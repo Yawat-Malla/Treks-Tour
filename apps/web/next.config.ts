@@ -15,10 +15,9 @@ const nextConfig: NextConfig = {
     ],
   },
   async rewrites() {
-    const api = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
-    return [
-      { source: "/uploads/:path*", destination: `${api}/uploads/:path*` },
-    ];
+    const api = process.env.NEXT_PUBLIC_API_URL;
+    if (!api || /localhost|127\.0\.0\.1/.test(api)) return [];
+    return [{ source: "/uploads/:path*", destination: `${api.replace(/\/$/, "")}/uploads/:path*` }];
   },
 };
 

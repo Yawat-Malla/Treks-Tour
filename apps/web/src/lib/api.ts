@@ -1,3 +1,5 @@
+import { fallbackPublic, fallbackTrek } from "@/data/fallback-site";
+
 export type SiteSettings = {
   siteTitle: string;
   logoUrl: string | null;
@@ -62,22 +64,66 @@ export type PublicPayload = {
   testimonials: Testimonial[];
 };
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+function isLoopback(url: string) {
+  try {
+    const host = new URL(url).hostname;
+    return host === "localhost" || host === "127.0.0.1";
+  } catch {
+    return false;
+  }
+}
+
+/** Live Nest API, or null on Vercel/production when only the frontend is hosted. */
+export function apiBase(): string | null {
+  const fromEnv = process.env.NEXT_PUBLIC_API_URL?.trim();
+  const hosted = Boolean(process.env.VERCEL || process.env.NODE_ENV === "production");
+  if (fromEnv && !(hosted && isLoopback(fromEnv))) return fromEnv.replace(/\/$/, "");
+  if (hosted) return null;
+  return fromEnv || "http://localhost:4000";
+}
+
+async function liveFetch(path: string) {
+  const base = apiBase();
+  if (!base) return null;
+  try {
+    const res = await fetch(`${base}${path}`, { cache: "no-store" });
+    if (!res.ok) return null;
+    return res;
+  } catch {
+    return null;
+  }
+}
 
 export async function fetchPublic(locale: string): Promise<PublicPayload> {
-  const res = await fetch(`${API}/public/site?locale=${locale}`, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to load site");
-  return res.json();
+  const res = await liveFetch(`/public/site?locale=${locale}`);
+  // #region agent log
+  fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
+    body: JSON.stringify({
+      sessionId: "4acaf2",
+      location: "api.ts:fetchPublic",
+      message: "site payload source",
+      data: { locale, apiBase: apiBase(), usedFallback: !res, vercel: Boolean(process.env.VERCEL) },
+      timestamp: Date.now(),
+      hypothesisId: "A",
+    }),
+  }).catch(() => {});
+  // #endregion
+  if (res) return res.json();
+  return fallbackPublic(locale);
 }
 
 export async function fetchTrek(slug: string, locale: string) {
-  const res = await fetch(`${API}/public/treks/${slug}?locale=${locale}`, { cache: "no-store" });
-  if (!res.ok) return null;
-  return res.json() as Promise<{ settings: SiteSettings; trek: Trip; trips: Trip[] }>;
+  const res = await liveFetch(`/public/treks/${slug}?locale=${locale}`);
+  if (res) return res.json() as Promise<{ settings: SiteSettings; trek: Trip; trips: Trip[] }>;
+  return fallbackTrek(slug, locale);
 }
 
 export function apiUrl(path: string) {
-  return `${API}${path}`;
+  const base = apiBase();
+  if (!base) return path;
+  return `${base}${path}`;
 }
 
 export function tripHref(trip: Pick<Trip, "kind" | "slug">) {
