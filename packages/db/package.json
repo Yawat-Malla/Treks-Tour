@@ -1,0 +1,27 @@
+{
+  "name": "@annapurna/db",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "generate": "prisma generate",
+    "migrate": "prisma migrate dev",
+    "migrate:deploy": "prisma migrate deploy",
+    "seed": "tsx prisma/seed.ts",
+    "reset": "prisma migrate reset --force",
+    "build": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.6.1",
+    "prisma": "^6.19.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.3"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}

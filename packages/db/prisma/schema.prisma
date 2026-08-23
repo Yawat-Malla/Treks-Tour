@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Locale {
+  en
+  zh
+  ko
+  he
+}
+
+enum BookingStatus {
+  new
+  contacted
+  confirmed
+  cancelled
+}
+
+enum TripKind {
+  trek
+  rafting
+}
+
+model SiteSettings {
+  id           String   @id @default("singleton")
+  siteTitle    String
+  logoUrl      String?
+  faviconUrl   String?
+  whatsapp     String
+  viber        String
+  email        String
+  wechatId     String
+  wechatQrUrl  String?
+  address      String
+  phone        String
+  trekkerCount Int      @default(2400)
+  yearsGuiding Int      @default(12)
+  updatedAt    DateTime @updatedAt
+  translations SiteSettingsTranslation[]
+}
+
+model SiteSettingsTranslation {
+  id            String       @id @default(cuid())
+  locale        Locale
+  settingsId    String
+  tagline       String
+  heroHeadline  String
+  heroSubhead   String
+  introTitle    String
+  introBody     String
+  aboutTitle    String
+  aboutBody     String
+  settings      SiteSettings @relation(fields: [settingsId], references: [id], onDelete: Cascade)
+
+  @@unique([settingsId, locale])
+}
+
+model Trek {
+  id               String            @id @default(cuid())
+  slug             String            @unique
+  kind             TripKind          @default(trek)
+  durationDays     Int
+  difficulty       String
+  maxAltitudeM     Int               @default(0)
+  priceFromUsd     Int
+  season           String
+  heroImageUrl     String
+  gallery          String[]
+  featured         Boolean           @default(false)
+  published        Boolean           @default(true)
+  sortOrder        Int               @default(0)
+  inclusions       String[]
+  exclusions       String[]
+  bestMonths       Int[]
+  river            String?
+  grade            String?
+  minAge           Int?
+  altitudeProfile  Json?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  translations     TrekTranslation[]
+  bookings         Booking[]         @relation("MainTrip")
+  addonBookings    Booking[]         @relation("AddonTrip")
+}
+
+model TrekTranslation {
+  id               String @id @default(cuid())
+  locale           Locale
+  trekId           String
+  name             String
+  summary          String
+  description      String
+  itinerary        Json
+  seasonLabel      String
+  difficultyLabel  String
+  trek             Trek   @relation(fields: [trekId], references: [id], onDelete: Cascade)
+
+  @@unique([trekId, locale])
+}
+
+model Booking {
+  id                 String         @id @default(cuid())
+  reference          String         @unique
+  trekId             String
+  addonTrekId        String?
+  locale             Locale
+  fullName           String
+  email              String
+  phone              String
+  nationality        String
+  startDate          DateTime
+  groupSize          Int
+  message            String?
+  privateDeparture   Boolean        @default(false)
+  status             BookingStatus  @default(new)
+  staffNotes         String?
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  trek               Trek           @relation("MainTrip", fields: [trekId], references: [id])
+  addon              Trek?          @relation("AddonTrip", fields: [addonTrekId], references: [id])
+}
+
+model Faq {
+  id           String           @id @default(cuid())
+  sortOrder    Int              @default(0)
+  translations FaqTranslation[]
+}
+
+model FaqTranslation {
+  id       String @id @default(cuid())
+  locale   Locale
+  faqId    String
+  question String
+  answer   String
+  faq      Faq    @relation(fields: [faqId], references: [id], onDelete: Cascade)
+
+  @@unique([faqId, locale])
+}
+
+model Testimonial {
+  id           String                  @id @default(cuid())
+  sortOrder    Int                     @default(0)
+  translations TestimonialTranslation[]
+}
+
+model TestimonialTranslation {
+  id            String      @id @default(cuid())
+  locale        Locale
+  testimonialId String
+  quote         String
+  attribution   String
+  testimonial   Testimonial @relation(fields: [testimonialId], references: [id], onDelete: Cascade)
+
+  @@unique([testimonialId, locale])
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  url       String
+  filename  String
+  mimeType  String
+  createdAt DateTime @default(now())
+}

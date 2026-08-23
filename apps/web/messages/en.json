@@ -1,0 +1,301 @@
+{
+  "meta": {
+    "homeDescription": "Guided Annapurna treks and Pokhara rafting. Book without creating an account."
+  },
+  "nav": {
+    "treks": "Treks",
+    "rafting": "Rafting",
+    "plan": "Plan",
+    "prepare": "Prepare",
+    "about": "About",
+    "contact": "Contact",
+    "book": "Book a trip",
+    "bookShort": "Book",
+    "search": "Search",
+    "wishlist": "Saved trips",
+    "account": "Account"
+  },
+  "hero": {
+    "kicker": "Pokhara · Annapurna Conservation Area",
+    "cta": "Choose your trek",
+    "secondary": "Talk to a manager"
+  },
+  "trust": {
+    "based": "Based in Pokhara",
+    "trekkers": "{count}+ walkers guided",
+    "years": "{count} years on these paths",
+    "noAccount": "No account required",
+    "stripBased": "Based in Pokhara",
+    "stripNoAccount": "No account required",
+    "stripReply": "A manager replies",
+    "stripPermits": "ACAP & TIMS handled"
+  },
+  "carousel": {
+    "kicker": "Pokhara · Annapurna Conservation Area",
+    "slides": "Hero slides",
+    "word1": "Annapurna",
+    "word2": "Whitewater",
+    "word3": "Lakeside",
+    "caption1": "Walk into the sanctuary. Sleep under a Himalayan sky.",
+    "caption2": "Seti days from Lakeside. Grade II–III, home for dinner.",
+    "caption3": "Phewa first. Then the range — or the river.",
+    "pin1": "Annapurna Base Camp · Circuit · Poon Hill",
+    "pin2": "Seti River · Kaligandaki gorge",
+    "pin3": "Pokhara-6, Kaski"
+  },
+  "bookBar": {
+    "trek": "Trek",
+    "raft": "Rafting",
+    "trip": "Trip",
+    "continue": "Continue"
+  },
+  "featured": {
+    "kicker": "The range",
+    "title": "Five ways into the Annapurna",
+    "all": "All treks",
+    "viewAll": "View all treks →",
+    "raftKicker": "The rivers",
+    "raftTitle": "Whitewater from Lakeside",
+    "allRaft": "All rafting",
+    "raftLede": "Seti days after the trek. Kaligandaki when you want more river than mountain."
+  },
+  "how": {
+    "kicker": "How it works",
+    "title": "Three steps. No password.",
+    "oneTitle": "Pick a trail",
+    "oneBody": "Base Camp, the Circuit, Poon Hill, Mardi Himal, Khopra Ridge — or a Seti day from Lakeside. Or ask us which fits your days and legs.",
+    "twoTitle": "Tell us when",
+    "twoBody": "Dates, group size, a phone number. You are not creating an account. You are sending a request to Pokhara.",
+    "threeTitle": "We confirm",
+    "threeBody": "A manager replies on WhatsApp, WeChat, Viber, or email with permits, pacing, and the next human step."
+  },
+  "trek": {
+    "from": "From",
+    "days": "{count, plural, one {# day} other {# days}}",
+    "altitude": "{count} m",
+    "season": "Season",
+    "difficulty": "Difficulty",
+    "itinerary": "Itinerary",
+    "bookThis": "Book this trek",
+    "bookRaft": "Book this river",
+    "enquire": "Enquire first",
+    "priceNote": "Price from, per person. Final quote after dates and group size.",
+    "gallery": "The path",
+    "trekTag": "Trek",
+    "raftTag": "Rafting",
+    "includes": "Included",
+    "excludes": "Not included",
+    "grade": "Grade",
+    "river": "River",
+    "minAge": "Minimum age",
+    "profile": "Altitude",
+    "gradeProfile": "River grade",
+    "similar": "Similar trips",
+    "finishPokhara": "Finish in Pokhara",
+    "pairTrek": "Pair with a rest-day trek"
+  },
+  "map": {
+    "kicker": "From the lake",
+    "title": "Where these trips sit",
+    "hint": "Pan, zoom, and tap a pin — treks in blue, rivers in teal.",
+    "open": "Open this trip"
+  },
+  "season": {
+    "kicker": "When to go",
+    "title": "Honest months, not fake urgency",
+    "trek": "Treks",
+    "raft": "Rivers",
+    "peak": "Peak",
+    "good": "Good",
+    "off": "Monsoon / quiet",
+    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  },
+  "match": {
+    "kicker": "Match in three questions",
+    "title": "One trip. Not a catalogue dump.",
+    "q1": "How many days do you have?",
+    "q1a": "1–5",
+    "q1b": "6–10",
+    "q1c": "11+",
+    "q2": "How do you feel about altitude?",
+    "q2a": "Keep it modest",
+    "q2b": "Base Camp is fine",
+    "q2c": "I want a high pass",
+    "q3": "Mountain, water, or both?",
+    "q3a": "Mountain",
+    "q3b": "Water",
+    "q3c": "Both",
+    "result": "Start here",
+    "book": "Book this",
+    "read": "Read the itinerary"
+  },
+  "split": {
+    "mountainKicker": "The Himalaya",
+    "mountain": "Walk into the Annapurna",
+    "mountainCta": "Tea-house treks from Pokhara",
+    "riverKicker": "The gorge",
+    "river": "Raft the Seti and Kaligandaki",
+    "riverCta": "Whitewater from Lakeside"
+  },
+  "faq": {
+    "kicker": "Before you write",
+    "title": "Questions we actually get"
+  },
+  "voices": {
+    "kicker": "From the trail",
+    "title": "What travelers say"
+  },
+  "deals": {
+    "kicker": "This week",
+    "title": "Top deals from Pokhara",
+    "promoKicker": "From the lake",
+    "promoTitle": "This week from Pokhara",
+    "promoBody": "Honest itineraries. No invented discounts. A manager quotes the real price.",
+    "promoCta": "See all treks",
+    "chipFeatured": "Featured",
+    "chipRest": "Rest day",
+    "chipGrade": "Grade II–III"
+  },
+  "value": {
+    "oneTitle": "Pokhara base",
+    "oneBody": "We live by the lake, not a Kathmandu desk.",
+    "twoTitle": "No account",
+    "twoBody": "Send dates. You are not creating a login.",
+    "threeTitle": "A manager replies",
+    "threeBody": "WhatsApp, WeChat, Viber, or email — a person, not a bot.",
+    "fourTitle": "ACAP & TIMS",
+    "fourBody": "Permits handled in Pokhara with your passport details.",
+    "fiveTitle": "Private departure",
+    "fiveBody": "Ask on the form. We quote the higher rate in writing."
+  },
+  "ask": {
+    "kicker": "Still deciding",
+    "title": "Ask a manager",
+    "body": "WhatsApp is usually fastest. Email if you want a longer plan on paper.",
+    "whatsapp": "WhatsApp",
+    "email": "Email"
+  },
+  "close": {
+    "kicker": "Pokhara is ready",
+    "title": "Send dates. We handle the rest.",
+    "cta": "Book a trip"
+  },
+  "book": {
+    "title": "Request a trip",
+    "lede": "No account. A manager in Pokhara will confirm the dates.",
+    "stepTrek": "Trip & dates",
+    "stepYou": "Your details",
+    "stepReview": "Review",
+    "kind": "What are you booking?",
+    "trekKind": "A trek",
+    "raftKind": "Rafting",
+    "trek": "Trek",
+    "raft": "River trip",
+    "start": "Start date",
+    "group": "People",
+    "addon": "Add a Seti River day after the trek",
+    "addonHint": "Classic Lakeside add-on. Staff will quote it with the trek.",
+    "private": "Ask for a private departure",
+    "privateHint": "Not a checkout. A manager quotes the higher private rate.",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone / WhatsApp",
+    "nationality": "Nationality",
+    "message": "Anything we should know",
+    "messageHint": "Fitness, visa timing, dietary needs — optional.",
+    "next": "Continue",
+    "back": "Back",
+    "submit": "Send request",
+    "sending": "Sending…",
+    "error": "Something went wrong. Try again, or message us on WhatsApp.",
+    "reviewLead": "Check this once. You can still go back."
+  },
+  "success": {
+    "kicker": "Received in Pokhara",
+    "title": "Your request is with us.",
+    "body": "Reference {ref}. No account was created. A manager will write to {email} and is fastest on WhatsApp.",
+    "next": "Message us now",
+    "raftKicker": "Still in Pokhara?",
+    "raftTitle": "Add a Seti day while you rest.",
+    "raftBody": "Most trekkers have a lake day left. The Seti is the classic finish — Grade II–III from Lakeside.",
+    "raftCta": "See the river day"
+  },
+  "contact": {
+    "kicker": "Reach a person",
+    "title": "Managers sit in Lakeside, Pokhara.",
+    "lede": "WhatsApp is usually fastest. WeChat if you are writing from China. Email for longer plans. Viber if that is what you already use.",
+    "whatsapp": "WhatsApp",
+    "viber": "Viber",
+    "email": "Email",
+    "wechat": "WeChat",
+    "wechatCopy": "Copy WeChat ID",
+    "wechatCopied": "Copied",
+    "wechatHint": "Open WeChat, add by ID, or scan the QR if we have one.",
+    "hours": "Usually answered 7:00–21:00 Nepal time",
+    "dock": "Contact"
+  },
+  "about": {
+    "kicker": "The company",
+    "baseTitle": "A Pokhara base, not a Kathmandu desk",
+    "baseBody": "We live by Phewa Lake. Permits, porters, and rest days start here — not from a catalogue in another city. When weather shifts a trail, the people who walk it are in the same town as you.",
+    "guidesTitle": "Guides who know these paths by season",
+    "guidesBody": "The same small team leads ABC, the Circuit, Poon Hill, Mardi, and Khopra. They pace for lungs, not for a clock. Rafting days use licensed river guides on the Seti and Kaligandaki.",
+    "licensesTitle": "Licences, ACAP, TIMS",
+    "licensesBody": "Treks run with Annapurna Conservation Area permits and TIMS as required. Rafting follows Nepal river-safety rules and age limits we list on each trip. We will not pretend a monsoon week is a clear week.",
+    "localTitle": "Why local still matters",
+    "localBody": "Money stays in Pokhara: lodges, porters, drivers, river crews. You talk to a manager, not a call centre. There is no customer login because a trek is a conversation, not a dashboard."
+  },
+  "plan": {
+    "kicker": "When, and for whom",
+    "title": "Plan the season before you pack.",
+    "lede": "October–November and March–April are the classic trek windows. Rivers run fuller in spring and after the monsoon. We will not sell you a view that cloud will hide.",
+    "whoTitle": "Who each trek is for",
+    "whoLede": "Short days and big views, or a high pass with time to acclimatise. Read the trip, then send dates.",
+    "riverTitle": "Who the rivers are for",
+    "riverLede": "A Seti day is the natural rest after a trek. Kaligandaki is for guests who came for whitewater first.",
+    "groupTitle": "Small group",
+    "groupBody": "Join a departure we are already running, or let us match dates with other walkers. Lower cost, shared pacing, tea-house rooms as they come.",
+    "privateTitle": "Private departure",
+    "privateBody": "Your dates, your speed, your group only. Tick the box on the booking form; a manager quotes the higher rate. It is not an online checkout.",
+    "prepareCue": "Permits, packing, fitness, and river ages live on",
+    "prepareLink": "Prepare."
+  },
+  "prepare": {
+    "kicker": "Before you fly",
+    "title": "Permits, packing, lungs, rivers.",
+    "lede": "We handle ACAP and TIMS on the ground. You bring honest fitness, layers, and a passport that still has months on it.",
+    "permitsTitle": "ACAP and TIMS",
+    "permitsBody": "Annapurna treks need an ACAP permit and usually a TIMS card. We organise them in Pokhara with your passport details. Costs sit in the quote, not as a surprise at the trailhead. Rafting does not use ACAP; river trips follow separate safety paperwork.",
+    "packingTitle": "What to pack",
+    "packingBody": "Broken-in boots, a down layer, rain shell, sun hat, and a refillable bottle. Tea-houses sell snacks; they do not sell a spare knee. We send a season-specific list after you request dates. For rafting: swimwear, a dry change, and shoes that can get wet. We supply helmet, PFD, and paddle.",
+    "fitnessTitle": "Fitness we actually mean",
+    "fitnessBody": "Poon Hill is a steep holiday. ABC is a week of stairs. The Circuit asks for consecutive days and a high pass. Train on hills with a pack. We pace conservatively and will not push a sick guest over Thorong. Tell us about knees, asthma, and recent altitude before we lock a plan.",
+    "riverTitle": "Rafting safety and age",
+    "riverBody": "Seti days are Grade II–III and suit most confident swimmers from the minimum age on the trip page. Kaligandaki gorge is punchier. Everyone wears a helmet and PFD. We will refuse a run if the river is in flood. If you cannot swim, say so — the Seti still has quieter lines, but we decide on the bank, not on a form.",
+    "ctaTitle": "Ready when you are",
+    "ctaBody": "Send dates. We reply with permits, pacing, and whether a Seti day fits after the trek.",
+    "cta": "Book a trip"
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "rights": "Pokhara, Nepal",
+    "blurb": "Locally owned trekking and rafting from the lake into the Annapurna Himalaya.",
+    "company": "Company",
+    "support": "Support",
+    "topTrips": "Top trips"
+  },
+  "legal": {
+    "privacyTitle": "Privacy",
+    "privacyBody": "We collect only what a booking needs: your name, email, phone, nationality, dates, and group size. We do not create customer accounts or sell your details. Staff in Pokhara use this information to confirm your trip and to reach you on the channel you prefer. You can ask us to delete a request by writing to the company email.",
+    "termsTitle": "Terms",
+    "termsBody": "A submitted request is not a confirmed departure until a manager writes back with dates, price, and permit notes. Weather, ACAP and TIMS rules, trail and river conditions can change a plan. Cancellation and refund terms are confirmed in writing with your quote. Trekking and rafting in Nepal carry inherent risk; we brief honestly and pace conservatively."
+  },
+  "lang": {
+    "label": "Language",
+    "en": "English",
+    "zh": "中文",
+    "ko": "한국어",
+    "he": "עברית"
+  }
+}

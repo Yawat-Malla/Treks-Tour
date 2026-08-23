@@ -1,0 +1,18 @@
+{
+  "name": "annapurna-trails",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --parallel --filter @annapurna/web --filter @annapurna/api dev",
+    "dev:web": "pnpm --filter @annapurna/web dev",
+    "dev:api": "pnpm --filter @annapurna/api dev",
+    "build": "pnpm --filter @annapurna/db build && pnpm --filter @annapurna/api build && pnpm --filter @annapurna/web build",
+    "db:generate": "pnpm --filter @annapurna/db generate",
+    "db:migrate": "pnpm --filter @annapurna/db migrate",
+    "db:seed": "pnpm --filter @annapurna/db seed",
+    "db:reset": "pnpm --filter @annapurna/db reset"
+  },
+  "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=22"
+  }
+}

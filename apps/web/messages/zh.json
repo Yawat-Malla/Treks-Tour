@@ -1,0 +1,301 @@
+{
+  "meta": {
+    "homeDescription": "从尼泊尔博卡拉出发的安纳普尔纳向导徒步与漂流。无需注册即可预订。"
+  },
+  "nav": {
+    "treks": "徒步",
+    "rafting": "漂流",
+    "plan": "出行规划",
+    "prepare": "行前准备",
+    "about": "关于我们",
+    "contact": "联系",
+    "book": "预订行程",
+    "bookShort": "预订",
+    "search": "搜索",
+    "wishlist": "收藏",
+    "account": "账户"
+  },
+  "hero": {
+    "kicker": "博卡拉 · 安纳普尔纳保护区",
+    "cta": "选择线路",
+    "secondary": "联系经理"
+  },
+  "trust": {
+    "based": "公司在博卡拉",
+    "trekkers": "已带领 {count}+ 位徒步者",
+    "years": "在这些山路上走了 {count} 年",
+    "noAccount": "无需注册账号",
+    "stripBased": "驻在博卡拉",
+    "stripNoAccount": "无需注册",
+    "stripReply": "经理亲自回复",
+    "stripPermits": "代办 ACAP 与 TIMS"
+  },
+  "carousel": {
+    "kicker": "博卡拉 · 安纳普尔纳保护区",
+    "slides": "主视觉",
+    "word1": "安纳普尔纳",
+    "word2": "白水",
+    "word3": "湖畔",
+    "caption1": "走进圣域。枕着喜马拉雅的夜空入眠。",
+    "caption2": "从湖畔出发的塞蒂河一日。II–III 级，晚饭回家。",
+    "caption3": "先到费瓦湖。然后是山脉，或是河流。",
+    "pin1": "基地营 · 环线 · 普恩山",
+    "pin2": "塞蒂河 · 卡利甘达基峡谷",
+    "pin3": "博卡拉湖畔"
+  },
+  "bookBar": {
+    "trek": "徒步",
+    "raft": "漂流",
+    "trip": "行程",
+    "continue": "继续"
+  },
+  "featured": {
+    "kicker": "这座山脉",
+    "title": "进入安纳普尔纳的五条路",
+    "all": "全部徒步",
+    "viewAll": "查看全部徒步 →",
+    "raftKicker": "河流",
+    "raftTitle": "从湖畔出发的漂流",
+    "allRaft": "全部漂流",
+    "raftLede": "徒步后的塞蒂河一日。想多走水路时，选卡利甘达基。"
+  },
+  "how": {
+    "kicker": "如何预订",
+    "title": "三步完成。不用设密码。",
+    "oneTitle": "选一条路",
+    "oneBody": "基地营、环线、普恩山、马尔迪喜马拉、霍普拉山脊，或从湖畔出发的塞蒂河一日。也可以告诉我们你的天数与体能。",
+    "twoTitle": "告诉我们时间",
+    "twoBody": "日期、人数、电话。你不是在注册账号，只是向博卡拉发出一份请求。",
+    "threeTitle": "我们确认",
+    "threeBody": "经理会通过微信、WhatsApp、Viber 或邮件回复许可、配速与下一步。"
+  },
+  "trek": {
+    "from": "起价",
+    "days": "{count} 天",
+    "altitude": "{count} 米",
+    "season": "季节",
+    "difficulty": "难度",
+    "itinerary": "行程",
+    "bookThis": "预订这条线路",
+    "bookRaft": "预订这条河",
+    "enquire": "先咨询",
+    "priceNote": "每人起价。最终报价视日期与人数确定。",
+    "gallery": "路上",
+    "trekTag": "徒步",
+    "raftTag": "漂流",
+    "includes": "包含",
+    "excludes": "不含",
+    "grade": "漂流等级",
+    "river": "河流",
+    "minAge": "最低年龄",
+    "profile": "海拔",
+    "gradeProfile": "河道等级",
+    "similar": "相近行程",
+    "finishPokhara": "在博卡拉收尾",
+    "pairTrek": "搭配轻松徒步"
+  },
+  "map": {
+    "kicker": "从湖边出发",
+    "title": "这些行程在哪里",
+    "hint": "可平移、缩放，点选标记 — 蓝色是徒步，青绿是河流。",
+    "open": "查看行程"
+  },
+  "season": {
+    "kicker": "何时出发",
+    "title": "如实说季节，不做倒计时",
+    "trek": "徒步",
+    "raft": "河流",
+    "peak": "最佳",
+    "good": "适宜",
+    "off": "雨季 / 淡季",
+    "months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+  },
+  "match": {
+    "kicker": "三个问题匹配",
+    "title": "只推荐一条。不堆目录。",
+    "q1": "你有多少天？",
+    "q1a": "1–5 天",
+    "q1b": "6–10 天",
+    "q1c": "11 天以上",
+    "q2": "对海拔的感觉？",
+    "q2a": "尽量低一些",
+    "q2b": "基地营可以",
+    "q2c": "想过高山口",
+    "q3": "山、水，还是都要？",
+    "q3a": "山",
+    "q3b": "水",
+    "q3c": "都要",
+    "result": "从这里开始",
+    "book": "预订这条",
+    "read": "看行程"
+  },
+  "split": {
+    "mountainKicker": "喜马拉雅",
+    "mountain": "走进安纳普尔纳",
+    "mountainCta": "从博卡拉出发的茶馆式徒步",
+    "riverKicker": "峡谷",
+    "river": "漂塞蒂河与卡利甘达基",
+    "riverCta": "从湖畔出发的白水"
+  },
+  "faq": {
+    "kicker": "写信之前",
+    "title": "我们真正被问到的问题"
+  },
+  "voices": {
+    "kicker": "来自路上",
+    "title": "旅行者怎么说"
+  },
+  "deals": {
+    "kicker": "本周",
+    "title": "博卡拉本周行程",
+    "promoKicker": "从湖畔出发",
+    "promoTitle": "本周从博卡拉出发",
+    "promoBody": "真实行程。没有虚构折扣。经理会报出实际价格。",
+    "promoCta": "查看全部徒步",
+    "chipFeatured": "精选",
+    "chipRest": "休息日",
+    "chipGrade": "II–III 级"
+  },
+  "value": {
+    "oneTitle": "驻在博卡拉",
+    "oneBody": "我们住在湖边，不是加德满都的柜台。",
+    "twoTitle": "无需账号",
+    "twoBody": "把日期发来。你不是在注册登录。",
+    "threeTitle": "经理亲自回复",
+    "threeBody": "WhatsApp、微信、Viber 或邮件 — 是人，不是机器人。",
+    "fourTitle": "ACAP 与 TIMS",
+    "fourBody": "在博卡拉凭护照信息代办许可。",
+    "fiveTitle": "包团出发",
+    "fiveBody": "在表格上勾选。我们书面报出更高报价。"
+  },
+  "ask": {
+    "kicker": "还在考虑",
+    "title": "问经理",
+    "body": "微信或 WhatsApp 通常最快。若需要书面长计划，请发邮件。",
+    "whatsapp": "WhatsApp",
+    "email": "邮件"
+  },
+  "close": {
+    "kicker": "博卡拉已准备好",
+    "title": "把日期发来。其余我们处理。",
+    "cta": "预订行程"
+  },
+  "book": {
+    "title": "提交行程请求",
+    "lede": "无需账号。博卡拉的经理会确认日期。",
+    "stepTrek": "行程与日期",
+    "stepYou": "你的信息",
+    "stepReview": "确认",
+    "kind": "你要订什么？",
+    "trekKind": "徒步",
+    "raftKind": "漂流",
+    "trek": "徒步线路",
+    "raft": "漂流行程",
+    "start": "出发日期",
+    "group": "人数",
+    "addon": "徒步后加一天塞蒂河漂流",
+    "addonHint": "湖畔经典加项。经理会与徒步一并报价。",
+    "private": "申请独立出发",
+    "privateHint": "不是在线付款。经理会报更高的包团价格。",
+    "name": "姓名",
+    "email": "邮箱",
+    "phone": "电话 / WhatsApp",
+    "nationality": "国籍",
+    "message": "需要我们知道的事",
+    "messageHint": "体能、签证时间、饮食 — 选填。",
+    "next": "继续",
+    "back": "返回",
+    "submit": "发送请求",
+    "sending": "发送中…",
+    "error": "出了点问题。请重试，或通过微信 / WhatsApp 联系我们。",
+    "reviewLead": "请再看一遍。仍可返回修改。"
+  },
+  "success": {
+    "kicker": "博卡拉已收到",
+    "title": "你的请求已送达。",
+    "body": "编号 {ref}。并未创建账号。经理会写信至 {email}，微信通常最快。",
+    "next": "现在发消息",
+    "raftKicker": "还在博卡拉？",
+    "raftTitle": "休息时加一天塞蒂河。",
+    "raftBody": "多数徒步者还会在湖边留一天。塞蒂河是经典收尾 — 从湖畔出发的 II–III 级。",
+    "raftCta": "查看漂流日"
+  },
+  "contact": {
+    "kicker": "联系真人",
+    "title": "经理在博卡拉湖畔。",
+    "lede": "在中国，微信通常最快。也可用 WhatsApp、邮件，或你常用的 Viber。",
+    "whatsapp": "WhatsApp",
+    "viber": "Viber",
+    "email": "邮件",
+    "wechat": "微信",
+    "wechatCopy": "复制微信号",
+    "wechatCopied": "已复制",
+    "wechatHint": "打开微信，用 ID 添加；如已上传二维码也可扫码。",
+    "hours": "尼泊尔时间 7:00–21:00 通常会回复",
+    "dock": "联系"
+  },
+  "about": {
+    "kicker": "公司",
+    "baseTitle": "驻在博卡拉，不是加德满都的柜台",
+    "baseBody": "我们住在费瓦湖边。许可、背夫、休息日都从这里开始，而不是另一座城市的目录。天气改路时，走路的人和你在同一个镇上。",
+    "guidesTitle": "按季节认识这些路的向导",
+    "guidesBody": "同一支小团队带领基地营、环线、普恩山、马尔迪与霍普拉。他们按肺走，不按钟走。漂流日由持证河道向导带塞蒂河与卡利甘达基。",
+    "licensesTitle": "执照、ACAP、TIMS",
+    "licensesBody": "徒步按规定办理安纳普尔纳保护区许可与 TIMS。漂流遵循尼泊尔河道安全规则与各行程标注的年龄限制。雨季我们不会假装是晴天。",
+    "localTitle": "为什么本地仍然重要",
+    "localBody": "钱留在博卡拉：旅馆、背夫、司机、河道团队。你和经理说话，不是呼叫中心。没有客户登录，因为一次徒步是对话，不是后台。"
+  },
+  "plan": {
+    "kicker": "何时，为谁",
+    "title": "先看季节，再打包。",
+    "lede": "十月至十一月、三月至四月是经典徒步窗口。春季与雨季后河水更满。云会挡住的风景，我们不会当晴天卖。",
+    "whoTitle": "各条徒步适合谁",
+    "whoLede": "短途大风景，或有时间适应的高山口。先读行程，再发日期。",
+    "riverTitle": "河流适合谁",
+    "riverLede": "塞蒂河一日是徒步后自然的休息。卡利甘达基给先为白水而来的客人。",
+    "groupTitle": "小团",
+    "groupBody": "加入我们已在开的团，或让我们把日期与其他客人拼在一起。费用更低，配速共享，茶馆房间按当时情况。",
+    "privateTitle": "独立出发",
+    "privateBody": "你的日期、你的速度、只属于你们的小组。在预订表勾选；经理会报更高价格。这不是在线结账。",
+    "prepareCue": "许可、装备、体能与漂流年龄在",
+    "prepareLink": "行前准备。"
+  },
+  "prepare": {
+    "kicker": "起飞之前",
+    "title": "许可、装备、肺、河流。",
+    "lede": "ACAP 与 TIMS 我们在当地办理。你需要诚实的体能、分层衣物，以及还有数月有效期的护照。",
+    "permitsTitle": "ACAP 与 TIMS",
+    "permitsBody": "安纳普尔纳徒步需要 ACAP 许可，通常还要 TIMS。我们用你的护照信息在博卡拉办理。费用写进报价，不会在路口才出现。漂流不用 ACAP；河道行程另有安全文件。",
+    "packingTitle": "带什么",
+    "packingBody": "穿过的靴子、羽绒层、雨壳、遮阳帽、可重复使用的水瓶。茶馆卖零食，不卖备用的膝盖。确认日期后我们会发当季清单。漂流：泳衣、一套干衣、可湿的鞋。头盔、救生衣与桨由我们提供。",
+    "fitnessTitle": "我们说的体能是什么",
+    "fitnessBody": "普恩山是陡的假期。基地营是一周台阶。环线需要连续天数和一个高山口。请负重走坡。我们配速保守，不会逼生病的客人过索隆拉。锁定计划前请告知膝盖、哮喘与近期海拔经历。",
+    "riverTitle": "漂流安全与年龄",
+    "riverBody": "塞蒂河一日为 II–III 级，适合行程页最低年龄以上、能自信游泳的人。卡利甘达基更猛。所有人戴头盔与救生衣。洪水时我们会停漂。若不会游泳请直说 — 塞蒂河仍有较缓线路，但我们在岸上决定，不在表格上决定。",
+    "ctaTitle": "你准备好就可以",
+    "ctaBody": "把日期发来。我们回复许可、配速，以及徒步后是否适合加一天塞蒂河。",
+    "cta": "预订行程"
+  },
+  "footer": {
+    "privacy": "隐私",
+    "terms": "条款",
+    "rights": "尼泊尔博卡拉",
+    "blurb": "从湖畔出发、走进安纳普尔纳的本地徒步与漂流公司。",
+    "company": "公司",
+    "support": "支持",
+    "topTrips": "热门行程"
+  },
+  "legal": {
+    "privacyTitle": "隐私",
+    "privacyBody": "我们只收集预订所需信息：姓名、邮箱、电话、国籍、日期与人数。不创建客户账号，也不出售你的资料。博卡拉的工作人员用这些信息确认行程，并通过你偏好的渠道联系你。如需删除请求，可写信至公司邮箱。",
+    "termsTitle": "条款",
+    "termsBody": "提交请求并不等于出发已确认，需等经理书面回复日期、价格与许可说明。天气、ACAP 与 TIMS 规定以及路况、河况可能改变计划。取消与退款以报价书面确认为准。尼泊尔徒步与漂流本身有风险；我们会如实说明，并采取稳健配速。"
+  },
+  "lang": {
+    "label": "语言",
+    "en": "English",
+    "zh": "中文",
+    "ko": "한국어",
+    "he": "עברית"
+  }
+}
