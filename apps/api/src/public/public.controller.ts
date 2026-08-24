@@ -115,8 +115,8 @@ export class PublicController {
 
     await this.mail.send(
       body.email,
-      `Annapurna Trails — ${reference}`,
-      `Namaste ${body.fullName},\n\nWe have your request ${reference} for ${name}. A manager in Pokhara will confirm dates, permits, and the next steps. No account was created.\n\n${text}\n\nAnnapurna Trails, Lakeside, Pokhara`,
+      `Upper Path Treks And Tours — ${reference}`,
+      `Namaste ${body.fullName},\n\nWe have your request ${reference} for ${name}. A manager in Pokhara will confirm dates, permits, and the next steps. No account was created.\n\n${text}\n\nUpper Path Treks And Tours, Lakeside, Pokhara`,
     );
     await this.mail.send(company, `New booking ${reference} — ${name}`, text);
 

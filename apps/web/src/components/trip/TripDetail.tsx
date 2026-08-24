@@ -23,7 +23,7 @@ export async function TripDetail({ slug }: { slug: string }) {
   const similar = trips.filter((x) => x.kind === trek.kind && x.slug !== trek.slug).slice(0, 3);
   const cross = raft
     ? trips.find((x) => x.slug === "ghorepani-poon-hill")
-    : trips.find((x) => x.slug === "seti-river-day");
+    : trips.find((x) => x.slug === "kaligandaki-1-day");
   const bookHref = `/book?trip=${trek.slug}&kind=${trek.kind}`;
 
   return (

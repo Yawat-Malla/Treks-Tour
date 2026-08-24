@@ -60,7 +60,7 @@ export async function generateMetadata({
       icons: data.settings.faviconUrl ? [{ url: data.settings.faviconUrl }] : undefined,
     };
   } catch {
-    return { title: "Annapurna Trails" };
+    return { title: "Upper Path Treks And Tours" };
   }
 }
 

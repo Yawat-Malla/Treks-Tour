@@ -32,6 +32,6 @@ async function bootstrap() {
 
   const port = Number(process.env.API_PORT || process.env.PORT || 4000);
   await app.listen(port);
-  console.log(`Annapurna Trails API on http://localhost:${port}`);
+  console.log(`Upper Path Treks And Tours API on http://localhost:${port}`);
 }
 bootstrap();

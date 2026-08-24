@@ -46,8 +46,8 @@ export function BookingForm({
 
   const pool = useMemo(() => trips.filter((x) => x.kind === kind), [trips, kind]);
   const trek = useMemo(() => trips.find((x) => x.id === form.trekId), [trips, form.trekId]);
-  const seti = useMemo(() => trips.find((x) => x.slug === "seti-river-day"), [trips]);
-  const showAddon = kind === "trek" && Boolean(seti);
+  const kali = useMemo(() => trips.find((x) => x.slug === "kaligandaki-1-day"), [trips]);
+  const showAddon = kind === "trek" && Boolean(kali);
 
   function set<K extends keyof typeof form>(key: K, value: (typeof form)[K]) {
     setForm((f) => ({ ...f, [key]: value }));
@@ -162,13 +162,13 @@ export function BookingForm({
               onChange={(e) => set("groupSize", Number(e.target.value))}
             />
           </label>
-          {showAddon && seti && (
+          {showAddon && kali && (
             <label className="flex items-start gap-3 rounded-2xl bg-snow p-4 ring-1 ring-ink/8">
               <input
                 type="checkbox"
                 className="mt-1"
-                checked={form.addonTrekId === seti.id}
-                onChange={(e) => set("addonTrekId", e.target.checked ? seti.id : "")}
+                checked={form.addonTrekId === kali.id}
+                onChange={(e) => set("addonTrekId", e.target.checked ? kali.id : "")}
               />
               <span>
                 <span className="block text-sm font-medium">{t("addon")}</span>
@@ -262,10 +262,10 @@ export function BookingForm({
               <dt className="text-ink-soft">{t("group")}</dt>
               <dd>{form.groupSize}</dd>
             </div>
-            {form.addonTrekId && seti ? (
+            {form.addonTrekId && kali ? (
               <div className="flex justify-between gap-4">
                 <dt className="text-ink-soft">{t("addon")}</dt>
-                <dd>{seti.name}</dd>
+                <dd>{kali.name}</dd>
               </div>
             ) : null}
             {form.privateDeparture ? (

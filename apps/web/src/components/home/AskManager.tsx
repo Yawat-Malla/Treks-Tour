@@ -2,6 +2,7 @@ import { getLocale, getTranslations } from "next-intl/server";
 import type { SiteSettings } from "@/lib/api";
 import type { Locale } from "@/i18n/routing";
 import { contactPrefill, whatsappHref } from "@/lib/contacts";
+import { RidgeBand } from "@/components/ui/RidgeBand";
 import { MessageCircle, Mail } from "lucide-react";
 
 export async function AskManager({ settings }: { settings: SiteSettings }) {
@@ -11,8 +12,8 @@ export async function AskManager({ settings }: { settings: SiteSettings }) {
   const mail = `mailto:${settings.email}?subject=${encodeURIComponent(settings.siteTitle)}`;
 
   return (
-    <section className="bg-sky">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-14 sm:flex-row sm:items-center lg:px-8">
+    <RidgeBand tone="sky">
+      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 sm:flex-row sm:items-center lg:px-8">
         <div className="text-snow">
           <p className="text-xs uppercase tracking-[0.2em] text-snow/80">{t("kicker")}</p>
           <h2 className="mt-2 font-serif text-4xl">{t("title")}</h2>
@@ -29,6 +30,6 @@ export async function AskManager({ settings }: { settings: SiteSettings }) {
           </a>
         </div>
       </div>
-    </section>
+    </RidgeBand>
   );
 }

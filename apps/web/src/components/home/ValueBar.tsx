@@ -11,7 +11,7 @@ export async function ValueBar() {
     { Icon: Users, title: t("fiveTitle"), body: t("fiveBody"), tint: "bg-river/10 text-river" },
   ];
   return (
-    <section className="bg-ivory py-16">
+    <section className="wash-river py-16">
       <div className="mx-auto grid max-w-6xl gap-4 px-5 sm:grid-cols-2 lg:grid-cols-5 lg:px-8">
         {tiles.map(({ Icon, title, body, tint }) => (
           <div key={title} className="rounded-2xl bg-snow p-5 shadow-[var(--shadow)] ring-1 ring-ink/6">

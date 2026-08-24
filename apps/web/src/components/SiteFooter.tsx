@@ -8,7 +8,7 @@ export async function SiteFooter({ settings }: { settings: SiteSettings }) {
   const t = await getTranslations();
 
   return (
-    <footer className="border-t border-ink/8 bg-ivory text-ink">
+    <footer className="bg-ivory text-ink">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <BrandMark settings={{ ...settings, logoUrl: null }} />

@@ -17,8 +17,8 @@ export default async function SuccessPage({
     settings,
     contactPrefill(locale, settings.siteTitle) + (ref ? ` (${ref})` : ""),
   );
-  const seti = rafting.find((x) => x.slug === "seti-river-day") || rafting[0];
-  const showRaft = kind !== "rafting" && seti;
+  const kali = rafting.find((x) => x.slug === "kaligandaki-1-day") || rafting[0];
+  const showRaft = kind !== "rafting" && kali;
 
   return (
     <div className="mx-auto max-w-xl px-5 py-24 text-center lg:px-8">
@@ -39,7 +39,7 @@ export default async function SuccessPage({
           <h2 className="mt-2 font-serif text-3xl">{t("raftTitle")}</h2>
           <p className="mt-3 text-sm leading-relaxed text-ink-soft">{t("raftBody")}</p>
           <Link
-            href={`/rafting/${seti.slug}`}
+            href={`/rafting/${kali.slug}`}
             className="mt-5 inline-block text-sm text-moss underline-offset-4 hover:underline"
           >
             {t("raftCta")}

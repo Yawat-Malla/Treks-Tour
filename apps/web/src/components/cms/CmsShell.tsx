@@ -83,7 +83,7 @@ export function CmsShell({ children }: { children: React.ReactNode }) {
       <aside className="border-b border-ink/10 bg-snow md:border-b-0 md:border-e">
         <div className="p-5">
           <p className="font-serif text-xl">Studio</p>
-          <p className="text-xs text-ink-soft">Annapurna Trails</p>
+          <p className="text-xs text-ink-soft">Upper Path Treks And Tours</p>
         </div>
         <nav className="flex flex-col px-3 pb-6 text-sm">
           {links.map(([href, label]) => (

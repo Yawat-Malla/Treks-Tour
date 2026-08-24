@@ -37,10 +37,10 @@
     "word2": "Whitewater",
     "word3": "Lakeside",
     "caption1": "Walk into the sanctuary. Sleep under a Himalayan sky.",
-    "caption2": "Seti days from Lakeside. Grade II–III, home for dinner.",
+    "caption2": "Kaligandaki from Lakeside. Grade III–IV. One, two, or three days.",
     "caption3": "Phewa first. Then the range — or the river.",
     "pin1": "Annapurna Base Camp · Circuit · Poon Hill",
-    "pin2": "Seti River · Kaligandaki gorge",
+    "pin2": "Kaligandaki 1 · 2 · 3 day",
     "pin3": "Pokhara-6, Kaski"
   },
   "bookBar": {
@@ -51,19 +51,19 @@
   },
   "featured": {
     "kicker": "The range",
-    "title": "Five ways into the Annapurna",
+    "title": "Short days, high ridges, the sanctuary",
     "all": "All treks",
     "viewAll": "View all treks →",
     "raftKicker": "The rivers",
     "raftTitle": "Whitewater from Lakeside",
     "allRaft": "All rafting",
-    "raftLede": "Seti days after the trek. Kaligandaki when you want more river than mountain."
+    "raftLede": "Kaligandaki 1, 2, or 3 days. Grade III–IV from Pokhara when you want river after the trek — or instead of it."
   },
   "how": {
     "kicker": "How it works",
     "title": "Three steps. No password.",
     "oneTitle": "Pick a trail",
-    "oneBody": "Base Camp, the Circuit, Poon Hill, Mardi Himal, Khopra Ridge — or a Seti day from Lakeside. Or ask us which fits your days and legs.",
+    "oneBody": "Dhampus, Poon Hill, Mardi, Base Camp, the Circuit — or a Kaligandaki day from Lakeside. Or ask us which fits your days and legs.",
     "twoTitle": "Tell us when",
     "twoBody": "Dates, group size, a phone number. You are not creating an account. You are sending a request to Pokhara.",
     "threeTitle": "We confirm",
@@ -134,7 +134,7 @@
     "mountain": "Walk into the Annapurna",
     "mountainCta": "Tea-house treks from Pokhara",
     "riverKicker": "The gorge",
-    "river": "Raft the Seti and Kaligandaki",
+    "river": "Raft the Kaligandaki",
     "riverCta": "Whitewater from Lakeside"
   },
   "faq": {
@@ -154,7 +154,7 @@
     "promoCta": "See all treks",
     "chipFeatured": "Featured",
     "chipRest": "Rest day",
-    "chipGrade": "Grade II–III"
+    "chipGrade": "Grade III–IV"
   },
   "value": {
     "oneTitle": "Pokhara base",
@@ -193,8 +193,8 @@
     "raft": "River trip",
     "start": "Start date",
     "group": "People",
-    "addon": "Add a Seti River day after the trek",
-    "addonHint": "Classic Lakeside add-on. Staff will quote it with the trek.",
+    "addon": "Add a Kaligandaki 1-day after the trek",
+    "addonHint": "Grade III–IV from Pokhara. Staff will quote it with the trek.",
     "private": "Ask for a private departure",
     "privateHint": "Not a checkout. A manager quotes the higher private rate.",
     "name": "Full name",
@@ -216,8 +216,8 @@
     "body": "Reference {ref}. No account was created. A manager will write to {email} and is fastest on WhatsApp.",
     "next": "Message us now",
     "raftKicker": "Still in Pokhara?",
-    "raftTitle": "Add a Seti day while you rest.",
-    "raftBody": "Most trekkers have a lake day left. The Seti is the classic finish — Grade II–III from Lakeside.",
+    "raftTitle": "Add a Kaligandaki day while you rest.",
+    "raftBody": "Most trekkers have a lake day left. The one-day Kali is the honest finish — Grade III–IV from Pokhara.",
     "raftCta": "See the river day"
   },
   "contact": {
@@ -239,7 +239,7 @@
     "baseTitle": "A Pokhara base, not a Kathmandu desk",
     "baseBody": "We live by Phewa Lake. Permits, porters, and rest days start here — not from a catalogue in another city. When weather shifts a trail, the people who walk it are in the same town as you.",
     "guidesTitle": "Guides who know these paths by season",
-    "guidesBody": "The same small team leads ABC, the Circuit, Poon Hill, Mardi, and Khopra. They pace for lungs, not for a clock. Rafting days use licensed river guides on the Seti and Kaligandaki.",
+    "guidesBody": "The same small team leads ABC, the Circuit, Poon Hill, Mardi, Dhampus, and Khopra. They pace for lungs, not for a clock. Rafting days use licensed river guides on the Kaligandaki.",
     "licensesTitle": "Licences, ACAP, TIMS",
     "licensesBody": "Treks run with Annapurna Conservation Area permits and TIMS as required. Rafting follows Nepal river-safety rules and age limits we list on each trip. We will not pretend a monsoon week is a clear week.",
     "localTitle": "Why local still matters",
@@ -252,7 +252,7 @@
     "whoTitle": "Who each trek is for",
     "whoLede": "Short days and big views, or a high pass with time to acclimatise. Read the trip, then send dates.",
     "riverTitle": "Who the rivers are for",
-    "riverLede": "A Seti day is the natural rest after a trek. Kaligandaki is for guests who came for whitewater first.",
+    "riverLede": "A Kaligandaki 1-day is the natural rest after a trek. Two- and three-day gorge trips are for guests who came for whitewater first.",
     "groupTitle": "Small group",
     "groupBody": "Join a departure we are already running, or let us match dates with other walkers. Lower cost, shared pacing, tea-house rooms as they come.",
     "privateTitle": "Private departure",
@@ -271,9 +271,9 @@
     "fitnessTitle": "Fitness we actually mean",
     "fitnessBody": "Poon Hill is a steep holiday. ABC is a week of stairs. The Circuit asks for consecutive days and a high pass. Train on hills with a pack. We pace conservatively and will not push a sick guest over Thorong. Tell us about knees, asthma, and recent altitude before we lock a plan.",
     "riverTitle": "Rafting safety and age",
-    "riverBody": "Seti days are Grade II–III and suit most confident swimmers from the minimum age on the trip page. Kaligandaki gorge is punchier. Everyone wears a helmet and PFD. We will refuse a run if the river is in flood. If you cannot swim, say so — the Seti still has quieter lines, but we decide on the bank, not on a form.",
+    "riverBody": "Kaligandaki days are Grade III–IV and suit confident swimmers from the minimum age on the trip page. Everyone wears a helmet and PFD. We will refuse a run if the river is in flood. If you cannot swim, say so — we decide on the bank, not on a form.",
     "ctaTitle": "Ready when you are",
-    "ctaBody": "Send dates. We reply with permits, pacing, and whether a Seti day fits after the trek.",
+    "ctaBody": "Send dates. We reply with permits, pacing, and whether a Kaligandaki day fits after the trek.",
     "cta": "Book a trip"
   },
   "footer": {

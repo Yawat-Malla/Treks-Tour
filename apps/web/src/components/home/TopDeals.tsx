@@ -9,15 +9,16 @@ export async function TopDeals({ treks, rafting }: { treks: Trip[]; rafting: Tri
   const tt = await getTranslations("trek");
   const abc = treks.find((x) => x.slug === "annapurna-base-camp") || treks[0];
   const poon = treks.find((x) => x.slug === "ghorepani-poon-hill") || treks[1];
-  const seti = rafting.find((x) => x.slug === "seti-river-day") || rafting[0];
+  const kali = rafting.find((x) => x.slug === "kaligandaki-1-day") || rafting[0];
   const cards = [
     abc && { trip: abc, chip: t("chipFeatured") },
     poon && { trip: poon, chip: t("chipRest") },
-    seti && { trip: seti, chip: t("chipGrade") },
+    kali && { trip: kali, chip: t("chipGrade") },
   ].filter(Boolean) as { trip: Trip; chip: string }[];
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
+    <section className="wash-mist">
+      <div className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("kicker")}</p>
@@ -53,6 +54,7 @@ export async function TopDeals({ treks, rafting }: { treks: Trip[]; rafting: Tri
             </Link>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

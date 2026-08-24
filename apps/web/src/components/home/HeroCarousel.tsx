@@ -46,7 +46,7 @@ export function HeroCarousel() {
 
   useEffect(() => {
     if (reduce || paused) return;
-    const id = window.setInterval(() => go(index + 1), 7000);
+    const id = window.setInterval(() => go(index + 1), 2200);
     return () => window.clearInterval(id);
   }, [index, paused, reduce, go]);
 
@@ -83,7 +83,7 @@ export function HeroCarousel() {
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: reduce ? 0 : 0.8, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: reduce ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className={`film absolute inset-0 h-full w-full ${reduce ? "" : "kenburns"}`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -101,7 +101,7 @@ export function HeroCarousel() {
             initial={reduce ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -8 }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             {t(slide.word)}
           </motion.h1>
@@ -118,7 +118,7 @@ export function HeroCarousel() {
             initial={reduce ? false : { opacity: 0, y: "8%" }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: "4%" }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             onError={() => setCutHidden((s) => ({ ...s, [slide.id]: true }))}
           />
         </AnimatePresence>

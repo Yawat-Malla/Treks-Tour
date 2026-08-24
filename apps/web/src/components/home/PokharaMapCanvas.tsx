@@ -9,14 +9,22 @@ import { tripHref } from "@/lib/api";
 import "leaflet/dist/leaflet.css";
 
 const PINS: { slug: string; lat: number; lng: number }[] = [
-  { slug: "annapurna-base-camp", lat: 28.5304, lng: 83.878 },
-  { slug: "annapurna-circuit", lat: 28.6667, lng: 84.0167 },
+  { slug: "australian-camp-dhampus", lat: 28.301, lng: 83.87 },
+  { slug: "sarangkot-naudanda", lat: 28.244, lng: 83.938 },
+  { slug: "panchase", lat: 28.232, lng: 83.8 },
+  { slug: "ghandruk-village", lat: 28.375, lng: 83.807 },
+  { slug: "sikles", lat: 28.345, lng: 84.1 },
+  { slug: "kuri-danda", lat: 28.28, lng: 83.72 },
   { slug: "ghorepani-poon-hill", lat: 28.4, lng: 83.6989 },
   { slug: "mardi-himal", lat: 28.473, lng: 83.946 },
-  { slug: "khopra-ridge", lat: 28.385, lng: 83.67 },
-  { slug: "seti-river-day", lat: 28.255, lng: 83.972 },
-  { slug: "upper-seti-canyon", lat: 28.29, lng: 83.94 },
-  { slug: "kaligandaki-gorge", lat: 28.478, lng: 83.605 },
+  { slug: "mohare-danda", lat: 28.37, lng: 83.65 },
+  { slug: "annapurna-base-camp", lat: 28.5304, lng: 83.878 },
+  { slug: "khopra-danda", lat: 28.385, lng: 83.67 },
+  { slug: "annapurna-circuit", lat: 28.6667, lng: 84.0167 },
+  { slug: "upper-mustang", lat: 29.183, lng: 83.958 },
+  { slug: "kaligandaki-1-day", lat: 28.478, lng: 83.605 },
+  { slug: "kaligandaki-2-day", lat: 28.52, lng: 83.62 },
+  { slug: "kaligandaki-3-day", lat: 28.56, lng: 83.64 },
 ];
 
 function FitPins({ points }: { points: [number, number][] }) {
