@@ -159,6 +159,10 @@ a {
   .ridge--sky {
     --ridge-fill: var(--sky);
   }
+
+  .ridge--flat-bottom {
+    padding-bottom: 4.5rem;
+  }
 }
 
 .film {

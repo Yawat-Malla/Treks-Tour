@@ -57,7 +57,9 @@ export async function generateMetadata({
         template: `%s · ${data.settings.siteTitle}`,
       },
       description: data.settings.tagline,
-      icons: data.settings.faviconUrl ? [{ url: data.settings.faviconUrl }] : undefined,
+      icons: data.settings.faviconUrl
+        ? [{ url: data.settings.faviconUrl }]
+        : [{ url: "/logo.png" }],
     };
   } catch {
     return { title: "Upper Path Treks And Tours" };

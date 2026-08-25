@@ -17,7 +17,7 @@ import { Quote } from "lucide-react";
 export default async function HomePage() {
   const locale = await getLocale();
   const t = await getTranslations();
-  const { settings, treks, rafting, trips, faqs, testimonials } = await fetchPublic(locale);
+  const { settings, treks, rafting, activities, safaris, trips, faqs, testimonials } = await fetchPublic(locale);
   const featured = treks.filter((x) => x.featured);
 
   return (
@@ -63,6 +63,46 @@ export default async function HomePage() {
         </RidgeBand>
       )}
 
+      {activities.length > 0 && (
+        <section className="wash-mist relative pt-14 pb-8">
+          <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
+            <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("featured.activityKicker")}</p>
+            <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+              <h2 className="max-w-xl font-serif text-4xl sm:text-5xl">{t("featured.activityTitle")}</h2>
+              <Link href="/activities" className="text-sm text-sky underline-offset-4 hover:underline">
+                {t("featured.allActivities")}
+              </Link>
+            </div>
+            <p className="mt-4 max-w-2xl text-ink-soft">{t("featured.activityLede")}</p>
+          </Reveal>
+          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+            {activities.slice(0, 6).map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {safaris.length > 0 && (
+        <RidgeBand tone="ink">
+          <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
+            <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("featured.safariKicker")}</p>
+            <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+              <h2 className="max-w-xl font-serif text-4xl sm:text-5xl text-snow">{t("featured.safariTitle")}</h2>
+              <Link href="/safaris" className="text-sm text-snow/80 underline-offset-4 hover:text-snow hover:underline">
+                {t("featured.allSafaris")}
+              </Link>
+            </div>
+            <p className="mt-4 max-w-2xl text-snow/70">{t("featured.safariLede")}</p>
+          </Reveal>
+          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+            {safaris.map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
+        </RidgeBand>
+      )}
+
       <ValueBar />
 
       <section className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
@@ -71,7 +111,7 @@ export default async function HomePage() {
         </Reveal>
       </section>
 
-      <RidgeBand tone="ink">
+      <RidgeBand tone="ink" flatBottom>
         <Reveal className="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-2 lg:px-8">
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-sky">{settings.address}</p>

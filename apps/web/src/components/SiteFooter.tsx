@@ -11,7 +11,7 @@ export async function SiteFooter({ settings }: { settings: SiteSettings }) {
     <footer className="bg-ivory text-ink">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
-          <BrandMark settings={{ ...settings, logoUrl: null }} />
+          <BrandMark settings={settings} />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">{t("footer.blurb")}</p>
           <div className="mt-4 flex gap-2">
             <span className="h-8 w-8 rounded-full ring-1 ring-ink/15" aria-hidden />
@@ -53,6 +53,12 @@ export async function SiteFooter({ settings }: { settings: SiteSettings }) {
           </Link>
           <Link href="/rafting" className="text-ink-soft hover:text-sky">
             {t("nav.rafting")}
+          </Link>
+          <Link href="/activities" className="text-ink-soft hover:text-sky">
+            {t("nav.activities")}
+          </Link>
+          <Link href="/safaris" className="text-ink-soft hover:text-sky">
+            {t("nav.safaris")}
           </Link>
           <p className="mt-2 inline-flex items-start gap-2 text-ink-soft">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-sky" />

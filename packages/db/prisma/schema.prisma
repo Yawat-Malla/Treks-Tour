@@ -24,6 +24,8 @@ enum BookingStatus {
 enum TripKind {
   trek
   rafting
+  activity
+  safari
 }
 
 model SiteSettings {

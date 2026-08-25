@@ -7,6 +7,8 @@ import type { Trip } from "@/lib/api";
 import { apiUrl } from "@/lib/api";
 import type { Locale } from "@/i18n/routing";
 
+type TripKindUi = "trek" | "rafting" | "activity" | "safari";
+
 export function BookingForm({
   trips,
   initialSlug,
@@ -24,13 +26,16 @@ export function BookingForm({
   const locale = useLocale() as Locale;
   const router = useRouter();
   const prefilled = trips.find((x) => x.slug === initialSlug);
-  const startKind: "trek" | "rafting" =
-    prefilled?.kind || (initialKind === "rafting" ? "rafting" : "trek");
+  const startKind: TripKindUi =
+    (prefilled?.kind as TripKindUi) ||
+    (["rafting", "activity", "safari"].includes(initialKind || "")
+      ? (initialKind as TripKindUi)
+      : "trek");
   const readyFromHome = Boolean(prefilled && initialDate);
   const [step, setStep] = useState(readyFromHome ? 2 : 1);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [kind, setKind] = useState<"trek" | "rafting">(startKind);
+  const [kind, setKind] = useState<TripKindUi>(startKind);
   const [form, setForm] = useState({
     trekId: prefilled?.id || trips.find((x) => x.kind === startKind)?.id || "",
     startDate: initialDate || "",
@@ -53,10 +58,24 @@ export function BookingForm({
     setForm((f) => ({ ...f, [key]: value }));
   }
 
-  function chooseKind(next: "trek" | "rafting") {
+  function chooseKind(next: TripKindUi) {
     setKind(next);
     const first = trips.find((x) => x.kind === next);
-    setForm((f) => ({ ...f, trekId: first?.id || "", addonTrekId: next === "rafting" ? "" : f.addonTrekId }));
+    setForm((f) => ({ ...f, trekId: first?.id || "", addonTrekId: next === "trek" ? f.addonTrekId : "" }));
+  }
+
+  function kindLabel(k: TripKindUi) {
+    if (k === "rafting") return t("raftKind");
+    if (k === "activity") return t("activityKind");
+    if (k === "safari") return t("safariKind");
+    return t("trekKind");
+  }
+
+  function tripFieldLabel(k: TripKindUi) {
+    if (k === "rafting") return t("raft");
+    if (k === "activity") return t("activity");
+    if (k === "safari") return t("safari");
+    return t("trek");
   }
 
   async function submit() {
@@ -113,7 +132,7 @@ export function BookingForm({
           <fieldset>
             <legend className="text-sm text-ink-soft">{t("kind")}</legend>
             <div className="mt-2 grid grid-cols-2 gap-2">
-              {(["trek", "rafting"] as const).map((k) => (
+              {(["trek", "rafting", "activity", "safari"] as const).map((k) => (
                 <button
                   key={k}
                   type="button"
@@ -122,13 +141,13 @@ export function BookingForm({
                     kind === k ? "bg-moss text-snow ring-moss" : "bg-snow ring-ink/10"
                   }`}
                 >
-                  {k === "trek" ? t("trekKind") : t("raftKind")}
+                  {kindLabel(k)}
                 </button>
               ))}
             </div>
           </fieldset>
           <label className="block">
-            <span className="text-sm text-ink-soft">{kind === "rafting" ? t("raft") : t("trek")}</span>
+            <span className="text-sm text-ink-soft">{tripFieldLabel(kind)}</span>
             <select
               className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
               value={form.trekId}
@@ -251,7 +270,7 @@ export function BookingForm({
           <p className="text-sm text-ink-soft">{t("reviewLead")}</p>
           <dl className="space-y-2 rounded-[1.4rem] bg-snow p-5 text-sm ring-1 ring-ink/8">
             <div className="flex justify-between gap-4">
-              <dt className="text-ink-soft">{kind === "rafting" ? t("raft") : t("trek")}</dt>
+              <dt className="text-ink-soft">{tripFieldLabel(kind)}</dt>
               <dd>{trek?.name}</dd>
             </div>
             <div className="flex justify-between gap-4">

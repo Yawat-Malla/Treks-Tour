@@ -7,7 +7,7 @@ import { TripCard } from "@/components/trip/TripCard";
 export default async function PlanPage() {
   const locale = await getLocale();
   const t = await getTranslations("plan");
-  const { treks, rafting } = await fetchPublic(locale);
+  const { treks, rafting, activities, safaris } = await fetchPublic(locale);
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-16 lg:px-8">
@@ -38,6 +38,30 @@ export default async function PlanPage() {
           ))}
         </div>
       </section>
+
+      {activities.length > 0 && (
+        <section className="mt-20">
+          <h2 className="font-serif text-4xl">{t("activityTitle")}</h2>
+          <p className="mt-3 max-w-2xl text-ink-soft">{t("activityLede")}</p>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {activities.map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {safaris.length > 0 && (
+        <section className="mt-20">
+          <h2 className="font-serif text-4xl">{t("safariTitle")}</h2>
+          <p className="mt-3 max-w-2xl text-ink-soft">{t("safariLede")}</p>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {safaris.map((trip) => (
+              <TripCard key={trip.id} trip={trip} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mt-20 grid gap-8 rounded-[2rem] bg-snow p-8 ring-1 ring-ink/8 md:grid-cols-2 md:p-12">
         <div>

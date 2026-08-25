@@ -11,6 +11,8 @@ export async function SiteHeader({ settings }: { settings: SiteSettings }) {
   const links = [
     { href: "/treks" as const, label: t("treks") },
     { href: "/rafting" as const, label: t("rafting") },
+    { href: "/activities" as const, label: t("activities") },
+    { href: "/safaris" as const, label: t("safaris") },
     { href: "/plan" as const, label: t("plan") },
     { href: "/about" as const, label: t("about") },
     { href: "/contact" as const, label: t("contact") },

@@ -12,7 +12,7 @@ export default async function AboutPage() {
     <div>
       <section className="relative h-[50vh] min-h-[320px]">
         <FilmImage
-          src="https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1706187975952-33765f844667?auto=format&fit=crop&w=2000&q=80"
           className="absolute inset-0"
           kenburns
         />

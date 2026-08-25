@@ -20,8 +20,11 @@ export async function TripDetail({ slug }: { slug: string }) {
   const profile = Array.isArray(trek.altitudeProfile) ? (trek.altitudeProfile as ProfilePoint[]) : [];
   const wa = whatsappHref(settings, contactPrefill(locale, trek.name));
   const raft = trek.kind === "rafting";
+  const activity = trek.kind === "activity";
+  const safari = trek.kind === "safari";
+  const showAltitude = !raft && !activity && trek.maxAltitudeM > 0;
   const similar = trips.filter((x) => x.kind === trek.kind && x.slug !== trek.slug).slice(0, 3);
-  const cross = raft
+  const cross = raft || activity || safari
     ? trips.find((x) => x.slug === "ghorepani-poon-hill")
     : trips.find((x) => x.slug === "kaligandaki-1-day");
   const bookHref = `/book?trip=${trek.slug}&kind=${trek.kind}`;
@@ -34,8 +37,8 @@ export async function TripDetail({ slug }: { slug: string }) {
         <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-12 lg:px-8">
           <div>
             <p className="text-xs uppercase tracking-[0.22em] text-snow/70">
-              {t("days", { count: trek.durationDays })} · {raft ? trek.grade : trek.difficultyLabel}
-              {!raft && ` · ${t("altitude", { count: trek.maxAltitudeM })}`}
+              {t("days", { count: trek.durationDays })} · {(raft || activity) && trek.grade ? trek.grade : trek.difficultyLabel}
+              {showAltitude && ` · ${t("altitude", { count: trek.maxAltitudeM })}`}
             </p>
             <h1 className="mt-3 max-w-3xl font-serif text-5xl text-snow sm:text-7xl">{trek.name}</h1>
           </div>
@@ -69,7 +72,7 @@ export async function TripDetail({ slug }: { slug: string }) {
             <ItinerarySnap days={itinerary} />
           </div>
           <div className="mt-14">
-            <AltitudeChart points={profile} label={raft ? t("gradeProfile") : t("profile")} />
+            <AltitudeChart points={profile} label={raft || activity ? t("gradeProfile") : t("profile")} />
           </div>
           {trek.gallery?.length > 0 && (
             <div className="mt-14">
@@ -90,8 +93,8 @@ export async function TripDetail({ slug }: { slug: string }) {
                 <dd>{trek.seasonLabel}</dd>
               </div>
               <div className="flex justify-between gap-4">
-                <dt className="text-ink-soft">{raft ? t("grade") : t("difficulty")}</dt>
-                <dd>{raft ? trek.grade : trek.difficultyLabel}</dd>
+                <dt className="text-ink-soft">{raft || activity ? t("grade") : t("difficulty")}</dt>
+                <dd>{(raft || activity) && trek.grade ? trek.grade : trek.difficultyLabel}</dd>
               </div>
               {raft && trek.river && (
                 <div className="flex justify-between gap-4">

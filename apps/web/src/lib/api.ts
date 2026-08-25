@@ -28,7 +28,7 @@ export type ProfilePoint = { d: number; m: number };
 export type Trip = {
   id: string;
   slug: string;
-  kind: "trek" | "rafting";
+  kind: "trek" | "rafting" | "activity" | "safari";
   durationDays: number;
   difficulty: string;
   maxAltitudeM: number;
@@ -59,6 +59,8 @@ export type PublicPayload = {
   settings: SiteSettings;
   treks: Trip[];
   rafting: Trip[];
+  activities: Trip[];
+  safaris: Trip[];
   trips: Trip[];
   faqs: Faq[];
   testimonials: Testimonial[];
@@ -127,7 +129,10 @@ export function apiUrl(path: string) {
 }
 
 export function tripHref(trip: Pick<Trip, "kind" | "slug">) {
-  return trip.kind === "rafting" ? `/rafting/${trip.slug}` : `/treks/${trip.slug}`;
+  if (trip.kind === "rafting") return `/rafting/${trip.slug}`;
+  if (trip.kind === "activity") return `/activities/${trip.slug}`;
+  if (trip.kind === "safari") return `/safaris/${trip.slug}`;
+  return `/treks/${trip.slug}`;
 }
 
 export type Trek = Trip;

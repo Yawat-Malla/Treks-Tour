@@ -6,7 +6,19 @@ import { FilmImage } from "@/components/ui/FilmImage";
 
 export async function TripCard({ trip, large = false, chip }: { trip: Trip; large?: boolean; chip?: string }) {
   const t = await getTranslations("trek");
-  const river = trip.kind === "rafting";
+  const tag =
+    chip ||
+    (trip.kind === "rafting"
+      ? t("raftTag")
+      : trip.kind === "activity"
+        ? t("activityTag")
+        : trip.kind === "safari"
+          ? t("safariTag")
+          : t("trekTag"));
+  const meta =
+    trip.kind === "rafting" || trip.kind === "activity"
+      ? trip.grade || trip.difficultyLabel
+      : trip.difficultyLabel;
   return (
     <Link
       href={tripHref(trip)}
@@ -16,10 +28,10 @@ export async function TripCard({ trip, large = false, chip }: { trip: Trip; larg
         <FilmImage src={trip.heroImageUrl} className="absolute inset-0" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent" />
         <p className="absolute top-3 start-3 rounded-2xl bg-snow/95 px-3 py-1 text-[10px] uppercase tracking-[0.14em] text-ink">
-          {chip || (river ? t("raftTag") : t("trekTag"))}
+          {tag}
         </p>
         <p className="absolute bottom-3 start-4 text-xs text-snow/90">
-          {t("days", { count: trip.durationDays })} · {river ? trip.grade : trip.difficultyLabel}
+          {t("days", { count: trip.durationDays })} · {meta}
         </p>
       </div>
       <div className="space-y-2 p-5">

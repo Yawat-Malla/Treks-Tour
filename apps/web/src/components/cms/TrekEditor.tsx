@@ -45,7 +45,7 @@ export function TrekEditor({ id }: { id: string }) {
     featured: false,
     published: true,
     sortOrder: 10,
-    kind: "trek" as "trek" | "rafting",
+    kind: "trek" as "trek" | "rafting" | "activity" | "safari",
     inclusions: [] as string[],
     exclusions: [] as string[],
     bestMonths: [3, 4, 5, 9, 10, 11] as number[],
@@ -107,10 +107,12 @@ export function TrekEditor({ id }: { id: string }) {
         <select
           className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
           value={form.kind}
-          onChange={(e) => setForm({ ...form, kind: e.target.value as "trek" | "rafting" })}
+          onChange={(e) => setForm({ ...form, kind: e.target.value as "trek" | "rafting" | "activity" | "safari" })}
         >
           <option value="trek">Trek</option>
           <option value="rafting">Rafting</option>
+          <option value="activity">Activity</option>
+          <option value="safari">Safari</option>
         </select>
       </label>
       <div className="grid gap-4 sm:grid-cols-2">

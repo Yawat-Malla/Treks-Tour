@@ -165,8 +165,8 @@ export class UpsertTrekDto {
   @IsInt()
   sortOrder!: number;
 
-  @IsIn(['trek', 'rafting'])
-  kind!: 'trek' | 'rafting';
+  @IsIn(['trek', 'rafting', 'activity', 'safari'])
+  kind!: 'trek' | 'rafting' | 'activity' | 'safari';
 
   @IsArray()
   @IsString({ each: true })
