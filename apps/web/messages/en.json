@@ -17,6 +17,9 @@
   },
   "hero": {
     "kicker": "Pokhara · Annapurna Conservation Area",
+    "headline": "Ridges, sanctuary, the high path.",
+    "lede": "Annapurna treks from Lakeside. Tea houses, permits, a manager in Pokhara.",
+    "destinations": "Poon Hill · Mardi Himal · Base Camp · Circuit",
     "cta": "Choose your trek",
     "secondary": "Talk to a manager"
   },
@@ -47,7 +50,9 @@
     "trek": "Trek",
     "raft": "Rafting",
     "trip": "Trip",
-    "continue": "Continue"
+    "continue": "Continue",
+    "prev": "Previous trips",
+    "next": "Next trips"
   },
   "featured": {
     "kicker": "The range",

@@ -17,6 +17,9 @@
   },
   "hero": {
     "kicker": "博卡拉 · 安纳普尔纳保护区",
+    "headline": "山脊、圣域、高处的路。",
+    "lede": "从湖畔出发的安纳普尔纳徒步。茶馆、许可证，博卡拉的经理亲自安排。",
+    "destinations": "Poon Hill · 马迪喜马拉雅 · 基地营 · 环线",
     "cta": "选择线路",
     "secondary": "联系经理"
   },
@@ -47,7 +50,9 @@
     "trek": "徒步",
     "raft": "漂流",
     "trip": "行程",
-    "continue": "继续"
+    "continue": "继续",
+    "prev": "上一组行程",
+    "next": "下一组行程"
   },
   "featured": {
     "kicker": "这座山脉",

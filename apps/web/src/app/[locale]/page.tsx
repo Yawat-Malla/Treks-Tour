@@ -6,13 +6,12 @@ import { TripCard } from "@/components/trip/TripCard";
 import { PokharaMap } from "@/components/home/PokharaMap";
 import { FaqList } from "@/components/home/FaqList";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
-import { HomeBookBar } from "@/components/home/HomeBookBar";
+import { HeroTripRail } from "@/components/home/HeroTripRail";
 import { HowPills } from "@/components/home/HowPills";
 import { TopDeals } from "@/components/home/TopDeals";
 import { ValueBar } from "@/components/home/ValueBar";
 import { AskManager } from "@/components/home/AskManager";
 import { RidgeBand } from "@/components/ui/RidgeBand";
-import { PeakCluster } from "@/components/ui/SceneMarks";
 import { Quote } from "lucide-react";
 
 export default async function HomePage() {
@@ -23,13 +22,10 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroCarousel />
-      <HomeBookBar trips={trips} />
+      <HeroCarousel trips={trips} />
+      <HeroTripRail treks={featured.length ? featured : treks} rafting={rafting} />
 
-      <section className="wash-sky relative overflow-visible pt-16 pb-8">
-        <div className="ridge-mark ridge-mark--featured" aria-hidden>
-          <PeakCluster />
-        </div>
+      <section className="wash-sky relative pt-14 pb-8">
         <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
           <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("featured.kicker")}</p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">

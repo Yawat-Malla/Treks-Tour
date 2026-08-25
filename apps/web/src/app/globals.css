@@ -107,61 +107,21 @@ a {
 }
 
 @layer components {
-  .wash-sky {
-    position: relative;
-    background:
-      radial-gradient(ellipse 90% 70% at 0% -8%, color-mix(in srgb, var(--sky) 20%, transparent), transparent 58%),
-      radial-gradient(ellipse 70% 55% at 100% 108%, color-mix(in srgb, var(--river) 12%, transparent), transparent 52%),
-      var(--ivory);
-  }
-
-  .wash-sky::before {
-    content: "";
-    position: absolute;
-    right: 4%;
-    top: 6%;
-    width: 150px;
-    height: 150px;
-    background: url("/textures/marks.svg") center / contain no-repeat;
-    opacity: 0.055;
-    pointer-events: none;
-  }
-
-  .wash-mist {
-    position: relative;
-    background:
-      radial-gradient(ellipse 80% 55% at 50% 0%, color-mix(in srgb, var(--ink) 7%, transparent), transparent 62%),
-      radial-gradient(ellipse 55% 45% at 100% 80%, color-mix(in srgb, var(--sky) 10%, transparent), transparent 55%),
-      var(--ivory);
-  }
-
+  .wash-sky,
+  .wash-mist,
   .wash-river {
     position: relative;
-    background:
-      radial-gradient(ellipse 85% 60% at 100% 0%, color-mix(in srgb, var(--river) 16%, transparent), transparent 55%),
-      radial-gradient(ellipse 50% 40% at 0% 100%, color-mix(in srgb, var(--sky) 8%, transparent), transparent 50%),
-      var(--ivory);
-  }
-
-  .wash-river::after {
-    content: "";
-    position: absolute;
-    left: 6%;
-    bottom: 8%;
-    width: 220px;
-    height: 90px;
-    background: url("/textures/waves.svg") center / contain no-repeat;
-    opacity: 0.12;
-    pointer-events: none;
+    background: var(--ivory);
   }
 
   .ridge {
-    --ridge-fill: #102846;
+    --ridge-fill: var(--ink);
     position: relative;
     isolation: isolate;
     color: var(--snow);
-    padding-block: 6.5rem 7rem;
+    padding-block: 5.5rem 6rem;
     overflow: visible;
+    background: var(--ridge-fill);
   }
 
   .ridge-inner {
@@ -169,108 +129,35 @@ a {
     z-index: 1;
   }
 
-  .ridge-peaks {
-    position: absolute;
-    inset: 8% 0 0;
-    z-index: 0;
-    pointer-events: none;
-    background: url("/textures/peaks.svg") no-repeat center bottom / 120% auto;
-    opacity: 1;
-  }
-
   .ridge-edge {
     position: absolute;
     left: 0;
     width: 100%;
-    height: 5.5rem;
+    height: 3.5rem;
     z-index: 2;
     pointer-events: none;
     display: block;
   }
 
   .ridge-edge--top {
-    top: -5.45rem;
+    top: -3.45rem;
   }
 
   .ridge-edge--bottom {
-    bottom: -5.45rem;
+    bottom: -3.45rem;
     transform: scaleY(-1);
   }
 
-  .ridge-mark {
-    position: absolute;
-    z-index: 3;
-    pointer-events: none;
-    top: -8.4rem;
-    width: min(48vw, 340px);
-    height: auto;
-  }
-
-  .ridge-mark svg {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .ridge-mark--end {
-    right: 5%;
-  }
-
-  .ridge-mark--start {
-    left: 6%;
-    top: -6.6rem;
-    width: min(54vw, 360px);
-  }
-
-  .ridge-mark--featured {
-    top: auto;
-    bottom: -2.25rem;
-    right: 3%;
-    width: min(34vw, 240px);
-  }
-
   .ridge--ink {
-    --ridge-fill: #102846;
-    background:
-      radial-gradient(ellipse 80% 65% at 82% 28%, rgba(47, 111, 237, 0.22), transparent 58%),
-      linear-gradient(180deg, #102846 0%, #0b1f3a 52%, #071525 100%);
+    --ridge-fill: var(--ink);
   }
 
   .ridge--river {
-    --ridge-fill: #0d4240;
-    background:
-      radial-gradient(ellipse 75% 60% at 18% 22%, rgba(15, 157, 154, 0.42), transparent 52%),
-      linear-gradient(180deg, #0d4240 0%, #083230 48%, #052422 100%);
-  }
-
-  .ridge--river .ridge-peaks {
-    background-image: url("/textures/waves.svg");
-    background-size: 130% auto;
-    opacity: 0.85;
+    --ridge-fill: var(--river-deep);
   }
 
   .ridge--sky {
-    --ridge-fill: #3a7af0;
-    background:
-      radial-gradient(ellipse 70% 50% at 8% 0%, rgba(255, 255, 255, 0.16), transparent 48%),
-      linear-gradient(180deg, #3a7af0 0%, #2f6fed 48%, #2458c9 100%);
-  }
-
-  .ridge--sky .ridge-peaks {
-    opacity: 0.45;
-  }
-}
-
-@media (max-width: 640px) {
-  .ridge-mark {
-    top: -5.6rem;
-    width: min(64vw, 230px);
-  }
-  .ridge-mark--start {
-    top: -4.8rem;
-  }
-  .ridge-mark--featured {
-    display: none;
+    --ridge-fill: var(--sky);
   }
 }
 
@@ -288,37 +175,22 @@ a {
 .film.kenburns img {
   animation: kenburns 28s ease-out forwards;
 }
-.hero-word {
-  font-family: var(--font-outfit), system-ui, sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  line-height: 0.82;
-  text-transform: uppercase;
-  color: var(--snow);
-  text-shadow: 0 12px 50px rgba(11, 31, 58, 0.45);
-  font-size: clamp(3.25rem, 13.5vw, 11.5rem);
-  text-wrap: nowrap;
-  user-select: none;
+.hero-wave {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  height: 11vh;
+  min-height: 3.75rem;
+  max-height: 7.5rem;
+  pointer-events: none;
 }
-html[lang="zh"] .hero-word,
-html[lang="ko"] .hero-word,
-html[lang="he"] .hero-word {
-  font-size: clamp(2.4rem, 9vw, 7.5rem);
-  letter-spacing: -0.02em;
-  text-transform: none;
-  font-weight: 700;
-}
-html[lang="zh"] .hero-word {
-  font-family: var(--font-noto-sc), sans-serif;
-}
-html[lang="ko"] .hero-word {
-  font-family: var(--font-noto-kr), sans-serif;
-}
-html[lang="he"] .hero-word {
-  font-family: var(--font-noto-he), sans-serif;
-}
-.hero-cutout {
-  filter: drop-shadow(0 12px 28px rgba(11, 31, 58, 0.28));
+.hero-vignette {
+  background:
+    radial-gradient(ellipse 80% 62% at 50% 36%, transparent 18%, color-mix(in srgb, var(--ink) 28%, transparent) 100%),
+    linear-gradient(to top, color-mix(in srgb, var(--ink) 38%, transparent), transparent 48%, color-mix(in srgb, var(--ink) 16%, transparent));
 }
 .how-pill {
   border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
