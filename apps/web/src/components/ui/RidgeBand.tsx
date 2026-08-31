@@ -11,7 +11,7 @@ export function RidgeBand({
   flatBottom?: boolean;
   children: ReactNode;
 }) {
-  const kind = tone === "river" ? "waves" : "mountains";
+  const kind = "waves" as const;
 
   return (
     <section className={`ridge ridge--${tone}${flatBottom ? " ridge--flat-bottom" : ""}`}>

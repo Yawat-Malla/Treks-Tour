@@ -71,20 +71,18 @@ export function WaveCluster({ className = "" }: { className?: string }) {
   );
 }
 
-/** Softer range silhouette — fewer peaks, logo-adjacent, less sawtooth. */
-const MOUNTAIN =
-  "M0 90V58L180 28l140 42 220-56 170 48 250-62 200 44 280-48V90H0Z";
-
+/** Symmetric cosine — start and end share Y, mirrored amplitudes. */
 export const WAVES =
-  "M0 90C36 90 48 52 92 50C136 48 148 78 192 72C236 66 252 28 304 32C356 36 372 76 428 68C480 60 502 18 560 24C618 30 636 74 700 62C760 52 788 16 852 22C916 28 936 76 1004 64C1068 54 1096 20 1164 28C1232 36 1252 74 1320 60C1372 50 1404 36 1440 42V90H0Z";
+  "M0 70 C 240 110, 480 110, 720 70 C 960 30, 1200 30, 1440 70 L1440 90 L0 90 Z";
 
 export function BandEdge({
   kind,
   flip = false,
 }: {
-  kind: "mountains" | "waves";
+  kind?: "mountains" | "waves" | "torn";
   flip?: boolean;
 }) {
+  void kind;
   return (
     <svg
       className={`ridge-edge ${flip ? "ridge-edge--bottom" : "ridge-edge--top"}`}
@@ -92,7 +90,15 @@ export function BandEdge({
       preserveAspectRatio="none"
       aria-hidden
     >
-      <path fill="var(--ridge-fill)" d={kind === "waves" ? WAVES : MOUNTAIN} />
+      <path fill="var(--ridge-fill)" d={WAVES} />
+    </svg>
+  );
+}
+
+export function FooterRidge() {
+  return (
+    <svg className="ridge-edge--footer" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden>
+      <path fill="var(--ink)" d={WAVES} />
     </svg>
   );
 }

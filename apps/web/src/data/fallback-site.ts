@@ -862,6 +862,127 @@ function tripFromCatalog(row: (typeof CATALOG)[number], locale: string): Trip {
   };
 }
 
+const POSTS: {
+  slug: string;
+  heroImageUrl: string;
+  featured: boolean;
+  publishedAt: string;
+  copy: Record<string, { title: string; excerpt: string; body: string }>;
+}[] = [
+  {
+    slug: "when-to-walk-annapurna",
+    heroImageUrl: IMAGES.abc,
+    featured: true,
+    publishedAt: "2026-03-12T00:00:00.000Z",
+    copy: {
+      en: {
+        title: "When to walk the Annapurna",
+        excerpt: "October light, April rhododendron, and the months we will not sell you a view.",
+        body: "October and November are the classic window: stable skies, cold nights, busy tea houses. March and April bring blossom and a little more haze. We will not pretend monsoon weeks are clear weeks. If you have ten days, ABC or Mardi is honest. If you have three weeks, the Circuit still asks for a high pass and consecutive legs.\n\nWrite us with your dates. A manager in Pokhara will say which trail matches the weather, not a brochure.",
+      },
+      zh: {
+        title: "何时走安纳普尔纳",
+        excerpt: "十月的光线、四月的杜鹃，以及我们不会向你推销风景的月份。",
+        body: "十月与十一月是经典窗口：天气稳定、夜间寒冷、茶馆忙碌。三四月有花，也有薄雾。我们不会把雨季说成晴天。十天适合基地营或马尔迪；三周才谈得上环线与高山口。\n\n把日期发给博卡拉的经理，我们按天气配路，不按宣传册。",
+      },
+      ko: {
+        title: "안나푸르나를 언제 걸을까",
+        excerpt: "10월의 빛, 4월의 철쭉, 그리고 전망을 팔지 않는 달.",
+        body: "10–11월이 고전적인 창입니다. 3–4월은 꽃이 있고 연무가 조금 더 있습니다. 몬순을 맑은 주로 포장하지 않습니다. 열흘이면 ABC나 마르디, 삼 주면 서킷과 높은 고개입니다.\n\n날짜를 보내 주세요. 포카라의 매니저가 브로슈어가 아니라 날씨에 맞는 길을 말합니다.",
+      },
+      he: {
+        title: "מתי ללכת באנאפורנה",
+        excerpt: "אור אוקטובר, רודודנדרון באפריל, והחודשים שבהם לא נמכור לכם נוף.",
+        body: "אוקטובר ונובמבר הם החלון הקלאסי. מרץ–אפריל מביאים פריחה וערפל. לא נעמיד פנים ששבוע מונסון הוא שבוע בהיר. עשרה ימים מתאימים ל־ABC או מרדי; שלושה שבועות לסרקוט ולמעבר גבוה.\n\nכתבו תאריכים. מנהל בפוקרה יגיד איזה שביל מתאים למזג האוויר, לא לחוברת.",
+      },
+    },
+  },
+  {
+    slug: "tea-houses-after-abc",
+    heroImageUrl: IMAGES.poon,
+    featured: false,
+    publishedAt: "2026-02-04T00:00:00.000Z",
+    copy: {
+      en: {
+        title: "What tea houses are actually like",
+        excerpt: "Dhal bhat, a wood stove, and a room that is warmer when you keep the door shut.",
+        body: "A tea house is a family lodge on the trail. Dinner is almost always dhal bhat. Rooms are simple. Wi-Fi comes and goes. The stove in the dining room is the social hour. We book lodges we know, not a mystery chain. If a village is full in October, we say so before you fly.",
+      },
+      zh: {
+        title: "茶馆实际是什么样",
+        excerpt: "达尔巴特、柴火炉，以及关上门才更暖的房间。",
+        body: "茶馆是路上的家庭旅馆。晚餐几乎总是达尔巴特。房间简单。网络时有时无。餐厅的炉火是社交时间。我们订熟悉的lodge，不是神秘连锁。十月若某村已满，起飞前就会告诉你。",
+      },
+      ko: {
+        title: "찻집은 실제로 어떤가",
+        excerpt: "달바트, 나무 난로, 문을 닫아야 따뜻한 방.",
+        body: "찻집은 길 위의 가족 숙소입니다. 저녁은 거의 달바트입니다. 방은 단순하고 와이파이는 들쭉날쭉합니다. 식당 난로가 사교 시간입니다. 아는 롯지를 잡습니다. 10월에 마을이 꽉 차면 출발 전에 말합니다.",
+      },
+      he: {
+        title: "איך בתי תה באמת נראים",
+        excerpt: "דאל באט, תנור עצים, וחדר שמתחמם כשסוגרים את הדלת.",
+        body: "בית תה הוא לודג' משפחתי על השביל. ארוחת ערב כמעט תמיד דאל באט. חדרים פשוטים. הוויי־פיי בא והולך. התנור בחדר האוכל הוא שעת החברה. אנחנו מזמינים לודג'ים שאנחנו מכירים. אם כפר מלא באוקטובר, נגיד לפני הטיסה.",
+      },
+    },
+  },
+  {
+    slug: "kali-after-the-trek",
+    heroImageUrl: IMAGES.kali,
+    featured: false,
+    publishedAt: "2026-01-18T00:00:00.000Z",
+    copy: {
+      en: {
+        title: "A Kaligandaki day after the trek",
+        excerpt: "Grade III–IV from Pokhara. The honest rest-day river, not a fake extra night.",
+        body: "Most groups have a lake day left. The one-day Kali is the finish we actually recommend: helmet, PFD, a licensed river crew, and a bus back to Lakeside. We will refuse a run in flood. If you cannot swim, say so on the bank.",
+      },
+      zh: {
+        title: "徒步之后的卡利甘达基一日",
+        excerpt: "从博卡拉出发的 III–IV 级。诚实的休息日河流，不是多住一晚的噱头。",
+        body: "多数团队还剩一天湖畔。一日卡利是我们真正推荐的收尾：头盔、救生衣、持证船员，再坐车回湖畔。洪水时我们停漂。若不会游泳，请在岸上说。",
+      },
+      ko: {
+        title: "트레킹 다음 칼리간다키 하루",
+        excerpt: "포카라에서 Grade III–IV. 가짜 호텔 밤이 아니라 정직한 휴식일 강.",
+        body: "대부분 호숫가 하루가 남습니다. 하루짜리 칼리가 우리가 실제로 권하는 마무리입니다. 홍수면 거절합니다. 수영을 못하면 강변에서 말하세요.",
+      },
+      he: {
+        title: "יום קאליגנדקי אחרי הטרק",
+        excerpt: "דרגה III–IV מפוקרה. נהר יום המנוחה הכנה, לא ליל מלון מזויף.",
+        body: "לרוב הקבוצות נשאר יום באגם. יום הקאלי הוא הסיום שאנחנו באמת ממליצים. בשיטפון נסרב. אם אינכם שוחים, אמרו על הגדה.",
+      },
+    },
+  },
+  {
+    slug: "permits-from-pokhara",
+    heroImageUrl: IMAGES.sarangkot,
+    featured: false,
+    publishedAt: "2025-11-02T00:00:00.000Z",
+    copy: {
+      en: {
+        title: "ACAP and TIMS from Lakeside",
+        excerpt: "We organise permits in Pokhara with your passport details. Costs sit in the quote.",
+        body: "Annapurna treks need ACAP and usually TIMS. We handle them in town so you are not queuing in Kathmandu the morning you hoped to walk. Send a passport scan with your dates. Rafting does not use ACAP; river trips have their own safety paperwork.",
+      },
+      zh: {
+        title: "从湖畔办理 ACAP 与 TIMS",
+        excerpt: "我们在博卡拉用护照信息办理许可。费用写在报价里。",
+        body: "安纳普尔纳徒步需要 ACAP，通常还有 TIMS。我们在城里办，免得你本该上路的早晨还在加德满都排队。把护照扫描和日期发来。漂流不用 ACAP，河流另有安全手续。",
+      },
+      ko: {
+        title: "레이크사이드에서 ACAP와 TIMS",
+        excerpt: "포카라에서 여권 정보로 허가를 처리합니다. 비용은 견적에 있습니다.",
+        body: "안나푸르나 트레킹은 ACAP와 보통 TIMS가 필요합니다. 카트만두에서 줄을 서지 않도록 시내에서 처리합니다. 날짜와 함께 여권 스캔을 보내 주세요.",
+      },
+      he: {
+        title: "ACAP ו־TIMS מלייקסייד",
+        excerpt: "אנחנו מארגנים היתרים בפוקרה עם פרטי הדרכון. העלויות בציטוט.",
+        body: "טרקי אנאפורנה צריכים ACAP ובדרך כלל TIMS. מטפלים בזה בעיר כדי שלא תעמדו בתור בקטמנדו בבוקר שבו רציתם ללכת. שלחו סריקת דרכון עם התאריכים.",
+      },
+    },
+  },
+];
+
 export function fallbackPublic(locale: string): PublicPayload {
   const loc = SETTINGS[locale] ? locale : "en";
   const settings: SiteSettings = {
@@ -889,6 +1010,16 @@ export function fallbackPublic(locale: string): PublicPayload {
     trips,
     faqs: FAQS[loc] || FAQS.en,
     testimonials: VOICES[loc] || VOICES.en,
+    posts: POSTS.map((p) => ({
+      id: p.slug,
+      slug: p.slug,
+      heroImageUrl: p.heroImageUrl,
+      featured: p.featured,
+      publishedAt: p.publishedAt,
+      title: p.copy[loc]?.title || p.copy.en.title,
+      excerpt: p.copy[loc]?.excerpt || p.copy.en.excerpt,
+      body: p.copy[loc]?.body || p.copy.en.body,
+    })),
   };
 }
 
@@ -898,4 +1029,11 @@ export function fallbackTrek(slug: string, locale: string) {
   const loc = SETTINGS[locale] ? locale : "en";
   const data = fallbackPublic(loc);
   return { settings: data.settings, trek: tripFromCatalog(row, loc), trips: data.trips };
+}
+
+export function fallbackBlog(slug: string, locale: string) {
+  const data = fallbackPublic(locale);
+  const post = data.posts.find((p) => p.slug === slug);
+  if (!post) return null;
+  return { settings: data.settings, post, posts: data.posts };
 }

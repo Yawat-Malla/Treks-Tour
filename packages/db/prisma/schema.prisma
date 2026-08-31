@@ -168,3 +168,28 @@ model MediaAsset {
   mimeType  String
   createdAt DateTime @default(now())
 }
+
+model BlogPost {
+  id           String                 @id @default(cuid())
+  slug         String                 @unique
+  heroImageUrl String
+  featured     Boolean                @default(false)
+  published    Boolean                @default(true)
+  publishedAt  DateTime               @default(now())
+  sortOrder    Int                    @default(0)
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
+  translations BlogPostTranslation[]
+}
+
+model BlogPostTranslation {
+  id       String   @id @default(cuid())
+  locale   Locale
+  postId   String
+  title    String
+  excerpt  String
+  body     String
+  post     BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, locale])
+}

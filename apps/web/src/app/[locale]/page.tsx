@@ -3,155 +3,93 @@ import { Link } from "@/i18n/navigation";
 import { fetchPublic } from "@/lib/api";
 import { Reveal } from "@/components/ui/Reveal";
 import { TripCard } from "@/components/trip/TripCard";
-import { PokharaMap } from "@/components/home/PokharaMap";
 import { FaqList } from "@/components/home/FaqList";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
-import { HeroTripRail } from "@/components/home/HeroTripRail";
-import { HowPills } from "@/components/home/HowPills";
-import { TopDeals } from "@/components/home/TopDeals";
-import { ValueBar } from "@/components/home/ValueBar";
-import { AskManager } from "@/components/home/AskManager";
-import { RidgeBand } from "@/components/ui/RidgeBand";
-import { Quote } from "lucide-react";
+import { DestinationChips } from "@/components/home/DestinationChips";
+import { PartnerStrip } from "@/components/home/PartnerStrip";
+import { PurposeBand } from "@/components/home/PurposeBand";
+import { TrekCtaBanner } from "@/components/home/TrekCtaBanner";
+import { BlogTeaser } from "@/components/home/BlogTeaser";
+import { RatedBand } from "@/components/home/RatedBand";
+import { MemoryWall } from "@/components/home/MemoryWall";
+import { Voices } from "@/components/home/Voices";
+import { AssociatedWith } from "@/components/home/AssociatedWith";
 
 export default async function HomePage() {
   const locale = await getLocale();
   const t = await getTranslations();
-  const { settings, treks, rafting, activities, safaris, trips, faqs, testimonials } = await fetchPublic(locale);
-  const featured = treks.filter((x) => x.featured);
+  const { settings, treks, rafting, activities, safaris, trips, faqs, testimonials, posts } =
+    await fetchPublic(locale);
+  const featured = (treks.filter((x) => x.featured).length ? treks.filter((x) => x.featured) : treks).slice(0, 2);
+  const visited = rafting.slice(0, 2);
+  const bannerTrip = featured[0] || treks[0];
+  const memories = trips.flatMap((x) => x.gallery).filter(Boolean);
+  const uniqueMemories = [...new Set(memories)].slice(0, 5);
+
+  // #region agent log
+  fetch('http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'894e04'},body:JSON.stringify({sessionId:'894e04',runId:'run1',hypothesisId:'H3',location:'page.tsx:29',message:'HomePage SSR render',data:{tripCount:trips?.length,treksCount:treks?.length,locale},timestamp:Date.now()})}).catch(()=>{});
+  // #endregion
 
   return (
     <>
-      <HeroCarousel trips={trips} />
-      <HeroTripRail treks={featured.length ? featured : treks} rafting={rafting} />
+      <HeroCarousel trips={trips}>
+        <DestinationChips treks={treks} rafting={rafting} activities={activities} safaris={safaris} />
+      </HeroCarousel>
 
-      <section className="wash-sky relative pt-14 pb-8">
-        <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
+      <PartnerStrip years={settings.yearsGuiding} walkers={settings.trekkerCount} />
+
+      <section className="bg-ivory py-16">
+        <Reveal className="mx-auto max-w-6xl px-5 text-center lg:px-8">
           <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("featured.kicker")}</p>
-          <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-            <h2 className="max-w-xl font-serif text-4xl sm:text-5xl">{t("featured.title")}</h2>
-            <Link href="/treks" className="text-sm text-sky underline-offset-4 hover:underline">
-              {t("featured.viewAll")}
-            </Link>
-          </div>
+          <h2 className="mt-3 font-serif text-4xl sm:text-5xl">{t("featured.title")}</h2>
         </Reveal>
         <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:px-8">
-          {(featured.length ? featured : treks).map((trip) => (
-            <TripCard key={trip.id} trip={trip} />
+          {featured.map((trip) => (
+            <TripCard key={trip.id} trip={trip} large />
           ))}
+        </div>
+        <div className="mt-8 text-center">
+          <Link href="/treks" className="text-sm text-sky underline-offset-4 hover:underline">
+            {t("featured.viewAll")}
+          </Link>
         </div>
       </section>
 
-      <TopDeals treks={treks} rafting={rafting} />
-
-      {rafting.length > 0 && (
-        <RidgeBand tone="river">
-          <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-snow/70">{t("featured.raftKicker")}</p>
-            <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-              <h2 className="max-w-xl font-serif text-4xl sm:text-5xl text-snow">{t("featured.raftTitle")}</h2>
-              <Link href="/rafting" className="text-sm text-snow/80 underline-offset-4 hover:text-snow hover:underline">
-                {t("featured.allRaft")}
-              </Link>
-            </div>
+      {visited.length > 0 && (
+        <section className="bg-ivory pb-16">
+          <Reveal className="mx-auto max-w-6xl px-5 text-center lg:px-8">
+            <h2 className="font-serif text-4xl sm:text-5xl">{t("featured.visitedTitle")}</h2>
           </Reveal>
-          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
-            {rafting.map((trip) => (
-              <TripCard key={trip.id} trip={trip} />
+          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:px-8">
+            {visited.map((trip) => (
+              <TripCard key={trip.id} trip={trip} large />
             ))}
           </div>
-        </RidgeBand>
-      )}
-
-      {activities.length > 0 && (
-        <section className="wash-mist relative pt-14 pb-8">
-          <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("featured.activityKicker")}</p>
-            <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-              <h2 className="max-w-xl font-serif text-4xl sm:text-5xl">{t("featured.activityTitle")}</h2>
-              <Link href="/activities" className="text-sm text-sky underline-offset-4 hover:underline">
-                {t("featured.allActivities")}
-              </Link>
-            </div>
-            <p className="mt-4 max-w-2xl text-ink-soft">{t("featured.activityLede")}</p>
-          </Reveal>
-          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
-            {activities.slice(0, 6).map((trip) => (
-              <TripCard key={trip.id} trip={trip} />
-            ))}
+          <div className="mt-8 text-center">
+            <Link href="/rafting" className="text-sm text-sky underline-offset-4 hover:underline">
+              {t("featured.allRaft")}
+            </Link>
           </div>
         </section>
       )}
 
-      {safaris.length > 0 && (
-        <RidgeBand tone="ink">
-          <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("featured.safariKicker")}</p>
-            <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-              <h2 className="max-w-xl font-serif text-4xl sm:text-5xl text-snow">{t("featured.safariTitle")}</h2>
-              <Link href="/safaris" className="text-sm text-snow/80 underline-offset-4 hover:text-snow hover:underline">
-                {t("featured.allSafaris")}
-              </Link>
-            </div>
-            <p className="mt-4 max-w-2xl text-snow/70">{t("featured.safariLede")}</p>
-          </Reveal>
-          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
-            {safaris.map((trip) => (
-              <TripCard key={trip.id} trip={trip} />
-            ))}
-          </div>
-        </RidgeBand>
-      )}
+      <PurposeBand title={settings.introTitle} body={settings.introBody} />
 
-      <ValueBar />
+      {testimonials.length > 0 && <Voices items={testimonials} />}
+
+      {bannerTrip && <TrekCtaBanner trip={bannerTrip} />}
+
+      <BlogTeaser posts={posts} locale={locale} />
+
+      <RatedBand years={settings.yearsGuiding} walkers={settings.trekkerCount} />
+
+      <MemoryWall images={uniqueMemories} />
 
       <section className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
-        <Reveal>
-          <PokharaMap trips={trips} />
-        </Reveal>
+        <FaqList items={faqs} kicker={t("faq.kicker")} title={t("faq.title")} />
       </section>
 
-      <RidgeBand tone="ink" flatBottom>
-        <Reveal className="mx-auto grid max-w-6xl gap-12 px-5 lg:grid-cols-2 lg:px-8">
-          <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-sky">{settings.address}</p>
-            <h2 className="mt-4 font-serif text-4xl sm:text-5xl">{settings.introTitle}</h2>
-          </div>
-          <p className="max-w-xl text-lg leading-relaxed text-snow/80">{settings.introBody}</p>
-        </Reveal>
-      </RidgeBand>
-
-      <section className="mx-auto max-w-6xl px-5 py-20 lg:px-8">
-        <Reveal>
-          <HowPills />
-        </Reveal>
-      </section>
-
-      {testimonials.length > 0 && (
-        <section className="wash-mist py-20">
-          <Reveal className="mx-auto max-w-6xl px-5 lg:px-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("voices.kicker")}</p>
-            <h2 className="mt-3 font-serif text-4xl">{t("voices.title")}</h2>
-            <div className="mt-10 flex gap-6 overflow-x-auto pb-2 cinema-rail ps-0">
-              {testimonials.map((v) => (
-                <blockquote key={v.id} className="min-w-[min(80vw,380px)] rounded-2xl bg-snow p-8 shadow-[var(--shadow)] ring-1 ring-ink/8">
-                  <Quote className="h-8 w-8 text-sky/40" />
-                  <p className="mt-4 font-serif text-2xl leading-snug">“{v.quote}”</p>
-                  <footer className="mt-4 text-sm text-ink-soft">{v.attribution}</footer>
-                </blockquote>
-              ))}
-            </div>
-          </Reveal>
-        </section>
-      )}
-
-      <section className="mx-auto max-w-3xl px-5 py-20 lg:px-8">
-        <Reveal>
-          <FaqList items={faqs} kicker={t("faq.kicker")} title={t("faq.title")} />
-        </Reveal>
-      </section>
-
-      <AskManager settings={settings} />
+      <AssociatedWith />
     </>
   );
 }

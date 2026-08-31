@@ -121,7 +121,7 @@ export function BookingForm({
       <ol className="mt-10 mb-8 grid grid-cols-3 gap-2">
         {steps.map((label, i) => (
           <li key={label} className="text-center">
-            <div className={`h-1 rounded-full ${i + 1 <= step ? "bg-copper" : "bg-ink/10"}`} />
+            <div className={`h-1 rounded-full ${i + 1 <= step ? "bg-ink" : "bg-ink/10"}`} />
             <p className={`mt-2 text-xs ${i + 1 === step ? "text-ink" : "text-ink-soft"}`}>{label}</p>
           </li>
         ))}
@@ -138,7 +138,7 @@ export function BookingForm({
                   type="button"
                   onClick={() => chooseKind(k)}
                   className={`rounded-2xl px-4 py-3 text-sm ring-1 ${
-                    kind === k ? "bg-moss text-snow ring-moss" : "bg-snow ring-ink/10"
+                    kind === k ? "bg-ink text-snow ring-ink" : "bg-snow ring-ink/10"
                   }`}
                 >
                   {kindLabel(k)}
@@ -211,7 +211,7 @@ export function BookingForm({
             type="button"
             disabled={!form.startDate || !form.trekId}
             onClick={() => setStep(2)}
-            className="w-full rounded-full bg-copper py-3 text-snow disabled:opacity-40"
+            className="w-full rounded-full bg-ink py-3 text-snow disabled:opacity-40"
           >
             {t("next")}
           </button>
@@ -257,7 +257,7 @@ export function BookingForm({
               type="button"
               disabled={!form.fullName || !form.email || !form.phone || !form.nationality}
               onClick={() => setStep(3)}
-              className="flex-1 rounded-full bg-copper py-3 text-snow disabled:opacity-40"
+              className="flex-1 rounded-full bg-ink py-3 text-snow disabled:opacity-40"
             >
               {t("next")}
             </button>
@@ -311,7 +311,7 @@ export function BookingForm({
               type="button"
               onClick={submit}
               disabled={busy}
-              className="flex-1 rounded-full bg-copper py-3 text-snow"
+              className="flex-1 rounded-full bg-ink py-3 text-snow"
             >
               {busy ? t("sending") : t("submit")}
             </button>

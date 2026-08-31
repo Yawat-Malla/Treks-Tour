@@ -13,7 +13,7 @@ import { Locale, Prisma } from '@prisma/client';
 import { AdminGuard } from '../auth/admin.guard';
 import { PrismaService } from '../prisma/prisma.service';
 import { ContentCache } from '../public/content-cache.service';
-import { UpdateBookingDto, UpdateSettingsDto, UpsertTrekDto } from './cms.dto';
+import { UpdateBookingDto, UpdateSettingsDto, UpsertBlogPostDto, UpsertTrekDto } from './cms.dto';
 
 @Controller('cms')
 @UseGuards(AdminGuard)
@@ -128,6 +128,53 @@ export class CmsController {
     });
   }
 
+  @Get('blog')
+  blog() {
+    return this.prisma.blogPost.findMany({
+      include: { translations: true },
+      orderBy: { sortOrder: 'asc' },
+    });
+  }
+
+  @Get('blog/:id')
+  async blogPost(@Param('id') id: string) {
+    const post = await this.prisma.blogPost.findUnique({
+      where: { id },
+      include: { translations: true },
+    });
+    if (!post) throw new NotFoundException();
+    return post;
+  }
+
+  @Post('blog')
+  async createBlog(@Body() body: UpsertBlogPostDto) {
+    const post = await this.prisma.blogPost.create({
+      data: this.blogData(body),
+      include: { translations: true },
+    });
+    await this.cache.invalidate();
+    return post;
+  }
+
+  @Patch('blog/:id')
+  async updateBlog(@Param('id') id: string, @Body() body: UpsertBlogPostDto) {
+    await this.prisma.blogPostTranslation.deleteMany({ where: { postId: id } });
+    const post = await this.prisma.blogPost.update({
+      where: { id },
+      data: this.blogData(body),
+      include: { translations: true },
+    });
+    await this.cache.invalidate();
+    return post;
+  }
+
+  @Delete('blog/:id')
+  async deleteBlog(@Param('id') id: string) {
+    await this.prisma.blogPost.delete({ where: { id } });
+    await this.cache.invalidate();
+    return { ok: true };
+  }
+
   private trekData(body: UpsertTrekDto) {
     return {
       slug: body.slug,
@@ -158,6 +205,25 @@ export class CmsController {
           itinerary: t.itinerary as Prisma.InputJsonValue,
           seasonLabel: t.seasonLabel,
           difficultyLabel: t.difficultyLabel,
+        })),
+      },
+    };
+  }
+
+  private blogData(body: UpsertBlogPostDto) {
+    return {
+      slug: body.slug,
+      heroImageUrl: body.heroImageUrl,
+      featured: body.featured,
+      published: body.published,
+      publishedAt: body.publishedAt ? new Date(body.publishedAt) : undefined,
+      sortOrder: body.sortOrder,
+      translations: {
+        create: body.translations.map((t) => ({
+          locale: t.locale as Locale,
+          title: t.title,
+          excerpt: t.excerpt,
+          body: t.body,
         })),
       },
     };

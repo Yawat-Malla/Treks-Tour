@@ -100,6 +100,11 @@ export class ContentCache {
       include: { translations: true },
       orderBy: { sortOrder: 'asc' },
     });
+    const posts = await this.prisma.blogPost.findMany({
+      where: { published: true },
+      include: { translations: true },
+      orderBy: [{ featured: 'desc' }, { sortOrder: 'asc' }],
+    });
 
     const t = settings?.translations.find((x) => x.locale === locale) || settings?.translations.find((x) => x.locale === 'en');
     const mapped = trips.map((trip) => this.mapTrip(trip, locale));
@@ -140,6 +145,19 @@ export class ContentCache {
       testimonials: testimonials.map((item) => {
         const tr = item.translations.find((x) => x.locale === locale) || item.translations.find((x) => x.locale === 'en');
         return { id: item.id, quote: tr?.quote ?? '', attribution: tr?.attribution ?? '' };
+      }),
+      posts: posts.map((post) => {
+        const tr = post.translations.find((x) => x.locale === locale) || post.translations.find((x) => x.locale === 'en');
+        return {
+          id: post.id,
+          slug: post.slug,
+          heroImageUrl: post.heroImageUrl,
+          featured: post.featured,
+          publishedAt: post.publishedAt,
+          title: tr?.title ?? post.slug,
+          excerpt: tr?.excerpt ?? '',
+          body: tr?.body ?? '',
+        };
       }),
     };
 

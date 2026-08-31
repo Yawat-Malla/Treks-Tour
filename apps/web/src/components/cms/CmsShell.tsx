@@ -75,6 +75,7 @@ export function CmsShell({ children }: { children: React.ReactNode }) {
     [`/${admin}`, "Home copy"],
     [`/${admin}/brand`, "Brand & contact"],
     [`/${admin}/treks`, "Trips"],
+    [`/${admin}/blog`, "Blog"],
     [`/${admin}/bookings`, "Bookings"],
   ];
 

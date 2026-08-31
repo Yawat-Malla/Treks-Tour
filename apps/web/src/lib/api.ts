@@ -1,4 +1,4 @@
-import { fallbackPublic, fallbackTrek } from "@/data/fallback-site";
+import { fallbackBlog, fallbackPublic, fallbackTrek } from "@/data/fallback-site";
 
 export type SiteSettings = {
   siteTitle: string;
@@ -54,6 +54,16 @@ export type Trip = {
 
 export type Faq = { id: string; question: string; answer: string };
 export type Testimonial = { id: string; quote: string; attribution: string };
+export type BlogPost = {
+  id: string;
+  slug: string;
+  heroImageUrl: string;
+  featured: boolean;
+  publishedAt: string;
+  title: string;
+  excerpt: string;
+  body: string;
+};
 
 export type PublicPayload = {
   settings: SiteSettings;
@@ -64,6 +74,7 @@ export type PublicPayload = {
   trips: Trip[];
   faqs: Faq[];
   testimonials: Testimonial[];
+  posts: BlogPost[];
 };
 
 function isLoopback(url: string) {
@@ -98,21 +109,10 @@ async function liveFetch(path: string) {
 
 export async function fetchPublic(locale: string): Promise<PublicPayload> {
   const res = await liveFetch(`/public/site?locale=${locale}`);
-  // #region agent log
-  fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-    body: JSON.stringify({
-      sessionId: "4acaf2",
-      location: "api.ts:fetchPublic",
-      message: "site payload source",
-      data: { locale, apiBase: apiBase(), usedFallback: !res, vercel: Boolean(process.env.VERCEL) },
-      timestamp: Date.now(),
-      hypothesisId: "A",
-    }),
-  }).catch(() => {});
-  // #endregion
-  if (res) return res.json();
+  if (res) {
+    const data = (await res.json()) as PublicPayload;
+    return { ...data, posts: data.posts ?? [] };
+  }
   return fallbackPublic(locale);
 }
 
@@ -120,6 +120,12 @@ export async function fetchTrek(slug: string, locale: string) {
   const res = await liveFetch(`/public/treks/${slug}?locale=${locale}`);
   if (res) return res.json() as Promise<{ settings: SiteSettings; trek: Trip; trips: Trip[] }>;
   return fallbackTrek(slug, locale);
+}
+
+export async function fetchBlog(slug: string, locale: string) {
+  const res = await liveFetch(`/public/blog/${slug}?locale=${locale}`);
+  if (res) return res.json() as Promise<{ settings: SiteSettings; post: BlogPost; posts: BlogPost[] }>;
+  return fallbackBlog(slug, locale);
 }
 
 export function apiUrl(path: string) {

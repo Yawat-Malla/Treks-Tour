@@ -7,6 +7,7 @@
     "rafting": "漂流",
     "activities": "活动",
     "safaris": "Safari",
+    "blog": "日志",
     "plan": "出行规划",
     "prepare": "行前准备",
     "about": "关于我们",
@@ -54,13 +55,15 @@
     "activity": "活动",
     "safari": "Safari",
     "trip": "行程",
+    "search": "搜索",
     "continue": "继续",
     "prev": "上一组行程",
     "next": "下一组行程"
   },
   "featured": {
     "kicker": "博卡拉附近",
-    "title": "博卡拉附近热门徒步",
+    "title": "热门徒步精选",
+    "visitedTitle": "最受欢迎的漂流",
     "all": "全部徒步",
     "viewAll": "查看全部徒步 →",
     "raftKicker": "河流",
@@ -87,6 +90,7 @@
     "threeBody": "经理会通过微信、WhatsApp、Viber 或邮件回复许可、配速与下一步。"
   },
   "trek": {
+    "bestSeller": "热销",
     "from": "起价",
     "days": "{count} 天",
     "altitude": "{count} 米",
@@ -162,7 +166,76 @@
   },
   "voices": {
     "kicker": "来自路上",
-    "title": "旅行者怎么说"
+    "title": "客人怎么说",
+    "prev": "上一组评价",
+    "next": "下一组评价"
+  },
+  "purpose": {
+    "kicker": "我们为何行走",
+    "whyTitle": "为什么选择我们？",
+    "tile1": "ACAP",
+    "tile2": "TIMS",
+    "tile3": "持证",
+    "tile4": "博卡拉",
+    "tile5": "WhatsApp",
+    "tile6": "微信",
+    "tile7": "Viber",
+    "tile8": "无需账号"
+  },
+  "associated": {
+    "title": "我们的合作机构"
+  },
+  "partners": {
+    "acap": "ACAP 许可",
+    "tims": "TIMS 卡",
+    "years": "向导 {count} 年",
+    "walkers": "{count}+ 位行者",
+    "reply": "经理亲自回复",
+    "local": "扎根博卡拉"
+  },
+  "ctaBanner": {
+    "bookNow": "立即预订"
+  },
+  "blogs": {
+    "kicker": "来自路上",
+    "title": "旅行日志与消息",
+    "readMore": "阅读全文",
+    "all": "全部文章",
+    "posted": "发布于"
+  },
+  "rated": {
+    "title": "因最好的体验被记住",
+    "body": "已从湖畔带领 {walkers}+ 位行者。这些山路上走了 {years} 年。"
+  },
+  "memories": {
+    "title": "一面记忆之墙"
+  },
+  "cats": {
+    "treks": "徒步",
+    "rafting": "漂流",
+    "activities": "活动",
+    "safaris": "Safari"
+  },
+  "heroTabs": {
+    "destinations": "目的地",
+    "activities": "活动项目",
+    "difficulty": "难度等级",
+    "trips": "{count} 个行程",
+    "everest": "珠峰地区",
+    "annapurna": "安纳普尔纳地区",
+    "langtang": "朗塘与赫兰布地区",
+    "restricted": "限制区域",
+    "hiddenGems": "其他小众秘境",
+    "allOther": "所有其他区域",
+    "treks": "徒步与日行",
+    "rafting": "白水漂流",
+    "air": "空中与热气球",
+    "extreme": "极限探险",
+    "safaris": "丛林 Safari",
+    "zip": "滑索与秋千",
+    "easy": "轻松与风景",
+    "moderate": "中等步道",
+    "challenging": "高难探险"
   },
   "deals": {
     "kicker": "本周",
@@ -310,6 +383,8 @@
     "blurb": "从湖畔出发、走进安纳普尔纳的本地徒步与漂流公司。",
     "company": "公司",
     "support": "支持",
+    "services": "服务",
+    "experiences": "体验",
     "topTrips": "热门行程"
   },
   "legal": {

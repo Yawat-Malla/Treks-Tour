@@ -7,6 +7,7 @@
     "rafting": "래프팅",
     "activities": "액티비티",
     "safaris": "사파리",
+    "blog": "블로그",
     "plan": "일정",
     "prepare": "준비",
     "about": "소개",
@@ -54,13 +55,15 @@
     "activity": "액티비티",
     "safari": "사파리",
     "trip": "여행",
+    "search": "검색",
     "continue": "계속",
     "prev": "이전 여행",
     "next": "다음 여행"
   },
   "featured": {
     "kicker": "포카라 근처",
-    "title": "포카라 근처 인기 트레킹",
+    "title": "추천 트레킹",
+    "visitedTitle": "가장 많이 찾은 래프팅",
     "all": "모든 트레킹",
     "viewAll": "모든 트레킹 보기 →",
     "raftKicker": "강",
@@ -87,6 +90,7 @@
     "threeBody": "매니저가 WhatsApp, WeChat, Viber 또는 이메일로 허가, 페이스, 다음 단계를 답합니다."
   },
   "trek": {
+    "bestSeller": "베스트",
     "from": "부터",
     "days": "{count}일",
     "altitude": "{count} m",
@@ -162,7 +166,76 @@
   },
   "voices": {
     "kicker": "길에서",
-    "title": "여행자들이 말하는 것"
+    "title": "게스트의 말",
+    "prev": "이전 후기",
+    "next": "다음 후기"
+  },
+  "purpose": {
+    "kicker": "우리가 걷는 이유",
+    "whyTitle": "왜 우리를 선택하나요?",
+    "tile1": "ACAP",
+    "tile2": "TIMS",
+    "tile3": "면허",
+    "tile4": "포카라",
+    "tile5": "WhatsApp",
+    "tile6": "WeChat",
+    "tile7": "Viber",
+    "tile8": "계정 없음"
+  },
+  "associated": {
+    "title": "협력 기관"
+  },
+  "partners": {
+    "acap": "ACAP 허가",
+    "tims": "TIMS 카드",
+    "years": "{count}년 가이드",
+    "walkers": "{count}+ 워커",
+    "reply": "매니저가 답합니다",
+    "local": "포카라 기반"
+  },
+  "ctaBanner": {
+    "bookNow": "지금 예약"
+  },
+  "blogs": {
+    "kicker": "길에서",
+    "title": "여행 블로그와 소식",
+    "readMore": "더 읽기",
+    "all": "모든 글",
+    "posted": "게시"
+  },
+  "rated": {
+    "title": "최고의 경험으로 평가받습니다",
+    "body": "레이크사이드에서 {walkers}+ 명을 안내했습니다. 이 길을 {years}년."
+  },
+  "memories": {
+    "title": "기억의 벽"
+  },
+  "cats": {
+    "treks": "트레킹",
+    "rafting": "래프팅",
+    "activities": "액티비티",
+    "safaris": "사파리"
+  },
+  "heroTabs": {
+    "destinations": "여행지",
+    "activities": "액티비티",
+    "difficulty": "난이도",
+    "trips": "{count}개 여행",
+    "everest": "에베레스트 지역",
+    "annapurna": "안나푸르나 지역",
+    "langtang": "랑탕 및 헬람부 지역",
+    "restricted": "허가 제한 지역",
+    "hiddenGems": "숨겨진 명소",
+    "allOther": "기타 모든 지역",
+    "treks": "트레킹 및 당일 코스",
+    "rafting": "급류 래프팅",
+    "air": "항공 및 열기구",
+    "extreme": "익스트림 어드벤처",
+    "safaris": "정글 사파리",
+    "zip": "짚라인 & 스윙",
+    "easy": "이지 & 파노라마",
+    "moderate": "보통 난이도 코스",
+    "challenging": "고난도 원정 트레킹"
   },
   "deals": {
     "kicker": "이번 주",
@@ -310,6 +383,8 @@
     "blurb": "호숫가에서 안나푸르나 히말라야로 향하는 현지 트레킹과 래프팅.",
     "company": "회사",
     "support": "지원",
+    "services": "서비스",
+    "experiences": "체험",
     "topTrips": "인기 여행"
   },
   "legal": {

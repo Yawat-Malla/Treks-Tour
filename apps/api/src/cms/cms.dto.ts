@@ -210,3 +210,43 @@ export class UpdateBookingDto {
   @IsString()
   staffNotes?: string;
 }
+
+export class BlogPostTranslationDto {
+  @IsIn(['en', 'zh', 'ko', 'he'])
+  locale!: 'en' | 'zh' | 'ko' | 'he';
+
+  @IsString()
+  title!: string;
+
+  @IsString()
+  excerpt!: string;
+
+  @IsString()
+  body!: string;
+}
+
+export class UpsertBlogPostDto {
+  @IsString()
+  slug!: string;
+
+  @IsString()
+  heroImageUrl!: string;
+
+  @IsBoolean()
+  featured!: boolean;
+
+  @IsBoolean()
+  published!: boolean;
+
+  @IsOptional()
+  @IsString()
+  publishedAt?: string;
+
+  @IsInt()
+  sortOrder!: number;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => BlogPostTranslationDto)
+  translations!: BlogPostTranslationDto[];
+}

@@ -6,9 +6,11 @@ export const DEFAULT_LOGO_URL = "/logo.png";
 export function BrandMark({
   settings,
   className = "",
+  inverted = false,
 }: {
   settings: SiteSettings;
   className?: string;
+  inverted?: boolean;
 }) {
   const src = settings.logoUrl?.trim() || DEFAULT_LOGO_URL;
 
@@ -17,7 +19,7 @@ export function BrandMark({
     <img
       src={src}
       alt={settings.siteTitle}
-      className={`h-11 w-auto object-contain object-left sm:h-12 ${className}`}
+      className={`h-11 w-auto object-contain object-left sm:h-12 ${inverted ? "brightness-0 invert" : ""} ${className}`}
     />
   );
 }

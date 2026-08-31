@@ -7,6 +7,7 @@
     "rafting": "Rafting",
     "activities": "Activities",
     "safaris": "Safaris",
+    "blog": "Blog",
     "plan": "Plan",
     "prepare": "Prepare",
     "about": "About",
@@ -54,13 +55,15 @@
     "activity": "Activity",
     "safari": "Safari",
     "trip": "Trip",
+    "search": "Search",
     "continue": "Continue",
     "prev": "Previous trips",
     "next": "Next trips"
   },
   "featured": {
     "kicker": "Near Pokhara",
-    "title": "Popular treks near Pokhara",
+    "title": "Trekking top choices",
+    "visitedTitle": "Most visited rafting",
     "all": "All treks",
     "viewAll": "View all treks →",
     "raftKicker": "The rivers",
@@ -87,6 +90,7 @@
     "threeBody": "A manager replies on WhatsApp, WeChat, Viber, or email with permits, pacing, and the next human step."
   },
   "trek": {
+    "bestSeller": "Best seller",
     "from": "From",
     "days": "{count, plural, one {# day} other {# days}}",
     "altitude": "{count} m",
@@ -162,7 +166,76 @@
   },
   "voices": {
     "kicker": "From the trail",
-    "title": "What travelers say"
+    "title": "Guest says",
+    "prev": "Previous reviews",
+    "next": "Next reviews"
+  },
+  "purpose": {
+    "kicker": "Why we walk",
+    "whyTitle": "Why choose us?",
+    "tile1": "ACAP",
+    "tile2": "TIMS",
+    "tile3": "Licensed",
+    "tile4": "Pokhara",
+    "tile5": "WhatsApp",
+    "tile6": "WeChat",
+    "tile7": "Viber",
+    "tile8": "No account"
+  },
+  "associated": {
+    "title": "We're associated with"
+  },
+  "partners": {
+    "acap": "ACAP permits",
+    "tims": "TIMS cards",
+    "years": "{count} years guiding",
+    "walkers": "{count}+ walkers",
+    "reply": "A manager replies",
+    "local": "Based in Pokhara"
+  },
+  "ctaBanner": {
+    "bookNow": "Book now"
+  },
+  "blogs": {
+    "kicker": "From the trail",
+    "title": "Travel blogs and news",
+    "readMore": "Read more",
+    "all": "All posts",
+    "posted": "Posted"
+  },
+  "rated": {
+    "title": "Rated for the best experience!",
+    "body": "{walkers}+ walkers guided from Lakeside. {years} years on these paths."
+  },
+  "memories": {
+    "title": "A wall of memories"
+  },
+  "cats": {
+    "treks": "Treks",
+    "rafting": "Rafting",
+    "activities": "Activities",
+    "safaris": "Safaris"
+  },
+  "heroTabs": {
+    "destinations": "DESTINATIONS",
+    "activities": "ACTIVITIES",
+    "difficulty": "DIFFICULTY",
+    "trips": "{count} trips",
+    "everest": "Everest Region",
+    "annapurna": "Annapurna Region",
+    "langtang": "Langtang and Helambu Region",
+    "restricted": "Restricted Regions",
+    "hiddenGems": "Other Hidden Gems",
+    "allOther": "All Other Regions",
+    "treks": "Treks & Day Hikes",
+    "rafting": "Whitewater Rafting",
+    "air": "Air & Ballooning",
+    "extreme": "Extreme Adventures",
+    "safaris": "Jungle Safaris",
+    "zip": "Zipflyer & Swing",
+    "easy": "Easy & Scenic",
+    "moderate": "Moderate Trails",
+    "challenging": "Challenging Expeditions"
   },
   "deals": {
     "kicker": "This week",
@@ -310,6 +383,8 @@
     "blurb": "Locally owned trekking and rafting from the lake into the Annapurna Himalaya.",
     "company": "Company",
     "support": "Support",
+    "services": "Services",
+    "experiences": "Experiences",
     "topTrips": "Top trips"
   },
   "legal": {

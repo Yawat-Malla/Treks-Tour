@@ -48,6 +48,14 @@ export class PublicController {
     return { settings: data.settings, trek, trips: data.trips };
   }
 
+  @Get('blog/:slug')
+  async blog(@Param('slug') slug: string, @Query('locale') locale?: string) {
+    const data = await this.cache.getPublic(asLocale(locale));
+    const post = data.posts.find((p: { slug: string }) => p.slug === slug);
+    if (!post) throw new NotFoundException('Post not found');
+    return { settings: data.settings, post, posts: data.posts };
+  }
+
   @Post('bookings')
   async book(@Body() body: CreateBookingDto, @Req() req: Request) {
     const ip = req.ip || req.socket.remoteAddress || 'unknown';

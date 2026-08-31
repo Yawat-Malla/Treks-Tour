@@ -8,7 +8,6 @@ import { fetchPublic } from "@/lib/api";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactDock } from "@/components/ContactDock";
-import { TrustStrip } from "@/components/home/TrustStrip";
 import "../globals.css";
 
 const fraunces = Fraunces({
@@ -90,7 +89,6 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           {data ? (
             <>
-              <TrustStrip />
               <SiteHeader settings={data.settings} />
               <main className="flex-1">{children}</main>
               <SiteFooter settings={data.settings} />

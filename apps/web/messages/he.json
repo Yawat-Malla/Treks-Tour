@@ -7,6 +7,7 @@
     "rafting": "רפטינג",
     "activities": "פעילויות",
     "safaris": "ספארי",
+    "blog": "בלוג",
     "plan": "תכנון",
     "prepare": "הכנה",
     "about": "אודות",
@@ -54,13 +55,15 @@
     "activity": "פעילות",
     "safari": "ספארי",
     "trip": "טיול",
+    "search": "חיפוש",
     "continue": "המשך",
     "prev": "טיולים קודמים",
     "next": "טיולים הבאים"
   },
   "featured": {
     "kicker": "ליד פוקרה",
-    "title": "טרקים פופולריים ליד פוקרה",
+    "title": "בחירות הטרקים המובילות",
+    "visitedTitle": "הרפטינג הכי מבוקש",
     "all": "כל הטרקים",
     "viewAll": "לכל הטרקים",
     "raftKicker": "הנהרות",
@@ -87,6 +90,7 @@
     "threeBody": "מנהל עונה ב-WhatsApp, WeChat, Viber או במייל עם היתרים, קצב והצעד האנושי הבא."
   },
   "trek": {
+    "bestSeller": "הנמכר ביותר",
     "from": "החל מ-",
     "days": "{count, plural, one {יום אחד} other {# ימים}}",
     "altitude": "{count} מ'",
@@ -162,7 +166,76 @@
   },
   "voices": {
     "kicker": "מהשביל",
-    "title": "מה אומרים המטיילים"
+    "title": "אורחים אומרים",
+    "prev": "ביקורות קודמות",
+    "next": "ביקורות הבאות"
+  },
+  "purpose": {
+    "kicker": "למה אנחנו הולכים",
+    "whyTitle": "למה לבחור בנו?",
+    "tile1": "ACAP",
+    "tile2": "TIMS",
+    "tile3": "רישיון",
+    "tile4": "פוקרה",
+    "tile5": "WhatsApp",
+    "tile6": "WeChat",
+    "tile7": "Viber",
+    "tile8": "בלי חשבון"
+  },
+  "associated": {
+    "title": "אנחנו משויכים אל"
+  },
+  "partners": {
+    "acap": "היתרי ACAP",
+    "tims": "כרטיסי TIMS",
+    "years": "{count} שנות הדרכה",
+    "walkers": "{count}+ הולכים",
+    "reply": "מנהל עונה",
+    "local": "מבוססים בפוקרה"
+  },
+  "ctaBanner": {
+    "bookNow": "הזמינו עכשיו"
+  },
+  "blogs": {
+    "kicker": "מהשביל",
+    "title": "בלוגי טיולים וחדשות",
+    "readMore": "קראו עוד",
+    "all": "כל הפוסטים",
+    "posted": "פורסם"
+  },
+  "rated": {
+    "title": "מדורגים בזכות החוויה הטובה ביותר",
+    "body": "{walkers}+ הולכים הודרכו מלייקסייד. {years} שנים על השבילים האלה."
+  },
+  "memories": {
+    "title": "קיר של זיכרונות"
+  },
+  "cats": {
+    "treks": "טרקים",
+    "rafting": "רפטינג",
+    "activities": "פעילויות",
+    "safaris": "ספארי"
+  },
+  "heroTabs": {
+    "destinations": "יעדים",
+    "activities": "פעילויות",
+    "difficulty": "רמת קושי",
+    "trips": "{count} מסלולים",
+    "everest": "אזור האוורסט",
+    "annapurna": "אזור אנאפורנה",
+    "langtang": "אזור לנגטאנג והלמבו",
+    "restricted": "אזורים מוגבלים",
+    "hiddenGems": "פנינות חבויות נוספות",
+    "allOther": "כל האזורים האחרים",
+    "treks": "טרקים וטיולי יום",
+    "rafting": "רפטינג מים לבנים",
+    "air": "כדור פורח ואוויר",
+    "extreme": "אקסטרים ובנג'י",
+    "safaris": "ספארי בג'ונגל",
+    "zip": "אומגה ונדנדה",
+    "easy": "קל ונופי",
+    "moderate": "מסלולים בינוניים",
+    "challenging": "משלחות מאתגרות"
   },
   "deals": {
     "kicker": "השבוע",
@@ -310,6 +383,8 @@
     "blurb": "טרקים ורפטינג בבעלות מקומית מהאגם אל הימלאיה של אנאפורנה.",
     "company": "חברה",
     "support": "תמיכה",
+    "services": "שירותים",
+    "experiences": "חוויות",
     "topTrips": "טיולים מובילים"
   },
   "legal": {

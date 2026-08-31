@@ -29,7 +29,7 @@ export default async function SuccessPage({
       </p>
       <a
         href={wa}
-        className="mt-10 inline-block rounded-full bg-copper px-8 py-3 text-sm text-snow hover:bg-copper-deep"
+        className="mt-10 inline-block rounded-full bg-ink px-8 py-3 text-sm text-snow hover:bg-moss-deep"
       >
         {t("next")}
       </a>
