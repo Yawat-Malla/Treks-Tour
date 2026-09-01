@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+import { readFileSync } from "fs";
 import { resolve } from "path";
 import { PrismaClient, Locale, TripKind, type Prisma } from "@prisma/client";
 
@@ -21,6 +22,84 @@ type LocaleCopy = {
 type Q = [string, string, string, string];
 
 const LOCALES: Locale[] = ["en", "zh", "ko", "he"];
+
+const COPY_NAMESPACES = new Set([
+  "hero",
+  "heroTabs",
+  "featured",
+  "partners",
+  "purpose",
+  "value",
+  "how",
+  "voices",
+  "faq",
+  "ctaBanner",
+  "blogs",
+  "rated",
+  "memories",
+  "associated",
+  "about",
+  "plan",
+  "prepare",
+  "legal",
+]);
+const CONTACT_KEYS = new Set(["kicker", "title", "lede", "hours", "wechatHint"]);
+
+function flattenMessages(obj: unknown, prefix = ""): Record<string, string> {
+  if (!obj || typeof obj !== "object") return {};
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
+    const key = prefix ? `${prefix}.${k}` : k;
+    if (typeof v === "string") out[key] = v;
+    else if (v && typeof v === "object" && !Array.isArray(v)) Object.assign(out, flattenMessages(v, key));
+  }
+  return out;
+}
+
+function pagesFromLocale(locale: Locale): Record<string, string> {
+  const path = resolve(__dirname, `../../../apps/web/messages/${locale}.json`);
+  const msgs = JSON.parse(readFileSync(path, "utf8"));
+  const flat = flattenMessages(msgs);
+  const pages: Record<string, string> = {};
+  for (const [k, v] of Object.entries(flat)) {
+    const ns = k.split(".")[0];
+    if (COPY_NAMESPACES.has(ns)) pages[k] = v;
+    if (k === "meta.homeDescription" || k === "footer.blurb") pages[k] = v;
+    if (ns === "contact" && CONTACT_KEYS.has(k.slice("contact.".length))) pages[k] = v;
+  }
+  const col = settingsCopy[locale];
+  pages.tagline = col.tagline;
+  pages["intro.title"] = col.introTitle;
+  pages["intro.body"] = col.introBody;
+  pages["about.title"] = col.aboutTitle;
+  pages["about.body"] = col.aboutBody;
+  return pages;
+}
+
+const DEFAULT_ASSOCIATIONS = [
+  { url: "/associations/1.svg", alt: "Emblem of Nepal" },
+  { url: "/associations/2.svg", alt: "Nepal Tourism Board" },
+  { url: "/associations/3.svg", alt: "Nepal Mountaineering Association" },
+  { url: "/associations/4.svg", alt: "Trekking Agencies' Association of Nepal" },
+];
+
+const DEFAULT_CHIPS = [
+  { id: "everest", tab: "destinations", href: "/treks", count: 3, titleKey: "everest", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80" },
+  { id: "annapurna", tab: "destinations", href: "/treks", count: 7, titleKey: "annapurna", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
+  { id: "langtang", tab: "destinations", href: "/treks", count: 2, titleKey: "langtang", image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=2000&q=80" },
+  { id: "restricted", tab: "destinations", href: "/treks", count: 3, titleKey: "restricted", image: "https://images.unsplash.com/photo-1758701320941-89f86492c1ef?auto=format&fit=crop&w=2000&q=80" },
+  { id: "hiddenGems", tab: "destinations", href: "/treks", count: 7, titleKey: "hiddenGems", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" },
+  { id: "allOther", tab: "destinations", href: "/treks", count: 9, titleKey: "allOther", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80" },
+  { id: "treks", tab: "activities", href: "/treks", count: 18, titleKey: "treks", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
+  { id: "rafting", tab: "activities", href: "/rafting", count: 3, titleKey: "rafting", image: "https://images.pexels.com/photos/1732278/pexels-photo-1732278.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "air", tab: "activities", href: "/activities", count: 2, titleKey: "air", image: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=2000&q=80" },
+  { id: "extreme", tab: "activities", href: "/activities", count: 4, titleKey: "extreme", image: "https://images.unsplash.com/photo-1559677624-3c956f10d431?auto=format&fit=crop&w=2000&q=80" },
+  { id: "safaris", tab: "activities", href: "/safaris", count: 3, titleKey: "safaris", image: "https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "zip", tab: "activities", href: "/activities", count: 3, titleKey: "zip", image: "https://images.unsplash.com/photo-1696940389431-b6a2f2e1b784?auto=format&fit=crop&w=2000&q=80" },
+  { id: "easy", tab: "difficulty", href: "/treks", count: 8, titleKey: "easy", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80" },
+  { id: "moderate", tab: "difficulty", href: "/treks", count: 9, titleKey: "moderate", image: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=2000&q=80" },
+  { id: "challenging", tab: "difficulty", href: "/treks", count: 7, titleKey: "challenging", image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=2000&q=80" },
+];
 
 const IMAGES = {
   // Annapurna / Pokhara — Machhapuchhre + prayer flags (ABC, Dhampus, Poon Hill, Ghandruk)
@@ -2222,11 +2301,26 @@ async function main() {
       phone: "+977 9856030972",
       trekkerCount: 2400,
       yearsGuiding: 12,
+      heroPosterUrl: "/heroes/hero-poster.jpg",
+      heroVideoUrl: "/heroes/hero.mp4",
+      aboutHeroUrl: "https://images.unsplash.com/photo-1706187975952-33765f844667?auto=format&fit=crop&w=2000&q=80",
+      associations: DEFAULT_ASSOCIATIONS as unknown as Prisma.InputJsonValue,
+      chips: DEFAULT_CHIPS as unknown as Prisma.InputJsonValue,
       translations: {
-        create: (Object.keys(settingsCopy) as Locale[]).map((locale) => ({
-          locale,
-          ...settingsCopy[locale],
-        })),
+        create: (Object.keys(settingsCopy) as Locale[]).map((locale) => {
+          const pages = pagesFromLocale(locale);
+          return {
+            locale,
+            tagline: pages.tagline,
+            heroHeadline: pages["hero.headline"] || settingsCopy[locale].heroHeadline,
+            heroSubhead: pages["hero.lede"] || settingsCopy[locale].heroSubhead,
+            introTitle: pages["intro.title"],
+            introBody: pages["intro.body"],
+            aboutTitle: pages["about.title"],
+            aboutBody: pages["about.body"],
+            pages: pages as unknown as Prisma.InputJsonValue,
+          };
+        }),
       },
     },
   });

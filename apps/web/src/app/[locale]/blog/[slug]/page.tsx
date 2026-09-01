@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { fetchBlog } from "@/lib/api";
 import { PageHero } from "@/components/ui/PageHero";
+import { siteCopy } from "@/lib/site-copy";
 
 function formatDate(iso: string, locale: string) {
   try {
@@ -32,7 +33,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
         </div>
         {others.length > 0 && (
           <aside className="mt-16 border-t border-ink/10 pt-10">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky">{t("kicker")}</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-sky">{siteCopy(data.settings, "blogs.kicker", () => t("kicker"))}</p>
             <ul className="mt-4 space-y-3">
               {others.map((p) => (
                 <li key={p.id}>
@@ -43,7 +44,7 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
               ))}
             </ul>
             <Link href="/blog" className="mt-6 inline-block text-sm text-sky underline-offset-4 hover:underline">
-              {t("all")}
+              {siteCopy(data.settings, "blogs.all", () => t("all"))}
             </Link>
           </aside>
         )}

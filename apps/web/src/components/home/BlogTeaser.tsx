@@ -1,5 +1,4 @@
 import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
 import { FilmImage } from "@/components/ui/FilmImage";
 import type { BlogPost } from "@/lib/api";
 
@@ -11,8 +10,19 @@ function formatDate(iso: string, locale: string) {
   }
 }
 
-export async function BlogTeaser({ posts, locale }: { posts: BlogPost[]; locale: string }) {
-  const t = await getTranslations("blogs");
+export function BlogTeaser({
+  posts,
+  locale,
+  kicker,
+  title,
+  all,
+}: {
+  posts: BlogPost[];
+  locale: string;
+  kicker: string;
+  title: string;
+  all: string;
+}) {
   if (posts.length === 0) return null;
   const featured = posts.find((p) => p.featured) || posts[0];
   const rest = posts.filter((p) => p.id !== featured.id).slice(0, 3);
@@ -20,8 +30,8 @@ export async function BlogTeaser({ posts, locale }: { posts: BlogPost[]; locale:
   return (
     <section className="bg-ivory py-20">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
-        <p className="text-center text-xs uppercase tracking-[0.22em] text-sky">{t("kicker")}</p>
-        <h2 className="mt-3 text-center font-serif text-4xl">{t("title")}</h2>
+        <p className="text-center text-xs uppercase tracking-[0.22em] text-sky">{kicker}</p>
+        <h2 className="mt-3 text-center font-serif text-4xl">{title}</h2>
         <div className="mt-12 grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
           <Link href={`/blog/${featured.slug}`} className="group block">
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
@@ -40,7 +50,7 @@ export async function BlogTeaser({ posts, locale }: { posts: BlogPost[]; locale:
               </Link>
             ))}
             <Link href="/blog" className="mt-4 inline-block pt-4 text-sm text-sky underline-offset-4 hover:underline">
-              {t("all")}
+              {all}
             </Link>
           </div>
         </div>

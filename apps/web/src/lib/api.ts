@@ -1,4 +1,7 @@
+import type { AssociationLogo, ChipCard } from "@/cms/page-catalog";
 import { fallbackBlog, fallbackPublic, fallbackTrek } from "@/data/fallback-site";
+
+export type { AssociationLogo, ChipCard };
 
 export type SiteSettings = {
   siteTitle: string;
@@ -13,6 +16,11 @@ export type SiteSettings = {
   phone: string;
   trekkerCount: number;
   yearsGuiding: number;
+  heroPosterUrl: string | null;
+  heroVideoUrl: string | null;
+  aboutHeroUrl: string | null;
+  associations: AssociationLogo[] | null;
+  chips: ChipCard[] | null;
   tagline: string;
   heroHeadline: string;
   heroSubhead: string;
@@ -20,6 +28,7 @@ export type SiteSettings = {
   introBody: string;
   aboutTitle: string;
   aboutBody: string;
+  pages: Record<string, string>;
 };
 
 export type ItineraryDay = { day: number; title: string; body: string };

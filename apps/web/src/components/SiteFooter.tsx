@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { SiteSettings } from "@/lib/api";
+import { siteCopy } from "@/lib/site-copy";
 import { BrandMark } from "./BrandMark";
 import { FooterRidge } from "./ui/SceneMarks";
 import { Phone, Mail, MapPin } from "lucide-react";
@@ -15,7 +16,7 @@ export async function SiteFooter({ settings }: { settings: SiteSettings }) {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
           <div>
             <BrandMark settings={settings} inverted />
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-snow/65">{t("footer.blurb")}</p>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-snow/65">{siteCopy(settings, "footer.blurb", () => t("footer.blurb"))}</p>
             <p className="mt-4 inline-flex items-start gap-2 text-sm text-snow/65">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-river" />
               {settings.address}

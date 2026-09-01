@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { fetchPublic } from "@/lib/api";
 import { PageHero } from "@/components/ui/PageHero";
 import { FilmImage } from "@/components/ui/FilmImage";
+import { siteCopy } from "@/lib/site-copy";
 
 function formatDate(iso: string, locale: string) {
   try {
@@ -15,12 +16,12 @@ function formatDate(iso: string, locale: string) {
 export default async function BlogIndexPage() {
   const locale = await getLocale();
   const t = await getTranslations("blogs");
-  const { posts } = await fetchPublic(locale);
-  const hero = posts[0]?.heroImageUrl || "/heroes/hero-poster.jpg";
+  const { settings, posts } = await fetchPublic(locale);
+  const hero = posts[0]?.heroImageUrl || settings.heroPosterUrl || "/heroes/hero-poster.jpg";
 
   return (
     <>
-      <PageHero kicker={t("kicker")} title={t("title")} image={hero} />
+      <PageHero kicker={siteCopy(settings, "blogs.kicker", () => t("kicker"))} title={siteCopy(settings, "blogs.title", () => t("title"))} image={hero} />
       <div className="mx-auto max-w-6xl px-5 py-16 lg:px-8">
         <div className="grid gap-8 md:grid-cols-2">
           {posts.map((post) => (

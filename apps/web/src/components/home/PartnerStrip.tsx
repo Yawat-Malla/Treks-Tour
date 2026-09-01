@@ -1,15 +1,40 @@
-import { getTranslations } from "next-intl/server";
 import { FileCheck, IdCard, Clock, Users, MessageCircle, MapPin } from "lucide-react";
+import type { SiteSettings } from "@/lib/api";
+import { fillCopy, siteCopy } from "@/lib/site-copy";
 
-export async function PartnerStrip({ years, walkers }: { years: number; walkers: number }) {
-  const t = await getTranslations("partners");
+export function PartnerStrip({
+  settings,
+  fallback,
+}: {
+  settings: SiteSettings;
+  fallback: (key: string) => string;
+}) {
+  const c = (key: string) =>
+    siteCopy(settings, key, () => {
+      // #region agent log
+      fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
+        body: JSON.stringify({
+          sessionId: "4acaf2",
+          runId: "post-fix",
+          hypothesisId: "A",
+          location: "PartnerStrip.tsx:c",
+          message: "t() invoked as last resort",
+          data: { key },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+      // #endregion
+      return fallback(key);
+    });
   const items = [
-    { Icon: FileCheck, label: t("acap") },
-    { Icon: IdCard, label: t("tims") },
-    { Icon: Clock, label: t("years", { count: years }) },
-    { Icon: Users, label: t("walkers", { count: walkers }) },
-    { Icon: MessageCircle, label: t("reply") },
-    { Icon: MapPin, label: t("local") },
+    { Icon: FileCheck, label: c("partners.acap") },
+    { Icon: IdCard, label: c("partners.tims") },
+    { Icon: Clock, label: fillCopy(c("partners.years"), { count: settings.yearsGuiding }) },
+    { Icon: Users, label: fillCopy(c("partners.walkers"), { count: settings.trekkerCount }) },
+    { Icon: MessageCircle, label: c("partners.reply") },
+    { Icon: MapPin, label: c("partners.local") },
   ];
 
   return (

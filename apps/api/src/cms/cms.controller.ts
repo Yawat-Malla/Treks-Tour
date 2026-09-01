@@ -13,7 +13,14 @@ import { Locale, Prisma } from '@prisma/client';
 import { AdminGuard } from '../auth/admin.guard';
 import { PrismaService } from '../prisma/prisma.service';
 import { ContentCache } from '../public/content-cache.service';
-import { UpdateBookingDto, UpdateSettingsDto, UpsertBlogPostDto, UpsertTrekDto } from './cms.dto';
+import {
+  UpdateBookingDto,
+  UpdateSettingsDto,
+  UpsertBlogPostDto,
+  UpsertFaqDto,
+  UpsertTestimonialDto,
+  UpsertTrekDto,
+} from './cms.dto';
 
 @Controller('cms')
 @UseGuards(AdminGuard)
@@ -33,11 +40,13 @@ export class CmsController {
 
   @Patch('settings')
   async updateSettings(@Body() body: UpdateSettingsDto) {
-    const { translations, ...rest } = body;
+    const { translations, associations, chips, ...rest } = body;
     const settings = await this.prisma.siteSettings.update({
       where: { id: 'singleton' },
       data: {
         ...rest,
+        associations: associations === undefined ? undefined : (associations as Prisma.InputJsonValue),
+        chips: chips === undefined ? undefined : (chips as Prisma.InputJsonValue),
         translations: translations
           ? {
               deleteMany: {},
@@ -50,6 +59,7 @@ export class CmsController {
                 introBody: t.introBody,
                 aboutTitle: t.aboutTitle,
                 aboutBody: t.aboutBody,
+                pages: (t.pages ?? {}) as Prisma.InputJsonValue,
               })),
             }
           : undefined,
@@ -126,6 +136,80 @@ export class CmsController {
       data: body,
       include: { trek: { include: { translations: { where: { locale: 'en' } } } }, addon: { include: { translations: { where: { locale: 'en' } } } } },
     });
+  }
+
+  @Get('faqs')
+  faqs() {
+    return this.prisma.faq.findMany({
+      include: { translations: true },
+      orderBy: { sortOrder: 'asc' },
+    });
+  }
+
+  @Post('faqs')
+  async createFaq(@Body() body: UpsertFaqDto) {
+    const faq = await this.prisma.faq.create({
+      data: this.faqData(body),
+      include: { translations: true },
+    });
+    await this.cache.invalidate();
+    return faq;
+  }
+
+  @Patch('faqs/:id')
+  async updateFaq(@Param('id') id: string, @Body() body: UpsertFaqDto) {
+    await this.prisma.faqTranslation.deleteMany({ where: { faqId: id } });
+    const faq = await this.prisma.faq.update({
+      where: { id },
+      data: this.faqData(body),
+      include: { translations: true },
+    });
+    await this.cache.invalidate();
+    return faq;
+  }
+
+  @Delete('faqs/:id')
+  async deleteFaq(@Param('id') id: string) {
+    await this.prisma.faq.delete({ where: { id } });
+    await this.cache.invalidate();
+    return { ok: true };
+  }
+
+  @Get('testimonials')
+  testimonials() {
+    return this.prisma.testimonial.findMany({
+      include: { translations: true },
+      orderBy: { sortOrder: 'asc' },
+    });
+  }
+
+  @Post('testimonials')
+  async createTestimonial(@Body() body: UpsertTestimonialDto) {
+    const item = await this.prisma.testimonial.create({
+      data: this.testimonialData(body),
+      include: { translations: true },
+    });
+    await this.cache.invalidate();
+    return item;
+  }
+
+  @Patch('testimonials/:id')
+  async updateTestimonial(@Param('id') id: string, @Body() body: UpsertTestimonialDto) {
+    await this.prisma.testimonialTranslation.deleteMany({ where: { testimonialId: id } });
+    const item = await this.prisma.testimonial.update({
+      where: { id },
+      data: this.testimonialData(body),
+      include: { translations: true },
+    });
+    await this.cache.invalidate();
+    return item;
+  }
+
+  @Delete('testimonials/:id')
+  async deleteTestimonial(@Param('id') id: string) {
+    await this.prisma.testimonial.delete({ where: { id } });
+    await this.cache.invalidate();
+    return { ok: true };
   }
 
   @Get('blog')
@@ -205,6 +289,32 @@ export class CmsController {
           itinerary: t.itinerary as Prisma.InputJsonValue,
           seasonLabel: t.seasonLabel,
           difficultyLabel: t.difficultyLabel,
+        })),
+      },
+    };
+  }
+
+  private faqData(body: UpsertFaqDto) {
+    return {
+      sortOrder: body.sortOrder,
+      translations: {
+        create: body.translations.map((t) => ({
+          locale: t.locale as Locale,
+          question: t.question,
+          answer: t.answer,
+        })),
+      },
+    };
+  }
+
+  private testimonialData(body: UpsertTestimonialDto) {
+    return {
+      sortOrder: body.sortOrder,
+      translations: {
+        create: body.translations.map((t) => ({
+          locale: t.locale as Locale,
+          quote: t.quote,
+          attribution: t.attribution,
         })),
       },
     };

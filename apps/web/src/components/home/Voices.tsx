@@ -46,7 +46,15 @@ function VoiceCard({ item }: { item: Testimonial }) {
   );
 }
 
-export function Voices({ items }: { items: Testimonial[] }) {
+export function Voices({
+  items,
+  kicker,
+  title,
+}: {
+  items: Testimonial[];
+  kicker: string;
+  title: string;
+}) {
   const t = useTranslations("voices");
   const [page, setPage] = useState(0);
   const pages = Math.max(1, Math.ceil(items.length / 2));
@@ -56,8 +64,8 @@ export function Voices({ items }: { items: Testimonial[] }) {
     <section className="bg-ivory py-20">
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <Reveal>
-          <p className="text-center text-xs uppercase tracking-[0.22em] text-sky">{t("kicker")}</p>
-          <h2 className="mt-3 text-center font-serif text-4xl">{t("title")}</h2>
+          <p className="text-center text-xs uppercase tracking-[0.22em] text-sky">{kicker}</p>
+          <h2 className="mt-3 text-center font-serif text-4xl">{title}</h2>
         </Reveal>
         <div className="mt-12 grid items-stretch gap-6 sm:grid-cols-2">
           {slice.map((v) => (

@@ -7,8 +7,8 @@ export type Channel = {
   kind: "link" | "wechat";
 };
 
-function digits(value: string) {
-  return value.replace(/[^\d]/g, "");
+export function digits(value: string) {
+  return (value || "").replace(/[^\d]/g, "");
 }
 
 export function contactPrefill(locale: Locale, title: string) {
@@ -21,20 +21,45 @@ export function contactPrefill(locale: Locale, title: string) {
   return encodeURIComponent(map[locale]);
 }
 
-export function orderedChannels(locale: Locale, settings: SiteSettings, text: string): Channel[] {
-  const wa = `https://wa.me/${digits(settings.whatsapp)}?text=${text}`;
-  const viber = `viber://chat?number=%2B${digits(settings.viber)}`;
-  const email = `mailto:${settings.email}?subject=${encodeURIComponent(settings.siteTitle)}&body=${text}`;
-  const wechat: Channel = { id: "wechat", kind: "wechat" };
-  const rest: Channel[] = [
-    { id: "whatsapp", href: wa, kind: "link" },
-    { id: "viber", href: viber, kind: "link" },
-    { id: "email", href: email, kind: "link" },
-  ];
-  if (locale === "zh") return [wechat, ...rest];
-  return [rest[0], wechat, rest[1], rest[2]];
+export function whatsappHref(settings: Pick<SiteSettings, "whatsapp">, text = "") {
+  const n = digits(settings.whatsapp);
+  if (!n) return "";
+  return text ? `https://wa.me/${n}?text=${text}` : `https://wa.me/${n}`;
 }
 
-export function whatsappHref(settings: SiteSettings, text: string) {
-  return `https://wa.me/${digits(settings.whatsapp)}?text=${text}`;
+export function viberHref(settings: Pick<SiteSettings, "viber">) {
+  const n = digits(settings.viber);
+  if (!n) return "";
+  return `viber://chat?number=%2B${n}`;
+}
+
+export function emailHref(settings: Pick<SiteSettings, "email" | "siteTitle">, text = "") {
+  const email = (settings.email || "").trim();
+  if (!email) return "";
+  const subject = encodeURIComponent(settings.siteTitle || "");
+  if (!text) return `mailto:${email}?subject=${subject}`;
+  return `mailto:${email}?subject=${subject}&body=${text}`;
+}
+
+export function orderedChannels(locale: Locale, settings: SiteSettings, text: string): Channel[] {
+  const channels: Channel[] = [];
+  const wa = whatsappHref(settings, text);
+  const viber = viberHref(settings);
+  const email = emailHref(settings, text);
+  const wechat = (settings.wechatId || "").trim();
+
+  const rest: Channel[] = [];
+  if (wa) rest.push({ id: "whatsapp", href: wa, kind: "link" });
+  if (viber) rest.push({ id: "viber", href: viber, kind: "link" });
+  if (email) rest.push({ id: "email", href: email, kind: "link" });
+
+  if (locale === "zh") {
+    if (wechat) channels.push({ id: "wechat", kind: "wechat" });
+    channels.push(...rest);
+    return channels;
+  }
+  if (rest[0]) channels.push(rest[0]);
+  if (wechat) channels.push({ id: "wechat", kind: "wechat" });
+  channels.push(...rest.slice(1));
+  return channels;
 }

@@ -21,7 +21,7 @@ export class TranslationDto {
   tagline!: string;
 
   @IsString()
-  @MaxLength(400)
+  @MaxLength(800)
   heroHeadline!: string;
 
   @IsString()
@@ -41,8 +41,12 @@ export class TranslationDto {
   aboutTitle!: string;
 
   @IsString()
-  @MaxLength(6000)
+  @MaxLength(20000)
   aboutBody!: string;
+
+  @IsOptional()
+  @Allow()
+  pages?: Record<string, string>;
 }
 
 export class UpdateSettingsDto {
@@ -98,10 +102,72 @@ export class UpdateSettingsDto {
   yearsGuiding?: number;
 
   @IsOptional()
+  @IsString()
+  heroPosterUrl?: string | null;
+
+  @IsOptional()
+  @IsString()
+  heroVideoUrl?: string | null;
+
+  @IsOptional()
+  @IsString()
+  aboutHeroUrl?: string | null;
+
+  @IsOptional()
+  @Allow()
+  associations?: unknown;
+
+  @IsOptional()
+  @Allow()
+  chips?: unknown;
+
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => TranslationDto)
   translations?: TranslationDto[];
+}
+
+export class FaqTranslationDto {
+  @IsIn(['en', 'zh', 'ko', 'he'])
+  locale!: 'en' | 'zh' | 'ko' | 'he';
+
+  @IsString()
+  question!: string;
+
+  @IsString()
+  answer!: string;
+}
+
+export class UpsertFaqDto {
+  @IsInt()
+  sortOrder!: number;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => FaqTranslationDto)
+  translations!: FaqTranslationDto[];
+}
+
+export class TestimonialTranslationDto {
+  @IsIn(['en', 'zh', 'ko', 'he'])
+  locale!: 'en' | 'zh' | 'ko' | 'he';
+
+  @IsString()
+  quote!: string;
+
+  @IsString()
+  attribution!: string;
+}
+
+export class UpsertTestimonialDto {
+  @IsInt()
+  sortOrder!: number;
+
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => TestimonialTranslationDto)
+  translations!: TestimonialTranslationDto[];
 }
 
 export class TrekTranslationDto {

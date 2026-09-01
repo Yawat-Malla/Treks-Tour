@@ -29,21 +29,26 @@ enum TripKind {
 }
 
 model SiteSettings {
-  id           String   @id @default("singleton")
-  siteTitle    String
-  logoUrl      String?
-  faviconUrl   String?
-  whatsapp     String
-  viber        String
-  email        String
-  wechatId     String
-  wechatQrUrl  String?
-  address      String
-  phone        String
-  trekkerCount Int      @default(2400)
-  yearsGuiding Int      @default(12)
-  updatedAt    DateTime @updatedAt
-  translations SiteSettingsTranslation[]
+  id             String   @id @default("singleton")
+  siteTitle      String
+  logoUrl        String?
+  faviconUrl     String?
+  whatsapp       String
+  viber          String
+  email          String
+  wechatId       String
+  wechatQrUrl    String?
+  address        String
+  phone          String
+  trekkerCount   Int      @default(2400)
+  yearsGuiding   Int      @default(12)
+  heroPosterUrl  String?
+  heroVideoUrl   String?
+  aboutHeroUrl   String?
+  associations   Json?
+  chips          Json?
+  updatedAt      DateTime @updatedAt
+  translations   SiteSettingsTranslation[]
 }
 
 model SiteSettingsTranslation {
@@ -57,6 +62,7 @@ model SiteSettingsTranslation {
   introBody     String
   aboutTitle    String
   aboutBody     String
+  pages         Json         @default("{}")
   settings      SiteSettings @relation(fields: [settingsId], references: [id], onDelete: Cascade)
 
   @@unique([settingsId, locale])

@@ -1,13 +1,11 @@
 import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
 import { FilmImage } from "@/components/ui/FilmImage";
 import { WAVES } from "@/components/ui/SceneMarks";
 import { Clock, Mountain } from "lucide-react";
 import type { Trip } from "@/lib/api";
 import { tripHref } from "@/lib/api";
 
-export async function TrekCtaBanner({ trip }: { trip: Trip }) {
-  const t = await getTranslations();
+export function TrekCtaBanner({ trip, daysLabel, bookNow }: { trip: Trip; daysLabel: string; bookNow: string }) {
   const meta = trip.grade || trip.difficultyLabel;
 
   return (
@@ -19,7 +17,7 @@ export async function TrekCtaBanner({ trip }: { trip: Trip }) {
         <div className="mt-5 flex flex-wrap items-center justify-center gap-6 text-sm text-snow/85">
           <span className="inline-flex items-center gap-2">
             <Clock className="h-4 w-4" />
-            {t("trek.days", { count: trip.durationDays })}
+            {daysLabel}
           </span>
           <span className="inline-flex items-center gap-2">
             <Mountain className="h-4 w-4" />
@@ -30,7 +28,7 @@ export async function TrekCtaBanner({ trip }: { trip: Trip }) {
           href={tripHref(trip)}
           className="mt-8 inline-block rounded-full bg-ink px-8 py-3 text-sm font-medium text-snow ring-1 ring-snow/20 hover:bg-moss-deep"
         >
-          {t("ctaBanner.bookNow")}
+          {bookNow}
         </Link>
       </div>
       <svg className="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden>

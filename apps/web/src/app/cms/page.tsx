@@ -1,10 +1,10 @@
 import { CmsShell } from "@/components/cms/CmsShell";
-import { HomeCopyEditor } from "@/components/cms/HomeCopyEditor";
+import { StudioHome } from "@/components/cms/StudioHome";
 
 export default function CmsHome() {
   return (
     <CmsShell>
-      <HomeCopyEditor />
+      <StudioHome />
     </CmsShell>
   );
 }

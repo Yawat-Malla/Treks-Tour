@@ -5,6 +5,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing, rtlLocales, type Locale } from "@/i18n/routing";
 import { fetchPublic } from "@/lib/api";
+import { siteCopy } from "@/lib/site-copy";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactDock } from "@/components/ContactDock";
@@ -55,7 +56,7 @@ export async function generateMetadata({
         default: data.settings.siteTitle,
         template: `%s · ${data.settings.siteTitle}`,
       },
-      description: data.settings.tagline,
+      description: siteCopy(data.settings, "meta.homeDescription", data.settings.tagline),
       icons: data.settings.faviconUrl
         ? [{ url: data.settings.faviconUrl }]
         : [{ url: "/logo.png" }],

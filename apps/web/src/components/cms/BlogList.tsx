@@ -1,10 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { adminPath } from "@/cms/studio-nav";
 import { cmsFetch } from "@/lib/cms";
-
-const admin = process.env.NEXT_PUBLIC_ADMIN_PATH || "studio-7f3a";
+import {
+  matchesQuery,
+  StudioCount,
+  StudioEmpty,
+  StudioFilters,
+  StudioPageHeader,
+  StudioSearch,
+  StudioStatus,
+} from "./studio-ui";
 
 type Row = {
   id: string;
@@ -14,39 +22,83 @@ type Row = {
   translations: { locale: string; title: string }[];
 };
 
+function titleOf(row: Row) {
+  return row.translations.find((t) => t.locale === "en")?.title || row.slug;
+}
+
 export function BlogList() {
   const [rows, setRows] = useState<Row[] | null>(null);
+  const [q, setQ] = useState("");
+  const [status, setStatus] = useState("all");
 
   useEffect(() => {
     cmsFetch("/cms/blog").then(setRows);
   }, []);
 
-  if (!rows) return <p>Loading…</p>;
+  const filtered = useMemo(() => {
+    if (!rows) return [];
+    return rows.filter((row) => {
+      if (status === "live" && !row.published) return false;
+      if (status === "hidden" && row.published) return false;
+      if (status === "home" && !row.featured) return false;
+      return matchesQuery(q, titleOf(row), row.slug);
+    });
+  }, [rows, q, status]);
+
+  if (!rows) return <p className="text-lg text-ink-soft">Loading news…</p>;
 
   return (
     <div className="max-w-3xl">
-      <div className="flex items-center justify-between">
-        <h1 className="font-serif text-4xl">Blog</h1>
-        <Link href={`/${admin}/blog/new`} className="rounded-full bg-ink px-4 py-2 text-sm text-snow">
-          New post
-        </Link>
+      <StudioPageHeader
+        title="News"
+        hint="Stories on the blog. Guests read these after the homepage."
+        action={
+          <Link href={`/${adminPath}/blog/new`} className="studio-btn studio-btn-primary">
+            Add a story
+          </Link>
+        }
+      />
+      <div className="mb-6 space-y-4">
+        <StudioSearch value={q} onChange={setQ} placeholder="Find a story by title" />
+        <StudioFilters
+          label="On the website"
+          value={status}
+          onChange={setStatus}
+          options={[
+            { id: "all", label: "All", count: rows.length },
+            { id: "live", label: "Live" },
+            { id: "hidden", label: "Hidden" },
+            { id: "home", label: "On the homepage" },
+          ]}
+        />
+        <StudioCount shown={filtered.length} total={rows.length} word="stories" />
       </div>
-      <ul className="mt-8 divide-y divide-ink/10 rounded-2xl bg-snow ring-1 ring-ink/8">
-        {rows.map((row) => (
-          <li key={row.id}>
-            <Link href={`/${admin}/blog/${row.id}`} className="flex items-center justify-between px-5 py-4 hover:bg-ivory">
-              <span>
-                {row.translations.find((t) => t.locale === "en")?.title || row.slug}
-                <span className="ms-2 text-xs text-ink-soft">{row.slug}</span>
-              </span>
-              <span className="text-xs text-ink-soft">
-                {row.featured ? "Featured · " : ""}
-                {row.published ? "Live" : "Hidden"}
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {filtered.length === 0 ? (
+        <StudioEmpty>
+          {q.trim() || status !== "all" ? "No stories match that search." : "No stories yet. Tap Add a story."}
+        </StudioEmpty>
+      ) : (
+        <ul className="grid gap-3">
+          {filtered.map((row) => (
+            <li key={row.id}>
+              <div className="studio-card flex min-h-20 items-center justify-between gap-4 p-5">
+                <Link href={`/${adminPath}/blog/${row.id}`} className="min-w-0 flex-1">
+                  <span className="block text-lg font-semibold text-ink">{titleOf(row)}</span>
+                  {row.featured && <span className="text-[15px] text-sky">Shown on the homepage</span>}
+                </Link>
+                <div className="flex shrink-0 items-center gap-2">
+                  <StudioStatus live={row.published} />
+                  {row.published && row.slug ? (
+                    <a href={`/blog/${row.slug}`} target="_blank" rel="noreferrer" className="studio-btn studio-btn-ghost px-4 text-[15px]">
+                      See
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

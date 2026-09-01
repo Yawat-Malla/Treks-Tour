@@ -2,9 +2,19 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { cmsFetch, uploadFile } from "@/lib/cms";
+import { adminPath, type StudioLocale } from "@/cms/studio-nav";
+import { cmsFetch } from "@/lib/cms";
+import {
+  StudioCard,
+  StudioCheck,
+  StudioField,
+  StudioLocaleTabs,
+  StudioPageHeader,
+  StudioSaveBar,
+  StudioUpload,
+  StudioViewSite,
+} from "./studio-ui";
 
-const admin = process.env.NEXT_PUBLIC_ADMIN_PATH || "studio-7f3a";
 const locales = ["en", "zh", "ko", "he"] as const;
 
 type Tr = {
@@ -24,8 +34,9 @@ const emptyTr = (locale: (typeof locales)[number]): Tr => ({
 export function BlogEditor({ id }: { id: string }) {
   const isNew = id === "new";
   const router = useRouter();
-  const [locale, setLocale] = useState<(typeof locales)[number]>("en");
+  const [locale, setLocale] = useState<StudioLocale>("en");
   const [busy, setBusy] = useState(false);
+  const [saved, setSaved] = useState("");
   const [form, setForm] = useState({
     slug: "",
     heroImageUrl: "",
@@ -66,128 +77,91 @@ export function BlogEditor({ id }: { id: string }) {
 
   async function save() {
     setBusy(true);
+    setSaved("");
     const method = isNew ? "POST" : "PATCH";
     const path = isNew ? "/cms/blog" : `/cms/blog/${id}`;
-    const saved = await cmsFetch(path, { method, body: JSON.stringify(form) });
-    router.push(`/${admin}/blog/${saved.id}`);
+    const savedPost = await cmsFetch(path, { method, body: JSON.stringify(form) });
     setBusy(false);
+    setSaved("Saved just now. Guests will see this on the website.");
+    router.push(`/${adminPath}/blog/${savedPost.id}`);
   }
 
   async function remove() {
-    if (!confirm("Delete this post?")) return;
+    if (!confirm("Delete this story? This cannot be undone.")) return;
     await cmsFetch(`/cms/blog/${id}`, { method: "DELETE" });
-    router.push(`/${admin}/blog`);
-  }
-
-  async function hero(file?: File) {
-    if (!file) return;
-    const { url } = await uploadFile(file);
-    setForm((f) => ({ ...f, heroImageUrl: url }));
+    router.push(`/${adminPath}/blog`);
   }
 
   return (
-    <div className="max-w-2xl space-y-5">
-      <h1 className="font-serif text-4xl">{isNew ? "New post" : tr.title || "Edit post"}</h1>
-      <label className="block">
-        <span className="text-sm text-ink-soft">Slug</span>
-        <input
-          className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
-          value={form.slug}
-          onChange={(e) => setForm({ ...form, slug: e.target.value })}
+    <div className="max-w-2xl space-y-6">
+      <StudioPageHeader
+        title={isNew ? "Add a story" : tr.title || "Edit story"}
+        hint="A photo, then the words in each language."
+        action={!isNew && form.published && form.slug ? <StudioViewSite href={`/blog/${form.slug}`} /> : undefined}
+      />
+
+      <StudioCard className="space-y-5">
+        <StudioUpload
+          label="Story photo"
+          help="The picture at the top of the post."
+          preview={form.heroImageUrl || null}
+          onUrl={(url) => setForm((f) => ({ ...f, heroImageUrl: url }))}
         />
-      </label>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <label>
-          <span className="text-sm text-ink-soft">Date</span>
-          <input
-            type="date"
-            className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
-            value={form.publishedAt}
-            onChange={(e) => setForm({ ...form, publishedAt: e.target.value })}
-          />
-        </label>
-        <label>
-          <span className="text-sm text-ink-soft">Sort</span>
-          <input
-            type="number"
-            className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
-            value={form.sortOrder}
-            onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })}
-          />
-        </label>
-      </div>
-      <label className="block">
-        <span className="text-sm text-ink-soft">Hero image</span>
-        <input type="file" accept="image/*" className="mt-1 block" onChange={(e) => hero(e.target.files?.[0])} />
-        {form.heroImageUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={form.heroImageUrl} alt="" className="mt-3 h-32 w-full rounded-2xl object-cover" />
-        ) : null}
-        <input
-          className="mt-2 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3 text-sm"
-          placeholder="or paste a URL"
-          value={form.heroImageUrl}
-          onChange={(e) => setForm({ ...form, heroImageUrl: e.target.value })}
-        />
-      </label>
-      <div className="flex gap-4 text-sm">
-        <label className="inline-flex items-center gap-2">
-          <input type="checkbox" checked={form.featured} onChange={(e) => setForm({ ...form, featured: e.target.checked })} />
-          Featured
-        </label>
-        <label className="inline-flex items-center gap-2">
-          <input type="checkbox" checked={form.published} onChange={(e) => setForm({ ...form, published: e.target.checked })} />
-          Published
-        </label>
-      </div>
-      <div className="flex gap-2">
-        {locales.map((l) => (
-          <button
-            key={l}
-            type="button"
-            onClick={() => setLocale(l)}
-            className={`rounded-full px-3 py-1 text-sm ${locale === l ? "bg-ink text-snow" : "bg-ivory text-ink-soft"}`}
-          >
-            {l}
-          </button>
-        ))}
-      </div>
-      <label className="block">
-        <span className="text-sm text-ink-soft">Title</span>
-        <input
-          className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
-          value={tr.title}
-          onChange={(e) => patchTr({ title: e.target.value })}
-        />
-      </label>
-      <label className="block">
-        <span className="text-sm text-ink-soft">Excerpt</span>
-        <textarea
-          rows={3}
-          className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
-          value={tr.excerpt}
-          onChange={(e) => patchTr({ excerpt: e.target.value })}
-        />
-      </label>
-      <label className="block">
-        <span className="text-sm text-ink-soft">Body</span>
-        <textarea
-          rows={12}
-          className="mt-1 w-full rounded-2xl border border-ink/10 bg-snow px-4 py-3"
-          value={tr.body}
-          onChange={(e) => patchTr({ body: e.target.value })}
-        />
-      </label>
-      <div className="flex gap-3">
-        <button type="button" onClick={save} disabled={busy} className="rounded-full bg-ink px-6 py-3 text-snow">
-          {busy ? "Saving…" : "Save"}
-        </button>
-        {!isNew && (
-          <button type="button" onClick={remove} className="rounded-full px-6 py-3 text-ink-soft">
-            Delete
-          </button>
-        )}
-      </div>
+        <StudioField label="Web address name" help="Short English name in the link. No spaces.">
+          <input className="studio-input" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+        </StudioField>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <StudioField label="Date">
+            <input
+              type="date"
+              className="studio-input"
+              value={form.publishedAt}
+              onChange={(e) => setForm({ ...form, publishedAt: e.target.value })}
+            />
+          </StudioField>
+          <StudioField label="Order on the list" help="Smaller numbers show first.">
+            <input
+              type="number"
+              className="studio-input"
+              value={form.sortOrder}
+              onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })}
+            />
+          </StudioField>
+        </div>
+        <StudioCheck checked={form.featured} onChange={(v) => setForm({ ...form, featured: v })}>
+          Show on the homepage
+        </StudioCheck>
+        <StudioCheck checked={form.published} onChange={(v) => setForm({ ...form, published: v })}>
+          Live on the website
+        </StudioCheck>
+      </StudioCard>
+
+      <StudioCard className="space-y-5">
+        <h2 className="font-serif text-2xl">Words guests read</h2>
+        <StudioLocaleTabs value={locale} onChange={setLocale} />
+        <StudioField label="Title">
+          <input className="studio-input" value={tr.title} onChange={(e) => patchTr({ title: e.target.value })} />
+        </StudioField>
+        <StudioField label="Short teaser" help="One or two sentences on the blog list.">
+          <textarea rows={3} className="studio-input" value={tr.excerpt} onChange={(e) => patchTr({ excerpt: e.target.value })} />
+        </StudioField>
+        <StudioField label="Full story">
+          <textarea rows={12} className="studio-input" value={tr.body} onChange={(e) => patchTr({ body: e.target.value })} />
+        </StudioField>
+      </StudioCard>
+
+      <StudioSaveBar
+        onSave={save}
+        busy={busy}
+        saved={saved}
+        extra={
+          !isNew ? (
+            <button type="button" onClick={remove} className="studio-btn studio-btn-danger">
+              Delete story
+            </button>
+          ) : null
+        }
+      />
     </div>
   );
 }

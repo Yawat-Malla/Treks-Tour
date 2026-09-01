@@ -108,6 +108,7 @@ export class ContentCache {
 
     const t = settings?.translations.find((x) => x.locale === locale) || settings?.translations.find((x) => x.locale === 'en');
     const mapped = trips.map((trip) => this.mapTrip(trip, locale));
+    const pages = this.mergePages(t);
 
     const payload = {
       settings: settings
@@ -124,6 +125,11 @@ export class ContentCache {
             phone: settings.phone,
             trekkerCount: settings.trekkerCount,
             yearsGuiding: settings.yearsGuiding,
+            heroPosterUrl: settings.heroPosterUrl,
+            heroVideoUrl: settings.heroVideoUrl,
+            aboutHeroUrl: settings.aboutHeroUrl,
+            associations: settings.associations ?? null,
+            chips: settings.chips ?? null,
             tagline: t?.tagline ?? '',
             heroHeadline: t?.heroHeadline ?? '',
             heroSubhead: t?.heroSubhead ?? '',
@@ -131,6 +137,7 @@ export class ContentCache {
             introBody: t?.introBody ?? '',
             aboutTitle: t?.aboutTitle ?? '',
             aboutBody: t?.aboutBody ?? '',
+            pages,
           }
         : null,
       treks: mapped.filter((x) => x.kind === 'trek'),
@@ -163,5 +170,36 @@ export class ContentCache {
 
     await this.redis.client.set(cacheKey, JSON.stringify(payload), 'EX', CACHE_TTL);
     return payload;
+  }
+
+  private mergePages(t?: {
+    tagline: string;
+    heroHeadline: string;
+    heroSubhead: string;
+    introTitle: string;
+    introBody: string;
+    aboutTitle: string;
+    aboutBody: string;
+    pages?: unknown;
+  }) {
+    const stored =
+      t?.pages && typeof t.pages === 'object' && !Array.isArray(t.pages)
+        ? Object.fromEntries(
+            Object.entries(t.pages as Record<string, unknown>).filter(([, v]) => typeof v === 'string') as [
+              string,
+              string,
+            ][],
+          )
+        : {};
+    return {
+      tagline: t?.tagline ?? '',
+      'hero.headline': t?.heroHeadline ?? '',
+      'hero.lede': t?.heroSubhead ?? '',
+      'intro.title': t?.introTitle ?? '',
+      'intro.body': t?.introBody ?? '',
+      'about.title': t?.aboutTitle ?? '',
+      'about.body': t?.aboutBody ?? '',
+      ...stored,
+    };
   }
 }

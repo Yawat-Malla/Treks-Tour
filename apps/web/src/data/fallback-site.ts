@@ -998,6 +998,12 @@ export function fallbackPublic(locale: string): PublicPayload {
     phone: "+977 9856030972",
     trekkerCount: 2400,
     yearsGuiding: 12,
+    heroPosterUrl: "/heroes/hero-poster.jpg",
+    heroVideoUrl: "/heroes/hero.mp4",
+    aboutHeroUrl: "https://images.unsplash.com/photo-1706187975952-33765f844667?auto=format&fit=crop&w=2000&q=80",
+    associations: null,
+    chips: null,
+    pages: {},
     ...SETTINGS[loc],
   };
   const trips = CATALOG.map((row) => tripFromCatalog(row, loc));
