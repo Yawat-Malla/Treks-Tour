@@ -15,6 +15,8 @@
   --sky: #2f6fed;
   --gold: #c9a227;
   --gold-deep: #a4841c;
+  --pine: #185c49;
+  --pine-deep: #114538;
   --line: color-mix(in srgb, var(--ink) 10%, transparent);
   --shadow: 0 18px 50px color-mix(in srgb, var(--ink) 10%, transparent);
   --header-h: 4.75rem;
@@ -35,6 +37,8 @@
   --color-sky: var(--sky);
   --color-gold: var(--gold);
   --color-gold-deep: var(--gold-deep);
+  --color-pine: var(--pine);
+  --color-pine-deep: var(--pine-deep);
   --font-sans: var(--font-outfit);
   --font-serif: var(--font-fraunces);
   --font-cjk: var(--font-noto-sc);
@@ -218,6 +222,56 @@ html[data-chrome="solid"] main {
   background:
     radial-gradient(ellipse 80% 62% at 50% 36%, transparent 18%, color-mix(in srgb, var(--ink) 28%, transparent) 100%),
     linear-gradient(to top, color-mix(in srgb, var(--ink) 38%, transparent), transparent 48%, color-mix(in srgb, var(--ink) 16%, transparent));
+}
+
+.site-header {
+  background:
+    linear-gradient(
+      102deg,
+      #b6e4c8 0%,
+      #6fc99a 36%,
+      #d7f2e3 58%,
+      #4caf7c 100%
+    );
+  color: var(--ink);
+  border-bottom: 1px solid color-mix(in srgb, var(--pine) 28%, transparent);
+}
+
+.hero-glass {
+  background: linear-gradient(
+    165deg,
+    color-mix(in srgb, white 42%, transparent),
+    color-mix(in srgb, white 16%, transparent) 55%,
+    color-mix(in srgb, white 22%, transparent)
+  );
+  backdrop-filter: blur(22px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.4);
+  border: 1px solid color-mix(in srgb, white 48%, transparent);
+  box-shadow:
+    0 22px 56px color-mix(in srgb, #0b1f3a 24%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 62%, transparent);
+}
+
+.hero-glass-field {
+  background: color-mix(in srgb, white 48%, transparent);
+  color: var(--ink);
+  border: 1px solid color-mix(in srgb, white 40%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 55%, transparent);
+}
+
+.hero-glass-field:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--pine) 45%, white);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--pine) 22%, transparent);
+}
+
+@supports not ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .hero-glass {
+    background: color-mix(in srgb, white 86%, transparent);
+  }
+  .hero-glass-field {
+    background: color-mix(in srgb, white 92%, transparent);
+  }
 }
 .how-pill {
   border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);

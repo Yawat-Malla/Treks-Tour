@@ -16,10 +16,10 @@ export function LanguageSwitcher() {
       <select
         value={locale}
         onChange={(e) => router.replace(pathname, { locale: e.target.value as Locale })}
-        className="cursor-pointer appearance-none rounded-full border border-ink/10 bg-snow/80 py-1.5 pe-8 ps-3 text-sm text-ink-soft outline-none transition hover:border-ink/25"
+        className="cursor-pointer appearance-none rounded-full border border-pine/15 bg-white/55 py-1.5 pe-8 ps-3 text-sm text-ink-soft outline-none transition hover:border-pine/30 hover:bg-white/80"
       >
         {locales.map((code) => (
-          <option key={code} value={code}>
+          <option key={code} value={code} className="bg-snow text-ink">
             {t(code)}
           </option>
         ))}

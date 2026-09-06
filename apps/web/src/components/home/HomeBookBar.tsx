@@ -10,8 +10,7 @@ import { MapPin, Calendar, Users, Search } from "lucide-react";
 
 type Kind = Trip["kind"];
 
-const glass =
-  "bg-snow/92 text-ink shadow-[0_18px_50px_rgba(11,31,58,0.28)] ring-1 ring-snow/40 backdrop-blur-md";
+const glass = "hero-glass text-ink";
 
 export function HomeBookBar({ trips }: { trips: Trip[] }) {
   const t = useTranslations("bookBar");
@@ -135,7 +134,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
   ];
 
   const field =
-    "mt-1 w-full rounded-xl border-0 bg-ivory px-3 py-2.5 text-sm text-ink outline-none ring-1 ring-ink/8 focus:ring-2 focus:ring-sky/40";
+    "hero-glass-field mt-1 w-full rounded-xl px-3 py-2.5 text-sm text-ink outline-none";
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -183,7 +182,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
         <button
           type="submit"
           disabled={!slug}
-          className="shrink-0 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-snow hover:bg-moss-deep disabled:opacity-40"
+          className="shrink-0 rounded-full bg-pine px-5 py-2.5 text-sm font-medium text-ivory shadow-[0_8px_20px_rgba(17,69,56,0.28)] hover:bg-pine-deep disabled:opacity-40"
         >
           {t("search")}
         </button>
@@ -199,12 +198,12 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
                 type="button"
                 onClick={() => chooseKind(id)}
                 className={`inline-flex items-center gap-2 rounded-full py-1 pe-3 ps-1 text-xs font-medium transition sm:text-sm ${
-                  on ? "bg-ink text-snow" : "bg-transparent text-ink-soft ring-1 ring-ink/12 hover:bg-ivory"
+                  on ? "bg-pine text-ivory" : "bg-white/25 text-ink-soft ring-1 ring-white/45 hover:bg-white/40"
                 }`}
               >
                 <span
                   className={`grid h-7 w-7 place-items-center rounded-full ${
-                    on ? "bg-river text-snow" : "bg-ivory text-river ring-1 ring-ink/8"
+                    on ? "bg-white/15 text-ivory" : "bg-white/50 text-pine ring-1 ring-white/50"
                   }`}
                 >
                   <KindMark kind={id} className="h-4 w-4" />
@@ -223,7 +222,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
             </span>
             <select className={field} value={slug} onChange={(e) => pickTrip(e.target.value)}>
               {pool.map((tr) => (
-                <option key={tr.id} value={tr.slug}>
+                <option key={tr.id} value={tr.slug} className="bg-snow text-ink">
                   {tr.name}
                 </option>
               ))}
@@ -259,7 +258,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
           <button
             type="submit"
             disabled={!date || !slug}
-            className="col-span-2 w-full rounded-full bg-ink px-7 py-2.5 text-sm font-medium text-snow hover:bg-moss-deep disabled:opacity-40 md:col-span-1 md:w-auto md:self-end"
+            className="col-span-2 w-full rounded-full bg-pine px-7 py-2.5 text-sm font-medium text-ivory shadow-[0_8px_20px_rgba(17,69,56,0.28)] hover:bg-pine-deep disabled:opacity-40 md:col-span-1 md:w-auto md:self-end"
           >
             {t("continue")}
           </button>

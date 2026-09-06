@@ -65,8 +65,8 @@ export function DestinationChips({
   const currentCards = tabsData[activeTab];
 
   return (
-    <div className="relative mt-5 w-full rounded-3xl bg-snow/85 p-4 shadow-[0_16px_48px_rgba(11,31,58,0.25)] ring-1 ring-snow/60 backdrop-blur-md sm:p-5 md:p-6 dark:bg-ink/80 dark:ring-snow/10">
-      <div className="mb-4 flex items-center gap-6 border-b border-ink/10 pb-3 sm:gap-8 dark:border-snow/10">
+    <div className="hero-glass relative mt-5 w-full rounded-3xl p-4 text-ink sm:p-5 md:p-6">
+      <div className="mb-4 flex items-center gap-6 border-b border-ink/12 pb-3 sm:gap-8">
         {(["destinations", "activities", "difficulty"] as const).map((tab) => {
           const isActive = activeTab === tab;
           return (
@@ -75,9 +75,7 @@ export function DestinationChips({
               type="button"
               onClick={() => setActiveTab(tab)}
               className={`relative -mb-[13px] pb-3 text-xs font-bold tracking-[0.14em] uppercase transition sm:text-sm ${
-                isActive
-                  ? "border-b-2 border-ink text-ink dark:border-snow dark:text-snow"
-                  : "text-ink-soft/75 hover:text-ink dark:text-snow/60 dark:hover:text-snow"
+                isActive ? "border-b-2 border-pine text-pine" : "text-ink-soft/80 hover:text-ink"
               }`}
             >
               {labels[tab]}
@@ -91,7 +89,7 @@ export function DestinationChips({
           <button
             type="button"
             onClick={() => scroll(-1)}
-            className="absolute -left-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-ink text-snow shadow-xl ring-2 ring-snow/40 transition hover:bg-sky sm:-left-3.5 sm:h-11 sm:w-11 dark:bg-river"
+            className="absolute -left-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-pine text-ivory shadow-xl ring-2 ring-white/35 transition hover:bg-pine-deep sm:-left-3.5 sm:h-11 sm:w-11"
             aria-label="Scroll left"
           >
             <ChevronLeft className="h-5 w-5 rtl:rotate-180" />
@@ -131,7 +129,7 @@ export function DestinationChips({
           <button
             type="button"
             onClick={() => scroll(1)}
-            className="absolute -right-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-ink text-snow shadow-xl ring-2 ring-snow/40 transition hover:bg-sky sm:-right-3.5 sm:h-11 sm:w-11 dark:bg-river"
+            className="absolute -right-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-pine text-ivory shadow-xl ring-2 ring-white/35 transition hover:bg-pine-deep sm:-right-3.5 sm:h-11 sm:w-11"
             aria-label="Scroll right"
           >
             <ChevronRight className="h-5 w-5 rtl:rotate-180" />
