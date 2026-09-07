@@ -6,6 +6,19 @@ import { TripCard } from "@/components/trip/TripCard";
 import { PokharaMap } from "@/components/home/PokharaMap";
 import { PageHero } from "@/components/ui/PageHero";
 import { siteCopy } from "@/lib/site-copy";
+import { publicMetadata } from "@/lib/page-metadata";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const { settings } = await fetchPublic(locale);
+  return publicMetadata(
+    locale,
+    "/plan",
+    siteCopy(settings, "plan.title", "Plan a trek from Pokhara"),
+    siteCopy(settings, "plan.lede", "Match days, altitude and river time with a manager in Lakeside."),
+    settings.heroPosterUrl,
+  );
+}
 
 export default async function PlanPage() {
   const locale = await getLocale();

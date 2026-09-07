@@ -89,7 +89,7 @@ export function DestinationChips({
           <button
             type="button"
             onClick={() => scroll(-1)}
-            className="absolute -left-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-pine text-ivory shadow-xl ring-2 ring-white/35 transition hover:bg-pine-deep sm:-left-3.5 sm:h-11 sm:w-11"
+            className="absolute -left-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-pine text-ink shadow-xl ring-2 ring-white/35 transition hover:bg-pine-deep sm:-left-3.5 sm:h-11 sm:w-11"
             aria-label="Scroll left"
           >
             <ChevronLeft className="h-5 w-5 rtl:rotate-180" />
@@ -109,6 +109,7 @@ export function DestinationChips({
             >
               <FilmImage
                 src={card.image}
+                alt={labels.titles[card.titleKey] || card.titleKey}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/35" />
@@ -129,7 +130,7 @@ export function DestinationChips({
           <button
             type="button"
             onClick={() => scroll(1)}
-            className="absolute -right-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-pine text-ivory shadow-xl ring-2 ring-white/35 transition hover:bg-pine-deep sm:-right-3.5 sm:h-11 sm:w-11"
+            className="absolute -right-2 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-pine text-ink shadow-xl ring-2 ring-white/35 transition hover:bg-pine-deep sm:-right-3.5 sm:h-11 sm:w-11"
             aria-label="Scroll right"
           >
             <ChevronRight className="h-5 w-5 rtl:rotate-180" />

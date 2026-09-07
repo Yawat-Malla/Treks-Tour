@@ -6,11 +6,11 @@ export function RatedBand({ title, body }: { title: string; body: string }) {
       <div className="relative mx-auto max-w-3xl px-5 py-8 text-center lg:px-8">
         <svg className="pointer-events-none absolute inset-x-0 -top-6 mx-auto h-40 w-64 opacity-30" viewBox="0 0 200 120" aria-hidden>
           <path fill="currentColor" d="M0 120 40 70 70 95 110 20 150 80 180 50 200 120Z" />
-          <circle cx="110" cy="14" r="6" fill="#e8eef6" />
-          <path stroke="#e8eef6" strokeWidth="3" d="M110 22v18M98 32h24M100 40 90 58M120 40l12 18" />
+          <circle cx="110" cy="14" r="6" fill="var(--pine)" />
+          <path stroke="var(--pine)" strokeWidth="3" d="M110 22v18M98 32h24M100 40 90 58M120 40l12 18" />
         </svg>
         <p className="relative font-serif text-3xl sm:text-5xl">{title}</p>
-        <p className="relative mt-4 text-sm text-snow/70 sm:text-base">{body}</p>
+        <p className="relative mt-4 text-sm text-ink-soft sm:text-base">{body}</p>
       </div>
     </RidgeBand>
   );

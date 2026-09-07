@@ -4,7 +4,12 @@ import type { BlogPost } from "@/lib/api";
 
 function formatDate(iso: string, locale: string) {
   try {
-    return new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric" }).format(new Date(iso));
+    return new Intl.DateTimeFormat(locale, {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(iso));
   } catch {
     return iso.slice(0, 10);
   }

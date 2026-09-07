@@ -24,7 +24,7 @@ export class MailService {
   }
 
   async send(to: string, subject: string, text: string, html?: string) {
-    const from = this.config.get<string>('SMTP_FROM') || 'Upper Path Treks And Tours <hello@annapurnatrails.com>';
+    const from = this.config.get<string>('SMTP_FROM') || 'Upper Path Treks And Tours <info@upperpathtreks.com>';
     if (!this.transporter) {
       console.log('[mail:dev]', { to, subject, text });
       return;

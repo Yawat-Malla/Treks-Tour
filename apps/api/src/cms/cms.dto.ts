@@ -122,6 +122,42 @@ export class UpdateSettingsDto {
   chips?: unknown;
 
   @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  siteUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  ogImageUrl?: string | null;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  googleSiteVerification?: string;
+
+  @IsOptional()
+  geoLat?: number;
+
+  @IsOptional()
+  geoLng?: number;
+
+  @IsOptional()
+  @IsString()
+  facebookUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  instagramUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  tripadvisorUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  googleBusinessUrl?: string;
+
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => TranslationDto)
@@ -191,6 +227,21 @@ export class TrekTranslationDto {
 
   @IsString()
   difficultyLabel!: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80)
+  seoTitle?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(300)
+  seoDescription?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  imageAlt?: string;
 }
 
 export class UpsertTrekDto {
@@ -233,6 +284,10 @@ export class UpsertTrekDto {
 
   @IsIn(['trek', 'rafting', 'activity', 'safari'])
   kind!: 'trek' | 'rafting' | 'activity' | 'safari';
+
+  @IsOptional()
+  @IsIn(['annapurna', 'everest', 'langtang', 'restricted', 'hidden_gems', 'other'])
+  region?: 'annapurna' | 'everest' | 'langtang' | 'restricted' | 'hidden_gems' | 'other';
 
   @IsArray()
   @IsString({ each: true })
@@ -289,6 +344,16 @@ export class BlogPostTranslationDto {
 
   @IsString()
   body!: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(80)
+  seoTitle?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(300)
+  seoDescription?: string;
 }
 
 export class UpsertBlogPostDto {

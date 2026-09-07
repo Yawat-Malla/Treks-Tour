@@ -21,24 +21,7 @@ export function PurposeBand({
   fallback: (key: string) => string;
 }) {
   const c = (key: string) =>
-    siteCopy(settings, key, () => {
-      // #region agent log
-      fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-        body: JSON.stringify({
-          sessionId: "4acaf2",
-          runId: "post-fix",
-          hypothesisId: "D",
-          location: "PurposeBand.tsx:c",
-          message: "t() invoked as last resort",
-          data: { key },
-          timestamp: Date.now(),
-        }),
-      }).catch(() => {});
-      // #endregion
-      return fallback(key);
-    });
+    siteCopy(settings, key, () => fallback(key));
   const title = c("intro.title");
   const body = c("intro.body");
 
@@ -47,9 +30,9 @@ export function PurposeBand({
       <div className="mx-auto max-w-6xl px-5 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-start">
           <div>
-            <p className="text-xs uppercase tracking-[0.22em] text-river">{c("purpose.kicker")}</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-pine-deep">{c("purpose.kicker")}</p>
             <h2 className="mt-4 font-serif text-4xl sm:text-5xl">{title}</h2>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-snow/75">{body}</p>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft">{body}</p>
           </div>
           <div className="grid grid-cols-4 gap-3">
             {TILES.map((key) => (
@@ -66,12 +49,12 @@ export function PurposeBand({
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {WHY.map(({ key, Icon }) => (
             <div key={key} className="flex gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-snow/10">
-                <Icon className="h-5 w-5 text-river" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-snow/70">
+                <Icon className="h-5 w-5 text-pine-deep" />
               </div>
               <div>
                 <p className="font-semibold">{key === "how" ? c("how.oneTitle") : c(`value.${key}Title`)}</p>
-                <p className="mt-1 text-sm leading-relaxed text-snow/65">
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">
                   {key === "how" ? c("how.oneBody") : c(`value.${key}Body`)}
                 </p>
               </div>

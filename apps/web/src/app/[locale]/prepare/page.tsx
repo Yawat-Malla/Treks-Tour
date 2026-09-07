@@ -3,6 +3,19 @@ import { Link } from "@/i18n/navigation";
 import { fetchPublic } from "@/lib/api";
 import { PageHero } from "@/components/ui/PageHero";
 import { siteCopy } from "@/lib/site-copy";
+import { publicMetadata } from "@/lib/page-metadata";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const { settings } = await fetchPublic(locale);
+  return publicMetadata(
+    locale,
+    "/prepare",
+    siteCopy(settings, "prepare.title", "Nepal trekking permits, packing and fitness | Pokhara"),
+    siteCopy(settings, "prepare.lede", "ACAP, TIMS, packing, and how we brief you from Lakeside before the trail."),
+    settings.heroPosterUrl,
+  );
+}
 
 export default async function PreparePage() {
   const locale = await getLocale();

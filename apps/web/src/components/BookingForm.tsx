@@ -138,7 +138,7 @@ export function BookingForm({
                   type="button"
                   onClick={() => chooseKind(k)}
                   className={`rounded-2xl px-4 py-3 text-sm ring-1 ${
-                    kind === k ? "bg-ink text-snow ring-ink" : "bg-snow ring-ink/10"
+                    kind === k ? "bg-pine text-ink ring-pine" : "bg-snow ring-ink/10"
                   }`}
                 >
                   {kindLabel(k)}
@@ -211,7 +211,7 @@ export function BookingForm({
             type="button"
             disabled={!form.startDate || !form.trekId}
             onClick={() => setStep(2)}
-            className="w-full rounded-full bg-ink py-3 text-snow disabled:opacity-40"
+            className="w-full rounded-full bg-pine py-3 text-ink disabled:opacity-40"
           >
             {t("next")}
           </button>
@@ -257,7 +257,7 @@ export function BookingForm({
               type="button"
               disabled={!form.fullName || !form.email || !form.phone || !form.nationality}
               onClick={() => setStep(3)}
-              className="flex-1 rounded-full bg-ink py-3 text-snow disabled:opacity-40"
+              className="flex-1 rounded-full bg-pine py-3 text-ink disabled:opacity-40"
             >
               {t("next")}
             </button>
@@ -311,7 +311,7 @@ export function BookingForm({
               type="button"
               onClick={submit}
               disabled={busy}
-              className="flex-1 rounded-full bg-ink py-3 text-snow"
+              className="flex-1 rounded-full bg-pine py-3 text-ink"
             >
               {busy ? t("sending") : t("submit")}
             </button>

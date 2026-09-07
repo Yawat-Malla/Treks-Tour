@@ -30,7 +30,7 @@ export async function TripCard({ trip, large = false, chip }: { trip: Trip; larg
       className="group block overflow-hidden rounded-2xl bg-snow shadow-[var(--shadow)] ring-1 ring-ink/6 transition hover:-translate-y-0.5"
     >
       <div className={`relative overflow-hidden ${large ? "aspect-[4/3]" : "aspect-[5/4]"}`}>
-        <FilmImage src={trip.heroImageUrl} className="absolute inset-0" />
+        <FilmImage src={trip.heroImageUrl} alt={trip.imageAlt || trip.name} className="absolute inset-0" />
         <p
           className={`absolute top-3 end-3 rounded-md px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${
             gold ? "bg-gold text-ink" : "bg-snow/95 text-ink"

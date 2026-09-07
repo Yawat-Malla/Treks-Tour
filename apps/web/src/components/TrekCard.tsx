@@ -13,7 +13,7 @@ export async function TrekCard({ trek }: { trek: Trek }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={trek.heroImageUrl}
-          alt=""
+          alt={trek.imageAlt || trek.name}
           className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />

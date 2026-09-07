@@ -2,6 +2,19 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { fetchPublic } from "@/lib/api";
 import { PageHero } from "@/components/ui/PageHero";
 import { siteCopy } from "@/lib/site-copy";
+import { publicMetadata } from "@/lib/page-metadata";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const { settings } = await fetchPublic(locale);
+  return publicMetadata(
+    locale,
+    "/about",
+    siteCopy(settings, "about.title", "A Pokhara trekking company | Upper Path Treks"),
+    siteCopy(settings, "about.body", settings.aboutBody || settings.tagline).slice(0, 160),
+    settings.aboutHeroUrl,
+  );
+}
 
 export default async function AboutPage() {
   const locale = await getLocale();

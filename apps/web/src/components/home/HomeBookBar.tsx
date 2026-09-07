@@ -182,7 +182,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
         <button
           type="submit"
           disabled={!slug}
-          className="shrink-0 rounded-full bg-pine px-5 py-2.5 text-sm font-medium text-ivory shadow-[0_8px_20px_rgba(17,69,56,0.28)] hover:bg-pine-deep disabled:opacity-40"
+          className="shrink-0 rounded-full bg-pine px-5 py-2.5 text-sm font-medium text-ink shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] hover:bg-pine-deep disabled:opacity-40"
         >
           {t("search")}
         </button>
@@ -198,12 +198,12 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
                 type="button"
                 onClick={() => chooseKind(id)}
                 className={`inline-flex items-center gap-2 rounded-full py-1 pe-3 ps-1 text-xs font-medium transition sm:text-sm ${
-                  on ? "bg-pine text-ivory" : "bg-white/25 text-ink-soft ring-1 ring-white/45 hover:bg-white/40"
+                  on ? "bg-pine text-ink" : "bg-white/25 text-ink-soft ring-1 ring-white/45 hover:bg-white/40"
                 }`}
               >
                 <span
                   className={`grid h-7 w-7 place-items-center rounded-full ${
-                    on ? "bg-white/15 text-ivory" : "bg-white/50 text-pine ring-1 ring-white/50"
+                    on ? "bg-white/35 text-ink" : "bg-white/50 text-pine ring-1 ring-white/50"
                   }`}
                 >
                   <KindMark kind={id} className="h-4 w-4" />
@@ -258,7 +258,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
           <button
             type="submit"
             disabled={!date || !slug}
-            className="col-span-2 w-full rounded-full bg-pine px-7 py-2.5 text-sm font-medium text-ivory shadow-[0_8px_20px_rgba(17,69,56,0.28)] hover:bg-pine-deep disabled:opacity-40 md:col-span-1 md:w-auto md:self-end"
+            className="col-span-2 w-full rounded-full bg-pine px-7 py-2.5 text-sm font-medium text-ink shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] hover:bg-pine-deep disabled:opacity-40 md:col-span-1 md:w-auto md:self-end"
           >
             {t("continue")}
           </button>

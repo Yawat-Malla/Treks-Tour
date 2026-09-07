@@ -73,7 +73,7 @@ export default function PokharaMapCanvas({ trips }: { trips: Trip[] }) {
             pathOptions={{
               color: "#ffffff",
               weight: 2,
-              fillColor: river ? "#0f9d9a" : "#2f6fed",
+              fillColor: river ? "#7bb5a8" : "#6eab86",
               fillOpacity: 1,
             }}
           >

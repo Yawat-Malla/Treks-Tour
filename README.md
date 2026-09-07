@@ -1,6 +1,8 @@
-# Annapurna Trails
+# Upper Path Treks And Tours
 
-Guest-booking site for a Pokhara-based Annapurna trekking company. Visitors never create an account. Staff edit the live title, logo, copy, treks and bookings through a secret URL and PIN.
+Guest-booking site for a Pokhara-based trekking company (Upper Path Treks And Tours). Visitors never create an account. Staff edit the live title, logo, copy, treks and bookings through a secret URL and PIN.
+
+Live domain: https://upperpathtreks.com — see [apps/web/SEO.md](apps/web/SEO.md) for Search Console, sitemap, and Google Business Profile steps.
 
 ## Run locally
 

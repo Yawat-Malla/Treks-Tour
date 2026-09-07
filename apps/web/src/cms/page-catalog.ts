@@ -26,6 +26,7 @@ export const PAGE_CATALOG: CopyGroup[] = [
     help: "The first page guests see. Start with the big title and the photos.",
     fields: [
       short("tagline", "Short line for Google and the browser tab"),
+      short("meta.homeTitle", "Google title for the homepage"),
       short("meta.homeDescription", "Longer Google description"),
       short("hero.kicker", "Small line above the big title"),
       long("hero.headline", "Big title at the top of the homepage"),
@@ -111,6 +112,9 @@ export const PAGE_CATALOG: CopyGroup[] = [
     label: "Trip list pages",
     help: "The titles at the top of Treks, Rafting, Activities, and Safaris.",
     fields: [
+      short("featured.trekKicker", "Treks page — small line"),
+      short("featured.trekTitle", "Treks page — title (use Treks in Nepal)"),
+      long("featured.trekLede", "Treks page — intro under the title"),
       short("featured.all", "All treks link"),
       short("featured.raftKicker", "Rafting page — small line"),
       short("featured.raftTitle", "Rafting page — title"),
@@ -212,6 +216,38 @@ export const PAGE_CATALOG: CopyGroup[] = [
       long("footer.blurb", "Footer paragraph"),
     ],
   },
+  {
+    id: "destinations",
+    label: "Destination hubs",
+    help: "Google pages for Annapurna, Everest, Langtang, restricted areas, and quieter treks. Leave a box empty to use the default text.",
+    fields: [
+      short("dest.annapurna.seoTitle", "Annapurna — Google title"),
+      long("dest.annapurna.seoDescription", "Annapurna — Google description"),
+      short("dest.annapurna.title", "Annapurna — page title"),
+      long("dest.annapurna.lede", "Annapurna — intro"),
+      long("dest.annapurna.body", "Annapurna — main text"),
+      short("dest.everest.seoTitle", "Everest — Google title"),
+      long("dest.everest.seoDescription", "Everest — Google description"),
+      short("dest.everest.title", "Everest — page title"),
+      long("dest.everest.lede", "Everest — intro"),
+      long("dest.everest.body", "Everest — main text"),
+      short("dest.langtang.seoTitle", "Langtang — Google title"),
+      long("dest.langtang.seoDescription", "Langtang — Google description"),
+      short("dest.langtang.title", "Langtang — page title"),
+      long("dest.langtang.lede", "Langtang — intro"),
+      long("dest.langtang.body", "Langtang — main text"),
+      short("dest.restricted.seoTitle", "Restricted — Google title"),
+      long("dest.restricted.seoDescription", "Restricted — Google description"),
+      short("dest.restricted.title", "Restricted — page title"),
+      long("dest.restricted.lede", "Restricted — intro"),
+      long("dest.restricted.body", "Restricted — main text"),
+      short("dest.hidden-gems.seoTitle", "Hidden gems — Google title"),
+      long("dest.hidden-gems.seoDescription", "Hidden gems — Google description"),
+      short("dest.hidden-gems.title", "Hidden gems — page title"),
+      long("dest.hidden-gems.lede", "Hidden gems — intro"),
+      long("dest.hidden-gems.body", "Hidden gems — main text"),
+    ],
+  },
 ];
 
 export const COPY_KEYS = PAGE_CATALOG.flatMap((g) => g.fields.map((f) => f.key));
@@ -219,7 +255,7 @@ export const COPY_KEYS = PAGE_CATALOG.flatMap((g) => g.fields.map((f) => f.key))
 export type ChipCard = {
   id: string;
   tab: "destinations" | "activities" | "difficulty";
-  href: "/treks" | "/rafting" | "/activities" | "/safaris";
+  href: string;
   image: string;
   count: number;
   titleKey: string;
@@ -235,12 +271,12 @@ export const DEFAULT_ASSOCIATIONS: AssociationLogo[] = [
 ];
 
 export const DEFAULT_CHIPS: ChipCard[] = [
-  { id: "everest", tab: "destinations", href: "/treks", count: 3, titleKey: "everest", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80" },
-  { id: "annapurna", tab: "destinations", href: "/treks", count: 7, titleKey: "annapurna", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
-  { id: "langtang", tab: "destinations", href: "/treks", count: 2, titleKey: "langtang", image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=2000&q=80" },
-  { id: "restricted", tab: "destinations", href: "/treks", count: 3, titleKey: "restricted", image: "https://images.unsplash.com/photo-1758701320941-89f86492c1ef?auto=format&fit=crop&w=2000&q=80" },
-  { id: "hiddenGems", tab: "destinations", href: "/treks", count: 7, titleKey: "hiddenGems", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" },
-  { id: "allOther", tab: "destinations", href: "/treks", count: 9, titleKey: "allOther", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80" },
+  { id: "everest", tab: "destinations", href: "/destinations/everest", count: 1, titleKey: "everest", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80" },
+  { id: "annapurna", tab: "destinations", href: "/destinations/annapurna", count: 7, titleKey: "annapurna", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
+  { id: "langtang", tab: "destinations", href: "/destinations/langtang", count: 1, titleKey: "langtang", image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=2000&q=80" },
+  { id: "restricted", tab: "destinations", href: "/destinations/restricted", count: 4, titleKey: "restricted", image: "https://images.unsplash.com/photo-1758701320941-89f86492c1ef?auto=format&fit=crop&w=2000&q=80" },
+  { id: "hiddenGems", tab: "destinations", href: "/destinations/hidden-gems", count: 7, titleKey: "hiddenGems", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" },
+  { id: "allOther", tab: "destinations", href: "/treks", count: 2, titleKey: "allOther", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80" },
   { id: "treks", tab: "activities", href: "/treks", count: 18, titleKey: "treks", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
   { id: "rafting", tab: "activities", href: "/rafting", count: 3, titleKey: "rafting", image: "https://images.pexels.com/photos/1732278/pexels-photo-1732278.jpeg?auto=compress&cs=tinysrgb&w=2000" },
   { id: "air", tab: "activities", href: "/activities", count: 2, titleKey: "air", image: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=2000&q=80" },

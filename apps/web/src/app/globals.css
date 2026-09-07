@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --ivory: #f4f8fc;
-  --ivory-deep: #e8eef6;
-  --snow: #ffffff;
-  --ink: #0b1f3a;
-  --ink-soft: #4a5c73;
-  --moss: #2f6fed;
-  --moss-deep: #0b1f3a;
-  --copper: #0b1f3a;
-  --copper-deep: #163a63;
-  --river: #0f9d9a;
-  --river-deep: #0b7a78;
-  --sky: #2f6fed;
-  --gold: #c9a227;
-  --gold-deep: #a4841c;
-  --pine: #185c49;
-  --pine-deep: #114538;
+  --ivory: #f3f7f0;
+  --ivory-deep: #e4ede5;
+  --snow: #fcfffb;
+  --ink: #1a2a22;
+  --ink-soft: #5c6f64;
+  --moss: #6eab86;
+  --moss-deep: #4e8a68;
+  --copper: #b06a4a;
+  --copper-deep: #8c5138;
+  --river: #7bb5a8;
+  --river-deep: #5a9488;
+  --sky: #a8c9b8;
+  --gold: #c4a35a;
+  --gold-deep: #9c7e3d;
+  --pine: #5b9b74;
+  --pine-deep: #478262;
   --line: color-mix(in srgb, var(--ink) 10%, transparent);
   --shadow: 0 18px 50px color-mix(in srgb, var(--ink) 10%, transparent);
   --header-h: 4.75rem;
@@ -104,7 +104,7 @@ html[lang="he"] .font-serif {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--sky) 35%, white);
+  background: color-mix(in srgb, var(--moss) 32%, white);
 }
 
 a {
@@ -124,10 +124,10 @@ a {
   }
 
   .ridge {
-    --ridge-fill: var(--ink);
+    --ridge-fill: var(--moss);
     position: relative;
     isolation: isolate;
-    color: var(--snow);
+    color: var(--ink);
     padding-block: 5.5rem 6.5rem;
     overflow: visible;
     background: var(--ridge-fill);
@@ -166,11 +166,11 @@ a {
   }
 
   .ridge--ink {
-    --ridge-fill: var(--ink);
+    --ridge-fill: var(--moss);
   }
 
   .ridge--river {
-    --ridge-fill: var(--river-deep);
+    --ridge-fill: var(--river);
   }
 
   .ridge--sky {
@@ -183,6 +183,7 @@ a {
 }
 
 .film {
+  position: relative;
   overflow: hidden;
   width: 100%;
   height: 100%;
@@ -228,13 +229,12 @@ html[data-chrome="solid"] main {
   background:
     linear-gradient(
       102deg,
-      #b6e4c8 0%,
-      #6fc99a 36%,
-      #d7f2e3 58%,
-      #4caf7c 100%
+      var(--ivory) 0%,
+      var(--sky) 42%,
+      var(--ivory-deep) 100%
     );
   color: var(--ink);
-  border-bottom: 1px solid color-mix(in srgb, var(--pine) 28%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 28%, transparent);
 }
 
 .hero-glass {
@@ -248,7 +248,7 @@ html[data-chrome="solid"] main {
   -webkit-backdrop-filter: blur(22px) saturate(1.4);
   border: 1px solid color-mix(in srgb, white 48%, transparent);
   box-shadow:
-    0 22px 56px color-mix(in srgb, #0b1f3a 24%, transparent),
+    0 22px 56px color-mix(in srgb, var(--ink) 24%, transparent),
     inset 0 1px 0 color-mix(in srgb, white 62%, transparent);
 }
 
@@ -276,6 +276,32 @@ html[data-chrome="solid"] main {
 .how-pill {
   border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
   border-radius: 999px;
+}
+
+.btn-night {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--pine);
+  color: var(--ink);
+  padding: 0.7rem 1.5rem;
+  font-weight: 500;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--pine) 28%, transparent);
+}
+
+.btn-night:hover {
+  background: var(--pine-deep);
+}
+
+.link-quiet {
+  color: var(--moss);
+  text-underline-offset: 0.22em;
+}
+
+.link-quiet:hover {
+  color: var(--moss-deep);
+  text-decoration: underline;
 }
 @keyframes kenburns {
   from {

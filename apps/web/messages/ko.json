@@ -1,6 +1,7 @@
 {
   "meta": {
-    "homeDescription": "네팔 포카라에서 출발하는 안나푸르나 가이드 트레킹과 래프팅. 계정 없이 예약하세요."
+    "homeTitle": "Upper Path Treks | 포카라에서 떠나는 네팔 트레킹",
+    "homeDescription": "포카라 레이크사이드에서 출발하는 네팔 가이드 트레킹. 안나푸르나, 에베레스트, 랑탕, 제한구역. 계정 없이 예약."
   },
   "nav": {
     "treks": "트레킹",
@@ -64,6 +65,9 @@
     "kicker": "포카라 근처",
     "title": "추천 트레킹",
     "visitedTitle": "가장 많이 찾은 래프팅",
+    "trekKicker": "포카라에서 히말라야로",
+    "trekTitle": "네팔 트레킹",
+    "trekLede": "실제로 운영하는 찻집 트레킹: 안나푸르나, 에베레스트, 랑탕, 제한구역, 호수 위 한적한 능선. 일수·고도·난이도·가격을 비교한 뒤 일정을 여세요.",
     "all": "모든 트레킹",
     "viewAll": "모든 트레킹 보기 →",
     "raftKicker": "강",
@@ -115,7 +119,35 @@
     "gradeProfile": "강 등급",
     "similar": "비슷한 여행",
     "finishPokhara": "포카라에서 마무리",
-    "pairTrek": "휴식일 트레킹과 함께"
+    "pairTrek": "휴식일 트레킹과 함께",
+    "compareName": "트레킹",
+    "compareDays": "일수",
+    "compareAltitude": "최고 고도",
+    "compareRegion": "지역",
+    "overview": "누구에게 맞나",
+    "altitudeTitle": "난이도와 고도",
+    "bestTime": "언제 가면 좋은가",
+    "permitsCost": "허가와 포함 내역",
+    "fromPokhara": "포카라에서 어떻게 시작하나",
+    "faqTitle": "예약 전 질문",
+    "breadcrumbHome": "홈",
+    "breadcrumbTreks": "트레킹",
+    "guideLink": "네팔 최고의 트레킹",
+    "faqGuideQ": "면허 가이드가 필요합니까?",
+    "faqGuideA": "주요 코스에서는 필요합니다. 면허 현지 가이드와 걷고, 예약은 포카라 등록 여행사로 합니다.",
+    "faqBeginnerQ": "초보가 {name}을(를) 할 수 있나요?",
+    "faqBeginnerEasy": "가능합니다. 짧고 낮은 길입니다. 고개가 아니라 계단과 마을입니다.",
+    "faqBeginnerMod": "체력이 있으면 처음도 가능합니다. 제한은 고도입니다. 일정을 서두르지 않습니다.",
+    "faqBeginnerHard": "힘든 일정입니다. 여러 날 트레킹 경험이 있으면 낫습니다.",
+    "faqSeasonQ": "언제가 가장 좋나요?",
+    "faqSeasonA": "몬순을 맑은 주로 포장하지 않습니다. 날짜를 보내 주세요.",
+    "faqPokharaQ": "포카라에서 출발하나요?",
+    "faqPokharaA": "브리핑과 허가는 레이크사이드입니다. 안나푸르나는 호수에서, 에베레스트와 랑탕은 카트만두 경유입니다.",
+    "altitudeBody": "{name}은(는) {difficulty} 코스, {days}일, 최고 약 {altitude} m입니다.",
+    "bestTimeBody": "일반적인 시즌: {season}. 10–11월과 3–4월이 고전적인 창입니다.",
+    "permitsBody": "안나푸르나는 ACAP와 보통 TIMS를 포카라에서 처리합니다. 제한구역은 RAP가 추가됩니다.",
+    "permitsLink": "레이크사이드 허가 안내",
+    "fromPokharaBody": "출발 전날 포카라에서 잡니다. 계정 없이 WhatsApp·WeChat·Viber·이메일로 매니저가 답합니다."
   },
   "map": {
     "kicker": "호수에서",

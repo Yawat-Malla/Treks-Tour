@@ -1,6 +1,7 @@
 {
   "meta": {
-    "homeDescription": "Guided Annapurna treks and Pokhara rafting. Book without creating an account."
+    "homeTitle": "Upper Path Treks | Guided treks from Pokhara, Nepal",
+    "homeDescription": "Guided treks in Nepal from Lakeside, Pokhara. Annapurna, Everest, Langtang and restricted-area routes. Book without creating an account."
   },
   "nav": {
     "treks": "Treks",
@@ -64,6 +65,9 @@
     "kicker": "Near Pokhara",
     "title": "Trekking top choices",
     "visitedTitle": "Most visited rafting",
+    "trekKicker": "Himalaya from Pokhara",
+    "trekTitle": "Treks in Nepal",
+    "trekLede": "Tea-house treks we actually run: Annapurna, Everest, Langtang, restricted valleys, and quieter ridges above the lake. Compare days, altitude, difficulty and the price from — then open the itinerary.",
     "all": "All treks",
     "viewAll": "View all treks →",
     "raftKicker": "The rivers",
@@ -115,7 +119,35 @@
     "gradeProfile": "River grade",
     "similar": "Similar trips",
     "finishPokhara": "Finish in Pokhara",
-    "pairTrek": "Pair with a rest-day trek"
+    "pairTrek": "Pair with a rest-day trek",
+    "compareName": "Trek",
+    "compareDays": "Days",
+    "compareAltitude": "Max altitude",
+    "compareRegion": "Region",
+    "overview": "Who this is for",
+    "altitudeTitle": "Difficulty and altitude",
+    "bestTime": "Best time to go",
+    "permitsCost": "Permits and what is included",
+    "fromPokhara": "How the trip starts from Pokhara",
+    "faqTitle": "Questions before you book",
+    "breadcrumbHome": "Home",
+    "breadcrumbTreks": "Treks",
+    "guideLink": "Best treks in Nepal",
+    "faqGuideQ": "Do I need a licensed guide?",
+    "faqGuideA": "Yes on the major Nepal trails. We walk with a licensed local guide; the booking is with a government-registered Pokhara agency.",
+    "faqBeginnerQ": "Can beginners do {name}?",
+    "faqBeginnerEasy": "Yes. This is a short, lower trail. Stairs and village paths, not a high pass. Tell us if you have just landed — we will not stack a jeep day on a high night.",
+    "faqBeginnerMod": "Fit first-timers manage this with honest pacing. Altitude is the limiter, not technical climbing. We build rest into the itinerary instead of racing the viewpoint.",
+    "faqBeginnerHard": "This is a demanding itinerary. Prior multi-day trekking or very solid fitness helps. We will not sell it as a first Himalayan week if your dates are tight.",
+    "faqSeasonQ": "When is the best time?",
+    "faqSeasonA": "We will not pretend monsoon weeks are clear weeks. Write your dates; a manager in Pokhara will say if the trail matches the weather.",
+    "faqPokharaQ": "Does this start from Pokhara?",
+    "faqPokharaA": "Briefing, permits and kit-check are in Lakeside. Annapurna trails leave from the lake. Everest and Langtang connect through Kathmandu or overland — we still own the plan.",
+    "altitudeBody": "{name} is a {difficulty} walk of {days} days, with a high point around {altitude} m. We pace for acclimatisation, not a brochure summit morning.",
+    "bestTimeBody": "Typical season: {season}. October–November and March–April are the classic Himalayan windows. We close or reroute when cloud and rain make the view a fiction.",
+    "permitsBody": "Annapurna routes include ACAP and usually TIMS, processed in Pokhara. Restricted valleys (Mustang, Manaslu, Tsum, Nar Phu) add a RAP filed through immigration. The quote lists permit days; there is no surprise at the checkpoint.",
+    "permitsLink": "Permit notes from Lakeside",
+    "fromPokharaBody": "You sleep in Pokhara the night before a jeep or tourist bus. We confirm the trailhead, tea-house nights, and who meets you. No guest account — a manager replies on WhatsApp, WeChat, Viber or email."
   },
   "map": {
     "kicker": "From the lake",

@@ -251,7 +251,7 @@ export function PagesEditor() {
                 <p className="mt-0.5 text-[15px] text-ink-soft">The row of badges near the bottom of the homepage.</p>
                 <div className="mt-4 grid gap-4 sm:grid-cols-2">
                   {associations.map((logo, i) => (
-                    <div key={i} className="rounded-2xl bg-[#F4F8FF] p-4">
+                    <div key={i} className="rounded-2xl bg-ivory-deep p-4">
                       <StudioField label="What this logo is" help="Read aloud for people who cannot see the picture.">
                         <input
                           className="studio-input"
@@ -296,7 +296,7 @@ export function PagesEditor() {
               </p>
               <div className="grid gap-4">
                 {chips.map((chip, i) => (
-                  <div key={chip.id} className="grid gap-4 rounded-2xl bg-[#F4F8FF] p-4 sm:grid-cols-[1fr_8rem]">
+                  <div key={chip.id} className="grid gap-4 rounded-2xl bg-ivory-deep p-4 sm:grid-cols-[1fr_8rem]">
                     <div>
                       <p className="text-lg font-semibold text-ink">{chipName(chip)}</p>
                       <StudioField label="How many trips" help="The number on the card.">

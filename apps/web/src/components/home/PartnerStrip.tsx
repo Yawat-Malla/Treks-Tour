@@ -10,24 +10,7 @@ export function PartnerStrip({
   fallback: (key: string) => string;
 }) {
   const c = (key: string) =>
-    siteCopy(settings, key, () => {
-      // #region agent log
-      fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-        body: JSON.stringify({
-          sessionId: "4acaf2",
-          runId: "post-fix",
-          hypothesisId: "A",
-          location: "PartnerStrip.tsx:c",
-          message: "t() invoked as last resort",
-          data: { key },
-          timestamp: Date.now(),
-        }),
-      }).catch(() => {});
-      // #endregion
-      return fallback(key);
-    });
+    siteCopy(settings, key, () => fallback(key));
   const items = [
     { Icon: FileCheck, label: c("partners.acap") },
     { Icon: IdCard, label: c("partners.tims") },

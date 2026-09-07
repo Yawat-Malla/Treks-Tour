@@ -16,7 +16,7 @@ export function PageHero({
 }) {
   return (
     <section className={`relative overflow-hidden bg-ink ${tall ? "min-h-[52vh]" : "min-h-[38vh]"} md:min-h-[42vh]`}>
-      <FilmImage src={image} className="absolute inset-0" kenburns />
+      <FilmImage src={image} alt={title} className="absolute inset-0" kenburns priority />
       <div className="hero-vignette absolute inset-0" />
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center px-5 pb-16 pt-28 text-center text-snow lg:px-8 lg:pt-32">
         {kicker ? <p className="text-xs uppercase tracking-[0.22em] text-snow/70">{kicker}</p> : null}

@@ -1,6 +1,7 @@
 {
   "meta": {
-    "homeDescription": "从尼泊尔博卡拉出发的安纳普尔纳向导徒步与漂流。无需注册即可预订。"
+    "homeTitle": "Upper Path Treks | 从博卡拉出发的尼泊尔徒步",
+    "homeDescription": "从博卡拉湖畔出发的尼泊尔向导徒步：安纳普尔纳、珠峰、朗塘与限制区。无需注册即可预订。"
   },
   "nav": {
     "treks": "徒步",
@@ -64,6 +65,9 @@
     "kicker": "博卡拉附近",
     "title": "热门徒步精选",
     "visitedTitle": "最受欢迎的漂流",
+    "trekKicker": "从博卡拉走进喜马拉雅",
+    "trekTitle": "尼泊尔徒步",
+    "trekLede": "我们实际带队的茶馆线路：安纳普尔纳、珠峰、朗塘、限制区山谷，以及湖上更安静的山脊。比较天数、海拔、难度与起步价，再打开行程。",
     "all": "全部徒步",
     "viewAll": "查看全部徒步 →",
     "raftKicker": "河流",
@@ -115,7 +119,35 @@
     "gradeProfile": "河道等级",
     "similar": "相近行程",
     "finishPokhara": "在博卡拉收尾",
-    "pairTrek": "搭配轻松徒步"
+    "pairTrek": "搭配轻松徒步",
+    "compareName": "线路",
+    "compareDays": "天数",
+    "compareAltitude": "最高海拔",
+    "compareRegion": "地区",
+    "overview": "适合谁",
+    "altitudeTitle": "难度与海拔",
+    "bestTime": "最佳季节",
+    "permitsCost": "许可与包含项目",
+    "fromPokhara": "如何从博卡拉出发",
+    "faqTitle": "出发前的问题",
+    "breadcrumbHome": "首页",
+    "breadcrumbTreks": "徒步",
+    "guideLink": "尼泊尔最佳徒步",
+    "faqGuideQ": "必须请持牌向导吗？",
+    "faqGuideA": "主要线路需要。我们与持牌当地向导同行；预订通过博卡拉注册旅行社。",
+    "faqBeginnerQ": "初学者能走{name}吗？",
+    "faqBeginnerEasy": "可以。短线、低海拔，是台阶与村落路，不是山口。刚下飞机告诉我们，不会把长车程叠在高夜上。",
+    "faqBeginnerMod": "体能诚实的初次徒步者可以。限制是海拔，不是技术攀登。我们把休息写进行程。",
+    "faqBeginnerHard": "这是高强度行程。有多日徒步经验更好。档期很紧时，我们不会把它当第一次喜马拉雅周来卖。",
+    "faqSeasonQ": "什么时候去最好？",
+    "faqSeasonA": "我们不会把雨季说成晴天。把日期发给博卡拉的经理。",
+    "faqPokharaQ": "从博卡拉出发吗？",
+    "faqPokharaA": "说明、许可与装备检查在湖畔。安纳普尔纳从湖边上路。珠峰与朗塘经加德满都或陆路衔接。",
+    "altitudeBody": "{name}是{difficulty}线路，{days}天，最高约{altitude}米。按适应配速，不为宣传册赶顶。",
+    "bestTimeBody": "通常季节：{season}。十月至十一月、三月至四月是经典窗口。",
+    "permitsBody": "安纳普尔纳含 ACAP，通常还有 TIMS，在博卡拉办理。限制区另加 RAP。报价写明许可天数。",
+    "permitsLink": "从湖畔办理许可",
+    "fromPokharaBody": "出发前一晚住博卡拉。我们确认步道口、茶馆夜数与接应人。无需账号，经理在 WhatsApp、微信、Viber 或邮件回复。"
   },
   "map": {
     "kicker": "从湖边出发",

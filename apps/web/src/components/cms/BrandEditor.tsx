@@ -26,6 +26,15 @@ type Settings = {
   phone: string;
   trekkerCount: number;
   yearsGuiding: number;
+  siteUrl: string;
+  ogImageUrl: string | null;
+  googleSiteVerification: string;
+  geoLat: number;
+  geoLng: number;
+  facebookUrl: string;
+  instagramUrl: string;
+  tripadvisorUrl: string;
+  googleBusinessUrl: string;
 };
 
 export function BrandEditor() {
@@ -34,7 +43,20 @@ export function BrandEditor() {
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    cmsFetch("/cms/settings").then(setS);
+    cmsFetch("/cms/settings").then((row) =>
+      setS({
+        siteUrl: "https://upperpathtreks.com",
+        ogImageUrl: null,
+        googleSiteVerification: "",
+        geoLat: 28.2096,
+        geoLng: 83.962,
+        facebookUrl: "",
+        instagramUrl: "",
+        tripadvisorUrl: "",
+        googleBusinessUrl: "",
+        ...row,
+      }),
+    );
   }, []);
 
   if (!s) return <p className="text-lg text-ink-soft">Loading name and phone…</p>;
@@ -61,6 +83,15 @@ export function BrandEditor() {
         phone: settings.phone,
         trekkerCount: settings.trekkerCount,
         yearsGuiding: settings.yearsGuiding,
+        siteUrl: settings.siteUrl,
+        ogImageUrl: settings.ogImageUrl,
+        googleSiteVerification: settings.googleSiteVerification,
+        geoLat: settings.geoLat,
+        geoLng: settings.geoLng,
+        facebookUrl: settings.facebookUrl,
+        instagramUrl: settings.instagramUrl,
+        tripadvisorUrl: settings.tripadvisorUrl,
+        googleBusinessUrl: settings.googleBusinessUrl,
       }),
     });
     setBusy(false);
@@ -157,6 +188,54 @@ export function BrandEditor() {
             value={s.yearsGuiding}
             onChange={(e) => patch("yearsGuiding", Number(e.target.value))}
           />
+        </StudioField>
+      </StudioCard>
+
+      <StudioCard className="space-y-5">
+        <h2 className="font-serif text-2xl">Google and maps</h2>
+        <StudioField label="Website address" help="https://upperpathtreks.com — used for Google links.">
+          <input className="studio-input" value={s.siteUrl || ""} onChange={(e) => patch("siteUrl", e.target.value)} />
+        </StudioField>
+        <StudioUpload
+          label="Share picture"
+          help="The photo Google and WhatsApp show when someone shares the homepage."
+          preview={s.ogImageUrl}
+          onUrl={(url) => patch("ogImageUrl", url)}
+        />
+        <StudioField label="Google Search Console code" help="The verification string Google gives you. Optional.">
+          <input className="studio-input" value={s.googleSiteVerification || ""} onChange={(e) => patch("googleSiteVerification", e.target.value)} />
+        </StudioField>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <StudioField label="Map latitude">
+            <input
+              type="number"
+              step="0.0001"
+              className="studio-input"
+              value={s.geoLat ?? 28.2096}
+              onChange={(e) => patch("geoLat", Number(e.target.value))}
+            />
+          </StudioField>
+          <StudioField label="Map longitude">
+            <input
+              type="number"
+              step="0.0001"
+              className="studio-input"
+              value={s.geoLng ?? 83.962}
+              onChange={(e) => patch("geoLng", Number(e.target.value))}
+            />
+          </StudioField>
+        </div>
+        <StudioField label="Facebook page URL">
+          <input className="studio-input" value={s.facebookUrl || ""} onChange={(e) => patch("facebookUrl", e.target.value)} />
+        </StudioField>
+        <StudioField label="Instagram URL">
+          <input className="studio-input" value={s.instagramUrl || ""} onChange={(e) => patch("instagramUrl", e.target.value)} />
+        </StudioField>
+        <StudioField label="TripAdvisor URL">
+          <input className="studio-input" value={s.tripadvisorUrl || ""} onChange={(e) => patch("tripadvisorUrl", e.target.value)} />
+        </StudioField>
+        <StudioField label="Google Business Profile URL">
+          <input className="studio-input" value={s.googleBusinessUrl || ""} onChange={(e) => patch("googleBusinessUrl", e.target.value)} />
         </StudioField>
       </StudioCard>
 

@@ -1,4 +1,5 @@
 import type { Faq, PublicPayload, SiteSettings, Testimonial, Trip } from "@/lib/api";
+import { regionForSlug } from "@/lib/regions";
 
 const IMAGES = {
   abc: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80",
@@ -859,6 +860,10 @@ function tripFromCatalog(row: (typeof CATALOG)[number], locale: string): Trip {
     description: copy.description,
     seasonLabel: copy.seasonLabel,
     difficultyLabel: copy.difficultyLabel,
+    region: regionForSlug(row.slug, row.kind),
+    seoTitle: "",
+    seoDescription: "",
+    imageAlt: copy.name,
   };
 }
 
@@ -869,6 +874,34 @@ const POSTS: {
   publishedAt: string;
   copy: Record<string, { title: string; excerpt: string; body: string }>;
 }[] = [
+  {
+    slug: "best-treks-in-nepal",
+    heroImageUrl: IMAGES.abc,
+    featured: true,
+    publishedAt: "2026-09-01T00:00:00.000Z",
+    copy: {
+      en: {
+        title: "Best treks in Nepal (2026)",
+        excerpt: "Twelve routes we actually sell from Pokhara, with days, altitude and who each walk is for.",
+        body: "People search “best treks in Nepal” when they mean which trail fits their days. [Poon Hill](/treks/ghorepani-poon-hill) and [Mardi Himal](/treks/mardi-himal) for a short holiday. [Annapurna Base Camp](/treks/annapurna-base-camp) for the sanctuary. [Everest Base Camp](/treks/everest-base-camp) if the Khumbu is the trip. Write dates on WhatsApp.",
+      },
+      zh: {
+        title: "2026 年尼泊尔最佳徒步",
+        excerpt: "我们从博卡拉实际出售的线路。",
+        body: "短假走 [普恩山](/treks/ghorepani-poon-hill) 或 [马尔迪](/treks/mardi-himal)。圣域走 [安纳普尔纳基地营](/treks/annapurna-base-camp)。",
+      },
+      ko: {
+        title: "2026 네팔 최고의 트레킹",
+        excerpt: "포카라에서 실제로 파는 코스.",
+        body: "짧은 휴가면 [푼힐](/treks/ghorepani-poon-hill). 성소는 [안나푸르나 베이스캠프](/treks/annapurna-base-camp).",
+      },
+      he: {
+        title: "הטרקים הטובים בנפאל (2026)",
+        excerpt: "מסלולים שאנחנו באמת מוכרים מפוקרה.",
+        body: "חופשה קצרה: [פון היל](/treks/ghorepani-poon-hill). מקדש: [מחנה הבסיס של אנאפורנה](/treks/annapurna-base-camp).",
+      },
+    },
+  },
   {
     slug: "when-to-walk-annapurna",
     heroImageUrl: IMAGES.abc,
@@ -991,8 +1024,8 @@ export function fallbackPublic(locale: string): PublicPayload {
     faviconUrl: null,
     whatsapp: "9779867687188",
     viber: "9779856030972",
-    email: "hello@annapurnatrails.com",
-    wechatId: "AnnapurnaTrailsPKR",
+    email: "info@upperpathtreks.com",
+    wechatId: "UpperPathTreks",
     wechatQrUrl: null,
     address: "Lakeside, Pokhara-6, Kaski, Nepal",
     phone: "+977 9856030972",
@@ -1003,6 +1036,15 @@ export function fallbackPublic(locale: string): PublicPayload {
     aboutHeroUrl: "https://images.unsplash.com/photo-1706187975952-33765f844667?auto=format&fit=crop&w=2000&q=80",
     associations: null,
     chips: null,
+    siteUrl: "https://upperpathtreks.com",
+    ogImageUrl: "/heroes/hero-poster.jpg",
+    googleSiteVerification: "",
+    geoLat: 28.2096,
+    geoLng: 83.962,
+    facebookUrl: "",
+    instagramUrl: "",
+    tripadvisorUrl: "",
+    googleBusinessUrl: "",
     pages: {},
     ...SETTINGS[loc],
   };
@@ -1025,6 +1067,8 @@ export function fallbackPublic(locale: string): PublicPayload {
       title: p.copy[loc]?.title || p.copy.en.title,
       excerpt: p.copy[loc]?.excerpt || p.copy.en.excerpt,
       body: p.copy[loc]?.body || p.copy.en.body,
+      seoTitle: "",
+      seoDescription: "",
     })),
   };
 }

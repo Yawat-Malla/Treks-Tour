@@ -37,7 +37,7 @@ export function WeChatModal({
           <button
             type="button"
             onClick={copy}
-            className="flex-1 rounded-full bg-moss py-2.5 text-sm text-snow"
+            className="flex-1 rounded-full bg-moss py-2.5 text-sm text-ink"
           >
             {copied ? t("wechatCopied") : t("wechatCopy")}
           </button>

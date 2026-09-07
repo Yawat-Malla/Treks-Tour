@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 import { readFileSync } from "fs";
 import { resolve } from "path";
-import { PrismaClient, Locale, TripKind, type Prisma } from "@prisma/client";
+import { PrismaClient, Locale, TripKind, TrekRegion, type Prisma } from "@prisma/client";
 
 config({ path: resolve(__dirname, "../../../.env") });
 
@@ -64,7 +64,7 @@ function pagesFromLocale(locale: Locale): Record<string, string> {
   for (const [k, v] of Object.entries(flat)) {
     const ns = k.split(".")[0];
     if (COPY_NAMESPACES.has(ns)) pages[k] = v;
-    if (k === "meta.homeDescription" || k === "footer.blurb") pages[k] = v;
+    if (k === "meta.homeDescription" || k === "meta.homeTitle" || k === "footer.blurb") pages[k] = v;
     if (ns === "contact" && CONTACT_KEYS.has(k.slice("contact.".length))) pages[k] = v;
   }
   const col = settingsCopy[locale];
@@ -84,12 +84,12 @@ const DEFAULT_ASSOCIATIONS = [
 ];
 
 const DEFAULT_CHIPS = [
-  { id: "everest", tab: "destinations", href: "/treks", count: 3, titleKey: "everest", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80" },
-  { id: "annapurna", tab: "destinations", href: "/treks", count: 7, titleKey: "annapurna", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
-  { id: "langtang", tab: "destinations", href: "/treks", count: 2, titleKey: "langtang", image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=2000&q=80" },
-  { id: "restricted", tab: "destinations", href: "/treks", count: 3, titleKey: "restricted", image: "https://images.unsplash.com/photo-1758701320941-89f86492c1ef?auto=format&fit=crop&w=2000&q=80" },
-  { id: "hiddenGems", tab: "destinations", href: "/treks", count: 7, titleKey: "hiddenGems", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" },
-  { id: "allOther", tab: "destinations", href: "/treks", count: 9, titleKey: "allOther", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80" },
+  { id: "everest", tab: "destinations", href: "/destinations/everest", count: 1, titleKey: "everest", image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=2000&q=80" },
+  { id: "annapurna", tab: "destinations", href: "/destinations/annapurna", count: 7, titleKey: "annapurna", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
+  { id: "langtang", tab: "destinations", href: "/destinations/langtang", count: 1, titleKey: "langtang", image: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=2000&q=80" },
+  { id: "restricted", tab: "destinations", href: "/destinations/restricted", count: 4, titleKey: "restricted", image: "https://images.unsplash.com/photo-1758701320941-89f86492c1ef?auto=format&fit=crop&w=2000&q=80" },
+  { id: "hiddenGems", tab: "destinations", href: "/destinations/hidden-gems", count: 7, titleKey: "hiddenGems", image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" },
+  { id: "allOther", tab: "destinations", href: "/treks", count: 2, titleKey: "allOther", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80" },
   { id: "treks", tab: "activities", href: "/treks", count: 18, titleKey: "treks", image: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80" },
   { id: "rafting", tab: "activities", href: "/rafting", count: 3, titleKey: "rafting", image: "https://images.pexels.com/photos/1732278/pexels-photo-1732278.jpeg?auto=compress&cs=tinysrgb&w=2000" },
   { id: "air", tab: "activities", href: "/activities", count: 2, titleKey: "air", image: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=2000&q=80" },
@@ -333,6 +333,31 @@ const D_EASY: Q = ["Easy", "轻松", "쉬움", "קל"];
 const D_MOD: Q = ["Moderate", "中等", "중급", "בינוני"];
 const D_CHAL: Q = ["Challenging", "挑战", "도전", "מאתגר"];
 const D_RIVER: Q = ["Spirited", "有劲", "활기참", "ערני"];
+
+const TREK_REGION: Record<string, TrekRegion> = {
+  "australian-camp-dhampus": "hidden_gems",
+  "sarangkot-naudanda": "hidden_gems",
+  panchase: "hidden_gems",
+  "ghandruk-village": "hidden_gems",
+  sikles: "hidden_gems",
+  "kuri-danda": "hidden_gems",
+  "ghorepani-poon-hill": "annapurna",
+  "mardi-himal": "annapurna",
+  "mohare-danda": "hidden_gems",
+  "annapurna-base-camp": "annapurna",
+  "khopra-danda": "hidden_gems",
+  "annapurna-circuit": "annapurna",
+  "upper-mustang": "restricted",
+  "manang-village": "annapurna",
+  "manaslu-circuit": "restricted",
+  "tsum-valley": "restricted",
+  "nar-phu-valley": "restricted",
+  "round-dhaulagiri": "other",
+  "langtang-valley": "langtang",
+  "tilicho-frozen-lake": "annapurna",
+  "everest-base-camp": "everest",
+  kanchenjunga: "other",
+};
 
 const treks: SeedTrip[] = [
   {
@@ -2270,6 +2295,182 @@ const blogPosts = [
       },
     },
   },
+  {
+    slug: "best-treks-in-nepal",
+    heroImageUrl: IMAGES.annapurna,
+    featured: true,
+    sortOrder: 0,
+    publishedAt: new Date("2026-09-01"),
+    copy: {
+      en: {
+        title: "Best treks in Nepal (2026)",
+        excerpt: "Twelve routes we actually sell from Pokhara — beginners, altitude, short holidays, and restricted valleys — with days, high points and who each walk is for.",
+        body: "People search “best treks in Nepal” when they mean: which trail fits my days, legs and budget. We are a Lakeside company, not a Kathmandu catalogue. Below are twelve walks we run. Update this page in place each September; do not chase a new URL every year.\n\n## How to choose\nIf you have never slept above 3,000 m, start with [Ghorepani Poon Hill](/treks/ghorepani-poon-hill) or [Mardi Himal](/treks/mardi-himal). If you want the amphitheatre everyone photographs, [Annapurna Base Camp](/treks/annapurna-base-camp) is the honest all-rounder from Pokhara. [Everest Base Camp](/treks/everest-base-camp) is a different mountain system, a Lukla flight, and more money.\n\nTrek | Days | Max altitude | Best for\n--- | --- | --- | ---\n[Poon Hill](/treks/ghorepani-poon-hill) | 4–5 | 3,210 m | First sunrise, families\n[Mardi Himal](/treks/mardi-himal) | 5 | 4,500 m | Quiet ridge, short holiday\n[Annapurna Base Camp](/treks/annapurna-base-camp) | 8 | 4,130 m | Classic sanctuary\n[Langtang Valley](/treks/langtang-valley) | 8 | 4,984 m | Close to Kathmandu, fewer crowds\n[Annapurna Circuit](/treks/annapurna-circuit) | 12 | 5,416 m | Thorong La, villages\n[Everest Base Camp](/treks/everest-base-camp) | 16 | 5,545 m | The name people search\n[Manaslu Circuit](/treks/manaslu-circuit) | 14 | 5,160 m | Restricted, quieter 8,000 m neighbour\n[Upper Mustang](/treks/upper-mustang) | 11 | 3,800 m | Rain-shadow, Lo Manthang\n[Australian Camp](/treks/australian-camp-dhampus) | 2 | 2,060 m | First night after a long flight\n[Khopra Danda](/treks/khopra-danda) | 7 | 4,600 m | Community lodge above Ghorepani\n[Tilicho](/treks/tilicho-frozen-lake) | 8 | 4,919 m | High lake from Manang\n[Kanchenjunga](/treks/kanchenjunga) | 18 | 5,143 m | Far-east, expedition pacing\n\n## Best for beginners\nStairs, not a pass: Poon Hill, Australian Camp, Ghandruk. See also [short treks from Pokhara](/blog/short-treks-from-pokhara).\n\n## Best from Pokhara itself\nAnything Annapurna. We jeep or bus from Lakeside. Everest and Langtang still start with a briefing here, then Kathmandu or the highway.\n\n## Restricted and quieter\n[Upper Mustang permits](/blog/upper-mustang-permits) and [Manaslu](/treks/manaslu-circuit) need a registered agency and a licensed guide. That is the law, not upselling.\n\nWrite dates on WhatsApp. A manager in Pokhara will say which row in the table matches the weather — not a brochure.",
+        seoTitle: "Best Treks in Nepal 2026 | Compared from Pokhara",
+        seoDescription: "Best treks in Nepal for 2026: Poon Hill, Mardi Himal, Annapurna Base Camp, Circuit, Everest, Langtang, Mustang and Manaslu — days, altitude and who each route is for.",
+      },
+      zh: {
+        title: "2026 年尼泊尔最佳徒步",
+        excerpt: "我们从博卡拉实际出售的十二条线路：初学者、海拔、短假与限制区山谷。",
+        body: "搜“尼泊尔最佳徒步”时，你真正要的是：哪条路匹配你的天数、腿力和预算。我们是湖畔公司。下面十二条是我们带的队。\n\n适合初学者： [普恩山](/treks/ghorepani-poon-hill)、[澳大利亚营地](/treks/australian-camp-dhampus)。想看圣域： [安纳普尔纳基地营](/treks/annapurna-base-camp)。珠峰是另一套山系，要飞卢克拉。限制区仍须持牌向导。把日期发到 WhatsApp。",
+      },
+      ko: {
+        title: "2026 네팔 최고의 트레킹",
+        excerpt: "포카라에서 실제로 파는 12개 코스. 초보, 고도, 짧은 휴가, 제한구역.",
+        body: "“네팔 최고의 트레킹”은 일수·체력·예산에 맞는 길을 묻는 검색입니다. 초보면 [푼힐](/treks/ghorepani-poon-hill) 또는 [마르디](/treks/mardi-himal). 성소는 [안나푸르나 베이스캠프](/treks/annapurna-base-camp). 에베레스트는 루클라 항공입니다. 날짜를 WhatsApp으로 보내 주세요.",
+      },
+      he: {
+        title: "הטרקים הטובים בנפאל (2026)",
+        excerpt: "שניים-עשר מסלולים שאנחנו באמת מוכרים מפוקרה.",
+        body: "\"הטרקים הטובים בנפאל\" פירושו: איזה שביל מתאים לימים ולרגליים. למתחילים [פון היל](/treks/ghorepani-poon-hill). למקדש [מחנה הבסיס של אנאפורנה](/treks/annapurna-base-camp). אוורסט זו מערכת הרים אחרת. כתבו תאריכים.",
+      },
+    },
+  },
+  {
+    slug: "ebc-vs-abc",
+    heroImageUrl: IMAGES.ebc,
+    featured: false,
+    sortOrder: 5,
+    publishedAt: new Date("2026-08-20"),
+    copy: {
+      en: {
+        title: "Everest Base Camp vs Annapurna Base Camp",
+        excerpt: "EBC is higher, longer and a Lukla flight. ABC starts from Pokhara, tops out lower, and fits more first-timers. Here is how we choose.",
+        body: "## The honest difference\n[Everest Base Camp](/treks/everest-base-camp) is the name. [Annapurna Base Camp](/treks/annapurna-base-camp) is the trek most first-timers should actually walk.\n\nFactor | EBC | ABC\n--- | --- | ---\nMax altitude | 5,545 m (Kala Patthar) | 4,130 m\nTrail days | 12–14 on the path | 7–9 typical\nStart | Lukla flight | Jeep from Pokhara\nCost | Higher (flights + altitude lodges) | Lower\nCulture | Sherpa Khumbu | Gurung + sanctuary\n\nIf you have under two weeks or have never slept high, we book ABC. If the Khumbu is the trip you came to Nepal for, we still brief you in Lakeside, then connect Kathmandu–Lukla with buffer nights.\n\nRead the [best treks in Nepal](/blog/best-treks-in-nepal) table if you are still choosing among Mardi, Circuit and Langtang.",
+      },
+      zh: {
+        title: "珠峰基地营还是安纳普尔纳基地营",
+        excerpt: "EBC 更高、更长、要飞卢克拉。ABC 从博卡拉出发，海拔更低，更适合第一次。",
+        body: "[珠峰基地营](/treks/everest-base-camp)是名字。[安纳普尔纳基地营](/treks/annapurna-base-camp)是多数初次徒步者真正该走的路。假期不到两周、没在 3000 米以上睡过，我们订 ABC。",
+      },
+      ko: {
+        title: "에베레스트 vs 안나푸르나 베이스캠프",
+        excerpt: "EBC는 더 높고 길고 루클라 항공. ABC는 포카라에서 출발합니다.",
+        body: "[에베레스트 베이스캠프](/treks/everest-base-camp)는 이름입니다. [안나푸르나 베이스캠프](/treks/annapurna-base-camp)는 대부분의 초보가 걸어야 할 길입니다.",
+      },
+      he: {
+        title: "מחנה בסיס אוורסט מול אנאפורנה",
+        excerpt: "EBC גבוה וארוך יותר ודורש טיסת לוקלה. ABC מתחיל בפוקרה.",
+        body: "[מחנה הבסיס של אוורסט](/treks/everest-base-camp) הוא השם. [מחנה הבסיס של אנאפורנה](/treks/annapurna-base-camp) הוא הטרק שרוב המתחילים צריכים.",
+      },
+    },
+  },
+  {
+    slug: "short-treks-from-pokhara",
+    heroImageUrl: IMAGES.poon,
+    featured: false,
+    sortOrder: 6,
+    publishedAt: new Date("2026-08-12"),
+    copy: {
+      en: {
+        title: "Best short treks from Pokhara",
+        excerpt: "Two to five days above the lake: Australian Camp, Poon Hill, Mardi Himal. Stairs, rhododendron, and a sunrise that does not need Lukla.",
+        body: "A rest week in Pokhara is enough for a real Himalayan walk if you pick the right ridge.\n\n## Two days\n[Australian Camp and Dhampus](/treks/australian-camp-dhampus) is the honest first overnight after a long flight. Machhapuchhre in the north window. Stairs, not altitude.\n\n## Four to five days\n[Ghorepani Poon Hill](/treks/ghorepani-poon-hill) is the classic dawn over Dhaulagiri. [Mardi Himal](/treks/mardi-himal) is quieter and higher — a 4,500 m morning if your legs and dates allow.\n\n## If you hate the Poon Hill queue\n[Mohare Danda](/treks/mohare-danda) and [Panchase](/treks/panchase) sit off the postcard trail. See [quieter treks](/destinations/hidden-gems).\n\nWe jeep from Lakeside. ACAP is included in the quote. Write how many days you actually have.",
+      },
+      zh: {
+        title: "从博卡拉出发的短线徒步",
+        excerpt: "湖上两到五天：澳大利亚营地、普恩山、马尔迪。",
+        body: "休息周也够走真喜马拉雅，只要选对山脊。[澳大利亚营地](/treks/australian-camp-dhampus)是长途航班后的诚实过夜。[普恩山](/treks/ghorepani-poon-hill)是经典黎明。[马尔迪](/treks/mardi-himal)更安静、更高。",
+      },
+      ko: {
+        title: "포카라에서 짧은 트레킹",
+        excerpt: "호수 위 2–5일. 오스트레일리안 캠프, 푼힐, 마르디.",
+        body: "짧은 휴가에도 히말라야를 걸을 수 있습니다. [오스트레일리안 캠프](/treks/australian-camp-dhampus), [푼힐](/treks/ghorepani-poon-hill), [마르디 히말](/treks/mardi-himal).",
+      },
+      he: {
+        title: "טרקים קצרים מפוקרה",
+        excerpt: "יומיים עד חמישה מעל האגם: אוסטרליאן קמפ, פון היל, מארדי.",
+        body: "שבוע מנוחה מספיק להליכה אמיתית. [אוסטרליאן קמפ](/treks/australian-camp-dhampus), [פון היל](/treks/ghorepani-poon-hill), [מארדי](/treks/mardi-himal).",
+      },
+    },
+  },
+  {
+    slug: "upper-mustang-permits",
+    heroImageUrl: IMAGES.mustang,
+    featured: false,
+    sortOrder: 7,
+    publishedAt: new Date("2026-07-15"),
+    copy: {
+      en: {
+        title: "Upper Mustang permits 2026",
+        excerpt: "Restricted-area permit by the day, ACAP, a licensed guide, and a registered agency. What actually changed — and what we still file before Kagbeni.",
+        body: "Upper Mustang is still a restricted area. You cannot buy a permit at the trailhead.\n\n## What you need\nA Restricted Area Permit (RAP) billed per person per day, an Annapurna Conservation Area Permit, and a licensed guide booked through a government-registered agency. TIMS may apply depending on how you enter.\n\nThe two-person minimum has been relaxed. Solo travellers can go on paper. A guide is still mandatory. We apply in Kathmandu or Pokhara before you reach Kagbeni.\n\n## Cost\nRAP is set by immigration (recently USD 50 per person per day — confirm the current notice). ACAP is extra. Our [Upper Mustang trek](/treks/upper-mustang) quote lists permit days so the checkpoint is not a surprise.\n\nSee all [restricted-area treks](/destinations/restricted) and [prepare / permits](/prepare).",
+      },
+      zh: {
+        title: "2026 上木斯塘许可",
+        excerpt: "按日计的限制区许可、ACAP、持牌向导与注册旅行社。",
+        body: "上木斯塘仍是限制区。步道口买不到许可。两人最低已放宽，持牌向导仍必须。我们在卡格贝尼之前于加德满都或博卡拉申请。见 [上木斯塘徒步](/treks/upper-mustang)。",
+      },
+      ko: {
+        title: "2026 상무스탕 허가",
+        excerpt: "일당 제한구역 허가, ACAP, 면허 가이드, 등록 여행사.",
+        body: "상무스탕은 여전히 제한구역입니다. 트레일헤드에서 허가를 살 수 없습니다. 가이드는 필수입니다. [상무스탕 트레킹](/treks/upper-mustang).",
+      },
+      he: {
+        title: "היתרי אפר מוסטנג 2026",
+        excerpt: "היתר אזור מוגבל לפי יום, ACAP, מדריך מורשה וסוכנות רשומה.",
+        body: "אפר מוסטנג עדיין אזור מוגבל. מדריך עדיין חובה. מגישים לפני קאגבני. [טרק אפר מוסטנג](/treks/upper-mustang).",
+      },
+    },
+  },
+  {
+    slug: "annapurna-circuit-vs-base-camp",
+    heroImageUrl: IMAGES.circuit,
+    featured: false,
+    sortOrder: 8,
+    publishedAt: new Date("2026-06-28"),
+    copy: {
+      en: {
+        title: "Annapurna Circuit vs Base Camp",
+        excerpt: "Circuit is a high pass and a changing valley. Base Camp is an out-and-back sanctuary. Different holidays.",
+        body: "[Annapurna Circuit](/treks/annapurna-circuit) crosses Thorong La at 5,416 m and finishes toward Pokhara through a rain-shadow. [Annapurna Base Camp](/treks/annapurna-base-camp) walks into a bowl of peaks and comes back the same trail family.\n\nChoose Circuit if you have twelve-plus days and want villages, a pass, and variety. Choose Base Camp if you want the amphitheatre and a shorter, lower high point. Mardi Himal is the quieter middle if Circuit is too long and ABC feels crowded.\n\nBoth start in our Pokhara plan. Permits: ACAP + TIMS. Read [best treks in Nepal](/blog/best-treks-in-nepal).",
+      },
+      zh: {
+        title: "安纳普尔纳环线还是基地营",
+        excerpt: "环线是山口与变化的河谷。基地营是进出圣域。",
+        body: "[环线](/treks/annapurna-circuit)翻越 5,416 米的托隆拉。[基地营](/treks/annapurna-base-camp)走进峰圈再沿同类步道回来。有十二天以上选环线；想看圣域选基地营。",
+      },
+      ko: {
+        title: "안나푸르나 서킷 vs 베이스캠프",
+        excerpt: "서킷은 고개와 변하는 계곡. 베이스캠프는 성소 왕복.",
+        body: "[서킷](/treks/annapurna-circuit)은 토롱라 5,416 m. [베이스캠프](/treks/annapurna-base-camp)는 봉우리 분지. 12일 이상이면 서킷.",
+      },
+      he: {
+        title: "מעגל אנאפורנה מול מחנה הבסיס",
+        excerpt: "המעגל הוא מעבר גבוה. מחנה הבסיס הוא מקדש הלוך ושוב.",
+        body: "[המעגל](/treks/annapurna-circuit) חוצה את תורונג לה. [מחנה הבסיס](/treks/annapurna-base-camp) נכנס לקערה של פסגות. שניים-עשר ימים — מעגל.",
+      },
+    },
+  },
+  {
+    slug: "best-time-to-trek-nepal",
+    heroImageUrl: IMAGES.phewa,
+    featured: false,
+    sortOrder: 9,
+    publishedAt: new Date("2026-05-10"),
+    copy: {
+      en: {
+        title: "Best time to trek in Nepal",
+        excerpt: "October light, April rhododendron, monsoon honesty, and why we will not sell you a view the cloud will hide.",
+        body: "Nepal has two classic windows: October–November (stable skies, cold nights, busy tea houses) and March–April (blossom, a little haze). December–February is possible on lower Annapurna ridges; high passes get bitter. June–early September is monsoon. We run some short Pokhara walks then. We will not pretend the Circuit or ABC is a view week.\n\nRain-shadow [Upper Mustang](/treks/upper-mustang) is the exception in those wet months.\n\nFor Annapurna-specific months see [when to walk the Annapurna](/blog/when-to-walk-annapurna). Send dates; a manager in Pokhara answers the weather, not a calendar graphic.",
+      },
+      zh: {
+        title: "尼泊尔徒步最佳季节",
+        excerpt: "十月的光线、四月的杜鹃，以及我们不会把雨季当晴天卖。",
+        body: "经典窗口：十月至十一月、三月至四月。雨季我们仍可能走博卡拉短线，不会把环线或基地营说成观景周。雨影里的 [上木斯塘](/treks/upper-mustang) 是例外。",
+      },
+      ko: {
+        title: "네팔 트레킹 최적 시기",
+        excerpt: "10월의 빛, 4월의 철쭉, 몬순을 맑다고 팔지 않는 이유.",
+        body: "고전적 창은 10–11월과 3–4월입니다. 몬순에 서킷이나 ABC를 전망 주로 포장하지 않습니다. 비그늘의 [상무스탕](/treks/upper-mustang)이 예외입니다.",
+      },
+      he: {
+        title: "מתי לטייל בנפאל",
+        excerpt: "אור אוקטובר, רודודנדרון באפריל, וכנות לגבי המונסון.",
+        body: "החלונות הקלאסיים: אוקטובר–נובמבר ומרץ–אפריל. במונסון לא נמכור את המעגל או את מחנה הבסיס כשבוע נוף. [אפר מוסטנג](/treks/upper-mustang) הוא החריג.",
+      },
+    },
+  },
 ];
 
 async function main() {
@@ -2294,8 +2495,8 @@ async function main() {
       faviconUrl: null,
       whatsapp: "9779867687188",
       viber: "9779856030972",
-      email: "hello@annapurnatrails.com",
-      wechatId: "AnnapurnaTrailsPKR",
+      email: "info@upperpathtreks.com",
+      wechatId: "UpperPathTreks",
       wechatQrUrl: null,
       address: "Lakeside, Pokhara-6, Kaski, Nepal",
       phone: "+977 9856030972",
@@ -2306,6 +2507,15 @@ async function main() {
       aboutHeroUrl: "https://images.unsplash.com/photo-1706187975952-33765f844667?auto=format&fit=crop&w=2000&q=80",
       associations: DEFAULT_ASSOCIATIONS as unknown as Prisma.InputJsonValue,
       chips: DEFAULT_CHIPS as unknown as Prisma.InputJsonValue,
+      siteUrl: "https://upperpathtreks.com",
+      ogImageUrl: "/heroes/hero-poster.jpg",
+      googleSiteVerification: "",
+      geoLat: 28.2096,
+      geoLng: 83.962,
+      facebookUrl: "",
+      instagramUrl: "",
+      tripadvisorUrl: "",
+      googleBusinessUrl: "",
       translations: {
         create: (Object.keys(settingsCopy) as Locale[]).map((locale) => {
           const pages = pagesFromLocale(locale);
@@ -2341,6 +2551,7 @@ async function main() {
         featured: trek.featured,
         published: true,
         sortOrder: trek.sortOrder,
+        region: TREK_REGION[trek.slug] ?? "other",
         inclusions: trek.inclusions ?? TREK_INCLUSIONS,
         exclusions: trek.exclusions ?? TREK_EXCLUSIONS,
         bestMonths: trek.bestMonths ?? MONTHS_TREK,
@@ -2357,6 +2568,7 @@ async function main() {
             itinerary: trek.copy[locale].itinerary as unknown as Prisma.InputJsonValue,
             seasonLabel: trek.copy[locale].seasonLabel,
             difficultyLabel: trek.copy[locale].difficultyLabel,
+            imageAlt: trek.copy[locale].name,
           })),
         },
       },
@@ -2408,6 +2620,8 @@ async function main() {
             title: post.copy[locale].title,
             excerpt: post.copy[locale].excerpt,
             body: post.copy[locale].body,
+            seoTitle: (post.copy[locale] as { seoTitle?: string }).seoTitle ?? "",
+            seoDescription: (post.copy[locale] as { seoDescription?: string }).seoDescription ?? "",
           })),
         },
       },

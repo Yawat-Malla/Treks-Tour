@@ -22,6 +22,8 @@ type Tr = {
   title: string;
   excerpt: string;
   body: string;
+  seoTitle: string;
+  seoDescription: string;
 };
 
 const emptyTr = (locale: (typeof locales)[number]): Tr => ({
@@ -29,6 +31,8 @@ const emptyTr = (locale: (typeof locales)[number]): Tr => ({
   title: "",
   excerpt: "",
   body: "",
+  seoTitle: "",
+  seoDescription: "",
 });
 
 export function BlogEditor({ id }: { id: string }) {
@@ -52,7 +56,9 @@ export function BlogEditor({ id }: { id: string }) {
     cmsFetch(`/cms/blog/${id}`).then((post) => {
       const translations = locales.map((l) => {
         const found = post.translations.find((t: Tr) => t.locale === l);
-        return found || emptyTr(l);
+        return found
+          ? { ...emptyTr(l), ...found, seoTitle: found.seoTitle || "", seoDescription: found.seoDescription || "" }
+          : emptyTr(l);
       });
       setForm({
         slug: post.slug,
@@ -147,6 +153,12 @@ export function BlogEditor({ id }: { id: string }) {
         </StudioField>
         <StudioField label="Full story">
           <textarea rows={12} className="studio-input" value={tr.body} onChange={(e) => patchTr({ body: e.target.value })} />
+        </StudioField>
+        <StudioField label="Google title" help="Leave empty to use the story title.">
+          <input className="studio-input" value={tr.seoTitle} onChange={(e) => patchTr({ seoTitle: e.target.value })} />
+        </StudioField>
+        <StudioField label="Google description">
+          <textarea rows={2} className="studio-input" value={tr.seoDescription} onChange={(e) => patchTr({ seoDescription: e.target.value })} />
         </StudioField>
       </StudioCard>
 

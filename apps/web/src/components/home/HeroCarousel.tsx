@@ -3,6 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { WAVES } from "@/components/ui/SceneMarks";
 import { HomeBookBar } from "@/components/home/HomeBookBar";
+import { FilmImage } from "@/components/ui/FilmImage";
 import type { Trip } from "@/lib/api";
 
 export function HeroCarousel({
@@ -34,8 +35,7 @@ export function HeroCarousel({
 
   return (
     <section className="relative min-h-[82svh] overflow-hidden bg-ink md:min-h-[88svh]">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover object-center" />
+      <FilmImage src={poster} alt={headline.replace(/\n/g, " ")} className="absolute inset-0" priority />
       {canPlay && video && (
         <video
           className="absolute inset-0 h-full w-full object-cover"

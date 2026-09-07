@@ -9,7 +9,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { Locale, Prisma } from '@prisma/client';
+import { Locale, Prisma, TrekRegion } from '@prisma/client';
 import { AdminGuard } from '../auth/admin.guard';
 import { PrismaService } from '../prisma/prisma.service';
 import { ContentCache } from '../public/content-cache.service';
@@ -273,6 +273,7 @@ export class CmsController {
       published: body.published,
       sortOrder: body.sortOrder,
       kind: body.kind,
+      region: (body.region ?? 'other') as TrekRegion,
       inclusions: body.inclusions,
       exclusions: body.exclusions,
       bestMonths: body.bestMonths,
@@ -289,6 +290,9 @@ export class CmsController {
           itinerary: t.itinerary as Prisma.InputJsonValue,
           seasonLabel: t.seasonLabel,
           difficultyLabel: t.difficultyLabel,
+          seoTitle: t.seoTitle ?? '',
+          seoDescription: t.seoDescription ?? '',
+          imageAlt: t.imageAlt ?? '',
         })),
       },
     };
@@ -334,6 +338,8 @@ export class CmsController {
           title: t.title,
           excerpt: t.excerpt,
           body: t.body,
+          seoTitle: t.seoTitle ?? '',
+          seoDescription: t.seoDescription ?? '',
         })),
       },
     };

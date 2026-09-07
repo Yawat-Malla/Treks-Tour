@@ -28,27 +28,45 @@ enum TripKind {
   safari
 }
 
+enum TrekRegion {
+  annapurna
+  everest
+  langtang
+  restricted
+  hidden_gems
+  other
+}
+
 model SiteSettings {
-  id             String   @id @default("singleton")
-  siteTitle      String
-  logoUrl        String?
-  faviconUrl     String?
-  whatsapp       String
-  viber          String
-  email          String
-  wechatId       String
-  wechatQrUrl    String?
-  address        String
-  phone          String
-  trekkerCount   Int      @default(2400)
-  yearsGuiding   Int      @default(12)
-  heroPosterUrl  String?
-  heroVideoUrl   String?
-  aboutHeroUrl   String?
-  associations   Json?
-  chips          Json?
-  updatedAt      DateTime @updatedAt
-  translations   SiteSettingsTranslation[]
+  id                      String   @id @default("singleton")
+  siteTitle               String
+  logoUrl                 String?
+  faviconUrl              String?
+  whatsapp                String
+  viber                   String
+  email                   String
+  wechatId                String
+  wechatQrUrl             String?
+  address                 String
+  phone                   String
+  trekkerCount            Int      @default(2400)
+  yearsGuiding            Int      @default(12)
+  heroPosterUrl           String?
+  heroVideoUrl            String?
+  aboutHeroUrl            String?
+  associations            Json?
+  chips                   Json?
+  siteUrl                 String   @default("https://upperpathtreks.com")
+  ogImageUrl              String?
+  googleSiteVerification  String   @default("")
+  geoLat                  Float    @default(28.2096)
+  geoLng                  Float    @default(83.962)
+  facebookUrl             String   @default("")
+  instagramUrl            String   @default("")
+  tripadvisorUrl          String   @default("")
+  googleBusinessUrl       String   @default("")
+  updatedAt               DateTime @updatedAt
+  translations            SiteSettingsTranslation[]
 }
 
 model SiteSettingsTranslation {
@@ -89,6 +107,7 @@ model Trek {
   grade            String?
   minAge           Int?
   altitudeProfile  Json?
+  region           TrekRegion        @default(other)
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   translations     TrekTranslation[]
@@ -106,6 +125,9 @@ model TrekTranslation {
   itinerary        Json
   seasonLabel      String
   difficultyLabel  String
+  seoTitle         String @default("")
+  seoDescription   String @default("")
+  imageAlt         String @default("")
   trek             Trek   @relation(fields: [trekId], references: [id], onDelete: Cascade)
 
   @@unique([trekId, locale])
@@ -192,10 +214,12 @@ model BlogPostTranslation {
   id       String   @id @default(cuid())
   locale   Locale
   postId   String
-  title    String
-  excerpt  String
-  body     String
-  post     BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  title          String
+  excerpt        String
+  body           String
+  seoTitle       String @default("")
+  seoDescription String @default("")
+  post           BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   @@unique([postId, locale])
 }

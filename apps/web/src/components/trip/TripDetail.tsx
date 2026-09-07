@@ -11,6 +11,42 @@ import { AltitudeChart } from "./AltitudeChart";
 import { Lightbox } from "./Lightbox";
 import { TripCard } from "./TripCard";
 import { Clock, Mountain } from "lucide-react";
+import { REGION_LABEL, regionToPath } from "@/lib/regions";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd, faqJsonLd, tripJsonLd } from "@/lib/jsonld";
+import { absoluteSiteUrl, absoluteUrl } from "@/lib/seo";
+import { FaqList } from "@/components/home/FaqList";
+
+function tripFaqs(trek: Trip, t: (key: string, values?: Record<string, string | number>) => string) {
+  const items = [
+    {
+      id: "guide",
+      question: t("faqGuideQ"),
+      answer: t("faqGuideA"),
+    },
+    {
+      id: "beginner",
+      question: t("faqBeginnerQ", { name: trek.name }),
+      answer:
+        trek.difficulty === "easy"
+          ? t("faqBeginnerEasy")
+          : trek.difficulty === "challenging"
+            ? t("faqBeginnerHard")
+            : t("faqBeginnerMod"),
+    },
+    {
+      id: "season",
+      question: t("faqSeasonQ"),
+      answer: `${trek.seasonLabel}. ${t("faqSeasonA")}`,
+    },
+    {
+      id: "pokhara",
+      question: t("faqPokharaQ"),
+      answer: t("faqPokharaA"),
+    },
+  ];
+  return items;
+}
 
 export async function TripDetail({ slug }: { slug: string }) {
   const locale = (await getLocale()) as Locale;
@@ -30,14 +66,42 @@ export async function TripDetail({ slug }: { slug: string }) {
     ? trips.find((x) => x.slug === "ghorepani-poon-hill")
     : trips.find((x) => x.slug === "kaligandaki-1-day");
   const bookHref = `/book?trip=${trek.slug}&kind=${trek.kind}`;
+  const destPath = trek.kind === "trek" ? regionToPath(trek.region) : null;
+  const heroAlt = trek.imageAlt || trek.name;
+  const faqs = tripFaqs(trek, t);
+  const base = absoluteSiteUrl(settings);
+  const crumbs = [
+    { name: t("breadcrumbHome"), url: absoluteUrl(locale, "/", base) },
+    { name: t("breadcrumbTreks"), url: absoluteUrl(locale, trek.kind === "trek" ? "/treks" : tripHref(trek).split("/").slice(0, -1).join("/") || "/treks", base) },
+  ];
+  if (destPath) crumbs.push({ name: REGION_LABEL[trek.region], url: absoluteUrl(locale, destPath, base) });
+  crumbs.push({ name: trek.name, url: absoluteUrl(locale, tripHref(trek), base) });
 
   return (
     <>
+      <JsonLd data={[tripJsonLd(settings, trek, locale), breadcrumbJsonLd(crumbs), faqJsonLd(faqs)].filter(Boolean)} />
       <section className="relative h-[70vh] min-h-[460px] overflow-hidden">
-        <FilmImage src={trek.heroImageUrl} className="absolute inset-0" kenburns />
+        <FilmImage src={trek.heroImageUrl} alt={heroAlt} className="absolute inset-0" kenburns priority />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
         <div className="relative mx-auto flex h-full max-w-6xl items-end px-5 pb-16 lg:px-8">
           <div>
+            <nav className="mb-4 text-xs text-snow/70">
+              <Link href="/" className="hover:underline">
+                {t("breadcrumbHome")}
+              </Link>
+              <span> / </span>
+              <Link href={trek.kind === "trek" ? "/treks" : tripHref(trek).replace(`/${trek.slug}`, "") || "/treks"} className="hover:underline">
+                {t("breadcrumbTreks")}
+              </Link>
+              {destPath && (
+                <>
+                  <span> / </span>
+                  <Link href={destPath} className="hover:underline">
+                    {REGION_LABEL[trek.region]}
+                  </Link>
+                </>
+              )}
+            </nav>
             <div className="flex flex-wrap items-center gap-4 text-sm text-snow/80">
               <span className="inline-flex items-center gap-1.5">
                 <Clock className="h-4 w-4" />
@@ -59,7 +123,8 @@ export async function TripDetail({ slug }: { slug: string }) {
 
       <div className="mx-auto grid max-w-6xl gap-12 px-5 py-14 lg:grid-cols-[1fr_320px] lg:px-8">
         <article>
-          <p className="text-lg leading-relaxed text-ink-soft">{trek.summary}</p>
+          <h2 className="font-serif text-2xl">{t("overview")}</h2>
+          <p className="mt-4 text-lg leading-relaxed text-ink-soft">{trek.summary}</p>
           <p className="mt-6 leading-relaxed">{trek.description}</p>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             <div>
@@ -83,15 +148,48 @@ export async function TripDetail({ slug }: { slug: string }) {
           <div className="mt-6">
             <ItinerarySnap days={itinerary} />
           </div>
+          {!raft && !activity && (
+            <>
+              <h2 className="mt-14 font-serif text-2xl">{t("altitudeTitle")}</h2>
+              <p className="mt-4 leading-relaxed text-ink-soft">
+                {t("altitudeBody", {
+                  name: trek.name,
+                  difficulty: trek.difficultyLabel,
+                  altitude: trek.maxAltitudeM || 0,
+                  days: trek.durationDays,
+                })}
+              </p>
+              <h2 className="mt-14 font-serif text-2xl">{t("bestTime")}</h2>
+              <p className="mt-4 leading-relaxed text-ink-soft">
+                {t("bestTimeBody", { season: trek.seasonLabel })}
+              </p>
+              <h2 className="mt-14 font-serif text-2xl">{t("permitsCost")}</h2>
+              <p className="mt-4 leading-relaxed text-ink-soft">{t("permitsBody")}</p>
+              <p className="mt-3 text-sm">
+                <Link href="/prepare" className="text-sky underline-offset-4 hover:underline">
+                  {t("permitsLink")}
+                </Link>
+                {" · "}
+                <Link href="/blog/best-treks-in-nepal" className="text-sky underline-offset-4 hover:underline">
+                  {t("guideLink")}
+                </Link>
+              </p>
+              <h2 className="mt-14 font-serif text-2xl">{t("fromPokhara")}</h2>
+              <p className="mt-4 leading-relaxed text-ink-soft">{t("fromPokharaBody")}</p>
+            </>
+          )}
           <div className="mt-14">
             <AltitudeChart points={profile} label={raft || activity ? t("gradeProfile") : t("profile")} />
           </div>
           {trek.gallery?.length > 0 && (
             <div className="mt-14">
               <h2 className="mb-6 font-serif text-3xl">{t("gallery")}</h2>
-              <Lightbox images={trek.gallery} />
+              <Lightbox images={trek.gallery} alt={heroAlt} />
             </div>
           )}
+          <div className="mt-16">
+            <FaqList items={faqs} kicker={t("faqTitle")} title={t("faqTitle")} columns={1} />
+          </div>
         </article>
 
         <aside className="lg:sticky lg:top-28 lg:self-start">

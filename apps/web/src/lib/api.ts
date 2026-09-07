@@ -21,6 +21,15 @@ export type SiteSettings = {
   aboutHeroUrl: string | null;
   associations: AssociationLogo[] | null;
   chips: ChipCard[] | null;
+  siteUrl: string;
+  ogImageUrl: string | null;
+  googleSiteVerification: string;
+  geoLat: number;
+  geoLng: number;
+  facebookUrl: string;
+  instagramUrl: string;
+  tripadvisorUrl: string;
+  googleBusinessUrl: string;
   tagline: string;
   heroHeadline: string;
   heroSubhead: string;
@@ -38,6 +47,7 @@ export type Trip = {
   id: string;
   slug: string;
   kind: "trek" | "rafting" | "activity" | "safari";
+  region: "annapurna" | "everest" | "langtang" | "restricted" | "hidden_gems" | "other";
   durationDays: number;
   difficulty: string;
   maxAltitudeM: number;
@@ -59,6 +69,10 @@ export type Trip = {
   itinerary: ItineraryDay[];
   seasonLabel: string;
   difficultyLabel: string;
+  seoTitle: string;
+  seoDescription: string;
+  imageAlt: string;
+  updatedAt?: string;
 };
 
 export type Faq = { id: string; question: string; answer: string };
@@ -72,6 +86,9 @@ export type BlogPost = {
   title: string;
   excerpt: string;
   body: string;
+  seoTitle: string;
+  seoDescription: string;
+  updatedAt?: string;
 };
 
 export type PublicPayload = {
@@ -108,7 +125,7 @@ async function liveFetch(path: string) {
   const base = apiBase();
   if (!base) return null;
   try {
-    const res = await fetch(`${base}${path}`, { cache: "no-store" });
+    const res = await fetch(`${base}${path}`, { next: { revalidate: 60 } });
     if (!res.ok) return null;
     return res;
   } catch {

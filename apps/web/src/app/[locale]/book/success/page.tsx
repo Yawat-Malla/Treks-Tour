@@ -3,6 +3,12 @@ import { Link } from "@/i18n/navigation";
 import { fetchPublic } from "@/lib/api";
 import { contactPrefill, whatsappHref } from "@/lib/contacts";
 import type { Locale } from "@/i18n/routing";
+import { publicMetadata } from "@/lib/page-metadata";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return publicMetadata(locale, "/book/success", "Request received", "A manager in Pokhara will confirm next steps.", null, true);
+}
 
 export default async function SuccessPage({
   searchParams,

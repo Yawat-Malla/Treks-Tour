@@ -104,7 +104,7 @@ export class PublicController {
       ? booking.addon.translations.find((t) => t.locale === body.locale)?.name ||
         booking.addon.translations.find((t) => t.locale === 'en')?.name
       : null;
-    const company = this.config.get<string>('COMPANY_EMAIL') || 'hello@annapurnatrails.com';
+    const company = this.config.get<string>('COMPANY_EMAIL') || 'info@upperpathtreks.com';
     const text = [
       `Booking ${reference}`,
       `Trip: ${name} (${trek.kind})`,

@@ -4,6 +4,21 @@ import { ContactActions } from "@/components/ContactActions";
 import { FaqList } from "@/components/home/FaqList";
 import { PageHero } from "@/components/ui/PageHero";
 import { siteCopy } from "@/lib/site-copy";
+import { publicMetadata } from "@/lib/page-metadata";
+import { faqJsonLd } from "@/lib/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const { settings } = await fetchPublic(locale);
+  return publicMetadata(
+    locale,
+    "/contact",
+    siteCopy(settings, "contact.title", "Contact Upper Path Treks | Lakeside, Pokhara"),
+    siteCopy(settings, "contact.lede", "WhatsApp, WeChat, Viber or email a manager in Pokhara. No account required."),
+    settings.heroPosterUrl,
+  );
+}
 
 export default async function ContactPage() {
   const t = await getTranslations();
@@ -12,6 +27,7 @@ export default async function ContactPage() {
 
   return (
     <>
+      <JsonLd data={faqJsonLd(faqs)} />
       <PageHero
         kicker={c("contact.kicker")}
         title={c("contact.title")}

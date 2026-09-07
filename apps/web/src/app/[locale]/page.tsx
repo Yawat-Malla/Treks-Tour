@@ -2,6 +2,10 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { fetchPublic } from "@/lib/api";
 import { fillCopy, siteAssociations, siteChips, siteCopy } from "@/lib/site-copy";
+import { chipRegion } from "@/lib/regions";
+import { homeMetadata } from "@/lib/page-metadata";
+import { faqJsonLd } from "@/lib/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Reveal } from "@/components/ui/Reveal";
 import { TripCard } from "@/components/trip/TripCard";
 import { FaqList } from "@/components/home/FaqList";
@@ -16,39 +20,38 @@ import { MemoryWall } from "@/components/home/MemoryWall";
 import { Voices } from "@/components/home/Voices";
 import { AssociatedWith } from "@/components/home/AssociatedWith";
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return homeMetadata(locale);
+}
+
 export default async function HomePage() {
   const locale = await getLocale();
   const t = await getTranslations();
-  const { settings, treks, rafting, trips, faqs, testimonials, posts } = await fetchPublic(locale);
+  const { settings, treks, rafting, activities, safaris, trips, faqs, testimonials, posts } = await fetchPublic(locale);
   const featured = (treks.filter((x) => x.featured).length ? treks.filter((x) => x.featured) : treks).slice(0, 2);
   const visited = rafting.slice(0, 2);
   const bannerTrip = featured[0] || treks[0];
   const memories = trips.flatMap((x) => x.gallery).filter(Boolean);
   const uniqueMemories = [...new Set(memories)].slice(0, 5);
-  const c = (key: string) =>
-    siteCopy(settings, key, () => {
-      // #region agent log
-      fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-        body: JSON.stringify({
-          sessionId: "4acaf2",
-          runId: "post-fix",
-          hypothesisId: "A",
-          location: "page.tsx:c",
-          message: "t() invoked as last resort",
-          data: { key },
-          timestamp: Date.now(),
-        }),
-      }).catch(() => {});
-      // #endregion
-      return t(key);
-    });
-  const chips = siteChips(settings);
+  const c = (key: string) => siteCopy(settings, key, () => t(key));
+  const chips = siteChips(settings).map((chip) => {
+    const region = chipRegion(chip.id);
+    if (region) return { ...chip, count: treks.filter((t) => t.region === region).length };
+    if (chip.id === "treks") return { ...chip, count: treks.length };
+    if (chip.id === "rafting") return { ...chip, count: rafting.length };
+    if (chip.id === "safaris") return { ...chip, count: safaris.length };
+    if (chip.tab === "activities") return { ...chip, count: activities.length };
+    if (chip.id === "easy" || chip.id === "moderate" || chip.id === "challenging") {
+      return { ...chip, count: treks.filter((t) => t.difficulty === chip.id).length };
+    }
+    return chip;
+  });
   const chipTitles = Object.fromEntries(chips.map((chip) => [chip.titleKey, c(`heroTabs.${chip.titleKey}`)]));
 
   return (
     <>
+      <JsonLd data={faqJsonLd(faqs)} />
       <HeroCarousel
         trips={trips}
         kicker={c("hero.kicker")}

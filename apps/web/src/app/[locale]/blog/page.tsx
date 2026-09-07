@@ -4,10 +4,21 @@ import { fetchPublic } from "@/lib/api";
 import { PageHero } from "@/components/ui/PageHero";
 import { FilmImage } from "@/components/ui/FilmImage";
 import { siteCopy } from "@/lib/site-copy";
+import { blogIndexMetadata } from "@/lib/page-metadata";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return blogIndexMetadata(locale);
+}
 
 function formatDate(iso: string, locale: string) {
   try {
-    return new Intl.DateTimeFormat(locale, { day: "numeric", month: "short", year: "numeric" }).format(new Date(iso));
+    return new Intl.DateTimeFormat(locale, {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(iso));
   } catch {
     return iso.slice(0, 10);
   }
@@ -27,7 +38,7 @@ export default async function BlogIndexPage() {
           {posts.map((post) => (
             <Link key={post.id} href={`/blog/${post.slug}`} className="group block overflow-hidden rounded-2xl bg-snow shadow-[var(--shadow)] ring-1 ring-ink/6">
               <div className="relative aspect-[16/10]">
-                <FilmImage src={post.heroImageUrl} className="absolute inset-0" />
+                <FilmImage src={post.heroImageUrl} alt={post.title} className="absolute inset-0" />
               </div>
               <div className="p-5">
                 <p className="text-xs uppercase tracking-[0.14em] text-sky">{formatDate(post.publishedAt, locale)}</p>

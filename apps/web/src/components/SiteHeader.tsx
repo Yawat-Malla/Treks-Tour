@@ -50,7 +50,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
     <header
       data-tone="solid"
       className={`site-header fixed inset-x-0 top-0 z-50 text-ink transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_10px_28px_rgba(24,92,73,0.12)]" : ""
+        scrolled ? "shadow-[0_10px_28px_color-mix(in_srgb,var(--ink)_12%,transparent)]" : ""
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5 lg:px-8">
@@ -67,7 +67,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
         <div className="flex items-center gap-1 sm:gap-2">
           <Link
             href="/#search"
-            className="hidden rounded-full p-2 text-ink-soft hover:bg-pine/8 hover:text-pine sm:inline-flex"
+            className="hidden rounded-full p-2 text-ink-soft hover:bg-pine/12 hover:text-pine sm:inline-flex"
             aria-label={t("search")}
           >
             <Search className="h-4 w-4" />
@@ -75,14 +75,14 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
           <LanguageSwitcher />
           <Link
             href="/book"
-            className="whitespace-nowrap rounded-full bg-pine px-3 py-2 text-sm font-medium text-ivory shadow-[0_8px_20px_rgba(17,69,56,0.22)] transition hover:bg-pine-deep sm:px-4"
+            className="whitespace-nowrap rounded-full bg-pine px-3 py-2 text-sm font-medium text-ink ring-1 ring-gold/35 shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] transition hover:bg-pine-deep sm:px-4"
           >
             <span className="sm:hidden">{t("bookShort")}</span>
             <span className="hidden sm:inline">{t("book")}</span>
           </Link>
         </div>
       </div>
-      <nav className="flex items-center gap-5 overflow-x-auto border-t border-pine/10 px-5 py-2 text-sm text-ink-soft lg:hidden">
+      <nav className="flex items-center gap-5 overflow-x-auto border-t border-pine/15 px-5 py-2 text-sm text-ink-soft lg:hidden">
         {links.map((l) => (
           <Link key={l.href} href={l.href} className="shrink-0 py-1 hover:text-pine">
             {l.label}

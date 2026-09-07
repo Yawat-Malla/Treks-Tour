@@ -2,22 +2,22 @@
 
 import { useState } from "react";
 
-export function Lightbox({ images }: { images: string[] }) {
+export function Lightbox({ images, alt }: { images: string[]; alt?: string }) {
   const [open, setOpen] = useState<string | null>(null);
   return (
     <>
       <div className="grid gap-3 sm:grid-cols-3">
-        {images.map((src) => (
+        {images.map((src, i) => (
           <button key={src} type="button" onClick={() => setOpen(src)} className="overflow-hidden rounded-2xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={src} alt="" className="h-44 w-full object-cover transition hover:scale-[1.03]" />
+            <img src={src} alt={alt ? `${alt} ${i + 1}` : ""} className="h-44 w-full object-cover transition hover:scale-[1.03]" />
           </button>
         ))}
       </div>
       {open && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/80 p-6" onClick={() => setOpen(null)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={open} alt="" className="max-h-full max-w-full rounded-xl object-contain" />
+          <img src={open} alt={alt || ""} className="max-h-full max-w-full rounded-xl object-contain" />
         </div>
       )}
     </>

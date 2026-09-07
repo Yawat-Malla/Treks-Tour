@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 import { routing, rtlLocales, type Locale } from "@/i18n/routing";
 import { fetchPublic } from "@/lib/api";
 import { siteCopy } from "@/lib/site-copy";
+import { absoluteSiteUrl, languageAlternates, ogLocale } from "@/lib/seo";
+import { organizationJsonLd } from "@/lib/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactDock } from "@/components/ContactDock";
@@ -51,15 +54,31 @@ export async function generateMetadata({
   const { locale } = await params;
   try {
     const data = await fetchPublic(locale);
+    const settings = data.settings;
+    const base = absoluteSiteUrl(settings);
+    const title = `${settings.siteTitle} | Guided treks from Pokhara, Nepal`;
+    const description = siteCopy(settings, "meta.homeDescription", settings.tagline);
+    const ogImage = settings.ogImageUrl || settings.heroPosterUrl || "/heroes/hero-poster.jpg";
     return {
-      title: {
-        default: data.settings.siteTitle,
-        template: `%s · ${data.settings.siteTitle}`,
+      metadataBase: new URL(base),
+      title: { default: title, template: "%s" },
+      description,
+      icons: settings.faviconUrl ? [{ url: settings.faviconUrl }] : [{ url: "/logo.png" }],
+      verification: settings.googleSiteVerification ? { google: settings.googleSiteVerification } : undefined,
+      alternates: {
+        canonical: locale === "en" ? base : `${base}/${locale}`,
+        languages: languageAlternates("/", base),
       },
-      description: siteCopy(data.settings, "meta.homeDescription", data.settings.tagline),
-      icons: data.settings.faviconUrl
-        ? [{ url: data.settings.faviconUrl }]
-        : [{ url: "/logo.png" }],
+      openGraph: {
+        type: "website",
+        locale: ogLocale(locale),
+        siteName: settings.siteTitle,
+        title,
+        description,
+        url: locale === "en" ? base : `${base}/${locale}`,
+        images: [{ url: ogImage }],
+      },
+      twitter: { card: "summary_large_image", title, description, images: [ogImage] },
     };
   } catch {
     return { title: "Upper Path Treks And Tours" };
@@ -90,6 +109,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           {data ? (
             <>
+              <JsonLd data={organizationJsonLd(data.settings, locale)} />
               <SiteHeader settings={data.settings} />
               <main className="flex-1">{children}</main>
               <SiteFooter settings={data.settings} />

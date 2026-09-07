@@ -41,7 +41,7 @@ export function HeroTripRail({ treks, rafting }: { treks: Trip[]; rafting: Trip[
               type="button"
               onClick={() => setKind("trek")}
               className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-sm ${
-                kind === "trek" ? "bg-moss text-snow" : "bg-ivory text-ink-soft"
+                kind === "trek" ? "bg-moss text-ink" : "bg-ivory text-ink-soft"
               }`}
             >
               <Mountain className="h-4 w-4" />
@@ -52,7 +52,7 @@ export function HeroTripRail({ treks, rafting }: { treks: Trip[]; rafting: Trip[
                 type="button"
                 onClick={() => setKind("rafting")}
                 className={`inline-flex items-center gap-2 rounded-2xl px-4 py-2 text-sm ${
-                  kind === "rafting" ? "bg-moss text-snow" : "bg-ivory text-ink-soft"
+                  kind === "rafting" ? "bg-moss text-ink" : "bg-ivory text-ink-soft"
                 }`}
               >
                 <Waves className="h-4 w-4" />

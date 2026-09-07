@@ -37,6 +37,8 @@ export class ContentCache {
       grade: string | null;
       minAge: number | null;
       altitudeProfile: unknown;
+      region: string;
+      updatedAt?: Date | string;
       translations: {
         locale: Locale;
         name: string;
@@ -45,6 +47,9 @@ export class ContentCache {
         itinerary: unknown;
         seasonLabel: string;
         difficultyLabel: string;
+        seoTitle?: string;
+        seoDescription?: string;
+        imageAlt?: string;
       }[];
     },
     locale: Locale,
@@ -54,6 +59,7 @@ export class ContentCache {
       id: trek.id,
       slug: trek.slug,
       kind: trek.kind,
+      region: trek.region,
       durationDays: trek.durationDays,
       difficulty: trek.difficulty,
       maxAltitudeM: trek.maxAltitudeM,
@@ -75,6 +81,10 @@ export class ContentCache {
       itinerary: tr?.itinerary ?? [],
       seasonLabel: tr?.seasonLabel ?? trek.season,
       difficultyLabel: tr?.difficultyLabel ?? trek.difficulty,
+      seoTitle: tr?.seoTitle ?? '',
+      seoDescription: tr?.seoDescription ?? '',
+      imageAlt: tr?.imageAlt ?? '',
+      updatedAt: trek.updatedAt instanceof Date ? trek.updatedAt.toISOString() : trek.updatedAt,
     };
   }
 
@@ -130,6 +140,15 @@ export class ContentCache {
             aboutHeroUrl: settings.aboutHeroUrl,
             associations: settings.associations ?? null,
             chips: settings.chips ?? null,
+            siteUrl: settings.siteUrl,
+            ogImageUrl: settings.ogImageUrl,
+            googleSiteVerification: settings.googleSiteVerification,
+            geoLat: settings.geoLat,
+            geoLng: settings.geoLng,
+            facebookUrl: settings.facebookUrl,
+            instagramUrl: settings.instagramUrl,
+            tripadvisorUrl: settings.tripadvisorUrl,
+            googleBusinessUrl: settings.googleBusinessUrl,
             tagline: t?.tagline ?? '',
             heroHeadline: t?.heroHeadline ?? '',
             heroSubhead: t?.heroSubhead ?? '',
@@ -164,6 +183,9 @@ export class ContentCache {
           title: tr?.title ?? post.slug,
           excerpt: tr?.excerpt ?? '',
           body: tr?.body ?? '',
+          seoTitle: tr?.seoTitle ?? '',
+          seoDescription: tr?.seoDescription ?? '',
+          updatedAt: post.updatedAt instanceof Date ? post.updatedAt.toISOString() : post.updatedAt,
         };
       }),
     };

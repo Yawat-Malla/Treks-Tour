@@ -27,6 +27,9 @@ type Tr = {
   itinerary: Itin[];
   seasonLabel: string;
   difficultyLabel: string;
+  seoTitle: string;
+  seoDescription: string;
+  imageAlt: string;
 };
 
 const emptyTr = (locale: (typeof locales)[number]): Tr => ({
@@ -37,6 +40,9 @@ const emptyTr = (locale: (typeof locales)[number]): Tr => ({
   itinerary: [{ day: 1, title: "", body: "" }],
   seasonLabel: "",
   difficultyLabel: "",
+  seoTitle: "",
+  seoDescription: "",
+  imageAlt: "",
 });
 
 export function TrekEditor({ id }: { id: string }) {
@@ -58,6 +64,7 @@ export function TrekEditor({ id }: { id: string }) {
     published: true,
     sortOrder: 10,
     kind: "trek" as "trek" | "rafting" | "activity" | "safari",
+    region: "other" as "annapurna" | "everest" | "langtang" | "restricted" | "hidden_gems" | "other",
     inclusions: [] as string[],
     exclusions: [] as string[],
     bestMonths: [3, 4, 5, 9, 10, 11] as number[],
@@ -74,7 +81,14 @@ export function TrekEditor({ id }: { id: string }) {
       const translations = locales.map((l) => {
         const found = trek.translations.find((t: Tr) => t.locale === l);
         return found
-          ? { ...found, itinerary: Array.isArray(found.itinerary) ? found.itinerary : emptyTr(l).itinerary }
+          ? {
+              ...emptyTr(l),
+              ...found,
+              itinerary: Array.isArray(found.itinerary) ? found.itinerary : emptyTr(l).itinerary,
+              seoTitle: found.seoTitle || "",
+              seoDescription: found.seoDescription || "",
+              imageAlt: found.imageAlt || "",
+            }
           : emptyTr(l);
       });
       setForm({
@@ -90,6 +104,7 @@ export function TrekEditor({ id }: { id: string }) {
         published: trek.published !== false,
         sortOrder: trek.sortOrder ?? 10,
         kind: trek.kind,
+        region: trek.region || "other",
         inclusions: trek.inclusions || [],
         exclusions: trek.exclusions || [],
         bestMonths: trek.bestMonths || [],
@@ -131,6 +146,7 @@ export function TrekEditor({ id }: { id: string }) {
         published: form.published,
         sortOrder: form.sortOrder,
         kind: form.kind,
+        region: form.region,
         inclusions: form.inclusions,
         exclusions: form.exclusions,
         bestMonths: form.bestMonths,
@@ -226,6 +242,27 @@ export function TrekEditor({ id }: { id: string }) {
             <option value="safari">Safari</option>
           </select>
         </StudioField>
+        {form.kind === "trek" && (
+          <StudioField label="Region (for Google destination pages)">
+            <select
+              className="studio-input"
+              value={form.region}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  region: e.target.value as "annapurna" | "everest" | "langtang" | "restricted" | "hidden_gems" | "other",
+                })
+              }
+            >
+              <option value="annapurna">Annapurna</option>
+              <option value="everest">Everest</option>
+              <option value="langtang">Langtang</option>
+              <option value="restricted">Restricted areas</option>
+              <option value="hidden_gems">Hidden gems</option>
+              <option value="other">Other</option>
+            </select>
+          </StudioField>
+        )}
         <StudioField
           label="Web address name"
           help="Short English name in the link, like annapurna-base-camp. No spaces."
@@ -370,10 +407,19 @@ export function TrekEditor({ id }: { id: string }) {
             <input className="studio-input" value={tr.difficultyLabel} onChange={(e) => patchTr({ difficultyLabel: e.target.value })} />
           </StudioField>
         </div>
+        <StudioField label="Photo description" help="What the main photo shows. Google reads this.">
+          <input className="studio-input" value={tr.imageAlt} onChange={(e) => patchTr({ imageAlt: e.target.value })} />
+        </StudioField>
+        <StudioField label="Google title" help="Leave empty to use the trip name. About 50–60 characters.">
+          <input className="studio-input" value={tr.seoTitle} onChange={(e) => patchTr({ seoTitle: e.target.value })} />
+        </StudioField>
+        <StudioField label="Google description" help="One or two sentences. About 150 characters.">
+          <textarea className="studio-input" rows={2} value={tr.seoDescription} onChange={(e) => patchTr({ seoDescription: e.target.value })} />
+        </StudioField>
         <div>
           <p className="text-base font-semibold text-ink">Day by day</p>
           {tr.itinerary.map((day, i) => (
-            <div key={i} className="mt-3 space-y-2 rounded-2xl bg-[#F4F8FF] p-4">
+            <div key={i} className="mt-3 space-y-2 rounded-2xl bg-ivory-deep p-4">
               <StudioField label={`Day ${i + 1} title`}>
                 <input
                   className="studio-input"
