@@ -57,7 +57,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
         <Link href="/" className="shrink-0">
           <BrandMark settings={settings} />
         </Link>
-        <nav className="hidden items-center gap-6 text-[13px] font-medium text-ink-soft lg:flex">
+        <nav className="hidden items-center gap-3.5 text-base font-medium text-ink-soft lg:flex xl:gap-5 xl:text-[17px]">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="transition hover:text-pine">
               {l.label}
@@ -70,19 +70,19 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
             className="hidden rounded-full p-2 text-ink-soft hover:bg-pine/12 hover:text-pine sm:inline-flex"
             aria-label={t("search")}
           >
-            <Search className="h-4 w-4" />
+            <Search className="h-5 w-5" />
           </Link>
           <LanguageSwitcher />
           <Link
             href="/book"
-            className="whitespace-nowrap rounded-full bg-pine px-3 py-2 text-sm font-medium text-ink ring-1 ring-gold/35 shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] transition hover:bg-pine-deep sm:px-4"
+            className="whitespace-nowrap rounded-full bg-pine px-3.5 py-2 text-base font-medium text-ink ring-1 ring-gold/35 shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] transition hover:bg-pine-deep sm:px-4"
           >
             <span className="sm:hidden">{t("bookShort")}</span>
             <span className="hidden sm:inline">{t("book")}</span>
           </Link>
         </div>
       </div>
-      <nav className="flex items-center gap-5 overflow-x-auto border-t border-pine/15 px-5 py-2 text-sm text-ink-soft lg:hidden">
+      <nav className="flex items-center gap-5 overflow-x-auto border-t border-pine/15 px-5 py-2 text-base text-ink-soft lg:hidden">
         {links.map((l) => (
           <Link key={l.href} href={l.href} className="shrink-0 py-1 hover:text-pine">
             {l.label}

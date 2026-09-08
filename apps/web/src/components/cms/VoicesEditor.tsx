@@ -22,6 +22,13 @@ type VoiceRow = { id: string; sortOrder: number; translations: Tr[] };
 
 const emptyTr = (locale: (typeof locales)[number]): Tr => ({ locale, quote: "", attribution: "" });
 
+// The API rejects unknown properties, so never carry database columns (id, testimonialId) into the form.
+const pickTrs = (translations: Partial<Tr>[] = []): Tr[] =>
+  locales.map((l) => {
+    const found = translations.find((t) => t.locale === l);
+    return found ? { locale: l, quote: found.quote ?? "", attribution: found.attribution ?? "" } : emptyTr(l);
+  });
+
 export function VoicesEditor() {
   const [rows, setRows] = useState<VoiceRow[] | null>(null);
   const [locale, setLocale] = useState<StudioLocale>("en");
@@ -34,7 +41,7 @@ export function VoicesEditor() {
     setRows(
       list.map((row: VoiceRow) => ({
         ...row,
-        translations: locales.map((l) => row.translations.find((t) => t.locale === l) || emptyTr(l)),
+        translations: pickTrs(row.translations),
       })),
     );
   }
@@ -101,10 +108,7 @@ export function VoicesEditor() {
         translations: locales.map(emptyTr),
       }),
     });
-    setRows((all) => [
-      ...all!,
-      { ...created, translations: locales.map((l) => created.translations.find((t: Tr) => t.locale === l) || emptyTr(l)) },
-    ]);
+    setRows((all) => [...all!, { ...created, translations: pickTrs(created.translations) }]);
   }
 
   async function remove(id: string) {

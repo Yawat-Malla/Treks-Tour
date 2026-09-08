@@ -134,7 +134,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
   ];
 
   const field =
-    "hero-glass-field mt-1 w-full rounded-xl px-3 py-2.5 text-sm text-ink outline-none";
+    "hero-glass-field mt-1 w-full rounded-xl px-3 py-2.5 text-base text-ink outline-none";
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -143,14 +143,14 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
         onSubmit={search}
         className={`flex w-full items-center gap-2 rounded-full p-1.5 ps-5 text-start ${glass}`}
       >
-        <Search className="h-4 w-4 shrink-0 text-ink-soft" aria-hidden />
+        <Search className="h-5 w-5 shrink-0 text-ink-soft" aria-hidden />
         <label className="sr-only" htmlFor="hero-search-trip">
           {t("trip")}
         </label>
         <div className="relative min-w-0 flex-1">
           <select
             id="hero-search-trip"
-            className={`w-full min-w-0 bg-transparent py-2 text-sm outline-none ${
+            className={`w-full min-w-0 bg-transparent py-2 text-base outline-none ${
               halted ? "text-ink" : "text-transparent"
             }`}
             value={slug}
@@ -169,7 +169,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
           </select>
           {!halted && (
             <span
-              className="pointer-events-none absolute inset-0 flex items-center overflow-hidden text-start text-sm text-ink"
+              className="pointer-events-none absolute inset-0 flex items-center overflow-hidden text-start text-base text-ink"
               aria-hidden
             >
               <span className="truncate">
@@ -182,7 +182,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
         <button
           type="submit"
           disabled={!slug}
-          className="shrink-0 rounded-full bg-pine px-5 py-2.5 text-sm font-medium text-ink shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] hover:bg-pine-deep disabled:opacity-40"
+          className="shrink-0 rounded-full bg-pine px-5 py-2.5 text-base font-medium text-ink shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] hover:bg-pine-deep disabled:opacity-40"
         >
           {t("search")}
         </button>
@@ -197,7 +197,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
                 key={id}
                 type="button"
                 onClick={() => chooseKind(id)}
-                className={`inline-flex items-center gap-2 rounded-full py-1 pe-3 ps-1 text-xs font-medium transition sm:text-sm ${
+                className={`inline-flex items-center gap-2 rounded-full py-1 pe-3.5 ps-1 text-sm font-medium transition sm:text-base ${
                   on ? "bg-pine text-ink" : "bg-white/25 text-ink-soft ring-1 ring-white/45 hover:bg-white/40"
                 }`}
               >
@@ -216,8 +216,8 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
 
         <div className="mt-3 grid grid-cols-2 gap-4 md:grid-cols-[1.5fr_1fr_0.55fr_auto] md:items-end">
           <label className="col-span-2 block min-w-0 md:col-span-1">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-ink-soft">
-              <MapPin className="h-3.5 w-3.5 text-sky" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-ink-soft">
+              <MapPin className="h-4 w-4 text-sky" />
               {t("trip")}
             </span>
             <select className={field} value={slug} onChange={(e) => pickTrip(e.target.value)}>
@@ -229,8 +229,8 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
             </select>
           </label>
           <label className="block">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-ink-soft">
-              <Calendar className="h-3.5 w-3.5 text-sky" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-ink-soft">
+              <Calendar className="h-4 w-4 text-sky" />
               {tb("start")}
             </span>
             <input
@@ -242,8 +242,8 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
             />
           </label>
           <label className="block">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.12em] text-ink-soft">
-              <Users className="h-3.5 w-3.5 text-sky" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-ink-soft">
+              <Users className="h-4 w-4 text-sky" />
               {tb("group")}
             </span>
             <input
@@ -258,7 +258,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
           <button
             type="submit"
             disabled={!date || !slug}
-            className="col-span-2 w-full rounded-full bg-pine px-7 py-2.5 text-sm font-medium text-ink shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] hover:bg-pine-deep disabled:opacity-40 md:col-span-1 md:w-auto md:self-end"
+            className="col-span-2 w-full rounded-full bg-pine px-7 py-2.5 text-base font-medium text-ink shadow-[0_8px_20px_color-mix(in_srgb,var(--pine)_28%,transparent)] hover:bg-pine-deep disabled:opacity-40 md:col-span-1 md:w-auto md:self-end"
           >
             {t("continue")}
           </button>

@@ -22,6 +22,13 @@ type FaqRow = { id: string; sortOrder: number; translations: Tr[] };
 
 const emptyTr = (locale: (typeof locales)[number]): Tr => ({ locale, question: "", answer: "" });
 
+// The API rejects unknown properties, so never carry database columns (id, faqId) into the form.
+const pickTrs = (translations: Partial<Tr>[] = []): Tr[] =>
+  locales.map((l) => {
+    const found = translations.find((t) => t.locale === l);
+    return found ? { locale: l, question: found.question ?? "", answer: found.answer ?? "" } : emptyTr(l);
+  });
+
 export function FaqsEditor() {
   const [rows, setRows] = useState<FaqRow[] | null>(null);
   const [locale, setLocale] = useState<StudioLocale>("en");
@@ -34,7 +41,7 @@ export function FaqsEditor() {
     setRows(
       list.map((row: FaqRow) => ({
         ...row,
-        translations: locales.map((l) => row.translations.find((t) => t.locale === l) || emptyTr(l)),
+        translations: pickTrs(row.translations),
       })),
     );
   }
@@ -101,7 +108,7 @@ export function FaqsEditor() {
         translations: locales.map(emptyTr),
       }),
     });
-    setRows((all) => [...all!, { ...created, translations: locales.map((l) => created.translations.find((t: Tr) => t.locale === l) || emptyTr(l)) }]);
+    setRows((all) => [...all!, { ...created, translations: pickTrs(created.translations) }]);
   }
 
   async function remove(id: string) {

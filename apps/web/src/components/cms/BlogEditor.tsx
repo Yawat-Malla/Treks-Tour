@@ -35,6 +35,20 @@ const emptyTr = (locale: (typeof locales)[number]): Tr => ({
   seoDescription: "",
 });
 
+// The API rejects unknown properties, so never carry database columns (id, postId) into the form.
+const pickTr = (locale: (typeof locales)[number], found?: Partial<Tr>): Tr => {
+  const base = emptyTr(locale);
+  if (!found) return base;
+  return {
+    locale,
+    title: found.title ?? base.title,
+    excerpt: found.excerpt ?? base.excerpt,
+    body: found.body ?? base.body,
+    seoTitle: found.seoTitle || base.seoTitle,
+    seoDescription: found.seoDescription || base.seoDescription,
+  };
+};
+
 export function BlogEditor({ id }: { id: string }) {
   const isNew = id === "new";
   const router = useRouter();
@@ -54,12 +68,12 @@ export function BlogEditor({ id }: { id: string }) {
   useEffect(() => {
     if (isNew) return;
     cmsFetch(`/cms/blog/${id}`).then((post) => {
-      const translations = locales.map((l) => {
-        const found = post.translations.find((t: Tr) => t.locale === l);
-        return found
-          ? { ...emptyTr(l), ...found, seoTitle: found.seoTitle || "", seoDescription: found.seoDescription || "" }
-          : emptyTr(l);
-      });
+      const translations = locales.map((l) =>
+        pickTr(
+          l,
+          post.translations.find((t: Tr) => t.locale === l),
+        ),
+      );
       setForm({
         slug: post.slug,
         heroImageUrl: post.heroImageUrl,

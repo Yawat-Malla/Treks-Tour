@@ -45,6 +45,24 @@ const emptyTr = (locale: (typeof locales)[number]): Tr => ({
   imageAlt: "",
 });
 
+// The API rejects unknown properties, so never carry database columns (id, trekId) into the form.
+const pickTr = (locale: (typeof locales)[number], found?: Partial<Tr>): Tr => {
+  const base = emptyTr(locale);
+  if (!found) return base;
+  return {
+    locale,
+    name: found.name ?? base.name,
+    summary: found.summary ?? base.summary,
+    description: found.description ?? base.description,
+    itinerary: Array.isArray(found.itinerary) ? found.itinerary : base.itinerary,
+    seasonLabel: found.seasonLabel ?? base.seasonLabel,
+    difficultyLabel: found.difficultyLabel ?? base.difficultyLabel,
+    seoTitle: found.seoTitle || base.seoTitle,
+    seoDescription: found.seoDescription || base.seoDescription,
+    imageAlt: found.imageAlt || base.imageAlt,
+  };
+};
+
 export function TrekEditor({ id }: { id: string }) {
   const isNew = id === "new";
   const router = useRouter();
@@ -78,19 +96,12 @@ export function TrekEditor({ id }: { id: string }) {
   useEffect(() => {
     if (isNew) return;
     cmsFetch(`/cms/treks/${id}`).then((trek) => {
-      const translations = locales.map((l) => {
-        const found = trek.translations.find((t: Tr) => t.locale === l);
-        return found
-          ? {
-              ...emptyTr(l),
-              ...found,
-              itinerary: Array.isArray(found.itinerary) ? found.itinerary : emptyTr(l).itinerary,
-              seoTitle: found.seoTitle || "",
-              seoDescription: found.seoDescription || "",
-              imageAlt: found.imageAlt || "",
-            }
-          : emptyTr(l);
-      });
+      const translations = locales.map((l) =>
+        pickTr(
+          l,
+          trek.translations.find((t: Tr) => t.locale === l),
+        ),
+      );
       setForm({
         slug: trek.slug,
         durationDays: trek.durationDays,

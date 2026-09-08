@@ -55,10 +55,10 @@ export function HeroCarousel({
 
       <div className="relative z-20 mx-auto flex min-h-[82svh] w-full max-w-6xl flex-col justify-end px-5 pb-8 pt-28 md:min-h-[88svh] lg:px-8">
         <div className="flex flex-col items-center text-center text-snow">
-          <p className="text-[10px] uppercase tracking-[0.22em] text-snow/70 sm:text-xs sm:tracking-[0.28em]">
+          <p className="text-xs uppercase tracking-[0.22em] text-snow/70 sm:text-sm sm:tracking-[0.28em]">
             {kicker}
           </p>
-          <h1 className="mx-auto mt-3 max-w-3xl whitespace-pre-line font-serif text-[clamp(1.85rem,4.6vw,3.6rem)] leading-[1.08] font-normal text-snow">
+          <h1 className="mx-auto mt-3 max-w-4xl whitespace-pre-line font-serif text-[clamp(2.25rem,5.4vw,4.25rem)] leading-[1.08] font-normal text-snow">
             {headline}
           </h1>
           <div className="mt-7 w-full">
