@@ -81,7 +81,7 @@ export function TrekEditor({ id }: { id: string }) {
     featured: false,
     published: true,
     sortOrder: 10,
-    kind: "trek" as "trek" | "rafting" | "activity" | "safari",
+    kind: "trek" as "trek" | "rafting" | "activity" | "safari" | "ride",
     region: "other" as "annapurna" | "everest" | "langtang" | "restricted" | "hidden_gems" | "other",
     inclusions: [] as string[],
     exclusions: [] as string[],
@@ -245,12 +245,13 @@ export function TrekEditor({ id }: { id: string }) {
           <select
             className="studio-input"
             value={form.kind}
-            onChange={(e) => setForm({ ...form, kind: e.target.value as "trek" | "rafting" | "activity" | "safari" })}
+            onChange={(e) => setForm({ ...form, kind: e.target.value as "trek" | "rafting" | "activity" | "safari" | "ride" })}
           >
             <option value="trek">Trek</option>
             <option value="rafting">Rafting</option>
             <option value="activity">Activity</option>
             <option value="safari">Safari</option>
+            <option value="ride">Ride</option>
           </select>
         </StudioField>
         {form.kind === "trek" && (

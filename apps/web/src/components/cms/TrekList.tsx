@@ -31,6 +31,7 @@ const KIND_LABEL: Record<string, string> = {
   rafting: "Rafting",
   activity: "Activity",
   safari: "Safari",
+  ride: "Ride",
 };
 
 function tripName(row: TrekRow) {
@@ -70,13 +71,14 @@ export function TrekList() {
     rafting: searched.filter((r) => r.kind === "rafting").length,
     activity: searched.filter((r) => r.kind === "activity").length,
     safari: searched.filter((r) => r.kind === "safari").length,
+    ride: searched.filter((r) => r.kind === "ride").length,
   };
 
   return (
     <div className="max-w-3xl">
       <StudioPageHeader
         title="Trips"
-        hint="Treks, rafting, activities, and safaris guests can book."
+        hint="Treks, rafting, activities, safaris, and rides guests can book."
         action={
           <Link href={`/${adminPath}/treks/new`} className="studio-btn studio-btn-primary">
             Add a trip
@@ -95,6 +97,7 @@ export function TrekList() {
             { id: "rafting", label: "Rafting", count: kindCounts.rafting },
             { id: "activity", label: "Activities", count: kindCounts.activity },
             { id: "safari", label: "Safaris", count: kindCounts.safari },
+            { id: "ride", label: "Rides", count: kindCounts.ride },
           ]}
         />
         <StudioFilters
@@ -141,7 +144,7 @@ export function TrekList() {
                 </Link>
                 {row.published && row.slug ? (
                   <a
-                    href={tripHref({ kind: row.kind as "trek" | "rafting" | "activity" | "safari", slug: row.slug })}
+                    href={tripHref({ kind: row.kind as "trek" | "rafting" | "activity" | "safari" | "ride", slug: row.slug })}
                     target="_blank"
                     rel="noreferrer"
                     className="studio-btn studio-btn-ghost shrink-0 px-4 text-[15px]"

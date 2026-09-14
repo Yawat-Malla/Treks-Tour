@@ -9,7 +9,7 @@ import { REGION_LABEL, regionToPath } from "@/lib/regions";
 export async function ListingPage({
   kind,
 }: {
-  kind: "trek" | "rafting" | "activity" | "safari";
+  kind: "trek" | "rafting" | "activity" | "safari" | "ride";
 }) {
   const locale = await getLocale();
   const t = await getTranslations("featured");
@@ -18,7 +18,15 @@ export async function ListingPage({
   const { settings } = data;
   const c = (key: string, fb: string) => siteCopy(settings, `featured.${key}`, fb);
   const trips: Trip[] =
-    kind === "trek" ? data.treks : kind === "rafting" ? data.rafting : kind === "activity" ? data.activities : data.safaris;
+    kind === "trek"
+      ? data.treks
+      : kind === "rafting"
+        ? data.rafting
+        : kind === "activity"
+          ? data.activities
+          : kind === "safari"
+            ? data.safaris
+            : data.rides ?? [];
   const copy = {
     trek: {
       kicker: c("trekKicker", t("trekKicker")),
@@ -32,6 +40,7 @@ export async function ListingPage({
       lede: c("activityLede", t("activityLede")),
     },
     safari: { kicker: c("safariKicker", t("safariKicker")), title: c("safariTitle", t("safariTitle")), lede: c("safariLede", t("safariLede")) },
+    ride: { kicker: c("rideKicker", t("rideKicker")), title: c("rideTitle", t("rideTitle")), lede: c("rideLede", t("rideLede")) },
   }[kind];
   const hero = trips[0]?.heroImageUrl || settings.heroPosterUrl || "/heroes/hero-poster.jpg";
 
@@ -74,6 +83,35 @@ export async function ListingPage({
                         REGION_LABEL[trip.region]
                       )}
                     </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+        {kind === "ride" && trips.length > 0 && (
+          <div className="mb-14 overflow-x-auto rounded-2xl bg-snow ring-1 ring-ink/8">
+            <table className="min-w-full text-left text-sm">
+              <caption className="sr-only">{copy.title}</caption>
+              <thead className="border-b border-ink/10 text-xs uppercase tracking-[0.12em] text-ink-soft">
+                <tr>
+                  <th className="px-4 py-3 font-medium">{trekT("compareName")}</th>
+                  <th className="px-4 py-3 font-medium">{trekT("compareDays")}</th>
+                  <th className="px-4 py-3 font-medium">{trekT("difficulty")}</th>
+                  <th className="px-4 py-3 font-medium">{trekT("from")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {trips.map((trip) => (
+                  <tr key={trip.id} className="border-b border-ink/6 last:border-0">
+                    <td className="px-4 py-3">
+                      <Link href={tripHref(trip)} className="font-medium text-sky hover:underline">
+                        {trip.name}
+                      </Link>
+                    </td>
+                    <td className="px-4 py-3 whitespace-nowrap">{trip.durationDays}</td>
+                    <td className="px-4 py-3">{trip.difficultyLabel}</td>
+                    <td className="px-4 py-3 whitespace-nowrap">${trip.priceFromUsd}</td>
                   </tr>
                 ))}
               </tbody>

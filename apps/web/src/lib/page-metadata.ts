@@ -34,7 +34,7 @@ export async function homeMetadata(locale: string): Promise<Metadata> {
 
 export async function listingMetadata(
   locale: string,
-  kind: "trek" | "rafting" | "activity" | "safari",
+  kind: "trek" | "rafting" | "activity" | "safari" | "ride",
 ): Promise<Metadata> {
   const { settings } = await fetchPublic(locale);
   const map = {
@@ -59,6 +59,13 @@ export async function listingMetadata(
       path: "/safaris",
       title: settings.pages?.["featured.safariTitle"] || "Jungle Safari Packages from Pokhara",
       description: settings.pages?.["featured.safariLede"] || "Chitwan, Bardia and Dhorpatan safari packages after the trek.",
+    },
+    ride: {
+      path: "/rides",
+      title: settings.pages?.["featured.rideTitle"] || "Motorcycle Rides from Pokhara | Royal Enfield",
+      description:
+        settings.pages?.["featured.rideLede"] ||
+        "Royal Enfield rides from Pokhara—day loops to multi-day Himalayan routes with a support jeep and a mechanic on the road.",
     },
   }[kind];
   return publicMetadata(locale, map.path, `${map.title} | ${settings.siteTitle}`.replace(` | ${settings.siteTitle} | `, " | "), map.description);

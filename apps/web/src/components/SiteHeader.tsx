@@ -10,7 +10,7 @@ import { Search } from "lucide-react";
 
 function isOverlayPath(pathname: string) {
   if (pathname === "/") return true;
-  return ["/treks", "/rafting", "/activities", "/safaris", "/about", "/plan", "/prepare", "/contact", "/blog"].some(
+  return ["/treks", "/rafting", "/activities", "/safaris", "/rides", "/about", "/plan", "/prepare", "/contact", "/blog"].some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
 }
@@ -40,6 +40,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
     { href: "/rafting" as const, label: t("rafting") },
     { href: "/activities" as const, label: t("activities") },
     { href: "/safaris" as const, label: t("safaris") },
+    { href: "/rides" as const, label: t("rides") },
     { href: "/blog" as const, label: t("blog") },
     { href: "/plan" as const, label: t("plan") },
     { href: "/about" as const, label: t("about") },
@@ -57,7 +58,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings }) {
         <Link href="/" className="shrink-0">
           <BrandMark settings={settings} />
         </Link>
-        <nav className="hidden items-center gap-3.5 text-base font-medium text-ink-soft lg:flex xl:gap-5 xl:text-[17px]">
+        <nav className="hidden items-center gap-3 text-base font-medium text-ink-soft lg:flex xl:gap-4 xl:text-[17px]">
           {links.map((l) => (
             <Link key={l.href} href={l.href} className="transition hover:text-pine">
               {l.label}

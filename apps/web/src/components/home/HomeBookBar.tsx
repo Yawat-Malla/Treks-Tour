@@ -131,6 +131,7 @@ export function HomeBookBar({ trips }: { trips: Trip[] }) {
     { id: "rafting", label: t("raft") },
     { id: "activity", label: t("activity") },
     { id: "safari", label: t("safari") },
+    { id: "ride", label: t("ride") },
   ];
 
   const field =

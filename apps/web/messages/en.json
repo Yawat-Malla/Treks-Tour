@@ -17,7 +17,8 @@
     "bookShort": "Book",
     "search": "Search",
     "wishlist": "Saved trips",
-    "account": "Account"
+    "account": "Account",
+    "rides": "Rides"
   },
   "hero": {
     "kicker": "Pokhara · Annapurna Conservation Area",
@@ -59,7 +60,8 @@
     "search": "Search",
     "continue": "Continue",
     "prev": "Previous trips",
-    "next": "Next trips"
+    "next": "Next trips",
+    "ride": "Ride"
   },
   "featured": {
     "kicker": "Near Pokhara",
@@ -81,7 +83,11 @@
     "safariKicker": "The Terai & high hills",
     "safariTitle": "Jungle safari packages",
     "allSafaris": "All safaris →",
-    "safariLede": "Chitwan, Bardia, and Dhorpatan packages after the trek — or as a standalone week from Pokhara."
+    "safariLede": "Chitwan, Bardia, and Dhorpatan packages after the trek — or as a standalone week from Pokhara.",
+    "rideKicker": "From Lakeside",
+    "rideTitle": "Motorcycle rides from Pokhara",
+    "rideLede": "Royal Enfield rides from Pokhara—day loops to multi-day Himalayan routes with a support jeep and a mechanic on the road.",
+    "allRides": "All rides"
   },
   "how": {
     "kicker": "How it works",
@@ -147,7 +153,8 @@
     "bestTimeBody": "Typical season: {season}. October–November and March–April are the classic Himalayan windows. We close or reroute when cloud and rain make the view a fiction.",
     "permitsBody": "Annapurna routes include ACAP and usually TIMS, processed in Pokhara. Restricted valleys (Mustang, Manaslu, Tsum, Nar Phu) add a RAP filed through immigration. The quote lists permit days; there is no surprise at the checkpoint.",
     "permitsLink": "Permit notes from Lakeside",
-    "fromPokharaBody": "You sleep in Pokhara the night before a jeep or tourist bus. We confirm the trailhead, tea-house nights, and who meets you. No guest account — a manager replies on WhatsApp, WeChat, Viber or email."
+    "fromPokharaBody": "You sleep in Pokhara the night before a jeep or tourist bus. We confirm the trailhead, tea-house nights, and who meets you. No guest account — a manager replies on WhatsApp, WeChat, Viber or email.",
+    "rideTag": "Ride"
   },
   "map": {
     "kicker": "From the lake",
@@ -163,7 +170,20 @@
     "peak": "Peak",
     "good": "Good",
     "off": "Monsoon / quiet",
-    "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ]
   },
   "match": {
     "kicker": "Match in three questions",
@@ -246,7 +266,8 @@
     "treks": "Treks",
     "rafting": "Rafting",
     "activities": "Activities",
-    "safaris": "Safaris"
+    "safaris": "Safaris",
+    "rides": "Rides"
   },
   "heroTabs": {
     "destinations": "DESTINATIONS",
@@ -267,7 +288,8 @@
     "zip": "Zipflyer & Swing",
     "easy": "Easy & Scenic",
     "moderate": "Moderate Trails",
-    "challenging": "Challenging Expeditions"
+    "challenging": "Challenging Expeditions",
+    "rides": "Motorcycle Rides"
   },
   "deals": {
     "kicker": "This week",
@@ -336,7 +358,9 @@
     "submit": "Send request",
     "sending": "Sending…",
     "error": "Something went wrong. Try again, or message us on WhatsApp.",
-    "reviewLead": "Check this once. You can still go back."
+    "reviewLead": "Check this once. You can still go back.",
+    "rideKind": "Ride",
+    "ride": "Motorcycle ride"
   },
   "success": {
     "kicker": "Received in Pokhara",
@@ -390,7 +414,9 @@
     "privateTitle": "Private departure",
     "privateBody": "Your dates, your speed, your group only. Tick the box on the booking form; a manager quotes the higher rate. It is not an online checkout.",
     "prepareCue": "Permits, packing, fitness, and river ages live on",
-    "prepareLink": "Prepare."
+    "prepareLink": "Prepare.",
+    "rideTitle": "Who the rides are for",
+    "rideLede": "Day loops to multi-day Himalayan roads on a Royal Enfield, with a support jeep and a mechanic—not a solo highway gamble."
   },
   "prepare": {
     "kicker": "Before you fly",

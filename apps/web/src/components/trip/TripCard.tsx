@@ -17,7 +17,9 @@ export async function TripCard({ trip, large = false, chip }: { trip: Trip; larg
           ? t("activityTag")
           : trip.kind === "safari"
             ? t("safariTag")
-            : t("trekTag"));
+            : trip.kind === "ride"
+              ? t("rideTag")
+              : t("trekTag"));
   const meta =
     trip.kind === "rafting" || trip.kind === "activity"
       ? trip.grade || trip.difficultyLabel

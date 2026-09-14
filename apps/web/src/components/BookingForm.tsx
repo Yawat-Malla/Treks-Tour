@@ -7,7 +7,7 @@ import type { Trip } from "@/lib/api";
 import { apiUrl } from "@/lib/api";
 import type { Locale } from "@/i18n/routing";
 
-type TripKindUi = "trek" | "rafting" | "activity" | "safari";
+type TripKindUi = "trek" | "rafting" | "activity" | "safari" | "ride";
 
 export function BookingForm({
   trips,
@@ -28,7 +28,7 @@ export function BookingForm({
   const prefilled = trips.find((x) => x.slug === initialSlug);
   const startKind: TripKindUi =
     (prefilled?.kind as TripKindUi) ||
-    (["rafting", "activity", "safari"].includes(initialKind || "")
+    (["rafting", "activity", "safari", "ride"].includes(initialKind || "")
       ? (initialKind as TripKindUi)
       : "trek");
   const readyFromHome = Boolean(prefilled && initialDate);
@@ -68,6 +68,7 @@ export function BookingForm({
     if (k === "rafting") return t("raftKind");
     if (k === "activity") return t("activityKind");
     if (k === "safari") return t("safariKind");
+    if (k === "ride") return t("rideKind");
     return t("trekKind");
   }
 
@@ -75,6 +76,7 @@ export function BookingForm({
     if (k === "rafting") return t("raft");
     if (k === "activity") return t("activity");
     if (k === "safari") return t("safari");
+    if (k === "ride") return t("ride");
     return t("trek");
   }
 
@@ -132,7 +134,7 @@ export function BookingForm({
           <fieldset>
             <legend className="text-sm text-ink-soft">{t("kind")}</legend>
             <div className="mt-2 grid grid-cols-2 gap-2">
-              {(["trek", "rafting", "activity", "safari"] as const).map((k) => (
+              {(["trek", "rafting", "activity", "safari", "ride"] as const).map((k) => (
                 <button
                   key={k}
                   type="button"

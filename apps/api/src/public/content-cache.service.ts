@@ -163,6 +163,7 @@ export class ContentCache {
       rafting: mapped.filter((x) => x.kind === 'rafting'),
       activities: mapped.filter((x) => x.kind === 'activity'),
       safaris: mapped.filter((x) => x.kind === 'safari'),
+      rides: mapped.filter((x) => x.kind === 'ride'),
       trips: mapped,
       faqs: faqs.map((f) => {
         const tr = f.translations.find((x) => x.locale === locale) || f.translations.find((x) => x.locale === 'en');

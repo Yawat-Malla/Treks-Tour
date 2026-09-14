@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function PlanPage() {
   const locale = await getLocale();
   const t = await getTranslations("plan");
-  const { settings, treks, rafting, activities, safaris, trips } = await fetchPublic(locale);
+  const { settings, treks, rafting, activities, safaris, rides, trips } = await fetchPublic(locale);
   const c = (key: string) => siteCopy(settings, `plan.${key}`, () => t(key));
   const hero = treks[0]?.heroImageUrl || settings.heroPosterUrl || "/heroes/hero-poster.jpg";
 
@@ -77,6 +77,18 @@ export default async function PlanPage() {
             <p className="mt-3 max-w-2xl text-ink-soft">{c("safariLede")}</p>
             <div className="mt-10 grid gap-6 md:grid-cols-2">
               {safaris.map((trip) => (
+                <TripCard key={trip.id} trip={trip} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {(rides ?? []).length > 0 && (
+          <section className="mt-20">
+            <h2 className="font-serif text-4xl">{c("rideTitle")}</h2>
+            <p className="mt-3 max-w-2xl text-ink-soft">{c("rideLede")}</p>
+            <div className="mt-10 grid gap-6 md:grid-cols-2">
+              {(rides ?? []).map((trip) => (
                 <TripCard key={trip.id} trip={trip} />
               ))}
             </div>

@@ -60,19 +60,31 @@ export async function TripDetail({ slug }: { slug: string }) {
   const raft = trek.kind === "rafting";
   const activity = trek.kind === "activity";
   const safari = trek.kind === "safari";
-  const showAltitude = !raft && !activity && trek.maxAltitudeM > 0;
+  const ride = trek.kind === "ride";
+  const showAltitude = !raft && !activity && !ride && trek.maxAltitudeM > 0;
   const similar = trips.filter((x) => x.kind === trek.kind && x.slug !== trek.slug).slice(0, 3);
-  const cross = raft || activity || safari
+  const cross = raft || activity || safari || ride
     ? trips.find((x) => x.slug === "ghorepani-poon-hill")
     : trips.find((x) => x.slug === "kaligandaki-1-day");
   const bookHref = `/book?trip=${trek.slug}&kind=${trek.kind}`;
+  const listingLabel =
+    trek.kind === "rafting"
+      ? t("raftTag")
+      : trek.kind === "activity"
+        ? t("activityTag")
+        : trek.kind === "safari"
+          ? t("safariTag")
+          : trek.kind === "ride"
+            ? t("rideTag")
+            : t("breadcrumbTreks");
+  const listingHref = trek.kind === "trek" ? "/treks" : tripHref(trek).replace(`/${trek.slug}`, "") || "/treks";
   const destPath = trek.kind === "trek" ? regionToPath(trek.region) : null;
   const heroAlt = trek.imageAlt || trek.name;
   const faqs = tripFaqs(trek, t);
   const base = absoluteSiteUrl(settings);
   const crumbs = [
     { name: t("breadcrumbHome"), url: absoluteUrl(locale, "/", base) },
-    { name: t("breadcrumbTreks"), url: absoluteUrl(locale, trek.kind === "trek" ? "/treks" : tripHref(trek).split("/").slice(0, -1).join("/") || "/treks", base) },
+    { name: listingLabel, url: absoluteUrl(locale, listingHref, base) },
   ];
   if (destPath) crumbs.push({ name: REGION_LABEL[trek.region], url: absoluteUrl(locale, destPath, base) });
   crumbs.push({ name: trek.name, url: absoluteUrl(locale, tripHref(trek), base) });
@@ -90,8 +102,8 @@ export async function TripDetail({ slug }: { slug: string }) {
                 {t("breadcrumbHome")}
               </Link>
               <span> / </span>
-              <Link href={trek.kind === "trek" ? "/treks" : tripHref(trek).replace(`/${trek.slug}`, "") || "/treks"} className="hover:underline">
-                {t("breadcrumbTreks")}
+              <Link href={listingHref} className="hover:underline">
+                {listingLabel}
               </Link>
               {destPath && (
                 <>

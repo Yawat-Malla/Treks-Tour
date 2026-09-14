@@ -95,6 +95,7 @@ const DEFAULT_CHIPS = [
   { id: "air", tab: "activities", href: "/activities", count: 2, titleKey: "air", image: "https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?auto=format&fit=crop&w=2000&q=80" },
   { id: "extreme", tab: "activities", href: "/activities", count: 4, titleKey: "extreme", image: "https://images.unsplash.com/photo-1559677624-3c956f10d431?auto=format&fit=crop&w=2000&q=80" },
   { id: "safaris", tab: "activities", href: "/safaris", count: 3, titleKey: "safaris", image: "https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=2000" },
+  { id: "rides", tab: "activities", href: "/rides", count: 8, titleKey: "rides", image: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=2000&q=80" },
   { id: "zip", tab: "activities", href: "/activities", count: 3, titleKey: "zip", image: "https://images.unsplash.com/photo-1696940389431-b6a2f2e1b784?auto=format&fit=crop&w=2000&q=80" },
   { id: "easy", tab: "difficulty", href: "/treks", count: 8, titleKey: "easy", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=2000&q=80" },
   { id: "moderate", tab: "difficulty", href: "/treks", count: 9, titleKey: "moderate", image: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=2000&q=80" },
@@ -138,6 +139,10 @@ const IMAGES = {
   elephants: "https://images.pexels.com/photos/631317/pexels-photo-631317.jpeg?auto=compress&cs=tinysrgb&w=2000",
   // Misty highland forest — Dhorpatan
   mistForest: "https://images.pexels.com/photos/1671325/pexels-photo-1671325.jpeg?auto=compress&cs=tinysrgb&w=2000",
+  // Motorcycle / Himalayan road
+  ride: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=2000&q=80",
+  rideRoad: "https://images.unsplash.com/photo-1558981852-426c6c7795e4?auto=format&fit=crop&w=2000&q=80",
+  rideHill: "https://images.unsplash.com/photo-1449426468159-d96dbf08f19f?auto=format&fit=crop&w=2000&q=80",
   // Aliases matching product keys
   abc: "https://images.unsplash.com/photo-1571401835393-8c5f35328320?auto=format&fit=crop&w=2000&q=80",
   circuit: "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=2000&q=80",
@@ -295,11 +300,34 @@ const SAFARI_INCLUSIONS = [
 ];
 const SAFARI_EXCLUSIONS = ["International flights", "Nepal visa", "Travel insurance", "Alcohol & soft drinks", "Tips"];
 
+const RIDE_INCLUSIONS = [
+  "Royal Enfield Himalayan 411cc or Classic 350cc",
+  "Petrol and riding gear",
+  "Support jeep",
+  "TIMS & ACAP permit (where the route requires)",
+  "Accommodation and meals on the itinerary",
+  "English-speaking tour guide",
+  "Mechanics and spare parts",
+  "Medical kit",
+  "Ride T-shirt",
+];
+const RIDE_EXCLUSIONS = [
+  "International flights",
+  "Nepal visa",
+  "Travel insurance",
+  "Personal expenses",
+  "Tips",
+  "Damage deposit / valid motorcycle licence (bring your licence)",
+];
+const RIDE_JUNGLE_INCLUSIONS = [...RIDE_INCLUSIONS, "Jungle safari as itinerary"];
+
 const MONTHS_TREK = [3, 4, 5, 9, 10, 11];
 const MONTHS_SHORT = [1, 2, 3, 4, 5, 10, 11, 12];
 const MONTHS_RIVER = [3, 4, 5, 9, 10, 11];
 const MONTHS_ACTIVITY = [1, 2, 3, 4, 5, 9, 10, 11, 12];
 const MONTHS_SAFARI = [10, 11, 12, 1, 2, 3, 4, 5];
+const MONTHS_RIDE = [3, 4, 5, 9, 10, 11];
+const S_RIDE: Q = ["March–May & September–November", "三月至五月、九月至十一月", "3–5월, 9–11월", "מרץ–מאי וספטמבר–נובמבר"];
 const D_THRILL: Q = ["Thrill", "刺激", "스릴", "ריגוש"];
 const S_YEAR: Q = ["Year-round (weather permitting)", "全年（视天气）", "연중(날씨 허용 시)", "כל השנה (בהתאם למזג האוויר)"];
 const S_SAFARI: Q = ["October–May", "十月至五月", "10–5월", "אוקטובר–מאי"];
@@ -2017,6 +2045,378 @@ const rafts: SeedTrip[] = [
   },
 ];
 
+const rides: SeedTrip[] = [
+  {
+    slug: "dhampus-suspension-bridge-ride",
+    kind: "ride",
+    durationDays: 1,
+    difficulty: "easy",
+    maxAltitudeM: 2060,
+    priceFromUsd: 200,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.ride,
+    featured: true,
+    sortOrder: 40,
+    inclusions: RIDE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Dhampus & Suspension Bridge", "丹普斯与吊桥骑行", "담푸스 · 현수교 라이드", "דהמפוס וגשר תלוי"],
+      [
+        "A one-day Royal Enfield loop from Pokhara: ridge views toward Dhampus and a suspension-bridge stop. Home by evening.",
+        "从博卡拉出发的一日皇家恩菲尔德环线：丹普斯方向山脊与吊桥停留。当晚回湖。",
+        "포카라에서 떠나는 하루 로열 엔필드 루프. 담푸스 능선과 현수교. 저녁에 호수로.",
+        "לולאה של יום אחד מפוקרה על רויאל אנפילד: רכס לדהמפוס ועצירה בגשר תלוי. חזרה בערב.",
+      ],
+      [
+        "The honest first ride from Lakeside. You leave on a Himalayan 411 or Classic 350 with a support jeep, stop for the ridge and the bridge, and return the same day. Riding gear, petrol, guide, and a mechanic are in the package. Bring a valid motorcycle licence; we brief before you roll.",
+        "从湖畔出发诚实的第一趟骑行。骑喜马拉雅 411 或经典 350，有支援吉普，停山脊与吊桥，当日返回。装备、汽油、向导与技师含在套餐。请带有效摩托车驾照；出发前说明。",
+        "레이크사이드에서 떠나는 정직한 첫 라이드. 히말라얀 411 또는 클래식 350, 지원 지프, 능선·현수교 후 당일 복귀. 장비·연료·가이드·정비 포함. 유효한 이륜 면허가 필요합니다.",
+        "הטיול הראשון הכנה מלייקסייד. הימאלאיין 411 או קלאסיק 350, ג'יפ תמיכה, רכס וגשר, חזרה באותו יום. ציוד, דלק, מדריך ומכונאי כלולים. הביאו רישיון אופנוע בתוקף.",
+      ],
+      S_RIDE,
+      D_EASY,
+      [
+        [
+          ["Pokhara loop — Dhampus & bridge", "博卡拉环线 — 丹普斯与吊桥", "포카라 루프 — 담푸스·교", "לולאת פוקרה — דהמפוס וגשר"],
+          [
+            "Briefing, ride out, viewpoint and bridge stops, return to Lakeside.",
+            "说明、出发、观景与吊桥停留，回湖畔。",
+            "브리핑, 출발, 전망·현수교, 레이크사이드 복귀.",
+            "תדריך, יציאה, תצפיות וגשר, חזרה ללייקסייד.",
+          ],
+        ],
+      ],
+    ),
+  },
+  {
+    slug: "panchase-ride",
+    kind: "ride",
+    durationDays: 2,
+    difficulty: "easy",
+    maxAltitudeM: 2500,
+    priceFromUsd: 350,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.rideRoad,
+    featured: false,
+    sortOrder: 41,
+    inclusions: RIDE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Panchase Ride", "潘查塞骑行", "판차세 라이드", "פאנצ'אסה"],
+      [
+        "Two days, one night: oak-and-rhododendron roads west of Pokhara with a lodge night on the Panchase side.",
+        "两日一夜：博卡拉以西橡树与杜鹃路，潘查塞一侧旅舍一夜。",
+        "이틀 1박. 포카라 서쪽 참나무·진달래 길, 판차세 쪽 롯지 하룻밤.",
+        "יומיים ולילה: כבישי אלון ורודודנדרון ממערב לפוקרה, ליל לודג' בצד פאנצ'אסה.",
+      ],
+      [
+        "A quieter road overnight from the lake. Day one rides into Panchase country; you sleep in a lodge; day two returns to Pokhara with the support jeep and mechanic on the road. Meals and gear are in the quote.",
+        "从湖出发较安静的过夜公路。第一天骑入潘查塞一带，旅舍过夜；第二天回博卡拉，支援吉普与技师随行。餐与装备在报价里。",
+        "호수에서 떠나는 한적한 1박 도로. 첫날 판차세, 롯지, 이튿날 포카라. 지원 지프·정비 포함.",
+        "לילה שקט מהאגם. יום ראשון לפאנצ'אסה, לודג', יום שני חזרה לפוקרה עם ג'יפ ומכונאי.",
+      ],
+      S_RIDE,
+      D_EASY,
+      [
+        [
+          ["Pokhara to Panchase", "博卡拉至潘查塞", "포카라 → 판차세", "פוקרה לפאנצ'אסה"],
+          ["Ride west into forest roads; lodge night.", "西骑入林道；旅舍夜。", "서쪽 숲길, 롯지 밤.", "מערב ליער; ליל לודג'."],
+        ],
+        [
+          ["Return to Lakeside", "返回湖畔", "레이크사이드 복귀", "חזרה ללייקסייד"],
+          ["Morning views if clear; ride back to Pokhara.", "晴则晨景；骑回博卡拉。", "맑으면 아침 전망, 포카라 복귀.", "בוקר בהיר אם אפשר; חזרה לפוקרה."],
+        ],
+      ],
+    ),
+  },
+  {
+    slug: "bandipur-ride",
+    kind: "ride",
+    durationDays: 2,
+    difficulty: "easy",
+    maxAltitudeM: 1030,
+    priceFromUsd: 350,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.rideHill,
+    featured: false,
+    sortOrder: 42,
+    inclusions: RIDE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Bandipur Ride", "班迪普尔骑行", "반디푸르 라이드", "בנדיפור"],
+      [
+        "Two days to the Newari hill town of Bandipur and back—stone lanes, ridge air, a night off the highway.",
+        "两日至纽瓦里山城班迪普尔再回——石巷、山脊空气、离公路一夜。",
+        "이틀. 네와리 산마을 반디푸르 왕복. 돌골목, 능선, 하룻밤.",
+        "יומיים לעיירת ההר בנדיפור וחזרה — סמטאות אבן, לילה מחוץ לכביש הראשי.",
+      ],
+      [
+        "Bandipur sits above the Prithvi Highway. We ride from Pokhara with a support jeep, sleep in town, and return the next day. Same bike package as our other rides: Enfield, gear, guide, mechanic.",
+        "班迪普尔在普里特维公路上方。从博卡拉骑行，支援吉普随行，城中过夜，次日返回。与其他骑行相同：恩菲尔德、装备、向导、技师。",
+        "반디푸르는 프리트비 하이웨이 위. 포카라에서 지원 지프와 함께, 마을 1박 후 복귀. 엔필드·장비·가이드·정비 동일.",
+        "בנדיפור מעל כביש פריטווי. יוצאים מפוקרה עם ג'יפ, לנים בעיירה, חוזרים למחרת. אותו חבילת אופנוע.",
+      ],
+      S_RIDE,
+      D_EASY,
+      [
+        [
+          ["Pokhara to Bandipur", "博卡拉至班迪普尔", "포카라 → 반디푸르", "פוקרה לבנדיפור"],
+          ["Highway and climb into the hill town; overnight.", "公路与上山入城；过夜。", "하이웨이 후 산마을, 1박.", "כביש ועלייה לעיירה; לילה."],
+        ],
+        [
+          ["Bandipur to Pokhara", "班迪普尔回博卡拉", "반디푸르 → 포카라", "בנדיפור לפוקרה"],
+          ["Morning in town; ride home to Lakeside.", "晨游城镇；骑回湖畔。", "아침 마을, 레이크사이드 복귀.", "בוקר בעיירה; חזרה ללייקסייד."],
+        ],
+      ],
+    ),
+  },
+  {
+    slug: "tansen-ride",
+    kind: "ride",
+    durationDays: 2,
+    difficulty: "easy",
+    maxAltitudeM: 1400,
+    priceFromUsd: 350,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.rideRoad,
+    featured: false,
+    sortOrder: 43,
+    inclusions: RIDE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Tansen Ride", "坦森骑行", "탄센 라이드", "טנסן"],
+      [
+        "Two days toward Tansen in Palpa—hill-town streets, Srinagar views, a night west of Pokhara.",
+        "两日前往帕尔帕坦森——山城街道、斯里纳加尔视野、博卡拉以西一夜。",
+        "이틀. 팔파 탄센. 산마을 거리, 스리나가르 전망, 포카라 서쪽 1박.",
+        "יומיים לטנסן בפלפה — רחובות הר, נוף סרינגאר, לילה ממערב לפוקרה.",
+      ],
+      [
+        "Tansen is the classic Palpa overnight from Lakeside. Support jeep, meals, bikes, and a guide who knows the road—not a solo highway gamble.",
+        "坦森是湖畔出发帕尔帕经典过夜。支援吉普、餐、车与熟路向导——不是独自赌公路。",
+        "탄센은 레이크사이드에서 떠나는 팔파의 고전 1박. 지원 지프·식사·바이크·길 아는 가이드.",
+        "טנסן הוא ליל פלפה הקלאסי מלייקסייד. ג'יפ, ארוחות, אופנועים ומדריך שמכיר את הכביש.",
+      ],
+      S_RIDE,
+      D_EASY,
+      [
+        [
+          ["Pokhara to Tansen", "博卡拉至坦森", "포카라 → 탄센", "פוקרה לטנסן"],
+          ["West toward Palpa; lodge in Tansen.", "西向帕尔帕；坦森旅舍。", "팔파 방면, 탄센 롯지.", "מערב לפלפה; לודג' בטנסן."],
+        ],
+        [
+          ["Return to Pokhara", "返回博卡拉", "포카라 복귀", "חזרה לפוקרה"],
+          ["Viewpoint if clear; ride back to the lake.", "晴则观景；骑回湖。", "맑으면 전망, 호수 복귀.", "תצפית אם בהיר; חזרה לאגם."],
+        ],
+      ],
+    ),
+  },
+  {
+    slug: "jungle-safari-ride",
+    kind: "ride",
+    durationDays: 3,
+    difficulty: "moderate",
+    maxAltitudeM: 200,
+    priceFromUsd: 500,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.elephants,
+    featured: true,
+    sortOrder: 44,
+    inclusions: RIDE_JUNGLE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Jungle & Safari Ride", "丛林与 safari 骑行", "정글 · 사파리 라이드", "ג'ונגל וספארי"],
+      [
+        "Three days, two nights: ride toward the Terai with a jungle safari in the package and lodges on the itinerary.",
+        "三日两夜：骑向德赖，套餐含丛林 safari，行程含旅舍。",
+        "사흘 2박. 테라이 방면 라이드, 정글 사파리 포함, 롯지.",
+        "שלושה ימים ושני לילות: רכיבה לטראי עם ספארי ג'ונגל בחבילה ולודג'ים במסלול.",
+      ],
+      [
+        "Motorcycle days linked to a Terai safari block. Bikes, support jeep, guide, mechanic, and the jungle safari line item sit in one quote—not a surprise add-on at the park gate.",
+        "摩托日与德赖 safari 连在一起。车、支援吉普、向导、技师与丛林 safari 写在同一报价——不是公园门口的突然加项。",
+        "바이크 일정과 테라이 사파리를 한 견적에. 지원 지프·가이드·정비·정글 사파리 포함.",
+        "ימי אופנוע מחוברים לבלוק ספארי בטראי. הכל בציטוט אחד — לא הפתעה בשער הפארק.",
+      ],
+      S_RIDE,
+      D_MOD,
+      [
+        [
+          ["Pokhara toward the Terai", "博卡拉向德赖", "포카라 → 테라이", "פוקרה לטראי"],
+          ["Ride south; lodge night.", "南骑；旅舍夜。", "남쪽 라이드, 롯지.", "רכיבה דרומה; ליל לודג'."],
+        ],
+        [
+          ["Jungle safari day", "丛林 safari 日", "정글 사파리", "יום ספארי"],
+          ["Park activity as packaged; lodge.", "按套餐进园；旅舍。", "패키지 사파리, 롯지.", "פעילות בפארק כפי שבחבילה; לודג'."],
+        ],
+        [
+          ["Return to Pokhara", "返回博卡拉", "포카라 복귀", "חזרה לפוקרה"],
+          ["Ride home to Lakeside.", "骑回湖畔。", "레이크사이드 복귀.", "חזרה ללייקסייד."],
+        ],
+      ],
+    ),
+  },
+  {
+    slug: "annapurna-ride",
+    kind: "ride",
+    durationDays: 3,
+    difficulty: "moderate",
+    maxAltitudeM: 3200,
+    priceFromUsd: 400,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.annapurna,
+    featured: true,
+    sortOrder: 45,
+    inclusions: RIDE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Annapurna Ride", "安纳普尔纳骑行", "안나푸르나 라이드", "אנאפורנה"],
+      [
+        "Three days on Annapurna-side roads from Pokhara—mountain highways, lodge nights, support jeep always with you.",
+        "三日在博卡拉出发的安纳普尔纳一侧公路——山路、旅舍夜、支援吉普始终随行。",
+        "사흘. 포카라에서 안나푸르나 쪽 도로. 산악 하이웨이, 롯지, 지원 지프.",
+        "שלושה ימים בכבישי צד אנאפורנה מפוקרה — כבישי הר, לילות לודג', ג'יפ תמיכה תמיד איתכם.",
+      ],
+      [
+        "Not a trek on foot. A guided Enfield tour into the Annapurna road network with TIMS/ACAP where required, meals, and a mechanic. We pace for mountain weather, not a brochure speed run.",
+        "不是徒步。有向导的恩菲尔德进入安纳普尔纳公路网，需要时办 TIMS/ACAP，含餐与技师。按山路天气配速，不是宣传册飙车。",
+        "도보 트레킹이 아닙니다. 가이드 엔필드로 안나푸르나 도로망, 필요 시 TIMS/ACAP, 식사·정비. 날씨에 맞춰 페이스.",
+        "לא טרק ברגל. סיור אנפילד מודרך ברשת הכבישים של אנאפורנה עם היתרים לפי הצורך, ארוחות ומכונאי.",
+      ],
+      S_RIDE,
+      D_MOD,
+      [
+        [
+          ["Into Annapurna roads", "进入安纳普尔纳公路", "안나푸르나 도로로", "לכבישי אנאפורנה"],
+          ["Ride from Pokhara; lodge night.", "从博卡拉出发；旅舍夜。", "포카라 출발, 롯지.", "יציאה מפוקרה; ליל לודג'."],
+        ],
+        [
+          ["Ridge and valley riding", "山脊与河谷骑行", "능선·계곡 라이딩", "רכס ועמק"],
+          ["Full day on mountain roads; lodge.", "全日山路；旅舍。", "종일 산악 도로, 롯지.", "יום מלא בכבישי הר; לודג'."],
+        ],
+        [
+          ["Return to Lakeside", "返回湖畔", "레이크사이드 복귀", "חזרה ללייקסייד"],
+          ["Descend and ride home.", "下山骑回。", "하산 후 복귀.", "ירידה וחזרה הביתה."],
+        ],
+      ],
+    ),
+  },
+  {
+    slug: "shangri-la-ride",
+    kind: "ride",
+    durationDays: 5,
+    difficulty: "challenging",
+    maxAltitudeM: 3800,
+    priceFromUsd: 1250,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.arid,
+    featured: false,
+    sortOrder: 46,
+    inclusions: RIDE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Shangri-La Ride", "香格里拉骑行", "샹그리라 라이드", "שאנגרי־לה"],
+      [
+        "Five days, four nights: a longer Himalayan road tour from Pokhara with lodges, permits as required, and full support.",
+        "五日四夜：从博卡拉出发的更长喜马拉雅公路游，含旅舍、所需许可与全程支援。",
+        "닷새 4박. 포카라 출발 긴 히말라야 도로 투어. 롯지·허가·풀 서포트.",
+        "חמישה ימים וארבעה לילות: סיור כביש הימלאיה ארוך יותר מפוקרה עם לודג'ים, היתרים ותמיכה מלאה.",
+      ],
+      [
+        "Built for riders who want more than a weekend loop. Royal Enfield, support jeep, guide, mechanic, meals, and a paced five-day line through high-road country. Licence required; we will not sell a rushed high-pass schedule in bad weather.",
+        "给想要超过周末环线的骑手。皇家恩菲尔德、支援吉普、向导、技师、餐食，以及五日高路配速。需要驾照；坏天气不会硬卖赶山口。",
+        "주말 루프 이상을 원하는 라이더용. 엔필드·지원 지프·가이드·정비·식사, 닷새 페이스. 면허 필수. 악천후엔 고갯길 무리하지 않습니다.",
+        "לרוכבים שרוצים יותר מסוף שבוע. אנפילד, ג'יפ, מדריך, מכונאי, ארוחות וחמישה ימים בקצב. רישיון חובה; לא נמכור מעבר גבוה במזג אוויר גרוע.",
+      ],
+      S_RIDE,
+      D_CHAL,
+      [
+        [
+          ["Leave Pokhara", "离开博卡拉", "포카라 출발", "יציאה מפוקרה"],
+          ["Brief and ride into the hills; lodge.", "说明后入山；旅舍。", "브리핑 후 산으로, 롯지.", "תדריך ורכיבה להרים; לודג'."],
+        ],
+        [
+          ["High-road day", "高路日", "고지 도로", "יום כביש גבוה"],
+          ["Longer mountain stage; lodge.", "更长山路段；旅舍。", "긴 산악 구간, 롯지.", "שלב הר ארוך יותר; לודג'."],
+        ],
+        [
+          ["Continue the circuit", "继续环线", "서킷 계속", "המשך המעגל"],
+          ["Mid-tour lodges and viewpoints.", "中段旅舍与观景点。", "중반 롯지·전망.", "לודג'ים ותצפיות באמצע."],
+        ],
+        [
+          ["Turn toward home", "转向回家", "귀환 방향", "פנייה הביתה"],
+          ["Begin the return stages.", "开始回程路段。", "복귀 구간 시작.", "תחילת שלבי החזרה."],
+        ],
+        [
+          ["Lakeside arrival", "抵达湖畔", "레이크사이드 도착", "הגעה ללייקסייד"],
+          ["Final ride into Pokhara.", "最后一段入博卡拉。", "포카라 최종 입성.", "רכיבה אחרונה לפוקרה."],
+        ],
+      ],
+    ),
+  },
+  {
+    slug: "into-thin-air-ride",
+    kind: "ride",
+    durationDays: 5,
+    difficulty: "challenging",
+    maxAltitudeM: 4500,
+    priceFromUsd: 1500,
+    season: "Mar–May, Sep–Nov",
+    heroImageUrl: IMAGES.peaks,
+    featured: false,
+    sortOrder: 47,
+    inclusions: RIDE_INCLUSIONS,
+    exclusions: RIDE_EXCLUSIONS,
+    bestMonths: MONTHS_RIDE,
+    copy: loc(
+      ["Into Thin Air Ride", "进入稀薄空气骑行", "희박한 공기 속으로", "אל אוויר דליל"],
+      [
+        "Five days toward higher Himalayan roads—altitude, cold mornings, and a full support crew from Pokhara.",
+        "五日走向更高喜马拉雅公路——海拔、寒冷清晨，以及从博卡拉出发的全程支援队。",
+        "닷새. 더 높은 히말라야 도로. 고도, 추운 아침, 포카라 풀 서포트.",
+        "חמישה ימים לכבישים גבוהים יותר — גובה, בוקרים קרים, וצוות תמיכה מלא מפוקרה.",
+      ],
+      [
+        "Our highest motorcycle package. Expect thinner air, colder nights, and honest pacing with a mechanic and support jeep. Bring a valid licence and insurance that covers motorcycle touring. We cancel or shorten a high day if weather closes the road.",
+        "我们最高的摩托套餐。预期更稀薄的空气、更冷的夜，以及技师与支援吉普的诚实配速。请带有效驾照与覆盖摩托旅行的保险。若天气封路，我们会取消或缩短高路日。",
+        "가장 높은 바이크 패키지. 희박한 공기·추운 밤, 정비·지원 지프와 정직한 페이스. 유효 면허와 바이크 보험 필요. 날씨가 막으면 고지 일정을 줄이거나 취소합니다.",
+        "חבילת האופנוע הגבוהה ביותר. אוויר דליל, לילות קרים, וקצב כנה עם מכונאי וג'יפ. הביאו רישיון וביטוח לטיולי אופנוע. נבטל או נקצר יום גבוה אם הכביש נסגר.",
+      ],
+      S_RIDE,
+      D_CHAL,
+      [
+        [
+          ["Pokhara to the high road", "博卡拉至高路", "포카라 → 고지 도로", "פוקרה לכביש הגבוה"],
+          ["Ascend with support; lodge.", "在支援下上升；旅舍。", "지원과 함께 상승, 롯지.", "עלייה עם תמיכה; לודג'."],
+        ],
+        [
+          ["Altitude stage", "海拔路段", "고도 구간", "שלב גובה"],
+          ["Shorter riding day; acclimatise.", "较短骑行日；适应。", "짧은 라이딩, 적응.", "יום רכיבה קצר יותר; הסתגלות."],
+        ],
+        [
+          ["High country", "高地", "고지대", "ארץ גבוהה"],
+          ["Core thin-air roads if open.", "若开放则核心稀薄空气路。", "개방 시 핵심 고지 도로.", "כבישי אוויר דליל אם פתוחים."],
+        ],
+        [
+          ["Begin descent", "开始下山", "하산 시작", "תחילת ירידה"],
+          ["Turn back toward thicker air.", "转向更浓的空气。", "더 낮은 고도로.", "חזרה לאוויר עבה יותר."],
+        ],
+        [
+          ["Home to Lakeside", "回家到湖畔", "레이크사이드로", "חזרה ללייקסייד"],
+          ["Final stage into Pokhara.", "最后一段入博卡拉。", "포카라 최종 구간.", "שלב אחרון לפוקרה."],
+        ],
+      ],
+    ),
+  },
+];
+
 const faqs: { sortOrder: number; copy: Record<Locale, { question: string; answer: string }> }[] = [
   {
     sortOrder: 1,
@@ -2535,7 +2935,7 @@ async function main() {
     },
   });
 
-  for (const trek of [...treks, ...rafts, ...activities, ...safaris]) {
+  for (const trek of [...treks, ...rafts, ...activities, ...safaris, ...rides]) {
     const kind = trek.kind ?? "trek";
     await prisma.trek.create({
       data: {
@@ -2629,7 +3029,7 @@ async function main() {
   }
 
   console.log(
-    `Seeded Upper Path Treks And Tours: ${treks.length} treks + ${rafts.length} rafting + ${activities.length} activities + ${safaris.length} safaris + ${blogPosts.length} posts + FAQs`,
+    `Seeded Upper Path Treks And Tours: ${treks.length} treks + ${rafts.length} rafting + ${activities.length} activities + ${safaris.length} safaris + ${rides.length} rides + ${blogPosts.length} posts + FAQs`,
   );
 }
 

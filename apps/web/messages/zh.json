@@ -17,7 +17,8 @@
     "bookShort": "预订",
     "search": "搜索",
     "wishlist": "收藏",
-    "account": "账户"
+    "account": "账户",
+    "rides": "骑行"
   },
   "hero": {
     "kicker": "博卡拉 · 安纳普尔纳保护区",
@@ -59,7 +60,8 @@
     "search": "搜索",
     "continue": "继续",
     "prev": "上一组行程",
-    "next": "下一组行程"
+    "next": "下一组行程",
+    "ride": "骑行"
   },
   "featured": {
     "kicker": "博卡拉附近",
@@ -81,7 +83,11 @@
     "safariKicker": "德赖与高地",
     "safariTitle": "丛林 safari 套餐",
     "allSafaris": "全部 safari →",
-    "safariLede": "奇旺、巴迪亚与多尔帕坦套餐——徒步之后，或从博卡拉单独安排。"
+    "safariLede": "奇旺、巴迪亚与多尔帕坦套餐——徒步之后，或从博卡拉单独安排。",
+    "rideKicker": "从湖畔出发",
+    "rideTitle": "从博卡拉出发的摩托骑行",
+    "rideLede": "从博卡拉出发的皇家恩菲尔德骑行——一日环线到多日喜马拉雅公路，含支援吉普与技师。",
+    "allRides": "全部骑行"
   },
   "how": {
     "kicker": "如何预订",
@@ -147,7 +153,8 @@
     "bestTimeBody": "通常季节：{season}。十月至十一月、三月至四月是经典窗口。",
     "permitsBody": "安纳普尔纳含 ACAP，通常还有 TIMS，在博卡拉办理。限制区另加 RAP。报价写明许可天数。",
     "permitsLink": "从湖畔办理许可",
-    "fromPokharaBody": "出发前一晚住博卡拉。我们确认步道口、茶馆夜数与接应人。无需账号，经理在 WhatsApp、微信、Viber 或邮件回复。"
+    "fromPokharaBody": "出发前一晚住博卡拉。我们确认步道口、茶馆夜数与接应人。无需账号，经理在 WhatsApp、微信、Viber 或邮件回复。",
+    "rideTag": "骑行"
   },
   "map": {
     "kicker": "从湖边出发",
@@ -163,7 +170,20 @@
     "peak": "最佳",
     "good": "适宜",
     "off": "雨季 / 淡季",
-    "months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+    "months": [
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月"
+    ]
   },
   "match": {
     "kicker": "三个问题匹配",
@@ -246,7 +266,8 @@
     "treks": "徒步",
     "rafting": "漂流",
     "activities": "活动",
-    "safaris": "Safari"
+    "safaris": "Safari",
+    "rides": "骑行"
   },
   "heroTabs": {
     "destinations": "目的地",
@@ -267,7 +288,8 @@
     "zip": "滑索与秋千",
     "easy": "轻松与风景",
     "moderate": "中等步道",
-    "challenging": "高难探险"
+    "challenging": "高难探险",
+    "rides": "摩托骑行"
   },
   "deals": {
     "kicker": "本周",
@@ -336,7 +358,9 @@
     "submit": "发送请求",
     "sending": "发送中…",
     "error": "出了点问题。请重试，或通过微信 / WhatsApp 联系我们。",
-    "reviewLead": "请再看一遍。仍可返回修改。"
+    "reviewLead": "请再看一遍。仍可返回修改。",
+    "rideKind": "骑行",
+    "ride": "摩托骑行"
   },
   "success": {
     "kicker": "博卡拉已收到",
@@ -390,7 +414,9 @@
     "privateTitle": "独立出发",
     "privateBody": "你的日期、你的速度、只属于你们的小组。在预订表勾选；经理会报更高价格。这不是在线结账。",
     "prepareCue": "许可、装备、体能与漂流年龄在",
-    "prepareLink": "行前准备。"
+    "prepareLink": "行前准备。",
+    "rideTitle": "适合谁骑行",
+    "rideLede": "一日环线到多日喜马拉雅公路，皇家恩菲尔德、支援吉普与技师——不是独自赌公路。"
   },
   "prepare": {
     "kicker": "起飞之前",

@@ -46,7 +46,7 @@ export type ProfilePoint = { d: number; m: number };
 export type Trip = {
   id: string;
   slug: string;
-  kind: "trek" | "rafting" | "activity" | "safari";
+  kind: "trek" | "rafting" | "activity" | "safari" | "ride";
   region: "annapurna" | "everest" | "langtang" | "restricted" | "hidden_gems" | "other";
   durationDays: number;
   difficulty: string;
@@ -97,6 +97,7 @@ export type PublicPayload = {
   rafting: Trip[];
   activities: Trip[];
   safaris: Trip[];
+  rides: Trip[];
   trips: Trip[];
   faqs: Faq[];
   testimonials: Testimonial[];
@@ -137,7 +138,7 @@ export async function fetchPublic(locale: string): Promise<PublicPayload> {
   const res = await liveFetch(`/public/site?locale=${locale}`);
   if (res) {
     const data = (await res.json()) as PublicPayload;
-    return { ...data, posts: data.posts ?? [] };
+    return { ...data, posts: data.posts ?? [], rides: data.rides ?? [] };
   }
   return fallbackPublic(locale);
 }
@@ -164,6 +165,7 @@ export function tripHref(trip: Pick<Trip, "kind" | "slug">) {
   if (trip.kind === "rafting") return `/rafting/${trip.slug}`;
   if (trip.kind === "activity") return `/activities/${trip.slug}`;
   if (trip.kind === "safari") return `/safaris/${trip.slug}`;
+  if (trip.kind === "ride") return `/rides/${trip.slug}`;
   return `/treks/${trip.slug}`;
 }
 

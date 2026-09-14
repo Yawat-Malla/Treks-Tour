@@ -26,6 +26,7 @@ enum TripKind {
   rafting
   activity
   safari
+  ride
 }
 
 enum TrekRegion {

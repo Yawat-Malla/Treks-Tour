@@ -77,6 +77,9 @@ export async function SiteFooter({ settings }: { settings: SiteSettings }) {
             <Link href="/safaris" className="text-ink-soft hover:text-pine">
               {t("nav.safaris")}
             </Link>
+            <Link href="/rides" className="text-ink-soft hover:text-pine">
+              {t("nav.rides")}
+            </Link>
           </div>
         </div>
         <div className="border-t border-ink/10 bg-ivory-deep">

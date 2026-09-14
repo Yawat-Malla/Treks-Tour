@@ -1,4 +1,4 @@
-export type KindId = "trek" | "rafting" | "activity" | "safari";
+export type KindId = "trek" | "rafting" | "activity" | "safari" | "ride";
 
 export function KindMark({ kind, className = "" }: { kind: KindId; className?: string }) {
   return (
@@ -7,6 +7,7 @@ export function KindMark({ kind, className = "" }: { kind: KindId; className?: s
       {kind === "rafting" && <RaftMark />}
       {kind === "activity" && <GliderMark />}
       {kind === "safari" && <RhinoMark />}
+      {kind === "ride" && <RideMark />}
     </svg>
   );
 }
@@ -87,6 +88,23 @@ function RhinoMark() {
         strokeWidth="1.85"
         strokeLinecap="round"
       />
+    </>
+  );
+}
+
+function RideMark() {
+  return (
+    <>
+      <circle cx="9.2" cy="22.2" r="3.4" stroke="currentColor" strokeWidth="1.7" />
+      <circle cx="22.8" cy="22.2" r="3.4" stroke="currentColor" strokeWidth="1.7" />
+      <path
+        d="M12.4 22.2h5.2M17.2 22.2 14.6 14.8H10.2M14.6 14.8l3.4-4.2h4.2M18.6 18.6h4.8"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M12.8 14.8h3.6" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" />
     </>
   );
 }

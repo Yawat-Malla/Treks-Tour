@@ -17,7 +17,8 @@
     "bookShort": "예약",
     "search": "검색",
     "wishlist": "저장한 여행",
-    "account": "계정"
+    "account": "계정",
+    "rides": "라이드"
   },
   "hero": {
     "kicker": "포카라 · 안나푸르나 보호구역",
@@ -59,7 +60,8 @@
     "search": "검색",
     "continue": "계속",
     "prev": "이전 여행",
-    "next": "다음 여행"
+    "next": "다음 여행",
+    "ride": "라이드"
   },
   "featured": {
     "kicker": "포카라 근처",
@@ -81,7 +83,11 @@
     "safariKicker": "테라이와 고지",
     "safariTitle": "정글 사파리 패키지",
     "allSafaris": "모든 사파리 →",
-    "safariLede": "치트완, 바르디아, 도르파탄 패키지 — 트레킹 뒤 또는 포카라에서 단독."
+    "safariLede": "치트완, 바르디아, 도르파탄 패키지 — 트레킹 뒤 또는 포카라에서 단독.",
+    "rideKicker": "레이크사이드에서",
+    "rideTitle": "포카라에서 떠나는 바이크 라이드",
+    "rideLede": "포카라에서 로열 엔필드 라이드—하루 루프부터 다일 히말라야 도로까지, 지원 지프와 정비 포함.",
+    "allRides": "모든 라이드"
   },
   "how": {
     "kicker": "예약 방법",
@@ -147,7 +153,8 @@
     "bestTimeBody": "일반적인 시즌: {season}. 10–11월과 3–4월이 고전적인 창입니다.",
     "permitsBody": "안나푸르나는 ACAP와 보통 TIMS를 포카라에서 처리합니다. 제한구역은 RAP가 추가됩니다.",
     "permitsLink": "레이크사이드 허가 안내",
-    "fromPokharaBody": "출발 전날 포카라에서 잡니다. 계정 없이 WhatsApp·WeChat·Viber·이메일로 매니저가 답합니다."
+    "fromPokharaBody": "출발 전날 포카라에서 잡니다. 계정 없이 WhatsApp·WeChat·Viber·이메일로 매니저가 답합니다.",
+    "rideTag": "라이드"
   },
   "map": {
     "kicker": "호수에서",
@@ -163,7 +170,20 @@
     "peak": "성수기",
     "good": "좋음",
     "off": "몬순 / 한산",
-    "months": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+    "months": [
+      "1월",
+      "2월",
+      "3월",
+      "4월",
+      "5월",
+      "6월",
+      "7월",
+      "8월",
+      "9월",
+      "10월",
+      "11월",
+      "12월"
+    ]
   },
   "match": {
     "kicker": "질문 세 개로 맞추기",
@@ -246,7 +266,8 @@
     "treks": "트레킹",
     "rafting": "래프팅",
     "activities": "액티비티",
-    "safaris": "사파리"
+    "safaris": "사파리",
+    "rides": "라이드"
   },
   "heroTabs": {
     "destinations": "여행지",
@@ -267,7 +288,8 @@
     "zip": "짚라인 & 스윙",
     "easy": "이지 & 파노라마",
     "moderate": "보통 난이도 코스",
-    "challenging": "고난도 원정 트레킹"
+    "challenging": "고난도 원정 트레킹",
+    "rides": "바이크 라이드"
   },
   "deals": {
     "kicker": "이번 주",
@@ -336,7 +358,9 @@
     "submit": "요청 보내기",
     "sending": "보내는 중…",
     "error": "문제가 생겼습니다. 다시 시도하거나 WhatsApp으로 연락해 주세요.",
-    "reviewLead": "한 번만 더 확인하세요. 뒤로 갈 수 있습니다."
+    "reviewLead": "한 번만 더 확인하세요. 뒤로 갈 수 있습니다.",
+    "rideKind": "라이드",
+    "ride": "바이크 라이드"
   },
   "success": {
     "kicker": "포카라에서 접수",
@@ -390,7 +414,9 @@
     "privateTitle": "프라이빗 출발",
     "privateBody": "당신의 날짜, 속도, 그룹만. 예약 양식에서 체크하면 매니저가 더 높은 요금을 안내합니다. 온라인 결제가 아닙니다.",
     "prepareCue": "허가, 짐, 체력, 강 연령은",
-    "prepareLink": "준비 페이지에 있습니다."
+    "prepareLink": "준비 페이지에 있습니다.",
+    "rideTitle": "라이드는 누구에게",
+    "rideLede": "하루 루프부터 다일 히말라야 도로까지. 로열 엔필드, 지원 지프, 정비—혼자 하이웨이를 감당하는 일정이 아닙니다."
   },
   "prepare": {
     "kicker": "비행 전에",

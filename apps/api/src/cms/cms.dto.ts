@@ -282,8 +282,8 @@ export class UpsertTrekDto {
   @IsInt()
   sortOrder!: number;
 
-  @IsIn(['trek', 'rafting', 'activity', 'safari'])
-  kind!: 'trek' | 'rafting' | 'activity' | 'safari';
+  @IsIn(['trek', 'rafting', 'activity', 'safari', 'ride'])
+  kind!: 'trek' | 'rafting' | 'activity' | 'safari' | 'ride';
 
   @IsOptional()
   @IsIn(['annapurna', 'everest', 'langtang', 'restricted', 'hidden_gems', 'other'])

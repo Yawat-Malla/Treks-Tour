@@ -79,6 +79,8 @@ export function chipHref(chipId: string): string {
       return "/activities";
     case "safaris":
       return "/safaris";
+    case "rides":
+      return "/rides";
     default:
       return "/treks";
   }

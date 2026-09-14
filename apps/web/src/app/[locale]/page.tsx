@@ -28,9 +28,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function HomePage() {
   const locale = await getLocale();
   const t = await getTranslations();
-  const { settings, treks, rafting, activities, safaris, trips, faqs, testimonials, posts } = await fetchPublic(locale);
+  const { settings, treks, rafting, activities, safaris, rides, trips, faqs, testimonials, posts } = await fetchPublic(locale);
   const featured = (treks.filter((x) => x.featured).length ? treks.filter((x) => x.featured) : treks).slice(0, 2);
   const visited = rafting.slice(0, 2);
+  const featuredRides = (rides ?? []).filter((x) => x.featured).length
+    ? (rides ?? []).filter((x) => x.featured).slice(0, 3)
+    : (rides ?? []).slice(0, 3);
   const bannerTrip = featured[0] || treks[0];
   const memories = trips.flatMap((x) => x.gallery).filter(Boolean);
   const uniqueMemories = [...new Set(memories)].slice(0, 5);
@@ -41,6 +44,7 @@ export default async function HomePage() {
     if (chip.id === "treks") return { ...chip, count: treks.length };
     if (chip.id === "rafting") return { ...chip, count: rafting.length };
     if (chip.id === "safaris") return { ...chip, count: safaris.length };
+    if (chip.id === "rides") return { ...chip, count: (rides ?? []).length };
     if (chip.tab === "activities") return { ...chip, count: activities.length };
     if (chip.id === "easy" || chip.id === "moderate" || chip.id === "challenging") {
       return { ...chip, count: treks.filter((t) => t.difficulty === chip.id).length };
@@ -103,6 +107,25 @@ export default async function HomePage() {
           <div className="mt-8 text-center">
             <Link href="/rafting" className="text-sm text-sky underline-offset-4 hover:underline">
               {c("featured.allRaft")}
+            </Link>
+          </div>
+        </section>
+      )}
+
+      {featuredRides.length > 0 && (
+        <section className="bg-ivory pb-16">
+          <Reveal className="mx-auto max-w-6xl px-5 text-center lg:px-8">
+            <p className="text-xs uppercase tracking-[0.22em] text-sky">{c("featured.rideKicker")}</p>
+            <h2 className="mt-3 font-serif text-4xl sm:text-5xl">{c("featured.rideTitle")}</h2>
+          </Reveal>
+          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+            {featuredRides.map((trip) => (
+              <TripCard key={trip.id} trip={trip} large />
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link href="/rides" className="text-sm text-sky underline-offset-4 hover:underline">
+              {c("featured.allRides")}
             </Link>
           </div>
         </section>

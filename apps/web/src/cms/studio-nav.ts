@@ -22,7 +22,7 @@ export function studioNav(admin: string): StudioNavItem[] {
     { href: `/${admin}`, label: "Home", hint: "Pick what you want to change", tint: "bg-sky/15 text-sky" },
     { href: `/${admin}/pages`, label: "Website words & photos", hint: "Titles, stories, and pictures guests see", tint: "bg-sky/15 text-sky" },
     { href: `/${admin}/brand`, label: "Name, logo & phone", hint: "WhatsApp, email, and the floating buttons", tint: "bg-river/15 text-river" },
-    { href: `/${admin}/treks`, label: "Trips", hint: "Treks, rafting, activities, and safaris", tint: "bg-sky/15 text-sky" },
+    { href: `/${admin}/treks`, label: "Trips", hint: "Treks, rafting, activities, safaris, and rides", tint: "bg-sky/15 text-sky" },
     { href: `/${admin}/bookings`, label: "Bookings", hint: "People who asked to go", tint: "bg-gold/20 text-ink" },
     { href: `/${admin}/faqs`, label: "Questions", hint: "Answers on the homepage", tint: "bg-river/15 text-river" },
     { href: `/${admin}/voices`, label: "Guest quotes", hint: "What walkers said about us", tint: "bg-sky/15 text-sky" },

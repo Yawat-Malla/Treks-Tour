@@ -10,6 +10,7 @@ const STATIC_PATHS = [
   "/rafting",
   "/activities",
   "/safaris",
+  "/rides",
   "/blog",
   "/plan",
   "/prepare",
