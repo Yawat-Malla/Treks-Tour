@@ -1,9 +1,64 @@
-import { setRequestLocale } from "next-intl/server";
-import { NotFoundView } from "@/components/NotFoundView";
-import { routing } from "@/i18n/routing";
+import Link from "next/link";
+import en from "../../messages/en.json";
 
-/** Global unmatched URLs (outside a triggered locale `notFound()`). */
-export default async function RootNotFound() {
-  setRequestLocale(routing.defaultLocale);
-  return <NotFoundView />;
+/**
+ * Root `/_not-found` is statically prerendered outside the `[locale]` tree.
+ * next-intl (`getTranslations` / i18n `Link`) breaks that prerender — keep this
+ * page free of next-intl. Localized 404s use `[locale]/not-found.tsx`.
+ */
+export default function RootNotFound() {
+  const t = en.notFound;
+
+  // #region agent log
+  fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
+    body: JSON.stringify({
+      sessionId: "4acaf2",
+      runId: "post-fix",
+      hypothesisId: "C",
+      location: "app/not-found.tsx:RootNotFound",
+      message: "static root not-found render (no next-intl)",
+      data: { title: t.title, phase: process.env.NEXT_PHASE ?? null },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+  // #endregion
+
+  return (
+    <section className="relative overflow-hidden bg-ivory">
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-48 opacity-[0.35]"
+        style={{
+          backgroundImage: "url(/textures/peaks.svg)",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "bottom center",
+          backgroundSize: "cover",
+        }}
+        aria-hidden
+      />
+      <div className="relative mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-5 py-24 text-center lg:px-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-pine-deep">{t.code}</p>
+        <h1 className="mt-5 font-serif text-4xl text-ink sm:text-5xl">{t.title}</h1>
+        <p className="mt-5 max-w-md text-base leading-relaxed text-ink-soft">{t.body}</p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href="/"
+            className="inline-flex min-h-11 items-center rounded-full bg-ink px-6 text-sm font-medium text-snow transition hover:bg-moss-deep"
+          >
+            {t.home}
+          </Link>
+          <Link
+            href="/treks"
+            className="inline-flex min-h-11 items-center rounded-full bg-snow px-6 text-sm font-medium text-ink ring-1 ring-ink/12 transition hover:bg-ivory-deep"
+          >
+            {t.treks}
+          </Link>
+          <Link href="/contact" className="text-sm text-sky underline-offset-4 hover:underline">
+            {t.contact}
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 }
