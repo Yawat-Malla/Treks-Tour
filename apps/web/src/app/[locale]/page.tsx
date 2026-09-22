@@ -17,7 +17,8 @@ import { TrekCtaBanner } from "@/components/home/TrekCtaBanner";
 import { BlogTeaser } from "@/components/home/BlogTeaser";
 import { RatedBand } from "@/components/home/RatedBand";
 import { MemoryWall } from "@/components/home/MemoryWall";
-import { Voices } from "@/components/home/Voices";
+import { GoogleReviews } from "@/components/home/GoogleReviews";
+import { GoogleMapBand } from "@/components/home/GoogleMapBand";
 import { AssociatedWith } from "@/components/home/AssociatedWith";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function HomePage() {
   const locale = await getLocale();
   const t = await getTranslations();
-  const { settings, treks, rafting, activities, safaris, rides, trips, faqs, testimonials, posts } = await fetchPublic(locale);
+  const { settings, treks, rafting, activities, safaris, rides, trips, faqs, posts, googleReviews } = await fetchPublic(locale);
   const featured = (treks.filter((x) => x.featured).length ? treks.filter((x) => x.featured) : treks).slice(0, 2);
   const visited = rafting.slice(0, 2);
   const featuredRides = (rides ?? []).filter((x) => x.featured).length
@@ -115,8 +116,8 @@ export default async function HomePage() {
       {featuredRides.length > 0 && (
         <section className="bg-ivory pb-16">
           <Reveal className="mx-auto max-w-6xl px-5 text-center lg:px-8">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky">{c("featured.rideKicker")}</p>
-            <h2 className="mt-3 font-serif text-4xl sm:text-5xl">{c("featured.rideTitle")}</h2>
+            <p className="text-xs uppercase tracking-[0.22em] text-sky">{c("featured.homeRideKicker")}</p>
+            <h2 className="mt-3 font-serif text-4xl sm:text-5xl">{c("featured.homeRideTitle")}</h2>
           </Reveal>
           <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-5 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
             {featuredRides.map((trip) => (
@@ -133,7 +134,9 @@ export default async function HomePage() {
 
       <PurposeBand settings={settings} fallback={(key) => t(key)} />
 
-      {testimonials.length > 0 && <Voices items={testimonials} kicker={c("voices.kicker")} title={c("voices.title")} />}
+      <GoogleMapBand settings={settings} />
+
+      {googleReviews ? <GoogleReviews data={googleReviews} /> : null}
 
       {bannerTrip && (
         <TrekCtaBanner

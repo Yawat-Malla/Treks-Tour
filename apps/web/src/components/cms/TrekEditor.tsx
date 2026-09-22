@@ -63,8 +63,10 @@ const pickTr = (locale: (typeof locales)[number], found?: Partial<Tr>): Tr => {
   };
 };
 
-export function TrekEditor({ id }: { id: string }) {
+export function TrekEditor({ id, forceKind }: { id: string; forceKind?: "ride" }) {
   const isNew = id === "new";
+  const isRide = forceKind === "ride";
+  const basePath = isRide ? "rides" : "treks";
   const router = useRouter();
   const [locale, setLocale] = useState<StudioLocale>("en");
   const [busy, setBusy] = useState(false);
@@ -81,7 +83,7 @@ export function TrekEditor({ id }: { id: string }) {
     featured: false,
     published: true,
     sortOrder: 10,
-    kind: "trek" as "trek" | "rafting" | "activity" | "safari" | "ride",
+    kind: (forceKind === "ride" ? "ride" : "trek") as "trek" | "rafting" | "activity" | "safari" | "ride",
     region: "other" as "annapurna" | "everest" | "langtang" | "restricted" | "hidden_gems" | "other",
     inclusions: [] as string[],
     exclusions: [] as string[],
@@ -114,7 +116,7 @@ export function TrekEditor({ id }: { id: string }) {
         featured: Boolean(trek.featured),
         published: trek.published !== false,
         sortOrder: trek.sortOrder ?? 10,
-        kind: trek.kind,
+        kind: isRide ? "ride" : trek.kind,
         region: trek.region || "other",
         inclusions: trek.inclusions || [],
         exclusions: trek.exclusions || [],
@@ -126,7 +128,7 @@ export function TrekEditor({ id }: { id: string }) {
         translations,
       });
     });
-  }, [id, isNew]);
+  }, [id, isNew, isRide]);
 
   const tr = form.translations.find((t) => t.locale === locale)!;
 
@@ -156,7 +158,7 @@ export function TrekEditor({ id }: { id: string }) {
         featured: form.featured,
         published: form.published,
         sortOrder: form.sortOrder,
-        kind: form.kind,
+        kind: isRide ? "ride" : form.kind,
         region: form.region,
         inclusions: form.inclusions,
         exclusions: form.exclusions,
@@ -169,24 +171,32 @@ export function TrekEditor({ id }: { id: string }) {
       }),
     });
     setBusy(false);
-    setSaved("Saved just now. Guests will see this on the website.");
-    router.push(`/${adminPath}/treks/${savedTrek.id}`);
+    setSaved(
+      isRide
+        ? "Saved just now. Guests will see this ride on the website."
+        : "Saved just now. Guests will see this on the website.",
+    );
+    router.push(`/${adminPath}/${basePath}/${savedTrek.id}`);
   }
 
   async function remove() {
-    if (!confirm("Delete this trip? This cannot be undone.")) return;
+    if (!confirm(isRide ? "Delete this ride? This cannot be undone." : "Delete this trip? This cannot be undone.")) return;
     await cmsFetch(`/cms/treks/${id}`, { method: "DELETE" });
-    router.push(`/${adminPath}/treks`);
+    router.push(`/${adminPath}/${basePath}`);
   }
 
   return (
     <div className="max-w-2xl space-y-6">
       <StudioPageHeader
-        title={isNew ? "Add a trip" : tr.name || "Edit trip"}
-        hint="Photos first, then prices, then the words in each language."
+        title={isNew ? (isRide ? "New ride" : "Add a trip") : tr.name || (isRide ? "Edit ride" : "Edit trip")}
+        hint={
+          isRide
+            ? "Photos first, then price and days, then the words guests read in each language."
+            : "Photos first, then prices, then the words in each language."
+        }
         action={
           !isNew && form.published && form.slug ? (
-            <StudioViewSite href={tripHref({ kind: form.kind, slug: form.slug })} />
+            <StudioViewSite href={tripHref({ kind: isRide ? "ride" : form.kind, slug: form.slug })} />
           ) : undefined
         }
       />
@@ -195,7 +205,7 @@ export function TrekEditor({ id }: { id: string }) {
         <h2 className="font-serif text-2xl">Photos</h2>
         <StudioUpload
           label="Main photo"
-          help="The big picture on the trip page."
+          help={isRide ? "The big picture on this ride’s page." : "The big picture on the trip page."}
           preview={form.heroImageUrl || null}
           onUrl={(url) => setForm((f) => ({ ...f, heroImageUrl: url }))}
         />
@@ -240,21 +250,23 @@ export function TrekEditor({ id }: { id: string }) {
       </StudioCard>
 
       <StudioCard className="space-y-5">
-        <h2 className="font-serif text-2xl">Kind, days & price</h2>
-        <StudioField label="What kind of trip">
-          <select
-            className="studio-input"
-            value={form.kind}
-            onChange={(e) => setForm({ ...form, kind: e.target.value as "trek" | "rafting" | "activity" | "safari" | "ride" })}
-          >
-            <option value="trek">Trek</option>
-            <option value="rafting">Rafting</option>
-            <option value="activity">Activity</option>
-            <option value="safari">Safari</option>
-            <option value="ride">Ride</option>
-          </select>
-        </StudioField>
-        {form.kind === "trek" && (
+        <h2 className="font-serif text-2xl">{isRide ? "Days & price" : "Kind, days & price"}</h2>
+        {!isRide && (
+          <StudioField label="What kind of trip">
+            <select
+              className="studio-input"
+              value={form.kind}
+              onChange={(e) => setForm({ ...form, kind: e.target.value as "trek" | "rafting" | "activity" | "safari" | "ride" })}
+            >
+              <option value="trek">Trek</option>
+              <option value="rafting">Rafting</option>
+              <option value="activity">Activity</option>
+              <option value="safari">Safari</option>
+              <option value="ride">Ride</option>
+            </select>
+          </StudioField>
+        )}
+        {!isRide && form.kind === "trek" && (
           <StudioField label="Region (for Google destination pages)">
             <select
               className="studio-input"
@@ -277,7 +289,11 @@ export function TrekEditor({ id }: { id: string }) {
         )}
         <StudioField
           label="Web address name"
-          help="Short English name in the link, like annapurna-base-camp. No spaces."
+          help={
+            isRide
+              ? "Short English name in the link, like panchase-ride. No spaces."
+              : "Short English name in the link, like annapurna-base-camp. No spaces."
+          }
         >
           <input className="studio-input" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
         </StudioField>
@@ -298,14 +314,16 @@ export function TrekEditor({ id }: { id: string }) {
               onChange={(e) => setForm({ ...form, priceFromUsd: Number(e.target.value) })}
             />
           </StudioField>
-          <StudioField label="Highest point (metres)">
-            <input
-              type="number"
-              className="studio-input"
-              value={form.maxAltitudeM}
-              onChange={(e) => setForm({ ...form, maxAltitudeM: Number(e.target.value) })}
-            />
-          </StudioField>
+          {!isRide && (
+            <StudioField label="Highest point (metres)">
+              <input
+                type="number"
+                className="studio-input"
+                value={form.maxAltitudeM}
+                onChange={(e) => setForm({ ...form, maxAltitudeM: Number(e.target.value) })}
+              />
+            </StudioField>
+          )}
           <StudioField label="How hard it is">
             <select
               className="studio-input"
@@ -361,9 +379,9 @@ export function TrekEditor({ id }: { id: string }) {
           Show on the homepage
         </StudioCheck>
         <StudioCheck checked={form.published} onChange={(v) => setForm({ ...form, published: v })}>
-          Live on the website
+          {isRide ? "Live on the website — book guests see this ride" : "Live on the website"}
         </StudioCheck>
-        {form.kind === "rafting" && (
+        {!isRide && form.kind === "rafting" && (
           <div className="grid gap-4 sm:grid-cols-3">
             <StudioField label="River">
               <input className="studio-input" value={form.river} onChange={(e) => setForm({ ...form, river: e.target.value })} />
@@ -402,7 +420,7 @@ export function TrekEditor({ id }: { id: string }) {
       <StudioCard className="space-y-5">
         <h2 className="font-serif text-2xl">Words guests read</h2>
         <StudioLocaleTabs value={locale} onChange={setLocale} />
-        <StudioField label="Trip name">
+        <StudioField label={isRide ? "Ride name" : "Trip name"}>
           <input className="studio-input" value={tr.name} onChange={(e) => patchTr({ name: e.target.value })} />
         </StudioField>
         <StudioField label="Short summary">
@@ -422,7 +440,7 @@ export function TrekEditor({ id }: { id: string }) {
         <StudioField label="Photo description" help="What the main photo shows. Google reads this.">
           <input className="studio-input" value={tr.imageAlt} onChange={(e) => patchTr({ imageAlt: e.target.value })} />
         </StudioField>
-        <StudioField label="Google title" help="Leave empty to use the trip name. About 50–60 characters.">
+        <StudioField label="Google title" help={isRide ? "Leave empty to use the ride name. About 50–60 characters." : "Leave empty to use the trip name. About 50–60 characters."}>
           <input className="studio-input" value={tr.seoTitle} onChange={(e) => patchTr({ seoTitle: e.target.value })} />
         </StudioField>
         <StudioField label="Google description" help="One or two sentences. About 150 characters.">
@@ -471,7 +489,7 @@ export function TrekEditor({ id }: { id: string }) {
         extra={
           !isNew ? (
             <button type="button" onClick={remove} className="studio-btn studio-btn-danger">
-              Delete trip
+              {isRide ? "Delete ride" : "Delete trip"}
             </button>
           ) : null
         }

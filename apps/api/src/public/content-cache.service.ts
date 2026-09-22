@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Locale } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { RedisService } from '../redis/redis.service';
+import { GooglePlacesService } from './google-places.service';
 
 const CACHE_TTL = 60;
 
@@ -10,11 +11,13 @@ export class ContentCache {
   constructor(
     private readonly prisma: PrismaService,
     private readonly redis: RedisService,
+    private readonly googlePlaces: GooglePlacesService,
   ) {}
 
   async invalidate() {
     const keys = await this.redis.client.keys('public:content:*');
     if (keys.length) await this.redis.client.del(...keys);
+    await this.googlePlaces.invalidate();
   }
 
   mapTrip(
@@ -138,6 +141,7 @@ export class ContentCache {
             heroPosterUrl: settings.heroPosterUrl,
             heroVideoUrl: settings.heroVideoUrl,
             aboutHeroUrl: settings.aboutHeroUrl,
+            ridesHeroUrl: settings.ridesHeroUrl,
             associations: settings.associations ?? null,
             chips: settings.chips ?? null,
             siteUrl: settings.siteUrl,
@@ -149,6 +153,7 @@ export class ContentCache {
             instagramUrl: settings.instagramUrl,
             tripadvisorUrl: settings.tripadvisorUrl,
             googleBusinessUrl: settings.googleBusinessUrl,
+            googlePlaceId: settings.googlePlaceId,
             tagline: t?.tagline ?? '',
             heroHeadline: t?.heroHeadline ?? '',
             heroSubhead: t?.heroSubhead ?? '',
@@ -188,6 +193,10 @@ export class ContentCache {
           seoDescription: tr?.seoDescription ?? '',
           updatedAt: post.updatedAt instanceof Date ? post.updatedAt.toISOString() : post.updatedAt,
         };
+      }),
+      googleReviews: await this.googlePlaces.getReviews({
+        placeId: settings?.googlePlaceId,
+        mapsUrl: settings?.googleBusinessUrl,
       }),
     };
 

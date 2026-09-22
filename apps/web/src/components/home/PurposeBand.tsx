@@ -1,9 +1,33 @@
+import {
+  Award,
+  BadgeCheck,
+  FileBadge,
+  FileCheck,
+  KeyRound,
+  MapPin,
+  MessageCircle,
+  MessagesSquare,
+  Phone,
+  Shield,
+  UserRound,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { RidgeBand } from "@/components/ui/RidgeBand";
-import { MapPin, UserRound, MessageCircle, FileCheck, Users, Shield } from "lucide-react";
 import type { SiteSettings } from "@/lib/api";
 import { siteCopy } from "@/lib/site-copy";
 
-const TILES = ["tile1", "tile2", "tile3", "tile4", "tile5", "tile6", "tile7", "tile8"] as const;
+const TILES: { key: string; Icon: LucideIcon }[] = [
+  { key: "tile1", Icon: BadgeCheck },
+  { key: "tile2", Icon: FileBadge },
+  { key: "tile3", Icon: Award },
+  { key: "tile4", Icon: MapPin },
+  { key: "tile5", Icon: MessageCircle },
+  { key: "tile6", Icon: MessagesSquare },
+  { key: "tile7", Icon: Phone },
+  { key: "tile8", Icon: KeyRound },
+];
+
 const WHY = [
   { key: "one", Icon: MapPin },
   { key: "two", Icon: UserRound },
@@ -20,8 +44,7 @@ export function PurposeBand({
   settings: SiteSettings;
   fallback: (key: string) => string;
 }) {
-  const c = (key: string) =>
-    siteCopy(settings, key, () => fallback(key));
+  const c = (key: string) => siteCopy(settings, key, () => fallback(key));
   const title = c("intro.title");
   const body = c("intro.body");
 
@@ -35,12 +58,17 @@ export function PurposeBand({
             <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft">{body}</p>
           </div>
           <div className="grid grid-cols-4 gap-3">
-            {TILES.map((key) => (
+            {TILES.map(({ key, Icon }) => (
               <div
                 key={key}
-                className="flex aspect-square items-center justify-center rounded-xl bg-snow px-2 text-center text-[10px] font-semibold uppercase tracking-[0.08em] text-ink sm:text-xs"
+                className="flex aspect-square flex-col items-center justify-center gap-2 rounded-xl bg-snow px-2 text-center ring-1 ring-ink/6"
               >
-                {c(`purpose.${key}`)}
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-pine/15 text-pine-deep">
+                  <Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+                </span>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.08em] text-ink sm:text-xs">
+                  {c(`purpose.${key}`)}
+                </span>
               </div>
             ))}
           </div>

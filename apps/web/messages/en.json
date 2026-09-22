@@ -87,7 +87,10 @@
     "rideKicker": "From Lakeside",
     "rideTitle": "Motorcycle rides from Pokhara",
     "rideLede": "Royal Enfield rides from Pokhara—day loops to multi-day Himalayan routes with a support jeep and a mechanic on the road.",
-    "allRides": "All rides"
+    "allRides": "All rides",
+    "homeRideKicker": "From Lakeside",
+    "homeRideTitle": "Motorcycle rides from Pokhara",
+    "homeRideLede": "Royal Enfield rides from Pokhara—day loops to multi-day Himalayan routes with a support jeep and a mechanic on the road."
   },
   "how": {
     "kicker": "How it works",
@@ -109,6 +112,7 @@
     "itinerary": "Itinerary",
     "bookThis": "Book this trek",
     "bookRaft": "Book this river",
+    "bookThisRide": "Book this ride",
     "enquire": "Enquire first",
     "priceNote": "Price from, per person. Final quote after dates and group size.",
     "gallery": "The path",
@@ -123,10 +127,12 @@
     "minAge": "Minimum age",
     "profile": "Altitude",
     "gradeProfile": "River grade",
+    "rideProfile": "Route notes",
     "similar": "Similar trips",
     "finishPokhara": "Finish in Pokhara",
     "pairTrek": "Pair with a rest-day trek",
     "compareName": "Trek",
+    "compareRide": "Ride",
     "compareDays": "Days",
     "compareAltitude": "Max altitude",
     "compareRegion": "Region",
@@ -154,7 +160,19 @@
     "permitsBody": "Annapurna routes include ACAP and usually TIMS, processed in Pokhara. Restricted valleys (Mustang, Manaslu, Tsum, Nar Phu) add a RAP filed through immigration. The quote lists permit days; there is no surprise at the checkpoint.",
     "permitsLink": "Permit notes from Lakeside",
     "fromPokharaBody": "You sleep in Pokhara the night before a jeep or tourist bus. We confirm the trailhead, tea-house nights, and who meets you. No guest account — a manager replies on WhatsApp, WeChat, Viber or email.",
-    "rideTag": "Ride"
+    "rideTag": "Ride",
+    "rideRoadNotesTitle": "Road and riding notes",
+    "rideRoadNotesBody": "{name} is a {difficulty} motorcycle package of {days} days. Typical season: {season}. You ride with a support jeep and a mechanic on the road — not a solo highway gamble.",
+    "rideBestTimeBody": "Typical season: {season}. Clear dry weeks are kinder on Himalayan roads; we will not sell a high-pass day into closed weather.",
+    "rideFromPokharaBody": "Briefing and bike handover are in Lakeside. Bring a valid motorcycle licence. A manager confirms the route, lodges, and who meets you — on WhatsApp, WeChat, Viber or email.",
+    "rideFaqLicenceQ": "Do I need a motorcycle licence?",
+    "rideFaqLicenceA": "Yes. Bring a valid motorcycle licence (and international permit if your home licence requires it). We brief before you roll; we will not put an unlicensed rider on the road.",
+    "rideFaqSupportQ": "Is there a support jeep?",
+    "rideFaqSupportA": "Yes. Our packages include a support jeep and a mechanic on the road with the group — fuel, gear, and pacing are part of the quote.",
+    "rideFaqBikeQ": "What bike do I ride on {name}?",
+    "rideFaqBikeA": "Royal Enfield models suited to the route (Classic 350 or Himalayan-class bikes depending on the package). Gear is in the package; tell us your height and experience when you enquire.",
+    "rideFaqSeasonQ": "When is the best time to ride?",
+    "rideFaqSeasonA": "Write your dates; a manager in Pokhara will say if the road matches the weather. We cancel or shorten a high day if conditions close the route."
   },
   "map": {
     "kicker": "From the lake",
@@ -221,6 +239,38 @@
     "title": "Guest says",
     "prev": "Previous reviews",
     "next": "Next reviews"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "This path is not on the map.",
+    "body": "The page you asked for is not a trail we run. Head back to the lake, browse the treks, or send a message from Contact.",
+    "home": "Back to home",
+    "treks": "See treks",
+    "contact": "Contact"
+  },
+  "googleReviews": {
+    "tabGoogle": "Google",
+    "tabHint": "Verified guest reviews from Google Maps",
+    "excellent": "Excellent",
+    "great": "Great",
+    "good": "Good",
+    "rated": "Rated",
+    "reviewCount": "{count, plural, one {# Google review} other {# Google reviews}}",
+    "writeReview": "Write a review",
+    "seeAll": "See all on Google",
+    "seeOnGoogle": "See us on Google",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "verified": "Posted on Google",
+    "prev": "Previous Google reviews",
+    "next": "Next Google reviews"
+  },
+  "googleMap": {
+    "kicker": "Find us",
+    "title": "Lakeside, Pokhara",
+    "lede": "Our desk is on the lake. Open the map for directions, then message us when you arrive.",
+    "iframeTitle": "Office location on Google Maps",
+    "openMaps": "Open in Google Maps"
   },
   "purpose": {
     "kicker": "Why we walk",

@@ -19,6 +19,7 @@ export type SiteSettings = {
   heroPosterUrl: string | null;
   heroVideoUrl: string | null;
   aboutHeroUrl: string | null;
+  ridesHeroUrl: string | null;
   associations: AssociationLogo[] | null;
   chips: ChipCard[] | null;
   siteUrl: string;
@@ -30,6 +31,7 @@ export type SiteSettings = {
   instagramUrl: string;
   tripadvisorUrl: string;
   googleBusinessUrl: string;
+  googlePlaceId: string;
   tagline: string;
   heroHeadline: string;
   heroSubhead: string;
@@ -91,6 +93,23 @@ export type BlogPost = {
   updatedAt?: string;
 };
 
+export type GoogleReview = {
+  authorName: string;
+  profilePhotoUrl: string | null;
+  rating: number;
+  relativeTime: string;
+  text: string;
+  authorUri: string | null;
+};
+
+export type GoogleReviewsPayload = {
+  rating: number;
+  userRatingCount: number;
+  mapsUri: string;
+  displayName: string;
+  reviews: GoogleReview[];
+};
+
 export type PublicPayload = {
   settings: SiteSettings;
   treks: Trip[];
@@ -102,6 +121,7 @@ export type PublicPayload = {
   faqs: Faq[];
   testimonials: Testimonial[];
   posts: BlogPost[];
+  googleReviews: GoogleReviewsPayload | null;
 };
 
 function isLoopback(url: string) {
@@ -138,7 +158,12 @@ export async function fetchPublic(locale: string): Promise<PublicPayload> {
   const res = await liveFetch(`/public/site?locale=${locale}`);
   if (res) {
     const data = (await res.json()) as PublicPayload;
-    return { ...data, posts: data.posts ?? [], rides: data.rides ?? [] };
+    return {
+      ...data,
+      posts: data.posts ?? [],
+      rides: data.rides ?? [],
+      googleReviews: data.googleReviews ?? null,
+    };
   }
   return fallbackPublic(locale);
 }

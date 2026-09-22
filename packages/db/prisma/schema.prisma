@@ -55,6 +55,7 @@ model SiteSettings {
   heroPosterUrl           String?
   heroVideoUrl            String?
   aboutHeroUrl            String?
+  ridesHeroUrl            String?
   associations            Json?
   chips                   Json?
   siteUrl                 String   @default("https://upperpathtreks.com")
@@ -66,6 +67,7 @@ model SiteSettings {
   instagramUrl            String   @default("")
   tripadvisorUrl          String   @default("")
   googleBusinessUrl       String   @default("")
+  googlePlaceId           String   @default("")
   updatedAt               DateTime @updatedAt
   translations            SiteSettingsTranslation[]
 }

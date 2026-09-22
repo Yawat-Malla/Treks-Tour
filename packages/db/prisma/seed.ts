@@ -2905,17 +2905,20 @@ async function main() {
       heroPosterUrl: "/heroes/hero-poster.jpg",
       heroVideoUrl: "/heroes/hero.mp4",
       aboutHeroUrl: "https://images.unsplash.com/photo-1706187975952-33765f844667?auto=format&fit=crop&w=2000&q=80",
+      ridesHeroUrl: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=2000&q=80",
       associations: DEFAULT_ASSOCIATIONS as unknown as Prisma.InputJsonValue,
       chips: DEFAULT_CHIPS as unknown as Prisma.InputJsonValue,
       siteUrl: "https://upperpathtreks.com",
       ogImageUrl: "/heroes/hero-poster.jpg",
       googleSiteVerification: "",
-      geoLat: 28.2096,
-      geoLng: 83.962,
+      geoLat: 28.2138084,
+      geoLng: 83.9596611,
       facebookUrl: "",
       instagramUrl: "",
       tripadvisorUrl: "",
-      googleBusinessUrl: "",
+      googleBusinessUrl:
+        "https://www.google.com/maps/place/Shalom+Treks+and+Travel/@28.2138084,83.9596611,17z/data=!3m1!4b1!4m6!3m5!1s0x39959564e9d25e13:0x8a06677afe170fe7!8m2!3d28.2138084!4d83.9596611!16s%2Fg%2F11qb5s1p_b",
+      googlePlaceId: "",
       translations: {
         create: (Object.keys(settingsCopy) as Locale[]).map((locale) => {
           const pages = pagesFromLocale(locale);

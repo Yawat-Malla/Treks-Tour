@@ -35,6 +35,7 @@ type Settings = {
   instagramUrl: string;
   tripadvisorUrl: string;
   googleBusinessUrl: string;
+  googlePlaceId: string;
 };
 
 export function BrandEditor() {
@@ -48,12 +49,13 @@ export function BrandEditor() {
         siteUrl: "https://upperpathtreks.com",
         ogImageUrl: null,
         googleSiteVerification: "",
-        geoLat: 28.2096,
-        geoLng: 83.962,
+        geoLat: 28.2138084,
+        geoLng: 83.9596611,
         facebookUrl: "",
         instagramUrl: "",
         tripadvisorUrl: "",
         googleBusinessUrl: "",
+        googlePlaceId: "",
         ...row,
       }),
     );
@@ -92,6 +94,7 @@ export function BrandEditor() {
         instagramUrl: settings.instagramUrl,
         tripadvisorUrl: settings.tripadvisorUrl,
         googleBusinessUrl: settings.googleBusinessUrl,
+        googlePlaceId: settings.googlePlaceId,
       }),
     });
     setBusy(false);
@@ -236,6 +239,17 @@ export function BrandEditor() {
         </StudioField>
         <StudioField label="Google Business Profile URL">
           <input className="studio-input" value={s.googleBusinessUrl || ""} onChange={(e) => patch("googleBusinessUrl", e.target.value)} />
+        </StudioField>
+        <StudioField
+          label="Google Place ID"
+          help="From Google’s Place ID finder (starts with ChIJ…). Needed for live Google reviews on the homepage."
+        >
+          <input
+            className="studio-input"
+            value={s.googlePlaceId || ""}
+            onChange={(e) => patch("googlePlaceId", e.target.value)}
+            placeholder="ChIJ…"
+          />
         </StudioField>
       </StudioCard>
 

@@ -87,7 +87,10 @@
     "rideKicker": "从湖畔出发",
     "rideTitle": "从博卡拉出发的摩托骑行",
     "rideLede": "从博卡拉出发的皇家恩菲尔德骑行——一日环线到多日喜马拉雅公路，含支援吉普与技师。",
-    "allRides": "全部骑行"
+    "allRides": "全部骑行",
+    "homeRideKicker": "从湖畔出发",
+    "homeRideTitle": "从博卡拉出发的摩托骑行",
+    "homeRideLede": "从博卡拉出发的皇家恩菲尔德骑行——一日环线到多日喜马拉雅公路，含支援吉普与技师。"
   },
   "how": {
     "kicker": "如何预订",
@@ -109,6 +112,7 @@
     "itinerary": "行程",
     "bookThis": "预订这条线路",
     "bookRaft": "预订这条河",
+    "bookThisRide": "预订这次骑行",
     "enquire": "先咨询",
     "priceNote": "每人起价。最终报价视日期与人数确定。",
     "gallery": "路上",
@@ -123,10 +127,12 @@
     "minAge": "最低年龄",
     "profile": "海拔",
     "gradeProfile": "河道等级",
+    "rideProfile": "路线说明",
     "similar": "相近行程",
     "finishPokhara": "在博卡拉收尾",
     "pairTrek": "搭配轻松徒步",
     "compareName": "线路",
+    "compareRide": "骑行",
     "compareDays": "天数",
     "compareAltitude": "最高海拔",
     "compareRegion": "地区",
@@ -154,7 +160,19 @@
     "permitsBody": "安纳普尔纳含 ACAP，通常还有 TIMS，在博卡拉办理。限制区另加 RAP。报价写明许可天数。",
     "permitsLink": "从湖畔办理许可",
     "fromPokharaBody": "出发前一晚住博卡拉。我们确认步道口、茶馆夜数与接应人。无需账号，经理在 WhatsApp、微信、Viber 或邮件回复。",
-    "rideTag": "骑行"
+    "rideTag": "骑行",
+    "rideRoadNotesTitle": "路况与骑行说明",
+    "rideRoadNotesBody": "{name}是{difficulty}摩托套餐，共{days}天。通常季节：{season}。有支援吉普与技师同行，不是独自上路。",
+    "rideBestTimeBody": "通常季节：{season}。干燥晴朗的周更适合喜马拉雅公路；天气关路时我们不会硬卖高山口日。",
+    "rideFromPokharaBody": "说明与交车在湖畔。请携带有效摩托车驾照。经理确认路线、住宿与接应——WhatsApp、微信、Viber 或邮件。",
+    "rideFaqLicenceQ": "需要摩托车驾照吗？",
+    "rideFaqLicenceA": "需要。请带有效摩托车驾照（若本国驾照要求，另带国际驾照）。出发前说明；我们不会让无证骑手上路。",
+    "rideFaqSupportQ": "有支援吉普吗？",
+    "rideFaqSupportA": "有。套餐含支援吉普与随队技师——燃油、装备与配速写在报价里。",
+    "rideFaqBikeQ": "{name}骑什么车？",
+    "rideFaqBikeA": "适合路线的皇家恩菲尔德（视套餐为 Classic 350 或喜马拉雅级）。装备含在套餐内；咨询时告知身高与经验。",
+    "rideFaqSeasonQ": "什么时候骑最好？",
+    "rideFaqSeasonA": "把日期发给博卡拉的经理。天气关路时我们会取消或缩短高路日。"
   },
   "map": {
     "kicker": "从湖边出发",
@@ -221,6 +239,38 @@
     "title": "客人怎么说",
     "prev": "上一组评价",
     "next": "下一组评价"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "这条路不在地图上。",
+    "body": "你要找的页面不是我们经营的线路。回到湖边、浏览徒步，或从联系页发消息。",
+    "home": "返回首页",
+    "treks": "查看徒步",
+    "contact": "联系我们"
+  },
+  "googleReviews": {
+    "tabGoogle": "Google",
+    "tabHint": "来自 Google 地图的真实客人评价",
+    "excellent": "出色",
+    "great": "很好",
+    "good": "不错",
+    "rated": "评分",
+    "reviewCount": "{count} 条 Google 评价",
+    "writeReview": "写评价",
+    "seeAll": "在 Google 查看全部",
+    "seeOnGoogle": "在 Google 上查看我们",
+    "readMore": "阅读更多",
+    "readLess": "收起",
+    "verified": "发布于 Google",
+    "prev": "上一组 Google 评价",
+    "next": "下一组 Google 评价"
+  },
+  "googleMap": {
+    "kicker": "找到我们",
+    "title": "博卡拉湖畔",
+    "lede": "我们的柜台在湖边。打开地图导航，到了以后给我们发消息。",
+    "iframeTitle": "Google 地图上的办公地点",
+    "openMaps": "在 Google 地图打开"
   },
   "purpose": {
     "kicker": "我们为何行走",

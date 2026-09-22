@@ -114,6 +114,10 @@ export class UpdateSettingsDto {
   aboutHeroUrl?: string | null;
 
   @IsOptional()
+  @IsString()
+  ridesHeroUrl?: string | null;
+
+  @IsOptional()
   @Allow()
   associations?: unknown;
 
@@ -156,6 +160,11 @@ export class UpdateSettingsDto {
   @IsOptional()
   @IsString()
   googleBusinessUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(200)
+  googlePlaceId?: string;
 
   @IsOptional()
   @IsArray()

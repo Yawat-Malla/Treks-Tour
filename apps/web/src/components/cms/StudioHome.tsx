@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { FileText, Phone, MapPinned, MessageCircle, Newspaper, HelpCircle, CalendarCheck } from "lucide-react";
+import { FileText, Phone, MapPinned, MessageCircle, Newspaper, HelpCircle, CalendarCheck, Bike } from "lucide-react";
 import { adminPath, studioNav } from "@/cms/studio-nav";
 import { cmsFetch } from "@/lib/cms";
 import { matchesQuery, StudioEmpty, StudioPageHeader, StudioSearch } from "./studio-ui";
 
-const TILE_ICONS = [FileText, Phone, MapPinned, CalendarCheck, HelpCircle, MessageCircle, Newspaper];
+const TILE_ICONS = [FileText, Phone, MapPinned, Bike, CalendarCheck, HelpCircle, MessageCircle, Newspaper];
 
 export function StudioHome() {
   const items = studioNav(adminPath).slice(1);

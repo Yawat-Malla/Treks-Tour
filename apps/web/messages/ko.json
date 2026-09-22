@@ -87,7 +87,10 @@
     "rideKicker": "레이크사이드에서",
     "rideTitle": "포카라에서 떠나는 바이크 라이드",
     "rideLede": "포카라에서 로열 엔필드 라이드—하루 루프부터 다일 히말라야 도로까지, 지원 지프와 정비 포함.",
-    "allRides": "모든 라이드"
+    "allRides": "모든 라이드",
+    "homeRideKicker": "레이크사이드에서",
+    "homeRideTitle": "포카라에서 떠나는 바이크 라이드",
+    "homeRideLede": "포카라에서 로열 엔필드 라이드—하루 루프부터 다일 히말라야 도로까지, 지원 지프와 정비 포함."
   },
   "how": {
     "kicker": "예약 방법",
@@ -109,6 +112,7 @@
     "itinerary": "일정",
     "bookThis": "이 트레킹 예약",
     "bookRaft": "이 강 예약",
+    "bookThisRide": "이 라이드 예약",
     "enquire": "먼저 문의",
     "priceNote": "1인 기준 시작가. 최종 견적은 날짜와 인원 후 안내합니다.",
     "gallery": "길 위에서",
@@ -123,10 +127,12 @@
     "minAge": "최소 연령",
     "profile": "고도",
     "gradeProfile": "강 등급",
+    "rideProfile": "루트 안내",
     "similar": "비슷한 여행",
     "finishPokhara": "포카라에서 마무리",
     "pairTrek": "휴식일 트레킹과 함께",
     "compareName": "트레킹",
+    "compareRide": "라이드",
     "compareDays": "일수",
     "compareAltitude": "최고 고도",
     "compareRegion": "지역",
@@ -154,7 +160,19 @@
     "permitsBody": "안나푸르나는 ACAP와 보통 TIMS를 포카라에서 처리합니다. 제한구역은 RAP가 추가됩니다.",
     "permitsLink": "레이크사이드 허가 안내",
     "fromPokharaBody": "출발 전날 포카라에서 잡니다. 계정 없이 WhatsApp·WeChat·Viber·이메일로 매니저가 답합니다.",
-    "rideTag": "라이드"
+    "rideTag": "라이드",
+    "rideRoadNotesTitle": "도로와 라이딩 안내",
+    "rideRoadNotesBody": "{name}은(는) {difficulty} 바이크 패키지, {days}일입니다. 일반 시즌: {season}. 지원 지프와 정비가 함께합니다.",
+    "rideBestTimeBody": "일반 시즌: {season}. 맑고 건조한 주가 히말라야 도로에 낫습니다. 날씨가 길을 닫으면 고지 일정을 팔지 않습니다.",
+    "rideFromPokharaBody": "브리핑과 바이크 인수는 레이크사이드입니다. 유효한 오토바이 면허를 가져오세요. 매니저가 루트·숙소·미팅을 WhatsApp·WeChat·Viber·이메일로 확인합니다.",
+    "rideFaqLicenceQ": "오토바이 면허가 필요합니까?",
+    "rideFaqLicenceA": "필요합니다. 유효한 오토바이 면허(필요 시 국제면허)를 가져오세요. 무면허 라이더는 태우지 않습니다.",
+    "rideFaqSupportQ": "지원 지프가 있습니까?",
+    "rideFaqSupportA": "있습니다. 패키지에 지원 지프와 정비가 포함됩니다.",
+    "rideFaqBikeQ": "{name}에서는 어떤 바이크를 탑니까?",
+    "rideFaqBikeA": "루트에 맞는 로열 엔필드(패키지에 따라 Classic 350 또는 히말라야급). 키와 경험을 알려 주세요.",
+    "rideFaqSeasonQ": "언제 타기 좋습니까?",
+    "rideFaqSeasonA": "날짜를 보내 주세요. 날씨가 길을 닫으면 고지 일정을 취소하거나 줄입니다."
   },
   "map": {
     "kicker": "호수에서",
@@ -221,6 +239,38 @@
     "title": "게스트의 말",
     "prev": "이전 후기",
     "next": "다음 후기"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "이 길은 지도에 없습니다.",
+    "body": "요청하신 페이지는 저희가 운영하는 코스가 아닙니다. 호수로 돌아가거나 트레킹을 보거나 연락 페이지에서 메시지를 보내 주세요.",
+    "home": "홈으로",
+    "treks": "트레킹 보기",
+    "contact": "문의"
+  },
+  "googleReviews": {
+    "tabGoogle": "Google",
+    "tabHint": "Google 지도의 실제 게스트 리뷰",
+    "excellent": "최고",
+    "great": "훌륭함",
+    "good": "좋음",
+    "rated": "평점",
+    "reviewCount": "Google 리뷰 {count}개",
+    "writeReview": "리뷰 작성",
+    "seeAll": "Google에서 모두 보기",
+    "seeOnGoogle": "Google에서 보기",
+    "readMore": "더 보기",
+    "readLess": "접기",
+    "verified": "Google에 게시됨",
+    "prev": "이전 Google 리뷰",
+    "next": "다음 Google 리뷰"
+  },
+  "googleMap": {
+    "kicker": "찾아오는 길",
+    "title": "포카라 레이크사이드",
+    "lede": "호숫가에 데스크가 있습니다. 지도로 길을 찾은 뒤 도착하면 메시지를 보내 주세요.",
+    "iframeTitle": "Google 지도의 사무실 위치",
+    "openMaps": "Google 지도에서 열기"
   },
   "purpose": {
     "kicker": "우리가 걷는 이유",

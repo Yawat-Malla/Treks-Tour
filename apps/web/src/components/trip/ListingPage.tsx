@@ -42,7 +42,10 @@ export async function ListingPage({
     safari: { kicker: c("safariKicker", t("safariKicker")), title: c("safariTitle", t("safariTitle")), lede: c("safariLede", t("safariLede")) },
     ride: { kicker: c("rideKicker", t("rideKicker")), title: c("rideTitle", t("rideTitle")), lede: c("rideLede", t("rideLede")) },
   }[kind];
-  const hero = trips[0]?.heroImageUrl || settings.heroPosterUrl || "/heroes/hero-poster.jpg";
+  const hero =
+    kind === "ride"
+      ? settings.ridesHeroUrl || trips[0]?.heroImageUrl || settings.heroPosterUrl || "/heroes/hero-poster.jpg"
+      : trips[0]?.heroImageUrl || settings.heroPosterUrl || "/heroes/hero-poster.jpg";
 
   return (
     <>
@@ -95,7 +98,7 @@ export async function ListingPage({
               <caption className="sr-only">{copy.title}</caption>
               <thead className="border-b border-ink/10 text-xs uppercase tracking-[0.12em] text-ink-soft">
                 <tr>
-                  <th className="px-4 py-3 font-medium">{trekT("compareName")}</th>
+                  <th className="px-4 py-3 font-medium">{trekT("compareRide")}</th>
                   <th className="px-4 py-3 font-medium">{trekT("compareDays")}</th>
                   <th className="px-4 py-3 font-medium">{trekT("difficulty")}</th>
                   <th className="px-4 py-3 font-medium">{trekT("from")}</th>

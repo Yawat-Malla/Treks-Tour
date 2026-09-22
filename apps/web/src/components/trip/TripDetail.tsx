@@ -18,6 +18,30 @@ import { absoluteSiteUrl, absoluteUrl } from "@/lib/seo";
 import { FaqList } from "@/components/home/FaqList";
 
 function tripFaqs(trek: Trip, t: (key: string, values?: Record<string, string | number>) => string) {
+  if (trek.kind === "ride") {
+    return [
+      {
+        id: "licence",
+        question: t("rideFaqLicenceQ"),
+        answer: t("rideFaqLicenceA"),
+      },
+      {
+        id: "support",
+        question: t("rideFaqSupportQ"),
+        answer: t("rideFaqSupportA"),
+      },
+      {
+        id: "bike",
+        question: t("rideFaqBikeQ", { name: trek.name }),
+        answer: t("rideFaqBikeA"),
+      },
+      {
+        id: "season",
+        question: t("rideFaqSeasonQ"),
+        answer: `${trek.seasonLabel}. ${t("rideFaqSeasonA")}`,
+      },
+    ];
+  }
   const items = [
     {
       id: "guide",
@@ -160,7 +184,7 @@ export async function TripDetail({ slug }: { slug: string }) {
           <div className="mt-6">
             <ItinerarySnap days={itinerary} />
           </div>
-          {!raft && !activity && (
+          {!raft && !activity && !ride && (
             <>
               <h2 className="mt-14 font-serif text-2xl">{t("altitudeTitle")}</h2>
               <p className="mt-4 leading-relaxed text-ink-soft">
@@ -190,8 +214,27 @@ export async function TripDetail({ slug }: { slug: string }) {
               <p className="mt-4 leading-relaxed text-ink-soft">{t("fromPokharaBody")}</p>
             </>
           )}
+          {ride && (
+            <>
+              <h2 className="mt-14 font-serif text-2xl">{t("rideRoadNotesTitle")}</h2>
+              <p className="mt-4 leading-relaxed text-ink-soft">
+                {t("rideRoadNotesBody", {
+                  name: trek.name,
+                  difficulty: trek.difficultyLabel,
+                  days: trek.durationDays,
+                  season: trek.seasonLabel,
+                })}
+              </p>
+              <h2 className="mt-14 font-serif text-2xl">{t("bestTime")}</h2>
+              <p className="mt-4 leading-relaxed text-ink-soft">
+                {t("rideBestTimeBody", { season: trek.seasonLabel })}
+              </p>
+              <h2 className="mt-14 font-serif text-2xl">{t("fromPokhara")}</h2>
+              <p className="mt-4 leading-relaxed text-ink-soft">{t("rideFromPokharaBody")}</p>
+            </>
+          )}
           <div className="mt-14">
-            <AltitudeChart points={profile} label={raft || activity ? t("gradeProfile") : t("profile")} />
+            <AltitudeChart points={profile} label={raft || activity ? t("gradeProfile") : ride ? t("rideProfile") : t("profile")} />
           </div>
           {trek.gallery?.length > 0 && (
             <div className="mt-14">
@@ -232,7 +275,7 @@ export async function TripDetail({ slug }: { slug: string }) {
               ) : null}
             </dl>
             <Link href={bookHref} className="mt-6 block rounded-full bg-ink py-3 text-center text-sm font-medium text-snow hover:bg-moss-deep">
-              {raft ? t("bookRaft") : t("bookThis")}
+              {raft ? t("bookRaft") : ride ? t("bookThisRide") : t("bookThis")}
             </Link>
             <a href={wa} className="mt-2 block py-2 text-center text-sm text-sky hover:underline">
               {t("enquire")}
@@ -261,7 +304,7 @@ export async function TripDetail({ slug }: { slug: string }) {
 
       <div className="sticky bottom-0 z-30 border-t border-ink/10 bg-ivory/95 p-3 backdrop-blur md:hidden">
         <Link href={bookHref} className="block rounded-full bg-ink py-3 text-center text-sm font-medium text-snow">
-          {raft ? t("bookRaft") : t("bookThis")}
+          {raft ? t("bookRaft") : ride ? t("bookThisRide") : t("bookThis")}
         </Link>
       </div>
     </>

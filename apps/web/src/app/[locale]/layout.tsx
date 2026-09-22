@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Outfit, Noto_Sans_SC, Noto_Sans_KR, Noto_Sans_Hebrew } from "next/font/google";
+import { Noto_Sans_SC, Noto_Sans_KR, Noto_Sans_Hebrew } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -12,17 +12,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ContactDock } from "@/components/ContactDock";
+import { DocumentLang } from "@/components/DocumentLang";
 import "../globals.css";
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
 
 const notoSc = Noto_Sans_SC({
   variable: "--font-noto-sc",
@@ -100,26 +91,21 @@ export default async function LocaleLayout({
   const dir = rtlLocales.includes(locale as Locale) ? "rtl" : "ltr";
 
   return (
-    <html
-      lang={locale}
-      dir={dir}
-      className={`${fraunces.variable} ${outfit.variable} ${notoSc.variable} ${notoKr.variable} ${notoHe.variable} h-full antialiased`}
-    >
-      <body className="grain min-h-full bg-ivory text-ink">
-        <NextIntlClientProvider messages={messages}>
-          {data ? (
-            <>
-              <JsonLd data={organizationJsonLd(data.settings, locale)} />
-              <SiteHeader settings={data.settings} />
-              <main className="flex-1">{children}</main>
-              <SiteFooter settings={data.settings} />
-              <ContactDock settings={data.settings} />
-            </>
-          ) : (
-            <main className="px-6 py-24 text-center">The trail is quiet. Please try again in a moment.</main>
-          )}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <div className={`${notoSc.variable} ${notoKr.variable} ${notoHe.variable} grain min-h-full bg-ivory text-ink`}>
+      <DocumentLang locale={locale} dir={dir} />
+      <NextIntlClientProvider messages={messages}>
+        {data ? (
+          <>
+            <JsonLd data={organizationJsonLd(data.settings, locale)} />
+            <SiteHeader settings={data.settings} />
+            <main className="flex-1">{children}</main>
+            <SiteFooter settings={data.settings} />
+            <ContactDock settings={data.settings} />
+          </>
+        ) : (
+          <main className="px-6 py-24 text-center">The trail is quiet. Please try again in a moment.</main>
+        )}
+      </NextIntlClientProvider>
+    </div>
   );
 }
