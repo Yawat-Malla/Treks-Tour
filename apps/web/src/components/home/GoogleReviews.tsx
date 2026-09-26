@@ -81,51 +81,7 @@ function ReviewCard({
             className="h-11 w-11 rounded-full object-cover"
             referrerPolicy="no-referrer"
             loading="lazy"
-            onLoad={() => {
-              // #region agent log
-              fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-                body: JSON.stringify({
-                  sessionId: "4acaf2",
-                  runId: "post-fix",
-                  hypothesisId: "H1",
-                  location: "GoogleReviews.tsx:img.onLoad",
-                  message: "reviewer photo loaded ok",
-                  data: { author: review.authorName.slice(0, 24), referrerPolicy: "no-referrer" },
-                  timestamp: Date.now(),
-                }),
-              }).catch(() => {});
-              // #endregion
-            }}
-            onError={() => {
-              // #region agent log
-              fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-                body: JSON.stringify({
-                  sessionId: "4acaf2",
-                  runId: "post-fix",
-                  hypothesisId: "H1",
-                  location: "GoogleReviews.tsx:img.onError",
-                  message: "reviewer photo failed",
-                  data: {
-                    author: review.authorName.slice(0, 24),
-                    host: (() => {
-                      try {
-                        return new URL(review.profilePhotoUrl!).hostname;
-                      } catch {
-                        return "invalid";
-                      }
-                    })(),
-                    referrerPolicy: "no-referrer",
-                  },
-                  timestamp: Date.now(),
-                }),
-              }).catch(() => {});
-              // #endregion
-              setPhotoFailed(true);
-            }}
+            onError={() => setPhotoFailed(true)}
           />
         ) : (
           <span className="grid h-11 w-11 place-items-center rounded-full bg-sky/15 text-sm font-semibold text-sky">

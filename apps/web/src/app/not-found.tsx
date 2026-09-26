@@ -9,22 +9,6 @@ import en from "../../messages/en.json";
 export default function RootNotFound() {
   const t = en.notFound;
 
-  // #region agent log
-  fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-    body: JSON.stringify({
-      sessionId: "4acaf2",
-      runId: "post-fix",
-      hypothesisId: "C",
-      location: "app/not-found.tsx:RootNotFound",
-      message: "static root not-found render (no next-intl)",
-      data: { title: t.title, phase: process.env.NEXT_PHASE ?? null },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-  // #endregion
-
   return (
     <section className="relative overflow-hidden bg-ivory">
       <div

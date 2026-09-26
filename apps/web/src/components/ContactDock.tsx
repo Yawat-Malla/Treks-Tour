@@ -89,7 +89,7 @@ export function ContactDock({ settings }: { settings: SiteSettings }) {
               className="transition hover:scale-105"
               aria-label={t(ch.id)}
               onClick={(e) => {
-                if (!ch.href) return;
+                if (!ch.href || ch.id === "wechat") return;
                 e.preventDefault();
                 openContactHref(ch.href, ch.id, ch.id === "viber" ? viberApp : undefined);
               }}

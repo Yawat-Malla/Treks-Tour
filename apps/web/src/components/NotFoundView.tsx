@@ -1,63 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
-/** Shared themed 404 body — used by locale and root not-found pages. */
+/** Shared themed 404 body — used by locale not-found pages. */
 export async function NotFoundView() {
-  // #region agent log
-  fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-    body: JSON.stringify({
-      sessionId: "4acaf2",
-      runId: "pre-fix",
-      hypothesisId: "A",
-      location: "NotFoundView.tsx:entry",
-      message: "NotFoundView before getTranslations",
-      data: { phase: process.env.NEXT_PHASE ?? null },
-      timestamp: Date.now(),
-    }),
-  }).catch(() => {});
-  // #endregion
-  let t: Awaited<ReturnType<typeof getTranslations>>;
-  try {
-    t = await getTranslations("notFound");
-    // #region agent log
-    fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-      body: JSON.stringify({
-        sessionId: "4acaf2",
-        runId: "pre-fix",
-        hypothesisId: "A",
-        location: "NotFoundView.tsx:afterTranslations",
-        message: "getTranslations ok",
-        data: { sample: t("title") },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion
-  } catch (err) {
-    // #region agent log
-    fetch("http://127.0.0.1:7250/ingest/4f909da6-e362-4dd0-8c11-1048ad8b271f", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "4acaf2" },
-      body: JSON.stringify({
-        sessionId: "4acaf2",
-        runId: "pre-fix",
-        hypothesisId: "A",
-        location: "NotFoundView.tsx:getTranslations-fail",
-        message: "getTranslations failed",
-        data: {
-          name: err instanceof Error ? err.name : typeof err,
-          msg: err instanceof Error ? err.message : String(err),
-          digest: err && typeof err === "object" && "digest" in err ? String((err as { digest?: unknown }).digest) : null,
-        },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion
-    throw err;
-  }
+  const t = await getTranslations("notFound");
 
   return (
     <section className="relative overflow-hidden bg-ivory">
