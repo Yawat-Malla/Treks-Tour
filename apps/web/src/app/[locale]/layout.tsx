@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { routing, rtlLocales, type Locale } from "@/i18n/routing";
 import { fetchPublic } from "@/lib/api";
 import { siteCopy } from "@/lib/site-copy";
-import { absoluteSiteUrl, languageAlternates, ogLocale } from "@/lib/seo";
+import { absoluteSiteUrl, languageAlternates, ogLocale, siteIcons } from "@/lib/seo";
 import { organizationJsonLd } from "@/lib/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -54,7 +54,7 @@ export async function generateMetadata({
       metadataBase: new URL(base),
       title: { default: title, template: "%s" },
       description,
-      icons: settings.faviconUrl ? [{ url: settings.faviconUrl }] : [{ url: "/logo.png" }],
+      icons: siteIcons(settings),
       verification: settings.googleSiteVerification ? { google: settings.googleSiteVerification } : undefined,
       alternates: {
         canonical: locale === "en" ? base : `${base}/${locale}`,

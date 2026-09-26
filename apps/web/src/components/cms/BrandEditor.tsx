@@ -121,7 +121,7 @@ export function BrandEditor() {
           <StudioUpload label="Logo" help="The picture in the top corner of the website." preview={s.logoUrl} onUrl={(url) => patch("logoUrl", url)} />
           <StudioUpload
             label="Tiny tab icon"
-            help="The small picture in the browser tab. Square works best."
+            help="The small picture in the browser tab. Use a square PNG or ICO (32×32 or 64×64). A wide photo will look empty in the tab."
             preview={s.faviconUrl}
             onUrl={(url) => patch("faviconUrl", url)}
           />
@@ -143,10 +143,13 @@ export function BrandEditor() {
           {waUrl ? <StudioCopy text={waUrl} label="Copy WhatsApp link" /> : null}
         </p>
 
-        <StudioField label="Viber number" help="Same as WhatsApp: country code, no plus sign.">
+        <StudioField label="Viber number" help="Country code, digits only. Opens https://viber.me/… (best with a Viber Business account).">
           <input className="studio-input" value={s.viber} onChange={(e) => patch("viber", e.target.value)} />
         </StudioField>
-        <p className="text-[15px] text-ink-soft">{vbUrl ? `Opens ${vbUrl}` : "Empty — Viber button hidden"}</p>
+        <p className="flex flex-wrap items-center gap-2 text-[15px] text-ink-soft">
+          <span>{vbUrl ? `Opens ${vbUrl}` : "Empty — Viber button hidden"}</span>
+          {vbUrl ? <StudioCopy text={vbUrl} label="Copy Viber link" /> : null}
+        </p>
 
         <StudioField label="Email" help="Guests open a mail draft to this address.">
           <input className="studio-input" value={s.email} onChange={(e) => patch("email", e.target.value)} />

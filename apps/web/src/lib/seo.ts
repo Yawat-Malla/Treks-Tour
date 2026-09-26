@@ -12,6 +12,21 @@ export type SeoSettings = {
   logoUrl?: string | null;
 };
 
+/** Tab icon uploaded in Studio ("Tiny tab icon"), with the logo as fallback. */
+export function siteIconUrl(settings: { faviconUrl?: string | null; logoUrl?: string | null }) {
+  return settings.faviconUrl?.trim() || settings.logoUrl?.trim() || "/logo.png";
+}
+
+/**
+ * Same-origin `/site-icon` proxies the Studio "Tiny tab icon" (or logo).
+ * Do not use `app/favicon.ico` or `app/icon` — Next treats those as special
+ * files and the leftover default.ico was winning the tab.
+ */
+export function siteIcons(_settings?: { faviconUrl?: string | null; logoUrl?: string | null }) {
+  const icon = { url: "/site-icon" };
+  return { icon: [icon], shortcut: [icon], apple: [icon] };
+}
+
 export function absoluteSiteUrl(settings?: Pick<SeoSettings, "siteUrl"> | null) {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   const raw = fromEnv || settings?.siteUrl || DEFAULT_SITE_URL;

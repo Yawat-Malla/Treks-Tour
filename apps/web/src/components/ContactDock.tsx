@@ -4,8 +4,32 @@ import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import type { SiteSettings } from "@/lib/api";
 import type { Locale } from "@/i18n/routing";
-import { contactPrefill, orderedChannels } from "@/lib/contacts";
+import { contactPrefill, orderedChannels, viberDeepLink } from "@/lib/contacts";
 import { WeChatModal } from "./WeChatModal";
+
+/** Open mailto / https / viber without relying on default protocol handling alone. */
+function openContactHref(href: string, id: "whatsapp" | "viber" | "email", viberApp?: string) {
+  if (id === "viber") {
+    // Try the native app first; fall back to https://viber.me so the click always does something.
+    if (viberApp) {
+      const start = Date.now();
+      window.location.href = viberApp;
+      window.setTimeout(() => {
+        if (document.visibilityState === "visible" && Date.now() - start < 2000) {
+          window.location.assign(href);
+        }
+      }, 700);
+      return;
+    }
+    window.location.assign(href);
+    return;
+  }
+  if (id === "email") {
+    window.location.href = href;
+    return;
+  }
+  window.open(href, "_blank", "noopener,noreferrer");
+}
 
 /** Official Simple Icons paths (24×24). Email uses a filled envelope in the same circular treatment. */
 function BrandGlyph({ id }: { id: "whatsapp" | "viber" | "wechat" | "email" }) {
@@ -38,7 +62,9 @@ export function ContactDock({ settings }: { settings: SiteSettings }) {
   const t = useTranslations("contact");
   const locale = useLocale() as Locale;
   const [wechat, setWechat] = useState(false);
-  const channels = orderedChannels(locale, settings, contactPrefill(locale, settings.siteTitle));
+  const prefill = contactPrefill(locale, settings.siteTitle);
+  const channels = orderedChannels(locale, settings, prefill);
+  const viberApp = viberDeepLink(settings);
 
   return (
     <>
@@ -58,8 +84,15 @@ export function ContactDock({ settings }: { settings: SiteSettings }) {
             <a
               key={ch.id}
               href={ch.href || "#"}
+              target={ch.id === "whatsapp" || ch.id === "viber" ? "_blank" : undefined}
+              rel={ch.id === "whatsapp" || ch.id === "viber" ? "noopener noreferrer" : undefined}
               className="transition hover:scale-105"
               aria-label={t(ch.id)}
+              onClick={(e) => {
+                if (!ch.href) return;
+                e.preventDefault();
+                openContactHref(ch.href, ch.id, ch.id === "viber" ? viberApp : undefined);
+              }}
             >
               <BrandGlyph id={ch.id} />
             </a>

@@ -27,16 +27,32 @@ export function whatsappHref(settings: Pick<SiteSettings, "whatsapp">, text = ""
   return text ? `https://wa.me/${n}?text=${text}` : `https://wa.me/${n}`;
 }
 
-export function viberHref(settings: Pick<SiteSettings, "viber">) {
+/**
+ * Viber click-to-chat. Prefer the HTTPS `viber.me` link so browsers always
+ * navigate (custom `viber://` schemes often fail silently with no app handler).
+ * Deep-link form is still available via `viberDeepLink` for in-app open.
+ * @see https://help.viber.com/hc/en-us/articles/36712478644381
+ */
+export function viberHref(settings: Pick<SiteSettings, "viber">, text = "") {
   const n = digits(settings.viber);
   if (!n) return "";
-  return `viber://chat?number=%2B${n}`;
+  const base = `https://viber.me/${n}`;
+  return text ? `${base}?draft=${text}` : base;
+}
+
+/** Native Viber app URI — use when forcing the installed app open. */
+export function viberDeepLink(settings: Pick<SiteSettings, "viber">) {
+  const n = digits(settings.viber);
+  if (!n) return "";
+  // Mobile needs %2B; slash after `chat` is the widely working form.
+  return `viber://chat/?number=%2B${n}`;
 }
 
 export function emailHref(settings: Pick<SiteSettings, "email" | "siteTitle">, text = "") {
   const email = (settings.email || "").trim();
   if (!email) return "";
-  const subject = encodeURIComponent(settings.siteTitle || "");
+  const subject = encodeURIComponent(settings.siteTitle || "Enquiry");
+  // `text` is already encodeURIComponent'd by contactPrefill when passed from UI.
   if (!text) return `mailto:${email}?subject=${subject}`;
   return `mailto:${email}?subject=${subject}&body=${text}`;
 }
@@ -44,7 +60,7 @@ export function emailHref(settings: Pick<SiteSettings, "email" | "siteTitle">, t
 export function orderedChannels(locale: Locale, settings: SiteSettings, text: string): Channel[] {
   const channels: Channel[] = [];
   const wa = whatsappHref(settings, text);
-  const viber = viberHref(settings);
+  const viber = viberHref(settings, text);
   const email = emailHref(settings, text);
   const wechat = (settings.wechatId || "").trim();
 
